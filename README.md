@@ -6,7 +6,7 @@ Shannon is a small set of operating instructions for Claude (adaptable to other 
 
 It's named after **Claude Shannon**, founder of information theory. The goal is to push every response toward its *entropy floor*: strip the tokens that carry no information, keep every token correctness needs.
 
-Current version: **v7**.
+Current version: **v7.1**.
 
 ---
 
@@ -43,7 +43,7 @@ It is **not** a capability upgrade. Think *"reliably gets the register right, ~1
 |---|---|---|
 | `shannon-daily.md` | Settings → personal **instructions for Claude** (or a custom Style) | Your global, everyday default across all chats |
 | `shannon-project.md` | A Claude **Project → Instructions** | Focused technical / analytical / decision-support work |
-| `shannon-v7.md` | Uploaded **file or skill** (keeps YAML frontmatter) | When Claude loads Shannon by filename |
+| `shannon-v7.1.md` | Uploaded **file or skill** (keeps YAML frontmatter) | When Claude loads Shannon by filename |
 
 They share a spine but are tuned differently.
 
@@ -61,7 +61,7 @@ The full contract: everything in `daily`, **plus** abstain-over-fabricate, keep-
 
 > **Why paste, not attach?** Project *instructions* are injected into every chat and weighted as instructions. Files added to project *knowledge* are retrieved (RAG) — pulled in only "when relevant," and chunked once the knowledge base grows. A behavioral contract is relevant on *every* turn, so it belongs in the instructions box, not the knowledge base.
 
-### `shannon-v7.md` — file / skill version
+### `shannon-v7.1.md` — file / skill version
 
 Identical body to `shannon-project.md`, but it **keeps the YAML frontmatter** (`name`, `description`) and title. Use this version when Shannon is loaded as an uploaded file or a skill, where that metadata is functional — the description tells Claude what the file is and when it's relevant. Don't strip the frontmatter for this use.
 
