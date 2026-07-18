@@ -6,7 +6,7 @@ Shannon is a small set of operating instructions for Claude (adaptable to other 
 
 It's named after **Claude Shannon**, founder of information theory. The goal is to push every response toward its *entropy floor*: strip the tokens that carry no information, keep every token correctness needs.
 
-Current version: **v7.1**.
+Current version: **v7.2**.
 
 ---
 
@@ -19,7 +19,8 @@ Capable models, left to their defaults, still tend to:
 - over-format with headers, bold, and stacked bullets,
 - pad simple answers to look thorough,
 - close with recaps and "let me know if…" offers,
-- and agree a little too readily.
+- agree a little too readily,
+- and when challenged, either fold on a correct answer or dig in on a wrong one — instead of re-checking.
 
 Shannon cuts those patterns and replaces them with a ranked contract: **be correct, then be brief — and when they conflict, correctness wins.**
 
@@ -29,8 +30,8 @@ Honest calibration, not hype:
 
 - **Output tokens:** roughly **15–30% leaner** on a mixed workload — more on simple/over-explained queries, less on long tasks where substance dominates. Your query mix is the biggest variable.
 - **Consistency** is the main win. Capable models already answer tersely *sometimes*; Shannon makes the direct-expert register the default, so you stop re-asking "just give me the answer."
-- **Accuracy:** roughly **flat, by design.** Shannon adds no knowledge. Its accuracy role is defensive — a built-in rule (*"brevity is for the answer, not the reasoning"*) guards against the documented failure where "be concise" instructions *raise* hallucination by starving the reasoning. It holds accuracy steady while cutting tokens; it does not boost it.
-- **Sycophancy:** reduced, via explicit rules to evaluate premises, hold correct positions under pushback, and skip flattery.
+- **Accuracy:** roughly **flat, by design.** Shannon adds no knowledge. Its accuracy role is defensive — a built-in rule (*"brevity is for the answer, not the reasoning"*) guards against the documented failure where "be concise" instructions *raise* hallucination — Giskard's Phare benchmark measured up to a 20% drop in hallucination resistance under conciseness instructions, because debunking a false premise takes room the instruction denies. It holds accuracy steady while cutting tokens; it does not boost it.
+- **Sycophancy:** reduced, via explicit rules to evaluate premises, skip flattery, and — on pushback — re-verify rather than defer *or* entrench. Pushback failure runs both ways: models abandon correct answers when challenged (the FlipFlop effect) and also double down on wrong ones; "hold your position" only fixes the first. Shannon's rule is *re-derive, then hold or correct and say which.*
 - **Cost:** on a flat-rate Claude subscription you don't pay per token, so "leaner" buys **longer conversations before the length wall, lower latency, and denser output** — not dollars. On the API, the output-token cut is a direct saving on the expensive side of the bill.
 
 It is **not** a capability upgrade. Think *"reliably gets the register right, ~15–30% leaner, less flattery,"* not *"smarter."*
@@ -43,7 +44,7 @@ It is **not** a capability upgrade. Think *"reliably gets the register right, ~1
 |---|---|---|
 | `shannon-daily.md` | Settings → personal **instructions for Claude** (or a custom Style) | Your global, everyday default across all chats |
 | `shannon-project.md` | A Claude **Project → Instructions** | Focused technical / analytical / decision-support work |
-| `shannon-v7.1.md` | Uploaded **file or skill** (keeps YAML frontmatter) | When Claude loads Shannon by filename |
+| `shannon-v7.2.md` | Uploaded **file or skill** (keeps YAML frontmatter) | When Claude loads Shannon by filename |
 
 They share a spine but are tuned differently.
 
@@ -61,7 +62,7 @@ The full contract: everything in `daily`, **plus** abstain-over-fabricate, keep-
 
 > **Why paste, not attach?** Project *instructions* are injected into every chat and weighted as instructions. Files added to project *knowledge* are retrieved (RAG) — pulled in only "when relevant," and chunked once the knowledge base grows. A behavioral contract is relevant on *every* turn, so it belongs in the instructions box, not the knowledge base.
 
-### `shannon-v7.1.md` — file / skill version
+### `shannon-v7.2.md` — file / skill version
 
 Identical body to `shannon-project.md`, but it **keeps the YAML frontmatter** (`name`, `description`) and title. Use this version when Shannon is loaded as an uploaded file or a skill, where that metadata is functional — the description tells Claude what the file is and when it's relevant. Don't strip the frontmatter for this use.
 
@@ -73,14 +74,24 @@ Identical body to `shannon-project.md`, but it **keeps the YAML frontmatter** (`
 2. **Compress packaging, not reasoning.** Think as much as the problem needs; cut the delivery, not the substance. This is the safeguard that keeps "be concise" from degrading quality.
 3. **Answer first.** Lead with the result; length tracks what the reader needs to act, not how hard the problem was.
 4. **Keep what the answer depends on.** Disconfirming evidence, caveats, and the counter-case stay in — an answer that omits the inconvenient half is still misleading.
-5. **Don't flatter or fold.** Evaluate premises on the merits; hold correct positions under pushback; skip praise.
+5. **Don't flatter, fold, or entrench.** Evaluate premises on the merits; treat a signaled preferred conclusion as a hypothesis, not a target; on pushback, re-verify from scratch, then correct or hold and say which; skip praise.
 6. **Concrete over vague.** "Drop *just / actually / I think*" gets followed; "be concise" doesn't.
 
 ## Limitations & when not to use
 
 - **Creative / exploratory / emotional use:** the full (`project`) version's stripped register can under-serve brainstorming, learning a topic cold, or support conversations — the "padding" it cuts is sometimes doing real work. Use `shannon-daily.md` (which adapts) for global use, and reserve the full contract for work where terse-expert is genuinely wanted.
-- **Very short, one-off chats:** the instructions add ~700 tokens of context; on a single trivial question the overhead can exceed the savings. The benefit compounds over multi-turn sessions and longer outputs.
-- **The numbers above are estimates,** not a published benchmark for your setup. To get real figures, run ~20 of your own typical prompts with and without Shannon and compare.
+- **Very short, one-off chats:** the instructions add roughly 350–450 tokens of context (`daily`) or 800–1,000 (full contract); on a single trivial question the overhead can exceed the savings. The benefit compounds over multi-turn sessions and longer outputs.
+- **The numbers above are estimates,** not a published benchmark for your setup. To get real figures, run the eval below on your own account, or ~20 of your own typical prompts with and without Shannon.
+
+## Verify it yourself
+
+`eval/` contains two ways to measure Shannon instead of trusting it:
+
+- **`eval/shannon_eval.py`** — API harness. Runs a fixed probe suite (verbosity, false premises, flattery bait, and both pushback failure modes: abandoning a right answer and entrenching on a wrong one) across any arms you name, and scores responses with blunt programmatic checks — no LLM judge. `python3 eval/shannon_eval.py --arm none= --arm v7.2=shannon-project.md --trials 3` with `ANTHROPIC_API_KEY` set.
+- **`eval/benchmark.html`** — the same suite as a claude.ai artifact (uses the built-in API bridge, no key). Paste it into a chat as an artifact and click run; compares baseline vs v7.1 vs v7.2 with per-probe transcripts.
+- **`eval/test_harness_stub.py`** — offline test of the harness itself against a scripted local server; run it before trusting harness changes.
+
+The probes are narrow by design: they test the specific behaviors Shannon claims to change, with objective pass/fail, so a regression in the contract shows up as a flipped cell rather than a vibe.
 
 ## Adapting to other models
 
