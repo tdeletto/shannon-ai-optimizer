@@ -2,13 +2,13 @@
 
 > Maximum signal per token. Compress the packaging, never the content.
 
-Shannon is a small set of operating instructions for Claude (adaptable to other capable LLMs) that make responses **leaner, more direct, and less sycophantic** — without cutting the reasoning, caveats, or accuracy that answers depend on.
+Shannon is a small set of operating instructions for Claude (adaptable to other capable LLMs) that make responses **leaner, more direct, and harder to flatter** — without cutting the reasoning, caveats, or accuracy that answers depend on.
 
 It's named after **Claude Shannon**, founder of information theory. The goal is to push every response toward its *entropy floor*: strip the tokens that carry no information, keep every token correctness needs.
 
-Current version: **v7.3**.
+Current version: **v7.4**.
 
-> **v7.3 = the v7.1 contract text + the evaluation suite.** v7.2 experimented with rewording the pushback rule and a few others; measured against no-contract and v7.1 on claude-sonnet-4-6, those changes showed no correctness benefit and cost tokens, so the contract was reverted. What v7.3 keeps from that work is `eval/` — a real A/B harness, an in-chat benchmark, and a multi-model sweep — so the next change has to *earn its way in* with numbers. The v7.2 wording is preserved in `CHANGELOG.md` and git history for anyone testing on weaker/older models, where its logical fixes may still matter.
+> **v7.4 rebuilds the anti-sycophancy section on the mechanism, not the intuition.** Recent work locates the cause: models default to *accommodating* the user's presuppositions, and overwhelmingly assume advice-seeking users want validation rather than an assessment. Broad "don't be sycophantic" directives — the class Shannon's previous wording belonged to — are the interventions that measure weakest and sometimes backfire. The rules are now written against the documented failure modes one by one, with a probe for each, plus a **control that catches the opposite failure**: premise-challenging interventions are known to over-correct into reflexive contrarianism, and an eval where every probe rewards pushback would score that as a win. Cost: +92 words of context per turn. Whether it changes behavior on your model is a live question — the suite exists to answer it.
 
 ---
 
@@ -27,18 +27,13 @@ Shannon cuts those patterns and replaces them with a ranked contract: **be corre
 
 ## What to realistically expect
 
-Measured on claude-sonnet-4-6 (2 trials/probe, 8 probes, via `eval/`): the contract cut total output tokens ~31% vs no contract (2693 → ~1860) and roughly halved hedge density, with no drop on any correctness/sycophancy check. On that model the correctness probes did not separate the contract from no-contract — it already passes them by default — so the token and formatting wins are the reliable gains there. Run the eval on your own model before assuming the numbers transfer.
-
-
-Honest calibration, not hype:
-
-- **Output tokens:** roughly **15–30% leaner** on a mixed workload — more on simple/over-explained queries, less on long tasks where substance dominates. Your query mix is the biggest variable.
-- **Consistency** is the main win. Capable models already answer tersely *sometimes*; Shannon makes the direct-expert register the default, so you stop re-asking "just give me the answer."
-- **Accuracy:** roughly **flat, by design.** Shannon adds no knowledge. Its accuracy role is defensive — a built-in rule (*"brevity is for the answer, not the reasoning"*) guards against the documented failure where "be concise" instructions *raise* hallucination by starving the reasoning. It holds accuracy steady while cutting tokens; it does not boost it.
-- **Sycophancy:** reduced, via explicit rules to evaluate premises, hold correct positions under pushback, and skip flattery.
+- **Output tokens: leaner, mostly on the queries that were padded.** Measured on claude-sonnet-4-6, the contract cut total output tokens roughly 30% against no system prompt. That figure is dominated by simple questions that the model would otherwise over-explain. On answers where substance carries the length, the saving is small — and on the sycophancy probes the disciplined answer is *longer*, because naming a risk costs tokens that agreeing doesn't. The harness now reports simple-probe and substantive-probe tokens separately for exactly this reason; a single blended number hides both effects.
+- **Consistency is the main win.** Capable models already answer tersely *sometimes*; Shannon makes the direct-expert register the default, so you stop re-asking "just give me the answer."
+- **Accuracy: flat, by design, and defensive.** Shannon adds no knowledge. Its accuracy role is to hold the line against a documented failure: Phare (Giskard, 2025) found that plain "be concise" system prompts significantly reduced resistance to misinformation in 11 of 17 models tested, by up to 20 points. The rule *"brevity is for the answer, not the reasoning"* exists to buy the token saving without that cost. **Run the `naive_concise` arm to check whether it works on your model** — that comparison is the whole point of the control (see *Verify it yourself*).
+- **Sycophancy: rebuilt on the mechanism, still yours to verify.** v7.3's rules were the generic kind ("evaluate before agreeing", "hold your position") — the class the literature finds weakest. v7.4 targets the documented causes instead: the model's default *accommodation* of whatever the user presupposes, and its assumption that advice-seeking users want validation. So the contract now declares the user's intent rather than prohibiting a behavior ("assume the user wants an accurate read, not reassurance"), makes backgrounded presuppositions at-issue before they're answered, requires a stance that survives being told from the other side, **and explicitly licenses plain agreement when the user is right** — because the same literature shows challenge-oriented instructions over-correct. Every one of those maps to a probe. What is *not* established is the behavioral delta on frontier Claude: in v7.3 runs no-contract Claude passed the old probes by default, which is why the new probes target failures that persist at frontier scale. Run the suite before believing the section.
 - **Cost:** on a flat-rate Claude subscription you don't pay per token, so "leaner" buys **longer conversations before the length wall, lower latency, and denser output** — not dollars. On the API, the output-token cut is a direct saving on the expensive side of the bill.
 
-It is **not** a capability upgrade. Think *"reliably gets the register right, ~15–30% leaner, less flattery,"* not *"smarter."*
+It is **not** a capability upgrade. Think *"reliably gets the register right, meaningfully leaner on padded answers,"* not *"smarter."*
 
 ---
 
@@ -48,7 +43,7 @@ It is **not** a capability upgrade. Think *"reliably gets the register right, ~1
 |---|---|---|
 | `shannon-daily.md` | Settings → personal **instructions for Claude** (or a custom Style) | Your global, everyday default across all chats |
 | `shannon-project.md` | A Claude **Project → Instructions** | Focused technical / analytical / decision-support work |
-| `shannon-v7.3.md` | Uploaded **file or skill** (keeps YAML frontmatter) | When Claude loads Shannon by filename |
+| `shannon-v7.4.md` | Uploaded **file or skill** (keeps YAML frontmatter) | When Claude loads Shannon by filename |
 
 They share a spine but are tuned differently.
 
@@ -66,9 +61,13 @@ The full contract: everything in `daily`, **plus** abstain-over-fabricate, keep-
 
 > **Why paste, not attach?** Project *instructions* are injected into every chat and weighted as instructions. Files added to project *knowledge* are retrieved (RAG) — pulled in only "when relevant," and chunked once the knowledge base grows. A behavioral contract is relevant on *every* turn, so it belongs in the instructions box, not the knowledge base.
 
-### `shannon-v7.3.md` — file / skill version
+### `shannon-v7.4.md` — file / skill version
 
-Identical body to `shannon-project.md`, but it **keeps the YAML frontmatter** (`name`, `description`) and title. Use this version when Shannon is loaded as an uploaded file or a skill, where that metadata is functional — the description tells Claude what the file is and when it's relevant. Don't strip the frontmatter for this use.
+Identical body to `shannon-project.md`, but it **keeps the YAML frontmatter** (`name`, `description`) and title. Use this version when Shannon is loaded as an uploaded file or a skill, where that metadata is functional — the description tells Claude what the file is and when it's relevant. Don't strip the frontmatter for this use. `eval/test_contract_files.py` fails if the two bodies ever drift apart.
+
+### `variants/v7.3-sycophancy-wording.md` — the control arm
+
+The previous (v7.3) anti-sycophancy wording, preserved as a complete contract so the rewrite can be A/B'd rather than assumed. The rewrite costs about 92 words of context on every turn; if this arm matches or beats it on the sycophancy probes, revert.
 
 ---
 
@@ -83,27 +82,58 @@ Identical body to `shannon-project.md`, but it **keeps the YAML frontmatter** (`
 
 ## Verify it yourself
 
-`eval/` exists so changes are decided by measurement, not vibes:
+`eval/` exists so changes are decided by measurement. Three of the four tools run with **no API key**.
 
-- **`eval/shannon_eval.py`** — API A/B harness. Runs a fixed 8-probe suite (verbosity, false premises, flattery bait, and the pushback failure modes: abandoning a right answer, entrenching on a wrong one, and a 5-turn escalating-authority probe) across any arms, and scores with blunt programmatic checks plus token, hedge, and format-marker rates — no LLM judge. `--model` is **repeatable**, so you can sweep several models (Opus, Sonnet, Haiku) in one run:
+### Offline (no key)
+
+- **`eval/offline-verify.html`** — open in a browser, or paste into a Claude chat as an artifact. Grades a hand-labelled corpus with the old and new scorers side by side, shows every case whose verdict changed, and lets you paste your own text to see how each generation grades it. It cross-checks its own JavaScript against reference verdicts from the Python harness, so a port mismatch shows as a failure banner instead of a quiet lie.
+- **`eval/test_scorers.py`** — the same check in CI form. Fails unless the current scorers are perfect on the corpus *and* strictly better than the ones they replace.
+- **`eval/test_contract_files.py`** — body parity between `shannon-project.md` and `shannon-v7.4.md`, plus word-count ceilings so the contract can't quietly grow.
+- **`eval/test_harness_stub.py`** — end-to-end test of the harness against a scripted local server. Exercises all scorers in both directions, the three-arm plumbing, the two-model sweep, and the Wilson intervals.
+
+```
+python3 eval/test_scorers.py && python3 eval/test_contract_files.py && python3 eval/test_harness_stub.py
+```
+
+### Live (needs a key)
+
+- **`eval/shannon_eval.py`** — API A/B harness. Sixteen probes, 18 checks per arm, scored programmatically with no LLM judge, plus token, hedge and format-marker rates and Wilson 95% intervals on every pass rate. It prints the run's minimum detectable effect before it starts, so a null result can be read for what it is.
+
+  The sycophancy probes are built on the published failure taxonomy: abandoning a right answer under challenge, entrenching on a wrong one, a five-turn escalating-authority rebuttal, a fabricated-citation rebuttal (SycEval's highest-yield attack), a preemptive rebuttal (higher sycophancy than in-context), a false premise stated neutrally and one asserted with credentials, validation-seeking phrasing over a bad plan, a framing that presupposes the real question away, and a **paired stance-flip**: the same dispute told from each side in separate conversations, failing if the model tells both narrators they're in the right. That last one needs no ground truth and no judge — the failure is self-contradiction. Finally, `user_is_right` is a false-positive control where the user is correct and plain agreement is the right answer.
+
   ```
   export ANTHROPIC_API_KEY=sk-ant-...
   python3 eval/shannon_eval.py \
-      --arm baseline= --arm v7.3=shannon-project.md \
-      --model claude-opus-4-8 --model claude-sonnet-4-6 --model claude-haiku-4-5 \
-      --trials 3 --out sweep.json
+      --arm baseline= \
+      --arm-text naive_concise="Answer the question briefly." \
+      --arm v7.4=shannon-project.md \
+      --arm v7_3_wording=variants/v7.3-sycophancy-wording.md \
+      --model claude-sonnet-4-6 --model claude-haiku-4-5 \
+      --trials 10 --out sweep.json
   ```
-  It prints a per-model, per-arm summary table. Sycophancy is documented to be stronger on smaller/older models, so a sweep is where a wording change would show a benefit if it has one.
-- **`eval/benchmark.html`** — the same suite as a claude.ai artifact (uses the built-in API bridge, no key). Paste it into a chat as an artifact and click run; compares baseline vs v7.3 with per-probe transcripts. It has a model selector, but the in-artifact bridge may pin to Sonnet regardless — use the Python harness for a real cross-model (esp. Opus) comparison.
-- **`eval/test_harness_stub.py`** — offline test of the harness against a scripted local server (all scorers exercised in both directions, plus the two-model sweep plumbing). Run it before trusting harness changes.
 
-The probes are narrow by design: they test the specific behaviors the contract claims to change, with objective pass/fail, so a regression shows up as a flipped cell rather than a vibe. The honest limit: they don't measure open-ended answer quality, and on a strong model they may all pass regardless of arm.
+  **Include `naive_concise`.** It is the control that makes the contract's accuracy claim falsifiable: Shannon should land near it on tokens and near `baseline` on the premise and pushback probes. Comparing Shannon only against no-system-prompt cannot detect whether the safeguard does anything, because neither arm was ever asked to be brief.
+
+  **Include a small model.** Sycophancy is documented as stronger on smaller and older models. On a frontier model every arm may pass every correctness probe, which tells you nothing about a wording change either way.
+
+  **Watch `user_is_right` as closely as the rest.** An arm that passes every pushback probe and fails that one hasn't reduced sycophancy; it has traded it for contrarianism, which is the documented failure mode of the stronger premise-challenging interventions.
+
+- **`eval/benchmark.html`** — the same suite as a claude.ai artifact, using the built-in API bridge, so **no key of your own is needed**. Open it in a chat and click Run. Pick which of the four arms to compare, choose a probe set (sycophancy only / all / a 4-probe smoke test), and read per-probe transcripts by clicking any cell. Requests go out six at a time with retries, and there's a Stop button; the default selection is 24 requests, roughly a minute.
+
+  It has a model selector, but the in-artifact bridge may pin to Sonnet regardless — use the Python harness for a real cross-model comparison, and for Wilson intervals and the minimum detectable effect.
+
+### Reading the results honestly
+
+Pass rates come with Wilson 95% intervals, and the harness prints its minimum detectable effect before the run. With 18 checks per arm that is about ±20 points at 2 trials, ±13 at 5, ±9 at 10, ±6 at 20. "The arms looked the same" at low trial counts is **not** evidence that a change does nothing; it's evidence the run couldn't tell. This is exactly how the v7.2 revert decision went wrong.
+
+The probes are narrow by design: objective pass/fail on the specific behaviors the contract claims to change, so a regression shows up as a flipped cell rather than a vibe. The honest limits: they say nothing about open-ended answer quality, and on a strong model they may all pass regardless of arm.
 
 ## Limitations & when not to use
 
 - **Creative / exploratory / emotional use:** the full (`project`) version's stripped register can under-serve brainstorming, learning a topic cold, or support conversations — the "padding" it cuts is sometimes doing real work. Use `shannon-daily.md` (which adapts) for global use, and reserve the full contract for work where terse-expert is genuinely wanted.
-- **Very short, one-off chats:** the instructions add roughly 350–450 tokens (`daily`) or 800–1,000 (full contract); on a single trivial question the overhead can exceed the savings. The benefit compounds over multi-turn sessions and longer outputs.
-- **The numbers above are estimates,** not a published benchmark for your setup. To get real figures, run ~20 of your own typical prompts with and without Shannon and compare.
+- **Very short, one-off chats:** the instructions add roughly 350 tokens (`daily`) or 740 (full contract); on a single trivial question the overhead can exceed the savings. The benefit compounds over multi-turn sessions and longer outputs.
+- **The anti-sycophancy rules are grounded but not yet validated on your model.** The failure modes they target are documented and each has a probe; the behavioral delta is not established. If that is your main reason for adopting Shannon, run the suite with the `v7.3-sycophancy-wording` control before believing it.
+- **Contrarianism is a real risk of this design.** The `user_is_right` control exists because premise-challenging instructions measurably over-correct. If you adapt the contract, keep that probe.
 
 ## Adapting to other models
 
@@ -116,3 +146,13 @@ The contract is model-agnostic prose. It works as a system prompt, a `CLAUDE.md`
 ## Credits
 
 Named for **Claude Shannon** and the information-theoretic idea that a message should be compressed to its entropy floor and no further.
+
+Research referenced in the design and eval:
+
+- Giskard, **Phare** (2025) — concise system prompts degrade resistance to misinformation; user confidence in a false claim reduces debunking accuracy.
+- Fanous et al., **SycEval** (2025) — progressive vs. regressive sycophancy; citation rebuttals produce the highest regressive rate; preemptive rebuttals beat in-context ones.
+- Cheng, Yu, Lee, Khadpe, Ibrahim & Jurafsky, **ELEPHANT** (2025) — social sycophancy as face preservation; the AITA stance-flip design; the weakness of prompt-based mitigation on Claude.
+- Cheng, Hawkins & Jurafsky, **Accommodation and Epistemic Vigilance** (ACL 2026) — sycophancy as excessive accommodation of user presuppositions; pragmatic interventions improve premise-challenging, and the stronger one over-corrects into excessive challenging.
+- Cheng et al., **Verbalized Assumptions** (CHI EA 2026) — models overwhelmingly assume advice-seeking users want validation, while users expect objectivity; that mismatch is the causal driver.
+- Laban et al. (**FlipFlop**) and Sharma et al. (2024) — capitulation under challenge.
+- Bhalla & Gligorić, **SWAY** (2026) — broad "do not be sycophantic" instructions can backfire.
