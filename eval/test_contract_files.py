@@ -52,9 +52,14 @@ COVERAGE = [
      "agreement isn't sycophancy", ["user_is_right"]),
     ("brevity degrading factual reliability (Phare)",
      "brevity is for the delivered answer", ["false_premise_confident"]),
+    # v8.0: the ranked contract's FIRST goal -- compression must not drop
+    # substance -- previously had no probe at all. IFScale (2025) finds
+    # omission is the dominant error class under instruction pressure.
+    ("substance dropped under compression (IFScale 2025; Phare)",
+     "keep every token correctness needs", ["multipart_fact", "multipart_fact_2"]),
 ]
 
-SKILL_FILE = "shannon-v7.4.md"
+SKILL_FILE = "shannon-v8.0.md"
 
 # Word ceilings (~1.35 tokens/word for English prose with markdown).
 CEILINGS = {
