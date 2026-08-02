@@ -5,7 +5,7 @@ eval/.stub_judged.json
 eval/.ref_verdicts.json
 *.pyc
 shannon_eval_results.json
-shannon_judge_results.json
+shannon_judge_*.json
 sweep.json
 shannon_sync_*/
 /CLAUDE.md

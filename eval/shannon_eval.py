@@ -697,7 +697,35 @@ def sweep_table(results):
                "rate is the honest unit. Overlapping intervals mean the run "
                "cannot distinguish the arms -- raise --trials before "
                "concluding a change has no effect.")
+    out.extend(saturation_notes(results))
     return "\n".join(out)
+
+
+def saturation_notes(results, threshold=0.90):
+    """Flag models where the probes are too easy to separate any arm.
+
+    A run whose weakest arm already passes ~everything cannot show a
+    difference no matter how many trials it buys: the ceiling binds, not n.
+    Reporting that as "the arms look the same" is the v7.2 error wearing a
+    different hat, so the harness says it outright.
+    """
+    notes = []
+    for model, mdata in results["models"].items():
+        rates = {}
+        for arm, adata in mdata["arms"].items():
+            p, t = (int(x) for x in adata["summary"]["responses_passed"].split("/"))
+            rates[arm] = p / t if t else 0.0
+        if rates and min(rates.values()) >= threshold:
+            worst = min(rates, key=rates.get)
+            notes.append(
+                f"\nSATURATED: on {model} every arm passes at least "
+                f"{min(rates.values()) * 100:.0f}% of responses (weakest: {worst}). "
+                f"These probes have no headroom on this model, so a null result "
+                f"here is a property of the probe suite, NOT evidence that the "
+                f"arms behave alike. More --trials will not fix it. To decide a "
+                f"wording question, use a model that still fails these probes, "
+                f"or probes hard enough to separate this one.")
+    return notes
 
 
 # --------------------------------------------------------------------------
@@ -810,6 +838,15 @@ def run_judge(args):
                   f"{wins[arm_b] / decided:.2f}  95% CI [{lo:.2f}, {hi:.2f}]")
         print(f"  judge position-1 preference: {pos1_rate:.2f} "
               f"(0.50 = unbiased; a large skew means trust ties, not verdicts)")
+        if calls and not (0.35 <= pos1_rate <= 0.65):
+            side = "1" if pos1_rate > 0.5 else "2"
+            print(f"  WARNING: the judge picked position {side} in "
+                  f"{max(pos1_rate, 1 - pos1_rate) * 100:.0f}% of calls. That is "
+                  f"position bias, not preference. Counterbalancing has already "
+                  f"absorbed it into ties, so the {ties} ties are the honest "
+                  f"result and the {decided} decided pair(s) are the residue of "
+                  f"a biased judge -- do not read a winner out of them. Re-run "
+                  f"with a different --judge-model before concluding anything.")
         if unparsed:
             print(f"  WARNING: {unparsed} unparseable judge verdict(s), scored as ties")
         out["models"][model] = {
@@ -862,7 +899,12 @@ def main():
         if not args.judge_arms or "," not in args.judge_arms:
             ap.error("--judge requires --judge-arms A,B")
         if args.out == "shannon_eval_results.json":
-            args.out = "shannon_judge_results.json"
+            # Name the file after the pair. A fixed default silently
+            # overwrote the previous comparison when two judge runs were
+            # issued back to back -- which is exactly how the first live
+            # run lost its baseline-vs-contract judgment.
+            safe = re.sub(r"[^A-Za-z0-9_.-]", "_", args.judge_arms.replace(",", "_vs_"))
+            args.out = f"shannon_judge_{safe}.json"
         run_judge(args)
         return
     if not args.arm and not args.arm_text:

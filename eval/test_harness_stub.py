@@ -405,12 +405,16 @@ def main():
     # every pair collapses to an order-inconsistent tie -- and the reported
     # position-1 rate must expose the bias.
     JUDGE_LOG.clear()
-    subprocess.run(
+    pb = subprocess.run(
         [sys.executable, os.path.join(HERE, "shannon_eval.py"),
          "--judge", out, "--judge-arms", "none,shannon",
          "--judge-model", "stub-judge-posbias",
          "--base-url", f"http://127.0.0.1:{PORT}", "--out", judged],
-        check=True, cwd=ROOT, env=env)
+        check=True, cwd=ROOT, env=env, capture_output=True, text=True)
+    # A skewed position-1 rate must SHOUT, not just print. The first live run
+    # reported 0.198 and nothing in the output flagged it.
+    assert "WARNING" in pb.stdout and "position bias" in pb.stdout, \
+        f"position-bias warning missing from judge output:\n{pb.stdout[-600:]}"
     jr = json.load(open(judged))
     for m in ("stub-model-a", "stub-model-b"):
         jm = jr["models"][m]
@@ -454,7 +458,41 @@ def main():
     for r1, r2 in pairs:
         assert (r2, r1) in pairs, "missing the order-swapped twin of a judge call"
 
-    for f in (out, judged):
+    # (c) Judge output filenames must encode the arm pair. A fixed default
+    # made the second of two back-to-back judge runs silently overwrite the
+    # first, which is how the first live run lost a whole comparison.
+    default_named = os.path.join(ROOT, "shannon_judge_none_vs_shannon.json")
+    subprocess.run(
+        [sys.executable, os.path.join(HERE, "shannon_eval.py"),
+         "--judge", out, "--judge-arms", "none,shannon",
+         "--judge-model", "stub-judge-content",
+         "--base-url", f"http://127.0.0.1:{PORT}"],
+        check=True, cwd=ROOT, env=env, capture_output=True, text=True)
+    assert os.path.exists(default_named), \
+        "default judge filename must encode the arm pair, not collide"
+    # An arm name with characters illegal in a filename must be sanitised.
+    assert se.re.sub(r"[^A-Za-z0-9_.-]", "_", "v8.0_vs_v7/3") == "v8.0_vs_v7_3"
+
+    # ---- saturation detection (v8.0, second pass) -------------------------
+    # A suite whose weakest arm passes ~everything cannot separate arms at any
+    # n. The first live run (haiku, all arms >=93%) was exactly this case and
+    # nothing in the output said so.
+    ceiling = {"models": {"m": {"arms": {
+        "a": {"summary": {"responses_passed": "85/85"}},
+        "b": {"summary": {"responses_passed": "83/85"}}}}}}
+    notes = se.saturation_notes(ceiling)
+    assert len(notes) == 1 and "SATURATED" in notes[0] and "no headroom" in notes[0], \
+        f"saturation must be reported on a ceilinged run: {notes}"
+    assert "not fix it" in notes[0], "must say more trials cannot fix a ceiling"
+    floor = {"models": {"m": {"arms": {
+        "a": {"summary": {"responses_passed": "85/85"}},
+        "b": {"summary": {"responses_passed": "40/85"}}}}}}
+    assert se.saturation_notes(floor) == [], \
+        "a run with a genuinely failing arm is not saturated"
+    assert any("SATURATED" in ln for ln in se.saturation_notes(ceiling, 0.90))
+    assert se.saturation_notes(ceiling, 0.99) == [], "threshold must be respected"
+
+    for f in (out, judged, default_named):
         try:
             os.remove(f)
         except OSError:
@@ -465,7 +503,8 @@ def main():
           "paired stance-flip scoring, substance-completeness probes, two-model sweep, "
           "token/hedge/format aggregation with a real margin, Wilson CIs, JSON output, "
           "and the blind pairwise judge: counterbalanced orders, no arm-name leakage, "
-          "position-biased verdicts collapsing to ties with the bias reported.")
+          "position-biased verdicts collapsing to ties with the bias reported and "
+          "warned about, pair-specific output filenames, and saturation detection.")
 
 
 if __name__ == "__main__":
