@@ -25,6 +25,7 @@ Run:  python3 eval/test_artifact_sync.py
 
 import json
 import os
+import atexit
 import re
 import shutil
 import subprocess
@@ -149,7 +150,12 @@ def main():
     verdicts = python_verdicts()
     n_cases = sum(len(v) for v in verdicts.values())
     failures = []
+    # atexit rather than try/finally: it also covers the sys.exit(1) failure
+    # path, and mkdtemp can land in the CWD when the system temp dir is
+    # unwritable (sandboxed runs) -- exactly how a shannon_sync_* dir once
+    # leaked into the repo root.
     tmp = tempfile.mkdtemp(prefix="shannon_sync_")
+    atexit.register(shutil.rmtree, tmp, ignore_errors=True)
     vpath = os.path.join(tmp, "verdicts.json")
     json.dump(verdicts, open(vpath, "w"))
     driver = os.path.join(tmp, "driver.js")

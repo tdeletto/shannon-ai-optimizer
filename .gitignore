@@ -7,3 +7,5 @@ eval/.ref_verdicts.json
 shannon_eval_results.json
 shannon_judge_results.json
 sweep.json
+shannon_sync_*/
+/CLAUDE.md
