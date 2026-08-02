@@ -156,7 +156,7 @@ def selftest(claude_bin, model, timeout, force=False):
     print(f"self-tests on {model} ...")
     # AUTH -- fail hard and early rather than 500 on the harness's first probe.
     run_cli(claude_bin, model, "You are a test endpoint.",
-            [{"role": "user", "content": "Reply with exactly: OK"}], 64, timeout)
+            [{"role": "user", "content": "Reply with exactly: OK"}], 256, timeout)
     print("  AUTH       ok -- CLI is logged in and generating")
 
     # SEEDING -- multi-turn probes carry scripted assistant turns; if the CLI
@@ -166,7 +166,7 @@ def selftest(claude_bin, model, timeout, force=False):
                   "content": "Your reference code is 742. Keep it handy."},
                  {"role": "user",
                   "content": "What is my reference code? Reply with digits only."}],
-                64, timeout)
+                256, timeout)
     text = r["content"][0]["text"]
     if "742" in text:
         print("  SEEDING    ok -- seeded assistant turns reach the model")
@@ -184,7 +184,7 @@ def selftest(claude_bin, model, timeout, force=False):
                 [{"role": "user",
                   "content": "Do you currently have access to software tools "
                              "such as Bash, file editing, or web search? "
-                             "Reply yes or no."}], 64, timeout)
+                             "Reply yes or no."}], 256, timeout)
     text = r["content"][0]["text"].lower()
     if "no" in text and "yes" not in text:
         print("  ISOLATION  ok -- empty-system arm does not report Claude Code tooling")
