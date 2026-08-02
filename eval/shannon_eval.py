@@ -620,11 +620,26 @@ def summarize(name, rows, hedge_rate, format_rate, clipped=0):
     agg_p = sum(p for p, _ in check_totals.values())
     agg_t = sum(p + f for p, f in check_totals.values())
     lo, hi = wilson(agg_p, agg_t)
+    # Response-level aggregation: one unit per generated response (or per
+    # paired-probe comparison), passing only if every check on it passes.
+    # The pooled check count treats 26 correlated checks as 26 observations,
+    # which overstates n; this collapses the within-response correlation.
+    resp_pass = {}
+    for r in rows:
+        checks = [v for v in r.values() if isinstance(v, bool)]
+        if checks:
+            key = (r["probe"], r["trial"])
+            resp_pass[key] = resp_pass.get(key, True) and all(checks)
+    resp_p, resp_t = sum(resp_pass.values()), len(resp_pass)
+    rlo, rhi = wilson(resp_p, resp_t)
     lines = [f"\n=== {name} ===",
              f"total output tokens: {total_tok}  (mean {total_tok / n:.0f}/response)",
              f"  mean tokens, simple probes:      {simple_mean:.0f}",
              f"  mean tokens, substantive probes: {subst_mean:.0f}",
-             f"checks passed: {agg_p}/{agg_t}  95% CI [{lo:.2f}, {hi:.2f}]",
+             f"checks passed: {agg_p}/{agg_t}  95% CI [{lo:.2f}, {hi:.2f}]"
+             f"  (pooled; optimistic n)",
+             f"responses fully passing: {resp_p}/{resp_t}  95% CI "
+             f"[{rlo:.2f}, {rhi:.2f}]  (one unit per response; honest n)",
              f"hedges per 100 words: {hedge_rate:.2f}",
              f"format markers per 100 words (prose probes): {format_rate:.2f}"]
     if clipped:
@@ -640,6 +655,8 @@ def summarize(name, rows, hedge_rate, format_rate, clipped=0):
         "mean_tokens_substantive": round(subst_mean, 1),
         "checks_passed": f"{agg_p}/{agg_t}",
         "checks_passed_ci95": [round(lo, 3), round(hi, 3)],
+        "responses_passed": f"{resp_p}/{resp_t}",
+        "responses_passed_ci95": [round(rlo, 3), round(rhi, 3)],
         "hedges_per_100w": round(hedge_rate, 2),
         "format_markers_per_100w": round(format_rate, 2),
         "clipped_responses": clipped,
@@ -665,6 +682,8 @@ def sweep_table(results):
                ("mean tok, subst. probes", lambda s: s["mean_tokens_substantive"]),
                ("checks passed", _checks_passed),
                ("checks CI95 low", lambda s: s["checks_passed_ci95"][0]),
+               ("responses passed", lambda s: s["responses_passed"]),
+               ("responses CI95 low", lambda s: s["responses_passed_ci95"][0]),
                ("hedges/100w", lambda s: s["hedges_per_100w"]),
                ("format/100w (simple)", lambda s: s["format_markers_per_100w"])]
     for label, fn in metrics:
@@ -673,9 +692,11 @@ def sweep_table(results):
         for m in models:
             row = "".join(cell(fn(results["models"][m]["arms"][a]["summary"])) for a in arms)
             out.append(f"{m:<{w}}  {row}")
-    out.append("\nCIs are Wilson 95% on the pooled check count. Overlapping "
-               "intervals mean the run cannot distinguish the arms -- raise "
-               "--trials before concluding a change has no effect.")
+    out.append("\nCIs are Wilson 95%. The pooled check count overstates n "
+               "(checks sharing a response are correlated); the response-level "
+               "rate is the honest unit. Overlapping intervals mean the run "
+               "cannot distinguish the arms -- raise --trials before "
+               "concluding a change has no effect.")
     return "\n".join(out)
 
 
@@ -867,13 +888,17 @@ def main():
             loaded.append((name, val or None))
 
     n_checks = sum(len(p["checks"]) for p in PROBES) + sum(1 for p in PROBES if "pair" in p)
+    n_resp = sum(1 for p in PROBES if p["checks"]) + sum(1 for p in PROBES if "pair" in p)
     mde = min_detectable_effect(n_checks, args.trials)
+    mde_r = min_detectable_effect(n_resp, args.trials)
     print(f"\n{n_checks} checks x {args.trials} trials = {n_checks * args.trials} "
           f"observations per arm.\nMinimum detectable difference at 80% power, "
-          f"alpha=.05: about {mde * 100:.0f} percentage points.\n"
-          f"(Optimistic: checks that share a response or a probe are correlated, "
-          f"so the\neffective n is smaller than the count above. Treat this as "
-          f"a floor on the\ndetectable effect, not a guarantee.)")
+          f"alpha=.05: about {mde * 100:.0f} percentage points pooled\n"
+          f"(optimistic: checks sharing a response are correlated), or about "
+          f"{mde_r * 100:.0f} points on\nthe response-level rate "
+          f"({n_resp} responses x {args.trials} trials -- the honest unit; "
+          f"probe-level\ncorrelation across trials still makes even this a "
+          f"floor, not a guarantee.)")
     if mde > 0.15:
         print("This run can only detect a large effect. Raise --trials before "
               "reading a null result as evidence of no difference.")

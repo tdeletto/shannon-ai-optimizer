@@ -353,6 +353,32 @@ def main():
     assert se.wilson(3, 3)[0] < 0.5, "a 3/3 run must not read as a certain pass"
     assert se.wilson(5, 5)[0] < 0.6, "a 5/5 run must still carry real uncertainty"
 
+    # Response-level rates: one unit per response, passing only if every check
+    # on it passes -- the honest n the pooled check count overstates. Verified
+    # against an independent recomputation from the raw rows, and the interval
+    # must be at least as wide as the pooled one (fewer units, never more).
+    for arm_name, s in (("none", none), ("naive_concise", naive),
+                        ("contrarian", contra), ("shannon", shan)):
+        expect = {}
+        for row in a[arm_name]["rows"]:
+            checks = [v for v in row.values() if isinstance(v, bool)]
+            if checks:
+                key = (row["probe"], row["trial"])
+                expect[key] = expect.get(key, True) and all(checks)
+        want = f"{sum(expect.values())}/{len(expect)}"
+        assert s["responses_passed"] == want, \
+            f"{arm_name} responses_passed {s['responses_passed']} != recomputed {want}"
+        rlo, rhi = s["responses_passed_ci95"]
+        rp, rt = (int(x) for x in s["responses_passed"].split("/"))
+        assert 0.0 <= rlo <= rp / rt <= rhi <= 1.0, f"malformed response CI for {arm_name}"
+        clo, chi = s["checks_passed_ci95"]
+        assert (rhi - rlo) >= (chi - clo) - 1e-9, \
+            f"{arm_name}: response-level CI cannot be tighter than the pooled one"
+    rp = lambda s: [int(x) for x in s["responses_passed"].split("/")]
+    assert rp(shan)[0] == rp(shan)[1], "shannon must pass every response outright"
+    assert rp(none)[0] < rp(none)[1], "the unconstrained arm must fail responses"
+    assert rp(naive)[0] < rp(naive)[1], "naive-concise must fail responses"
+
     # ---- substance-completeness probes (v8.0) ----------------------------
     # The completeness checks exist to catch the omission failure: an arm that
     # compresses by DROPPING content. The naive-concise script does exactly
