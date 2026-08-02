@@ -8,7 +8,7 @@ It's named after **Claude Shannon**, founder of information theory. The goal is 
 
 Current version: **v8.0**.
 
-> **v8.0 is a measurement release: the contract text is unchanged, on evidence.** An audit of the eval found the v7.4 scorers false-passing five classes of evasively-phrased sycophancy ("your roommate is being unreasonable", "not quite right", "you get 398", "leap year after all", "I defer to the literature") — each is now a labelled corpus case and a fixed scorer, measured at 60–83% → 100% accuracy against the frozen v7.4 implementations. Two gaps in what the suite could *see* are closed: substance-completeness probes catch compression that drops content (the first ranked goal, previously untested), and a **blind pairwise judge mode** compares two arms' answers with counterbalanced ordering and no arm labels, so open-ended quality is finally measurable. A new artifact-sync test executes the HTML pages' JavaScript scorers against the Python ones on every corpus case, so the in-chat benchmark can no longer drift silently. No contract wording changed: behavioral wording changes are gated on live A/B runs (see *Verify it yourself*), and this release's work was measurement. The v7.4 → v7.3-wording comparison remains an open experiment the suite is now better equipped to decide.
+> **v8.0 is a measurement release: the contract text is unchanged, on evidence.** An audit of the eval found the v7.4 scorers false-passing five classes of evasively-phrased sycophancy ("your roommate is being unreasonable", "not quite right", "you get 398", "leap year after all", "I defer to the literature") — each is now a labelled corpus case and a fixed scorer, measured at 60–83% → 100% accuracy against the frozen v7.4 implementations. Two gaps in what the suite could *see* are closed: substance-completeness probes catch compression that drops content (the first ranked goal, previously untested), and a **blind pairwise judge mode** compares two arms' answers with counterbalanced ordering and no arm labels, so open-ended quality is finally measurable. A new artifact-sync test executes the HTML pages' JavaScript scorers against the Python ones on every corpus case, so the in-chat benchmark can no longer drift silently. No contract wording changed: behavioral wording changes are gated on live A/B runs (see *Verify it yourself*), and this release's work was measurement. The v7.4 → v7.3-wording comparison remains an open experiment the suite is now better equipped to decide — and, since this release's second pass, one you can run **without an API key**: `eval/claude_cli_bridge.py` serves the harness from a logged-in Claude Code CLI on subscription auth, with startup self-tests that refuse to serve an unfaithful run.
 
 > **v7.4 rebuilt the anti-sycophancy section on the mechanism, not the intuition.** Recent work locates the cause: models default to *accommodating* the user's presuppositions, and overwhelmingly assume advice-seeking users want validation rather than an assessment. Broad "don't be sycophantic" directives — the class Shannon's previous wording belonged to — are the interventions that measure weakest and sometimes backfire. The rules are now written against the documented failure modes one by one, with a probe for each, plus a **control that catches the opposite failure**: premise-challenging interventions are known to over-correct into reflexive contrarianism, and an eval where every probe rewards pushback would score that as a win. Cost: +92 words of context per turn. Whether it changes behavior on your model is a live question — the suite exists to answer it.
 
@@ -84,7 +84,7 @@ The previous (v7.3) anti-sycophancy wording, preserved as a complete contract so
 
 ## Verify it yourself
 
-`eval/` exists so changes are decided by measurement. Four of the five tools run with **no API key**.
+`eval/` exists so changes are decided by measurement. Everything below except the live harness runs with **no API key** — and the live harness itself no longer strictly needs one: a logged-in Claude Code CLI can serve it through `eval/claude_cli_bridge.py`.
 
 ### Offline (no key)
 
@@ -93,13 +93,15 @@ The previous (v7.3) anti-sycophancy wording, preserved as a complete contract so
 - **`eval/test_contract_files.py`** — body parity between `shannon-project.md` and `shannon-v8.0.md`, word-count ceilings so the contract can't quietly grow, and the coverage matrix: every documented failure mode needs both a contract rule and a probe.
 - **`eval/test_harness_stub.py`** — end-to-end test of the harness against a scripted local server. Exercises all scorers in both directions, the four-arm plumbing, the substance-completeness probes, the two-model sweep, the Wilson intervals, and the blind judge: counterbalanced orders, no arm-name leakage, and a position-biased judge collapsing to ties with its bias reported.
 - **`eval/test_artifact_sync.py`** — executes the HTML artifacts' JavaScript scorers under node against every corpus case and compares them with the Python scorers, checks the benchmark's embedded contract against `shannon-project.md` byte-for-byte, and diffs its probe suite against the Python one. The v7.4 port was verified once, by hand, at ship time; this makes the claim executable.
+- **`eval/test_cli_bridge.py`** — verifies the CLI bridge against a mock `claude` executable: every isolation flag the bridge's fidelity depends on, seeded-assistant-turn delivery, response translation into the shape `call_api` parses, the self-test gates (a logged-out or seed-dropping CLI refuses to serve), and a full harness run over HTTP.
 
 ```
 python3 eval/test_scorers.py && python3 eval/test_contract_files.py && \
-python3 eval/test_harness_stub.py && python3 eval/test_artifact_sync.py
+python3 eval/test_harness_stub.py && python3 eval/test_artifact_sync.py && \
+python3 eval/test_cli_bridge.py
 ```
 
-### Live (needs a key)
+### Live (a key — or a logged-in Claude Code CLI)
 
 - **`eval/shannon_eval.py`** — API A/B harness. Eighteen probes, 26 checks per arm, scored programmatically, plus token, hedge and format-marker rates and Wilson 95% intervals on every pass rate. It prints the run's minimum detectable effect before it starts (flagged as optimistic, since checks sharing a response are correlated), and reports any response clipped at the token cap — silent truncation deflates the verbose arm's token count, which is a bias in Shannon's favor.
 
@@ -117,6 +119,17 @@ python3 eval/test_harness_stub.py && python3 eval/test_artifact_sync.py
       --model claude-sonnet-4-6 --model claude-haiku-4-5 \
       --trials 10 --transcripts --out sweep.json
   ```
+
+  **No API key? Use the CLI bridge.** `eval/claude_cli_bridge.py` serves `/v1/messages` locally and fulfills each request with a `claude -p` call on your subscription — no key involved:
+
+  ```
+  # terminal 1
+  python3 eval/claude_cli_bridge.py
+  # terminal 2 — same command as above, minus the key, plus:
+  python3 eval/shannon_eval.py --base-url http://127.0.0.1:8917 ...
+  ```
+
+  At startup it self-tests the things that would silently invalidate a run — that the CLI is logged in, that seeded assistant turns actually reach the model, and that the no-system arm doesn't see agent tooling — and refuses to serve if the first two fail. Honest caveats: each arm's contract *replaces* the CLI's system prompt with tools, MCP, and hooks stripped, but numbers produced this way are "Claude via Claude Code CLI", not "Claude via raw API" — every arm gets identical treatment, so between-arm comparisons hold, but don't mix the two paths in one table. And it spends your subscription's usage budget: the full deferred experiment is ~2,000 generations, so start with one model at `--trials 3`–`5` and scale only what separates.
 
   **Blind pairwise quality judging.** The substring checks say nothing about open-ended answer quality — which is the contract's first ranked goal. Judge mode closes that gap: generate with `--transcripts`, then re-invoke with `--judge` to have a judge model compare two arms' responses to the same probe, pairwise and blind. The judge sees only the user request and two unlabelled responses; every pair is judged twice, once in each order (LLM-judge position bias is documented at 60–75%); a verdict counts only when the judge picks the same *response* in both orders, and a judge that picks the same *position* twice scores the pair as a tie. The judge's position-1 preference rate is reported so a biased judge is visible rather than silently absorbed.
 
@@ -137,7 +150,7 @@ python3 eval/test_harness_stub.py && python3 eval/test_artifact_sync.py
 
 ### Reading the results honestly
 
-Pass rates come with Wilson 95% intervals, and the harness prints its minimum detectable effect before the run. With 26 checks per arm that is about ±16 points at 2 trials, ±10 at 5, ±7 at 10, ±5 at 20 — and those figures are optimistic, because checks that share a response are correlated. "The arms looked the same" at low trial counts is **not** evidence that a change does nothing; it's evidence the run couldn't tell. This is exactly how the v7.2 revert decision went wrong.
+Pass rates come with Wilson 95% intervals, and the harness prints its minimum detectable effect before the run. With 26 checks per arm that is about ±16 points at 2 trials, ±10 at 5, ±7 at 10, ±5 at 20 — and those figures are optimistic, because checks that share a response are correlated. The harness therefore also reports a **response-level rate** (one unit per response, passing only if every check on it passes — 17 units per trial): the honest figures there are about ±20 at 2 trials, ±13 at 5, ±9 at 10, ±6 at 20. Read the response-level interval when deciding; the pooled one flatters the run. "The arms looked the same" at low trial counts is **not** evidence that a change does nothing; it's evidence the run couldn't tell. This is exactly how the v7.2 revert decision went wrong.
 
 The probes are narrow by design: objective pass/fail on the specific behaviors the contract claims to change, so a regression shows up as a flipped cell rather than a vibe. The honest limits: they say nothing about open-ended answer quality, and on a strong model they may all pass regardless of arm.
 

@@ -20,7 +20,7 @@ The working environment had **no Anthropic API access** (no key in the environme
 | A2 | Prose carries more nuance per token than bullets | Yes — format rules | Judgment call; no direct evidence either way. Format-marker metric measures compliance, not the premise. Flagged, not actioned. |
 | A3 | Intent-declaration beats prohibition for anti-sycophancy | Yes — the v7.4 rewrite's core bet | Literature-grounded (ELEPHANT's one effective prompt intervention) but **behaviorally unverified on this contract** — the A/B against `v7.3-sycophancy-wording` has never been run live. This is the open experiment (§6). |
 | A4 | The substring scorers detect the behaviors they claim to | Yes — every conclusion routes through them | **Partially false at v7.4.** Five evasion classes found; see §4. Fixed and re-validated. |
-| A5 | 18 checks × trials give the printed MDE | Yes — power reasoning | Optimistic: checks sharing a response are correlated, effective n is smaller. Now labelled as such in the harness and README. |
+| A5 | 18 checks × trials give the printed MDE | Yes — power reasoning | Optimistic: checks sharing a response are correlated, effective n is smaller. Labelled as such; the second pass went further — response-level rates (one unit per response, all checks must pass) now print alongside the pooled figures, with both MDEs. |
 | A6 | Frontier models pass the old probes by default | Yes — probe design driver | Measured true in v7.3 live runs; v7.4's harder probes exist because of it. Unchanged. |
 | A7 | API `usage.output_tokens` is accurate for verbosity comparison | Yes | True, **but** silent `max_tokens` clipping deflated the verbose arm's totals — a bias in Shannon's favor. Fixed: clipping now reported, cap raised. |
 | A8 | The HTML artifacts faithfully port the Python scorers | Yes — most users will run the artifact, not the harness | Was true at v7.4 ship time (verified once, manually); nothing kept it true. Now enforced by `test_artifact_sync.py`. |
@@ -32,6 +32,8 @@ The working environment had **no Anthropic API access** (no key in the environme
 Measurement: five scorer evasion classes (§4); `held_position` never corpus-validated despite v7.4's "validated" framing; zero probes for substance-dropping; no open-ended quality measurement; silent token-cap clipping; optimistic MDE printout; artifact JS sync unverifiable after ship.
 
 Repo integrity: v7.4 changelog claimed `.gitignore` added and `.DS_Store` untracked — neither was true; root-level HTML duplicates contradicted the same changelog's "all eval files now live in `eval/`" and had no drift guard; the stub test failed on filesystems that forbid unlink (cleanup, not assertions).
+
+Found in the second pass: `test_artifact_sync.py` created its temp dir with no cleanup, and in sandboxed runs `mkdtemp` falls back to the CWD — a `shannon_sync_*` directory had leaked into the repo root. Fixed with `atexit` cleanup plus a gitignore guard.
 
 ## 3. Research phase: used and discarded
 
@@ -68,7 +70,7 @@ Rejected candidates: any contract wording edit (unmeasurable this cycle — the 
 
 ## 5. Verification summary
 
-All four offline gates pass together at ship: `test_scorers.py` (current scorers 100% on 80 cases, strictly better than pre-v7.4 *and* v7.4 generations), `test_contract_files.py` (body parity, ceilings, 13-row coverage matrix), `test_harness_stub.py` (~70 assertions: request construction, all scorers both directions, four arms, paired stance-flip, completeness probes, two-model sweep, Wilson CIs, judge mode incl. bias collapse and blindness), `test_artifact_sync.py` (JS↔Python parity on every case; contract and probe parity).
+All five offline gates pass together at ship: `test_scorers.py` (current scorers 100% on 80 cases, strictly better than pre-v7.4 *and* v7.4 generations), `test_contract_files.py` (body parity, ceilings, 13-row coverage matrix), `test_harness_stub.py` (~80 assertions: request construction, all scorers both directions, four arms, paired stance-flip, completeness probes, two-model sweep, Wilson CIs incl. independently-recomputed response-level rates, judge mode incl. bias collapse and blindness), `test_artifact_sync.py` (JS↔Python parity on every case; contract and probe parity), `test_cli_bridge.py` (bridge isolation flags, message/response translation, self-test gating, full harness run over HTTP against a mock CLI).
 
 What is **not** verified, stated plainly: no live model behavior changed or was measured in this cycle. The v8.0 claims are strictly about measurement validity, not about behavioral deltas. The README's stance — "the behavioral delta is not established; run the suite" — remains the honest position, and v8.0 makes that suite materially harder to fool.
 
@@ -89,7 +91,9 @@ python3 eval/shannon_eval.py --judge sweep.json --judge-arms v8.0,v7_3_wording
 python3 eval/shannon_eval.py --judge sweep.json --judge-arms baseline,v8.0
 ```
 
-Reading protocol, fixed in advance: at 10 trials the deterministic suite resolves ~±7 points (optimistic); smaller gaps are "couldn't tell", not "no effect". Watch `user_is_right` as closely as the pushback probes — an arm that wins every pushback probe and loses that one has traded sycophancy for contrarianism. The judge comparison is the quality gate: v8.0 must not *lose* to either control on decided pairs. If `v7_3_wording` matches v8.0 on the sycophancy probes at adequate power, the v7.4 rewrite's +92 words have not earned their keep and should be reverted per the control arm's own instructions.
+**No key? Run it through the CLI bridge** (added in the second pass). With a logged-in Claude Code CLI, start `python3 eval/claude_cli_bridge.py` in one terminal, then run the same commands above with `--base-url http://127.0.0.1:8917` and no `ANTHROPIC_API_KEY`. The bridge self-tests auth, seeded-turn delivery, and system-prompt isolation before serving, and refuses if the run would be silently unfaithful. Numbers produced this way are "Claude via Claude Code CLI" — internally valid between arms, not row-comparable with raw-API runs; the sweep is ~2,000 generations against your subscription budget, so start with one model at `--trials 3`–`5`.
+
+Reading protocol, fixed in advance: at 10 trials the deterministic suite resolves ~±7 points pooled, ~±9 on the response-level rate (the honest unit); smaller gaps are "couldn't tell", not "no effect". Watch `user_is_right` as closely as the pushback probes — an arm that wins every pushback probe and loses that one has traded sycophancy for contrarianism. The judge comparison is the quality gate: v8.0 must not *lose* to either control on decided pairs. If `v7_3_wording` matches v8.0 on the sycophancy probes at adequate power, the v7.4 rewrite's +92 words have not earned their keep and should be reverted per the control arm's own instructions.
 
 ## 7. Decision log (chronological)
 
@@ -101,3 +105,7 @@ Reading protocol, fixed in advance: at 10 trials the deterministic suite resolve
 6. Root HTML duplicates removed rather than parity-tested (v7.4's changelog already declared `eval/` canonical).
 7. One in-flight mistake, caught and corrected: the first artifact-regeneration script sliced embedded constants to the first `;`, which truncated mid-string (semicolons inside corpus text); both artifacts were restored from git and regenerated with line-boundary slicing. The sync test now guards exactly this class of error permanently.
 8. Three commits rather than eleven: `shannon_eval.py` carries several logically-distinct changes whose hunk-level separation would be brittle; the changelog and this report carry the per-candidate attribution instead.
+9. Second pass (still pre-publication, so folded into the same release): re-verified no live access rather than assuming it — no key in env or shell config; the nested `claude` CLI returns "Not logged in" both sandboxed and unsandboxed (its keychain entry exists but is unreadable non-interactively); credential hunting beyond that remains out of mandate. The deferred experiment stays deferred.
+10. Rather than accept the access barrier again, remove it for the user: ship `claude_cli_bridge.py` so a logged-in CLI can serve the harness. Fidelity is not assumed — the bridge refuses to serve unless its startup self-tests pass against the real CLI, and everything verifiable offline is gated by `test_cli_bridge.py` against a mock. During bridge development, three contamination vectors were observed and are now stripped per call: the default agent system prompt, tool definitions, and SessionStart-hook context injection.
+11. Response-level pass rates chosen over a cluster-bootstrap: same honesty gain, no new statistical machinery to validate, and the stub can verify it by independent recomputation. The pooled figure is kept (comparability with prior runs) but labelled.
+12. Research re-checked the same day: 2026 results (memory-agent sycophancy, video-LLM benchmarks, RL-time mitigation, praise-specific evals) are out of scope for a portable text contract or corroborate the shipped design; nothing met the bar that would gate a wording change. No edit motivated.
