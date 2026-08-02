@@ -44,6 +44,23 @@ A continuation pass before first publication, after re-verifying that this envir
 - **`test_artifact_sync.py` temp-dir leak fixed.** In sandboxed runs `mkdtemp` can fall back to the CWD, and the test never cleaned up — a `shannon_sync_*` directory was found leaked in the repo root. Cleanup is now registered with `atexit` (covers the failure path too), and `shannon_sync_*/` is gitignored as a belt-and-braces guard.
 - **Research re-check, same day:** the 2026 sycophancy literature surfaced nothing decision-changing — new work targets memory-augmented agents, video-LLMs, and RL-time mitigation (out of scope for a portable text contract); prompt-level findings corroborate system-prompt intervention and motivate measurement, not rewording.
 
+### Third pass: the deferred experiment, run at last — and what it cost the eval
+
+The v7.4-vs-v7.3-wording A/B, deferred since v7.4, was executed through the new CLI bridge: claude-haiku-4-5, four arms, five trials, 360 generations, nothing clipped. Full record in **`RESULTS-live-2026-08.md`**.
+
+- **The wording question is still open, and this run could not have closed it.** Every arm-vs-arm response-level comparison is undecided (all Newcombe 95% CIs on the difference span zero). Cause: saturation, not sample size — baseline alone passes 125/130 checks. The v7.4 rewrite's +92 words are unearned *and* unrefuted; the control arm's revert instruction requires a match *at adequate power*, which this is not.
+- **The blind judge decided nothing, correctly.** 12–9 on decided pairs with 69 ties, win-share CI [0.245, 0.635]. Its position-1 rate was 0.198 — heavy position bias, which counterbalancing absorbed into ties exactly as designed rather than reporting a false winner.
+- **No aggregate token saving on this model.** v8.0 spent 2.8% *more* total output than baseline: −17.9% on simple probes, +5.4% on substantive ones. The README's token claim is now stated with both runs' numbers instead of the flattering one.
+- **Two effects separated cleanly** (v8.0's per-trial range not overlapping baseline's): ~10× fewer format markers (0.63 vs 6.57 per 100 words) and hedges roughly halved (0.36 vs 0.69).
+- **A finding that cuts against the current wording:** v8.0 was the worst arm on the paired stance-flip check (3/5; v7.3 wording and naive-concise both 5/5), with transcript-verified contradictions — the one check that needs no ground truth. Not separated at n=5; the decisive follow-up is ~80 generations on that pair alone, not another full sweep.
+
+Four harness fixes, each prompted by a defect this run exposed:
+
+- **Saturation detection.** When every arm passes ≥90% of responses the sweep prints a `SATURATED:` warning stating that a null result is a property of the probes, not the arms, and that more trials cannot fix it. Nothing warned during the run that spent 360 generations to learn this.
+- **Position-bias warning.** A position-1 rate outside 0.35–0.65 now prints a warning that the decided pairs are a biased judge's residue and should not be read as a winner. The rate was printed before; nothing flagged it.
+- **Judge output filenames encode the arm pair.** Two back-to-back judge invocations both wrote `shannon_judge_results.json`, so the second silently destroyed the first — which is how this run lost its `baseline` vs `v8.0` comparison.
+- Stub coverage for all three, plus the sanitisation of arm names containing filesystem-illegal characters.
+
 ### Repo hygiene, including two corrections to v7.4 claims
 
 - The v7.4 changelog claimed `.gitignore` was added and the committed `.DS_Store` removed. **Neither was true**: there was no `.gitignore` on `main`, and `.DS_Store` was tracked and modified. Both are actually done now.
