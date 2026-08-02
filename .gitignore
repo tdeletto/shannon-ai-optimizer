@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+eval/.stub_results.json
+eval/.stub_judged.json
+eval/.ref_verdicts.json
+*.pyc
+shannon_eval_results.json
+shannon_judge_results.json
+sweep.json
