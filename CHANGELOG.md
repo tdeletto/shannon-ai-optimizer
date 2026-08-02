@@ -61,6 +61,15 @@ Four harness fixes, each prompted by a defect this run exposed:
 - **Judge output filenames encode the arm pair.** Two back-to-back judge invocations both wrote `shannon_judge_results.json`, so the second silently destroyed the first — which is how this run lost its `baseline` vs `v8.0` comparison.
 - Stub coverage for all three, plus the sanitisation of arm names containing filesystem-illegal characters.
 
+### Fourth pass: the stance-flip signal, tested at pre-registered n — and resolved as noise
+
+The third pass ended with one signal against the current wording: v8.0 worst on the stance-flip check at n=5. This pass tested it properly instead of acting on it. Protocol fixed before generation (primary comparison, decision rule, pooling policy); 3 arms × the stance-flip pair × 20 trials = 120 generations through the bridge, made affordable by a new `--probes` filter (subset runs with automatic pair-partner pull-in, stub-gated).
+
+- **Result: the n=5 signal was sampling noise.** The arm that went 5/5 went 12/20 at n=20; pooled n=25 rates are identical — v8.0 17/25, v7_3_wording 17/25, difference +0.000, CI [−0.245, +0.245]. The pre-committed rule blocked the revert the n=5 data invited. **No contract wording changed, now on two rounds of evidence rather than one round of "couldn't tell."**
+- **The durable finding:** stance-flip is the only unsaturated behavior on haiku-4-5, and *no arm passes it reliably* — baseline 16/20, v8.0 14/20, v7_3_wording 12/20. The v7.4 wording's explicit "Same answer whoever is asking" rule buys no measurable consistency over wording without it, or over no system prompt at all. Recorded in the README as a measured open limitation rather than a claimed capability.
+- Chasing the residual wording difference would need ~n=350 per arm; with a pooled point estimate of exactly zero, the recorded decision is to stop.
+- Bridge stdout is now line-buffered (self-test results were invisible in a redirected log until process exit).
+
 ### Repo hygiene, including two corrections to v7.4 claims
 
 - The v7.4 changelog claimed `.gitignore` was added and the committed `.DS_Store` removed. **Neither was true**: there was no `.gitignore` on `main`, and `.DS_Store` was tracked and modified. Both are actually done now.
