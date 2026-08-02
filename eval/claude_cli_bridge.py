@@ -255,6 +255,11 @@ def serve(cfg):
 
 
 def main():
+    # Line-buffer stdout even when redirected to a file: with block buffering,
+    # the self-test results and the "listening" line sit invisible in the
+    # buffer while the server runs -- observed as an apparently-empty log on
+    # the first backgrounded run.
+    sys.stdout.reconfigure(line_buffering=True)
     ap = argparse.ArgumentParser(description=(
         "Serve the Anthropic Messages API from a logged-in Claude Code CLI, "
         "so shannon_eval.py can run live without an API key."))

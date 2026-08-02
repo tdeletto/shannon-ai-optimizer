@@ -891,6 +891,12 @@ def main():
                          "'v7.4,candidate'. Required with --judge.")
     ap.add_argument("--judge-model", default="claude-sonnet-4-6",
                     help="model used as the blind judge")
+    ap.add_argument("--probes", default=None,
+                    help="comma-separated probe ids; run only these (a probe "
+                         "with a paired check pulls its partner in "
+                         "automatically). For focused follow-ups: a saturated "
+                         "suite question needs ~2 probes at high n, not all "
+                         "18 at low n.")
     args = ap.parse_args()
     args.api_key = os.environ.get("ANTHROPIC_API_KEY", "")
     if not args.api_key and "api.anthropic.com" in args.base_url:
@@ -909,6 +915,22 @@ def main():
         return
     if not args.arm and not args.arm_text:
         ap.error("pass at least one --arm or --arm-text")
+    if args.probes:
+        global PROBES
+        want = {s.strip() for s in args.probes.split(",") if s.strip()}
+        known = {p["id"] for p in PROBES}
+        bad = want - known
+        if bad:
+            sys.exit(f"Unknown probe id(s): {', '.join(sorted(bad))}. "
+                     f"Known: {', '.join(sorted(known))}")
+        # A paired check scores one probe's response against its partner's;
+        # running half the pair would silently score against empty text.
+        for p in PROBES:
+            if p["id"] in want and "pair" in p:
+                want.add(p["pair"][0])
+        PROBES = [p for p in PROBES if p["id"] in want]
+        print(f"probe filter: {len(PROBES)}/{len(known)} probes "
+              f"({', '.join(p['id'] for p in PROBES)})")
     models = args.model or ["claude-sonnet-4-6"]
 
     # Preserve the order the arms were declared on the command line, so the
@@ -947,7 +969,8 @@ def main():
 
     results = {"models": {}, "trials": args.trials, "checks_per_arm": n_checks,
                "min_detectable_effect": round(mde, 3),
-               "model_list": models, "arm_list": [n for n, _ in loaded]}
+               "model_list": models, "arm_list": [n for n, _ in loaded],
+               "probe_filter": sorted(p["id"] for p in PROBES) if args.probes else None}
     for model in models:
         print(f"\n{'#' * 60}\n# MODEL: {model}\n{'#' * 60}")
         results["models"][model] = {"arms": {}}

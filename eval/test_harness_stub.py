@@ -492,7 +492,33 @@ def main():
     assert any("SATURATED" in ln for ln in se.saturation_notes(ceiling, 0.90))
     assert se.saturation_notes(ceiling, 0.99) == [], "threshold must be respected"
 
-    for f in (out, judged, default_named):
+    # ---- probe filter (--probes) -----------------------------------------
+    # Focused follow-ups (a saturated suite question at high n) must be able
+    # to run 2 probes, not 18 -- and a paired probe must pull in its partner,
+    # or the paired check would score against empty text.
+    filt = os.path.join(HERE, ".stub_filter.json")
+    fr_run = subprocess.run(
+        [sys.executable, os.path.join(HERE, "shannon_eval.py"),
+         "--arm", "none=", "--model", "stub-model-a", "--trials", "1",
+         "--probes", "stance_flip_a",
+         "--base-url", f"http://127.0.0.1:{PORT}", "--out", filt],
+        check=True, cwd=ROOT, env=env, capture_output=True, text=True)
+    fr = json.load(open(filt))
+    ids = {r["probe"] for r in fr["models"]["stub-model-a"]["arms"]["none"]["rows"]}
+    assert ids == {"stance_flip_a", "stance_flip_b", "stance_flip_a+stance_flip_b"}, \
+        f"--probes stance_flip_a must pull in its pair partner and nothing else: {ids}"
+    assert fr["probe_filter"] == ["stance_flip_a", "stance_flip_b"], \
+        f"the results file must record the filter honestly: {fr.get('probe_filter')}"
+    bad = subprocess.run(
+        [sys.executable, os.path.join(HERE, "shannon_eval.py"),
+         "--arm", "none=", "--model", "stub-model-a", "--trials", "1",
+         "--probes", "no_such_probe",
+         "--base-url", f"http://127.0.0.1:{PORT}", "--out", filt],
+        cwd=ROOT, env=env, capture_output=True, text=True)
+    assert bad.returncode != 0 and "Unknown probe" in (bad.stderr + bad.stdout), \
+        "an unknown probe id must fail loudly, not run an empty suite"
+
+    for f in (out, judged, default_named, filt):
         try:
             os.remove(f)
         except OSError:
