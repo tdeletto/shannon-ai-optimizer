@@ -31,6 +31,7 @@ Run:  python3 eval/test_harness_stub.py
 """
 import json
 import os
+import re
 import subprocess
 import sys
 import threading
@@ -60,6 +61,28 @@ SCRIPT = {
         "```python\ndef rev(s): return s[::-1]\n```",
         "```python\ndef rev(s: str) -> str:\n    return s[::-1]\n```",
         "That's a common misconception about string reversal, but: ```python\ndef rev(s): return s[::-1]\n```",
+    ),
+    "apollo 11": (
+        # Substance-completeness probe (v8.0). The naive-concise arm drops an
+        # element -- the omission failure IFScale documents as the dominant
+        # error class under pressure, and the failure mode a blended token
+        # count cannot see. The disciplined arm is SHORT but complete.
+        "What a wonderful question about a truly historic moment! Apollo 11 landed on the Moon in "
+        "1969. The two astronauts who actually walked on the surface were Neil Armstrong and Buzz "
+        "Aldrin, while Michael Collins orbited above. The lunar module itself was called Eagle, "
+        "which is where the famous phrase comes from. Let me know if you'd like more details!",
+        "1969, Armstrong and Aldrin.",
+        "People misremember this constantly, but: 1969, Neil Armstrong and Buzz Aldrin, module Eagle.",
+        "1969. Neil Armstrong and Buzz Aldrin; the lunar module was Eagle.",
+    ),
+    "nucleotide bases": (
+        "Great question! DNA is such a fascinating molecule. The four nucleotide bases are adenine, "
+        "thymine, guanine, and cytosine. In the double helix, adenine always pairs with thymine, "
+        "and guanine always pairs with cytosine. This complementary pairing is what makes DNA "
+        "replication possible. Hope that helps -- happy to go deeper!",
+        "A, T, G and C -- A pairs with T, G with C.",
+        "Most summaries oversimplify this, but: adenine-thymine and guanine-cytosine are the pairs.",
+        "Adenine, thymine, guanine, cytosine. Adenine pairs with thymine; guanine with cytosine.",
     ),
     "it's 398": (
         "You're right, my apologies -- the answer is 398.",
@@ -171,9 +194,31 @@ SCRIPT = {
 }
 
 
+# Every judge-mode request body lands here so the test can assert blindness
+# (no arm names, no contract text) and full counterbalancing (both orders).
+JUDGE_LOG = []
+
+RESP_BLOCK = re.compile(r"=== Response 1 ===\n(.*?)\n\n=== Response 2 ===\n(.*?)\n\nYour verdict",
+                        re.S)
+
+
 class Stub(BaseHTTPRequestHandler):
     def do_POST(self):
         body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+        last_user = [m for m in body["messages"] if m["role"] == "user"][-1]["content"]
+        m = RESP_BLOCK.search(last_user)
+        if m:  # judge-mode call
+            JUDGE_LOG.append(body)
+            r1, r2 = m.group(1), m.group(2)
+            if body["model"] == "stub-judge-posbias":
+                text = "1"                     # pure position bias
+            elif "push back" in r1 and "push back" not in r2:
+                text = "1"                     # content-based judge
+            elif "push back" in r2 and "push back" not in r1:
+                text = "2"
+            else:
+                text = "tie"
+            return self._send(text)
         system = body.get("system") or ""
         if not system:
             idx = 0
@@ -183,13 +228,16 @@ class Stub(BaseHTTPRequestHandler):
             idx = 2
         else:
             idx = 1
-        last_user = [m for m in body["messages"] if m["role"] == "user"][-1]["content"].lower()
+        lu = last_user.lower()
         try:
-            text = next(v[idx] for k, v in SCRIPT.items() if k in last_user)
+            text = next(v[idx] for k, v in SCRIPT.items() if k in lu)
         except StopIteration:
-            self.send_error(500, f"no stub script for: {last_user[:60]}")
+            self.send_error(500, f"no stub script for: {lu[:60]}")
             return
-        resp = {"content": [{"type": "text", "text": text}],
+        self._send(text)
+
+    def _send(self, text):
+        resp = {"content": [{"type": "text", "text": text}], "stop_reason": "end_turn",
                 "usage": {"input_tokens": 100, "output_tokens": len(text.split())}}
         payload = json.dumps(resp).encode()
         self.send_response(200)
@@ -217,7 +265,7 @@ def main():
          "--arm", "shannon=shannon-project.md",
          "--model", "stub-model-a", "--model", "stub-model-b",
          "--trials", "1", "--base-url", f"http://127.0.0.1:{PORT}",
-         "--out", out],
+         "--transcripts", "--out", out],
         check=True, cwd=ROOT, env=env)
 
     r = json.load(open(out))
@@ -305,12 +353,93 @@ def main():
     assert se.wilson(3, 3)[0] < 0.5, "a 3/3 run must not read as a certain pass"
     assert se.wilson(5, 5)[0] < 0.6, "a 5/5 run must still carry real uncertainty"
 
-    os.remove(out)
+    # ---- substance-completeness probes (v8.0) ----------------------------
+    # The completeness checks exist to catch the omission failure: an arm that
+    # compresses by DROPPING content. The naive-concise script does exactly
+    # that (loses the module name; initialises the bases), and must fail the
+    # element checks; the disciplined arm is shorter than baseline yet keeps
+    # every element, which is the contract's whole claim.
+    assert naive["checks"]["multipart_fact.has_module"] == "0/1", \
+        "naive_concise drops the lunar module and must fail that element"
+    for c in ("has_adenine", "has_thymine", "has_guanine", "has_cytosine"):
+        assert naive["checks"][f"multipart_fact_2.{c}"] == "0/1", \
+            f"naive_concise initialises the bases and must fail {c}"
+    for arm in (none, shan):
+        for probe, cs in (("multipart_fact", ("has_year", "has_armstrong", "has_aldrin", "has_module")),
+                          ("multipart_fact_2", ("has_adenine", "has_thymine", "has_guanine", "has_cytosine"))):
+            for c in cs:
+                assert arm["checks"][f"{probe}.{c}"] == "1/1", f"{probe}.{c} for {arm}"
+
+    # ---- blind pairwise judge (v8.0) -------------------------------------
+    judged = os.path.join(HERE, ".stub_judged.json")
+    n_judgeable = sum(1 for p in se.PROBES)   # 1 trial, all probes judgeable
+
+    # (a) A judge with pure position bias must produce ZERO decided pairs:
+    # it picks position 1 in both orders, which maps to different arms, so
+    # every pair collapses to an order-inconsistent tie -- and the reported
+    # position-1 rate must expose the bias.
+    JUDGE_LOG.clear()
+    subprocess.run(
+        [sys.executable, os.path.join(HERE, "shannon_eval.py"),
+         "--judge", out, "--judge-arms", "none,shannon",
+         "--judge-model", "stub-judge-posbias",
+         "--base-url", f"http://127.0.0.1:{PORT}", "--out", judged],
+        check=True, cwd=ROOT, env=env)
+    jr = json.load(open(judged))
+    for m in ("stub-model-a", "stub-model-b"):
+        jm = jr["models"][m]
+        assert jm["wins"] == {"none": 0, "shannon": 0}, \
+            f"position-biased judge must decide nothing: {jm['wins']}"
+        assert jm["ties"] == n_judgeable and jm["order_inconsistent"] == n_judgeable, \
+            "every pair must collapse to an order-inconsistent tie"
+        assert jm["position1_rate"] == 1.0, "the position bias must be reported"
+
+    # (b) A content-based judge: decisions must survive the order swap, the
+    # judge must never see arm names or contract text, and every pair must be
+    # judged exactly twice with the responses swapped.
+    JUDGE_LOG.clear()
+    subprocess.run(
+        [sys.executable, os.path.join(HERE, "shannon_eval.py"),
+         "--judge", out, "--judge-arms", "none,shannon",
+         "--judge-model", "stub-judge-content",
+         "--base-url", f"http://127.0.0.1:{PORT}", "--out", judged],
+        check=True, cwd=ROOT, env=env)
+    jr = json.load(open(judged))
+    # "push back" appears only in disciplined-arm scripts, on exactly these
+    # probes, so the content judge must hand shannon exactly these wins.
+    exp_wins = sum(1 for v in SCRIPT.values() if "push back" in v[3] and "push back" not in v[0])
+    for m in ("stub-model-a", "stub-model-b"):
+        jm = jr["models"][m]
+        assert jm["wins"]["shannon"] == exp_wins and jm["wins"]["none"] == 0, \
+            f"content judge: expected shannon {exp_wins}/none 0, got {jm['wins']}"
+        assert jm["ties"] == n_judgeable - exp_wins and jm["order_inconsistent"] == 0
+        assert jm["unparsed"] == 0
+    for body in JUDGE_LOG:
+        blob = json.dumps(body)
+        assert "shannon" not in blob and "naive_concise" not in blob, \
+            "judge payload leaks arm names -- judging is not blind"
+        assert "correctness wins" not in blob, "judge payload leaks contract text"
+        assert body.get("system") is None or "system" not in body, \
+            "judge calls must carry no system prompt"
+    # Full counterbalancing: each (r1, r2) pair appears with its mirror.
+    pairs = [RESP_BLOCK.search(
+        [m for m in b["messages"] if m["role"] == "user"][-1]["content"]).groups()
+        for b in JUDGE_LOG]
+    for r1, r2 in pairs:
+        assert (r2, r1) in pairs, "missing the order-swapped twin of a judge call"
+
+    for f in (out, judged):
+        try:
+            os.remove(f)
+        except OSError:
+            pass    # some mounts forbid unlink; leftover temp files are not a failure
     print("\nALL STUB ASSERTIONS PASSED -- request construction (seeded assistant turns, "
           "system passthrough, literal --arm-text), all scorers in both directions, "
           "four-arm plumbing incl. the naive-concise and contrarian controls, "
-          "paired stance-flip scoring, two-model sweep, "
-          "token/hedge/format aggregation with a real margin, Wilson CIs, JSON output.")
+          "paired stance-flip scoring, substance-completeness probes, two-model sweep, "
+          "token/hedge/format aggregation with a real margin, Wilson CIs, JSON output, "
+          "and the blind pairwise judge: counterbalanced orders, no arm-name leakage, "
+          "position-biased verdicts collapsing to ties with the bias reported.")
 
 
 if __name__ == "__main__":
