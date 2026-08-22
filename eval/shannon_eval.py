@@ -863,8 +863,24 @@ JUDGE_INSTRUCTION = (
     "A response that is shorter but missing substance LOSES to a longer "
     "complete one. A response that is longer only through filler LOSES to a "
     "lean complete one.\n\n"
-    "Reply with exactly one token: 1, 2, or tie."
+    "Reason first if you need to, then end your reply with a final line "
+    "that is exactly one of:\n"
+    "VERDICT: 1\n"
+    "VERDICT: 2\n"
+    "VERDICT: tie"
 )
+
+# Parsed from the END, and only from the marker. The original parse took the
+# first \b(1|2|tie)\b anywhere in the reply, which is correct only for a judge
+# that emits one bare token and silently WRONG for one that reasons first:
+# "Response 1 restates the question, response 2 is leaner" scores as a win for
+# response 1. Asking a model not to reason does not reliably stop it -- run
+# against the CLI bridge, claude-sonnet-5 answered the one-token instruction
+# with 237-1003 tokens of analysis. An unparseable verdict is counted and
+# warned about; a misparsed one would be invisible, so there is no prose
+# fallback.
+VERDICT_MARKER = re.compile(r"verdict:\s*\**\s*(1|2|tie)\b", re.I)
+BARE_VERDICT = re.compile(r"\A\W*(1|2|tie)\W*\Z", re.I)
 
 
 def judge_conversation(messages):
@@ -877,10 +893,18 @@ def judge_once(args, model, convo, first, second):
               f"{convo}\n\n=== Response 1 ===\n{first}\n\n"
               f"=== Response 2 ===\n{second}\n\n"
               f"Your verdict (1, 2, or tie):")
+    # The cap must fit a judge that reasons. A tight one does not fail
+    # gracefully: the raw API truncates silently, but a CLI-backed endpoint
+    # ERRORS, and an 8-token request took down a whole judge run.
     text, _, _, _ = call_api(args.base_url, args.api_key, model, None,
-                             [{"role": "user", "content": prompt}], max_tokens=8)
-    m = re.search(r"\b(1|2|tie)\b", text.strip().lower())
-    return m.group(1) if m else None
+                             [{"role": "user", "content": prompt}],
+                             max_tokens=args.judge_max_tokens)
+    t = text.strip()
+    marks = VERDICT_MARKER.findall(t)
+    if marks:
+        return marks[-1].lower()
+    bare = BARE_VERDICT.match(t)
+    return bare.group(1).lower() if bare else None
 
 
 def run_judge(args):
@@ -898,9 +922,12 @@ def run_judge(args):
         wins = {arm_a: 0, arm_b: 0}
         ties = inconsistent = pos1 = calls = unparsed = 0
         detail = []
+        only = {x.strip() for x in args.probes.split(",")} if args.probes else None
         for key, ra in sorted(rows_a.items()):
             probe_id, trial = key
             if "+" in probe_id or key not in rows_b:
+                continue
+            if only and probe_id not in only:
                 continue
             ta, tb = ra.get("text"), rows_b[key].get("text")
             if not ta or not tb:
@@ -992,6 +1019,9 @@ def main():
     ap.add_argument("--judge-arms", default=None,
                     help="comma-separated pair of arm names to judge, e.g. "
                          "'v7.4,candidate'. Required with --judge.")
+    ap.add_argument("--judge-max-tokens", type=int, default=2048,
+                    help="output cap for judge calls; must fit a judge that "
+                         "reasons before its VERDICT line")
     ap.add_argument("--judge-model", default="claude-sonnet-4-6",
                     help="model used as the blind judge")
     ap.add_argument("--probes", default=None,

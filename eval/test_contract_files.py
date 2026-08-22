@@ -3,7 +3,7 @@
 
 Two failure modes this catches, both of which have real cost:
 
-1. Body drift. `shannon-project.md` and `shannon-v8.1.md` are supposed to be
+1. Body drift. `shannon-project.md` and `shannon-v8.2.md` are supposed to be
    the same contract, differing only by YAML frontmatter and an H1. Nothing
    previously enforced that, and a one-line edit to one of them is exactly
    the kind of change that silently ships a split-brain contract.
@@ -71,6 +71,13 @@ REJECTED_ON_EVIDENCE = [
      "then scored identically (2 hits each). The floor is at zero because the "
      "habit is absent, so ~130 words of contract bought nothing -- see "
      "RESULTS-live-v8.1-register.md"),
+    ("register voice rules (shipped v8.1, withdrawn v8.2)",
+     "blind pairwise judge", ["open_explain"],
+     "say-it-once, concrete-over-abstract, sentence-length, metaphor and "
+     "warmth-from-candor. Shipped at v8.1 unmeasured, then tested directly: "
+     "4-10 against v8.0 on open_explain at n=20, win share 0.29, p=0.18, "
+     "undecided -- and on the more position-biased of the two judge runs. "
+     "149 words nothing could show doing anything, so they came back out"),
     ("reflexive rhetorical shapes (proposed v8.1, not adopted)",
      "em_dashes_per_100w", [],
      "only the em-dash budget was measurable and it did not separate: paired "
@@ -83,34 +90,33 @@ REJECTED_ON_EVIDENCE = [
 # programmatic scoring -- but the point of the coverage matrix is that untested
 # claims stay visible, so they are named and printed rather than left implicit.
 UNPROBED = [
-    ("colleague warmth without praise (v8.1)", "Warmth comes from candor",
-     "no scorer distinguishes warmth from flattery beyond the existing "
-     "no_praise check, which only catches the praise half -- it was 5/5 in "
-     "every arm, so the tension between this rule and No flattery did not "
-     "surface, but absence of a regression is not a measurement of the rule"),
-    ("voice rules kept from the v8.1 draft", "Say it once",
-     "say-it-once, concrete-over-abstract, sentence-length and metaphor are "
-     "prose guidance with no scorer. They were kept because they are cheap and "
-     "overlap rules already probed under Compress, NOT because they were "
-     "measured -- unlike the banlist, they were never tested either way"),
+    # Empty by construction at v8.2, and that is the point: every rule the
+    # contract now carries has both a documented failure mode and a probe.
+    # Rules that could not clear that bar are in REJECTED_ON_EVIDENCE, not
+    # quietly resident in the contract.
 ]
 
-SKILL_FILE = "shannon-v8.1.md"
+SKILL_FILE = "shannon-v8.2.md"
 
 # Word ceilings (~1.35 tokens/word for English prose with markdown).
 #
-# v8.1 raised the project ceiling 700 -> 800. The v8.1 draft arrived at 969
-# words; it ships at 776 because the two most expensive rules in it were
-# measured and did not survive. What was cut and why is in
-# REJECTED_ON_EVIDENCE below and in RESULTS-live-v8.1-register.md.
+# v8.2 LOWERED the project ceiling 800 -> 650. The contract is 627 words --
+# ten fewer than v8.0, and 342 fewer than the v8.1 draft -- because every part
+# of the v8.1 register section was measured and none of it separated from v8.0
+# on anything: the banlist, the shape rules, and finally the voice rules,
+# which lost 4-10 at n=20 on open_explain at p=0.18, undecided.
 #
-# What the remaining +139 words buy is NOT established -- the kept voice rules
-# have no scorer. They were kept for being cheap and adjacent to rules already
-# probed, which is a weaker argument than a measurement and is recorded as
-# such. Raise this ceiling again only with a live run attached.
+# What is left of v8.1 is its rewordings of existing rules and its shift to
+# the first person, which together cost -10 words. Those are NOT measured
+# either; they ride along because they are free, and a change that is neutral
+# on evidence and negative on size cannot lose the brevity tiebreak. That is a
+# weaker warrant than a measurement and is stated here rather than implied.
+#
+# A ceiling that moves down is the healthy direction for this file. Move it up
+# only with a live run attached.
 CEILINGS = {
     "shannon-daily.md": 340,
-    "shannon-project.md": 800,
+    "shannon-project.md": 650,
 }
 
 

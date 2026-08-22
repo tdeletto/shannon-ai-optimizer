@@ -1,5 +1,59 @@
 # Changelog
 
+## v8.2 — 2026-08
+
+**627 words — ten fewer than v8.0, and the smallest full contract since v7.** The entire v8.1 register section is gone, because all three of its parts were measured and none of them separated from v8.0 on anything.
+
+This release adds no rules. It removes 149 words and closes the last gap in the coverage matrix: `eval/test_contract_files.py`'s `[UNP]` list — rules shipping without a probe — is now empty.
+
+### The three-part autopsy of the v8.1 section
+
+| part | words | how it died |
+|---|---|---|
+| twenty-word vocabulary banlist | ~130 | baseline used 3 of the 20 words 7 times in 13,264 words; `delve` never appeared. Both contract arms scored identically. The floor was already zero |
+| five rhetorical-shape rules | ~56 | only the em-dash budget was scoreable; paired difference −0.122/100w, 95% CI [−0.382, +0.138] |
+| voice rules | ~149 | shipped at v8.1 *unmeasured*, then tested: 4–10 against v8.0 on `open_explain` at n=20, share 0.29, p = 0.18, undecided |
+
+The first two were cut before v8.1 shipped. The third shipped on the argument that it was "cheap and adjacent to rules already probed" — a weaker warrant than a measurement, labelled as such at the time, and it did not survive being measured.
+
+### The n=5 signal that wasn't
+
+An n=5 blind judge run had the v8.1 draft losing `open_explain` **5–0**, order-consistently, with no ties. It was reported as suggestive-not-significant (p ≈ 0.06) and as the cleanest signal in that run. **It did not replicate.** At n=20 the same comparison is 9–6 — share 0.40, p = 0.61 — and that judge run is the cleaner of the two (position-1 rate 0.47 against 0.34). The adverse reading is withdrawn.
+
+The internal ordering of the n=20 results is itself the argument for noise: the shipped 776-word contract scored *worse* (0.29) than the 969-word draft it is a subset of. A section that degraded answers should degrade them more when there is more of it.
+
+Across three blind comparisons the direction consistently favours v8.0 and not one reaches significance. That is weak, consistent, non-significant evidence of **no benefit** — not evidence of harm.
+
+### What was kept from v8.1, and on what basis
+
+The rewordings of existing rules and the shift to the first person ("assume I know the background" rather than "the user"). Together they cost **−10 words**, which is why the contract lands below v8.0.
+
+They are **not measured**. They ride along because a change that is neutral on evidence and negative on size cannot lose the contract's brevity tiebreak. That is an argument from ranking, not from data, and it is the only such argument left in the contract. It is stated in the README limitations and in the ceiling comment rather than implied.
+
+### Ceiling lowered
+
+700 → 1000 (v8.1 draft) → 800 (v8.1 shipped) → **650**. A ceiling that moves down is the healthy direction for a file whose whole purpose is to stop the contract growing on assertion.
+
+### Preserved as runnable arms
+
+`variants/v8.1-contract.md` (776 words, shipped v8.1) and `variants/v8.1-draft-full.md` (969 words, the full draft). Results in `RESULTS-live-v8.1-register.md` are reported against these texts; reproducing them needs the text that produced them, not a commit hash in a paragraph.
+
+### Measurement retained despite the rules being gone
+
+`no_ai_tells`, the `open_explain` probe, and the `ai_tells_per_100w` / `em_dashes_per_100w` rates all stay. They are the evidence for these decisions, the guard that would catch the floor moving, and what lets anyone adapting Shannon to a model that *does* delve measure it before paying for the rule. They now appear under `[REJ]` in the coverage output — written, measured, left out — rather than under any claim that the contract carries them.
+
+### Two harness defects, both found by trying to run the judge
+
+- **The judge's 8-token cap** crashed every call against a backend that errors on overflow instead of truncating silently.
+- **The judge's verdict parse** took the first `1|2|tie` anywhere in the reply. Correct for a one-token judge, silently **backwards** for one that reasons first — and claude-sonnet-5, told to emit one token, answered the real prompts with 237–1003 tokens of analysis. A completed run would have decided every verdict by whichever response the judge's prose mentioned first, with nothing in the output looking wrong. The crash was the lucky failure.
+
+Fixed: the instruction now permits reasoning and requires a final `VERDICT:` line, parsed from the last marker with no prose fallback (an unparseable verdict is counted and warned about; a misparsed one is invisible). `--judge-max-tokens` added, `--probes` now filters judge mode. Regression guard: `stub-judge-chatty` reasons in prose naming the *losing* response first, and must reach verdicts identical to the terse judge — it fails under the old parse.
+
+### An open hypothesis, offered as such
+
+Both v8.1 variants sat below v8.0 on em-dash density (1.03 and 1.09 vs 1.59 per 100 words) **including the shipped one, which has no em-dash rule**. Contract prose leaking into output would explain that, and v8.1's text is nearly em-dash-free where v8.0's is dense with them. Single probe, n=20, untested. The cheap experiment is an em-dash-free rewrite of v8.0 as a fourth arm, punctuation changed and nothing else.
+
+
 ## v8.1 — 2026-08
 
 A register section, adopted at **776 words after two of its three parts were measured and cut**. The draft arrived at 969 words — 38% over the 700-word ceiling, and nearly four times the +92 words v7.4 spent and never justified. A contract that size does not get adopted and validated afterwards, so it was measured first, and most of it did not survive.
