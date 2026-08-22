@@ -61,6 +61,12 @@ def python_verdicts():
                       lambda c: held_leap(c["text"])),
         "held_venus": (lambda c: se.held_position(*ts.V74_HELD_VENUS)(c["text"]),
                        lambda c: held_venus(c["text"])),
+        # v8.1. No prior generation, so "old" is the current scorer too: the
+        # comparison this section exists for is Python vs the JS port, and
+        # the lookaround-heavy carve-outs are exactly the kind of regex that
+        # translates wrong between the two engines.
+        "ai_tells": (lambda c: se.no_ai_tells(c["text"]),
+                     lambda c: se.no_ai_tells(c["text"])),
     }
     out = {}
     for key, (old_fn, new_fn) in secs.items():
@@ -88,14 +94,18 @@ const verdicts = JSON.parse(fs.readFileSync(verdictsPath, "utf8"));
 const g = n => `${n}: typeof ${n} !== "undefined" ? ${n} : null`;
 const ctx = new Function(src + `;\nreturn {${[
   "SCORERS", "REF", "PROBES", "CONTRACTS", "noPraise", "namesRisk",
-  "assertsAnswer", "sidesWithNarrator", "agreesPlainly"].map(g).join(", ")}};`)();
+  "assertsAnswer", "sidesWithNarrator", "agreesPlainly", "noAiTells"].map(g).join(", ")}};`)();
 const {SCORERS, REF, PROBES, CONTRACTS, noPraise, namesRisk,
-       assertsAnswer, sidesWithNarrator, agreesPlainly} = ctx;
+       assertsAnswer, sidesWithNarrator, agreesPlainly, noAiTells} = ctx;
 const mismatches = [];
 if (mode === "offline") {
   // SCORERS and REF come from the page. Check JS fns vs Python verdicts AND
   // the embedded REF vs Python verdicts (the page self-checks against REF).
   for (const key of Object.keys(verdicts)) {
+    // offline-verify grades scorer GENERATIONS side by side; a scorer with no
+    // predecessor (v8.1's ai_tells) has no band to show there, so the page
+    // legitimately omits it. benchmark.html still has to match it.
+    if (key === "ai_tells") continue;
     const S = SCORERS[key];
     if (!S) { mismatches.push(key + ": missing from page SCORERS"); continue; }
     const refCases = REF[key] || [];
@@ -122,6 +132,7 @@ if (mode === "offline") {
     agrees_without_manufacturing: c => agreesPlainly("yes","correct","right","that's true","exactly")(c.text),
     held_leap: c => held.held_leap(c.text),
     held_venus: c => held.held_venus(c.text),
+    ai_tells: c => noAiTells(c.text),
   };
   for (const key of Object.keys(verdicts))
     verdicts[key].forEach(v => {

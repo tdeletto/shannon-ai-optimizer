@@ -3,7 +3,7 @@
 
 Two failure modes this catches, both of which have real cost:
 
-1. Body drift. `shannon-project.md` and `shannon-v7.4.md` are supposed to be
+1. Body drift. `shannon-project.md` and `shannon-v8.1.md` are supposed to be
    the same contract, differing only by YAML frontmatter and an H1. Nothing
    previously enforced that, and a one-line edit to one of them is exactly
    the kind of change that silently ships a split-brain contract.
@@ -41,7 +41,7 @@ COVERAGE = [
     ("user confidence in a false claim (Phare)",
      "Confidence, credentials", ["false_premise_confident"]),
     ("validation-seeking intent assumption (Cheng et al., CHI EA 2026)",
-     "wants an accurate read, not reassurance", ["validation_seeking"]),
+     "want an accurate read, not reassurance", ["validation_seeking"]),
     ("accepting the user's framing (ELEPHANT)",
      "the framing hides the real question", ["framing_acceptance"]),
     ("moral sycophancy / siding with the narrator (ELEPHANT AITA-flip)",
@@ -49,9 +49,9 @@ COVERAGE = [
     ("flattery and face preservation (ELEPHANT)",
      "No flattery", ["flattery_bait", "preferred_conclusion"]),
     ("over-correction into excessive challenging (Cheng et al., ACL 2026)",
-     "agreement isn't sycophancy", ["user_is_right"]),
+     "Agreement is not sycophancy", ["user_is_right"]),
     ("brevity degrading factual reliability (Phare)",
-     "brevity is for the delivered answer", ["false_premise_confident"]),
+     "Brevity applies to the delivered answer", ["false_premise_confident"]),
     # v8.0: the ranked contract's FIRST goal -- compression must not drop
     # substance -- previously had no probe at all. IFScale (2025) finds
     # omission is the dominant error class under instruction pressure.
@@ -59,12 +59,58 @@ COVERAGE = [
      "keep every token correctness needs", ["multipart_fact", "multipart_fact_2"]),
 ]
 
-SKILL_FILE = "shannon-v8.0.md"
+# Rules that were WRITTEN, MEASURED, and then left out of the contract on the
+# result. The scorer and probe stay: they are the evidence for the decision and
+# the guard that would catch the floor moving. A rule is only in COVERAGE above
+# if the contract actually carries it, so nothing here is claimed as shipped.
+REJECTED_ON_EVIDENCE = [
+    ("AI-register vocabulary banlist (proposed v8.1, not adopted)",
+     "no_ai_tells", ["open_explain"],
+     "claude-haiku-4-5 with NO system prompt used 3 of the 20 banned words 7 "
+     "times in 13,264 words; delve appeared zero times. Both contract arms "
+     "then scored identically (2 hits each). The floor is at zero because the "
+     "habit is absent, so ~130 words of contract bought nothing -- see "
+     "RESULTS-live-v8.1-register.md"),
+    ("reflexive rhetorical shapes (proposed v8.1, not adopted)",
+     "em_dashes_per_100w", [],
+     "only the em-dash budget was measurable and it did not separate: paired "
+     "per-probe difference vs v8.0 was -0.122/100w, 95% CI [-0.382, +0.138]. "
+     "The antithesis, ornamental-triad, rhetorical-question and aphoristic-"
+     "closer rules never had a scorer at all"),
+]
+
+# Rules that ship WITHOUT a probe. Not a build failure -- some rules resist
+# programmatic scoring -- but the point of the coverage matrix is that untested
+# claims stay visible, so they are named and printed rather than left implicit.
+UNPROBED = [
+    ("colleague warmth without praise (v8.1)", "Warmth comes from candor",
+     "no scorer distinguishes warmth from flattery beyond the existing "
+     "no_praise check, which only catches the praise half -- it was 5/5 in "
+     "every arm, so the tension between this rule and No flattery did not "
+     "surface, but absence of a regression is not a measurement of the rule"),
+    ("voice rules kept from the v8.1 draft", "Say it once",
+     "say-it-once, concrete-over-abstract, sentence-length and metaphor are "
+     "prose guidance with no scorer. They were kept because they are cheap and "
+     "overlap rules already probed under Compress, NOT because they were "
+     "measured -- unlike the banlist, they were never tested either way"),
+]
+
+SKILL_FILE = "shannon-v8.1.md"
 
 # Word ceilings (~1.35 tokens/word for English prose with markdown).
+#
+# v8.1 raised the project ceiling 700 -> 800. The v8.1 draft arrived at 969
+# words; it ships at 776 because the two most expensive rules in it were
+# measured and did not survive. What was cut and why is in
+# REJECTED_ON_EVIDENCE below and in RESULTS-live-v8.1-register.md.
+#
+# What the remaining +139 words buy is NOT established -- the kept voice rules
+# have no scorer. They were kept for being cheap and adjacent to rules already
+# probed, which is a weaker argument than a measurement and is recorded as
+# such. Raise this ceiling again only with a live run attached.
 CEILINGS = {
     "shannon-daily.md": 340,
-    "shannon-project.md": 700,
+    "shannon-project.md": 800,
 }
 
 
@@ -128,6 +174,20 @@ def main():
             failures.append(f"no contract rule for: {mode} (expected phrase {phrase!r})")
         if missing:
             failures.append(f"no probe for: {mode} (missing {missing})")
+
+    print()
+    for mode, scorer, probes, why in REJECTED_ON_EVIDENCE:
+        missing = [x for x in probes if x not in probe_ids]
+        print(f"  coverage  [{'REJ' if not missing else 'GAP':>3}]  {mode} -- {why}")
+        if missing:
+            failures.append(f"probe retired along with a rejected rule: {missing}")
+
+    print()
+    for mode, phrase, why in UNPROBED:
+        has_rule = phrase.lower() in project.lower()
+        print(f"  coverage  [{'UNP' if has_rule else 'GAP':>3}]  {mode} -- {why}")
+        if not has_rule:
+            failures.append(f"no contract rule for: {mode} (expected phrase {phrase!r})")
 
     print()
     if failures:

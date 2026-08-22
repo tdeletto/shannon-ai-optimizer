@@ -1,5 +1,59 @@
 # Changelog
 
+## v8.1 — 2026-08
+
+A register section, adopted at **776 words after two of its three parts were measured and cut**. The draft arrived at 969 words — 38% over the 700-word ceiling, and nearly four times the +92 words v7.4 spent and never justified. A contract that size does not get adopted and validated afterwards, so it was measured first, and most of it did not survive.
+
+### What the draft proposed, and what shipped
+
+| part | words | outcome |
+|---|---|---|
+| voice rules (say it once, concrete over abstract, sentence length, metaphor, warmth-from-candor) | ~139 | **shipped**, unmeasured, on the weaker argument that they are cheap and adjacent to rules already probed |
+| twenty-word vocabulary banlist | ~130 | **cut** — measured inert |
+| five reflexive rhetorical shapes | ~56 | **cut** — the one part with a scorer did not separate; the rest never had one |
+
+Also adopted, at roughly zero net cost: the draft's tightened wording of existing rules, and its shift to the first person ("assume I know the background") rather than the third-person "the user", matching how `shannon-daily.md` was already written. That reworded three phrases the coverage matrix keys on; each rule survives intact, so the expected phrases moved and the contract did not.
+
+### Why the banlist was cut
+
+With **no system prompt at all**, claude-haiku-4-5 used three of the twenty banned words seven times across 13,264 words: *that said* ×4, *landscape* ×2, *pivotal* ×1. **`delve` appeared zero times**, as did *tapestry*, *beacon*, *crucial*, *realm*, *furthermore*, *moreover*, *in conclusion*, *at its core*, *transformative*, *game-changing* and *seamless*. Both contract arms then scored identically: 2 hits each, the same two words.
+
+This is a different failure from v8.0's saturation. There the probes were too easy for the arms to separate. Here the floor is genuinely at zero: the model does not have the habit, so no wording can suppress it. Unlike a saturated probe, this will not be fixed by picking a different model — stronger Claude models use these words less, not more.
+
+The em-dash budget was the only shape rule that could be scored. It did not separate either: paired per-probe difference against v8.0 was **−0.122 per 100 words, 95% CI [−0.382, +0.138]**, and against baseline **+0.001**. The aggregate row looked like a 16% improvement and was an artifact of differing word totals per probe — the paired figure is the honest one.
+
+### The live run
+
+285 generations, three arms (baseline / v8.0 / v8.1), nineteen probes, five trials, nothing clipped, through `eval/claude_cli_bridge.py` on subscription auth. Full record in **`RESULTS-live-v8.1-register.md`**.
+
+- **Nothing regressed:** 133/135 checks against v8.0's 134/135 — one response, inside noise.
+- **The flagged tension did not bite.** The section licenses "saying when a problem is genuinely interesting" while the contract elsewhere forbids praising the idea. `no_praise` was **5/5 in every arm on all three probes**. Absence of a regression is not a measurement of the rule, and it is recorded as `[UNP]`, not as a pass.
+- **No token saving:** +0.4% against v8.0, +0.9% against baseline, on top of the section's own cost.
+- **What the contract still earns**, unchanged from v8.0: format markers 12.99 → ~1.6 per 100w (8×), hedges 0.70 → 0.37–0.45, simple-probe tokens 252.6 → ~190.
+- The bridge printed an **ISOLATION warning** for the no-system arm, so baseline may have seen some agent tooling. Both contract arms carry a system prompt; the decisive comparison was between them.
+
+### New measurement, kept regardless of the outcome
+
+- **`no_ai_tells` scorer.** The carve-outs are the work: the proposed rule exempted literal and technical senses, so "navigate to the directory", a leading underscore, a load-bearing wall, an AWS landscape, a Kerberos realm and BLE beacon frames must not trip it. 24 labelled corpus cases, 14 of them guards. The naive banlist — the word list as a bare alternation, which is what five minutes of work produces — scores **54.2%** by flagging 11 of the 14 guards; the carve-out version scores **100%**. Ported to `benchmark.html` and checked against Python on every corpus case by `test_artifact_sync.py`.
+- **`open_explain` probe.** Open-ended and conceptual, chosen because the other eighteen probes are short-answer or adversarial and give a model no room to be florid.
+- **`ai_tells_per_100w` and `em_dashes_per_100w`**, alongside the hedge and format-marker rates. A binary check cannot express "roughly one em-dash per paragraph", so it is a density.
+- **`variants/v8.0-contract.md`** preserves the previous body as the control arm, the same discipline v7.3 got.
+
+All of it stays in the repo although the rules it measures were cut. It is the evidence for the decision, the guard that would catch the floor moving, and the thing that lets anyone adapting Shannon to a model that *does* delve measure it before paying for the rule.
+
+### Honesty categories in the coverage matrix
+
+`eval/test_contract_files.py` now prints three states instead of one. `[OK]` is a documented failure mode with both a contract rule and a probe. **`[UNP]`** is a rule that ships without a probe — the kept voice rules and the warmth rule. **`[REJ]`** is a rule that was written, measured, and left out on the result, with its scorer and probe retained. A rule only enters the `COVERAGE` list if the contract actually carries it, so nothing rejected can be quietly claimed as shipped.
+
+### Harness fix found on the way
+
+`prose_expected` was doing double duty as "this is a simple probe" for the token split. Harmless while every prose probe was also a short factual one; wrong the moment `open_explain` arrived, which expects prose but is substantive. The two sets are now declared separately.
+
+### Deliberately unchanged
+
+`shannon-daily.md`. The section would roughly double it and cost the register-adaptivity that makes it safe as a global default, and none of it was measured in a lightweight contract.
+
+
 ## v8.0 — 2026-08
 
 A measurement release. **The contract text is unchanged, deliberately.** The audit that opened this cycle found the eval — not the contract — to be the weakest link: five scorers false-passing evasively-phrased sycophancy, the first-ranked goal (compression must not drop substance) tested by nothing, open-ended quality unmeasurable, and the HTML artifacts' scorer ports checked once, by hand, at v7.4 ship time and never since. Fixing measurement precedes changing the contract: an untrustworthy benchmark makes every downstream decision worthless. No behavioral wording change could clear the adoption rule this cycle — the rule requires live A/B evidence, and this environment had no API access — so none shipped, and the v7.4 wording vs `variants/v7.3-sycophancy-wording.md` remains the open experiment the improved suite exists to decide.
