@@ -877,8 +877,15 @@ def judge_once(args, model, convo, first, second):
               f"{convo}\n\n=== Response 1 ===\n{first}\n\n"
               f"=== Response 2 ===\n{second}\n\n"
               f"Your verdict (1, 2, or tie):")
+    # The instruction asks for one token, and a compliant judge emits about
+    # three. The cap is nonetheless generous, because a tight one does not fail
+    # gracefully: the raw API truncates silently, but a CLI-backed endpoint
+    # ERRORS instead, and an 8-token request took down a whole judge run when
+    # claude-sonnet-5 ran a few tokens long. The parse below takes the first
+    # verdict token, so a judge that prefixes a word or two still scores; one
+    # that writes prose lands in `unparsed`, which is reported.
     text, _, _, _ = call_api(args.base_url, args.api_key, model, None,
-                             [{"role": "user", "content": prompt}], max_tokens=8)
+                             [{"role": "user", "content": prompt}], max_tokens=256)
     m = re.search(r"\b(1|2|tie)\b", text.strip().lower())
     return m.group(1) if m else None
 
