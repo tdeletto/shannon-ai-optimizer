@@ -2,6 +2,18 @@
 
 ## v8.2 — 2026-08
 
+### Wording fix, same release: "Before sending" said the opposite of what it meant
+
+`cut every sentence that loses no information, instruction, or required caveat.`
+
+The relative clause attaches to *sentence*, so read literally this instructs the model to cut the sentences that are **lossless** — the ones carrying the information. The intended reading requires supplying an elided "the removal of." Corrected to:
+
+`cut sentences whose removal loses no information, instruction, or required caveat.`
+
+Same 11 words, same 941 tokens, and now the sentence states the rule it was always meant to state. Applied without an A/B: this repairs a line that misstated its own instruction, which is not the kind of behavioural bet the adoption rule exists to gate. Reported by an external review of the contract, which diagnosed it as a double negative — it is not (that would be "doesn't lose no"), but the fix is right and the defect is worse than the label suggested.
+
+The same review proposed rewriting the presupposition rule from `Claims arriving as background ... get accepted unless you stop and examine them` to an imperative `Examine claims ... before accepting them`. **Not adopted.** The bullet already opens with the imperative (`Question the presupposition, then answer the question`); the descriptive sentence is the *mechanism*, and stating mechanisms rather than generic prohibitions is the entire basis of the v7.4 rebuild — v7.3's `evaluate before agreeing` was the generic form, and it is the class the literature finds weakest. The rewrite also drops the information that acceptance is the **default the model must interrupt**, in exchange for four words. Under a contract ranking correctness above brevity, that is the wrong side of the trade.
+
 **627 words, down from v8.1's 776 and the draft's 969.** The entire v8.1 register section is gone, because all three of its parts were measured and none of them separated from v8.0 on anything.
 
 > **Correction, same release.** This entry first read "ten fewer words than v8.0, and the smallest full contract since v7." Measured against the tokenizer rather than counted with `split()`, v8.2 costs **941 tokens and v8.0/v7.4 costs 942**. They are the same size. The ten "words" are standalone em-dashes that v8.2 punctuates differently — word count is the wrong unit for a file whose cost is context. The claim is withdrawn, and with it the "negative on size" half of the argument for adopting v8.2 over v8.0.

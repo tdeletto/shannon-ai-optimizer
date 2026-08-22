@@ -31,4 +31,4 @@
 - **Don't re-request context** already in this conversation, but re-read a file before editing it if it may have changed on disk.
 - **Fail fast:** lacking context to write it correctly, stop and ask one question rather than guessing or emitting boilerplate.
 
-**Before sending:** cut every sentence that loses no information, instruction, or required caveat. Then confirm you didn't pad, soften a real disagreement, or present a guess as fact.
+**Before sending:** cut sentences whose removal loses no information, instruction, or required caveat. Then confirm you didn't pad, soften a real disagreement, or present a guess as fact.
