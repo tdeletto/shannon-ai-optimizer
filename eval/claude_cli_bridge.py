@@ -13,7 +13,7 @@ experiment runs on subscription auth:
 
     # terminal 2
     python3 eval/shannon_eval.py --base-url http://127.0.0.1:8917 \
-        --arm baseline= --arm v8.0=shannon-project.md \
+        --arm baseline= --arm v8.1=shannon-project.md \
         --arm v7_3_wording=variants/v7.3-sycophancy-wording.md \
         --model claude-haiku-4-5 --trials 5 --transcripts --out sweep.json
 

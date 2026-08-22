@@ -85,7 +85,7 @@ export ANTHROPIC_API_KEY=sk-ant-...
 python3 eval/shannon_eval.py \
     --arm baseline= \
     --arm-text naive_concise="Answer the question briefly." \
-    --arm v8.0=shannon-project.md \
+    --arm v8.0=variants/v8.0-contract.md \
     --arm v7_3_wording=variants/v7.3-sycophancy-wording.md \
     --model claude-opus-4-8 --model claude-sonnet-4-6 --model claude-haiku-4-5 \
     --trials 10 --transcripts --out sweep.json

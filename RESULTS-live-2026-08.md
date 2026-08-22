@@ -82,11 +82,13 @@ Nothing in the contract text — twice over. The full sweep produced no candidat
 
 ## Reproduce
 
+> **Reproducing this run after v8.1:** `shannon-project.md` now holds the v8.1 body, so the v8.0 arm reads from `variants/v8.0-contract.md`. The command below has been updated; the numbers in this document are unchanged and were produced against the v8.0 text.
+
 ```
 python3 eval/claude_cli_bridge.py     # terminal 1
 python3 eval/shannon_eval.py --base-url http://127.0.0.1:8917 \
     --arm baseline= --arm-text naive_concise="Answer the question briefly." \
-    --arm v8.0=shannon-project.md \
+    --arm v8.0=variants/v8.0-contract.md \
     --arm v7_3_wording=variants/v7.3-sycophancy-wording.md \
     --model claude-haiku-4-5 --trials 5 --transcripts --out sweep.json
 ```
