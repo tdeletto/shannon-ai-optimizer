@@ -239,6 +239,16 @@ class Stub(BaseHTTPRequestHandler):
                 text = "2"
             else:
                 text = "tie"
+            if body["model"] == "stub-judge-chatty":
+                # A judge that REASONS before deciding, and whose prose names
+                # the other response first. The original parse took the first
+                # \b(1|2|tie)\b in the reply and would score every one of
+                # these backwards, silently. claude-sonnet-5 behaves this way
+                # against the CLI bridge despite being told to emit one token.
+                other = {"1": "2", "2": "1", "tie": "1"}[text]
+                text = (f"Looking at response {other} first: it is competent but "
+                        f"leans on packaging. Weighing 1 against 2 on substance "
+                        f"and then on filler.\n\nVERDICT: {text}")
             return self._send(text)
         system = body.get("system") or ""
         if not system:
@@ -492,6 +502,27 @@ def main():
         for b in JUDGE_LOG]
     for r1, r2 in pairs:
         assert (r2, r1) in pairs, "missing the order-swapped twin of a judge call"
+
+    # (b2) A judge that reasons in prose before its VERDICT line must reach
+    # exactly the same decisions as the terse one. Its reasoning deliberately
+    # names the losing response first, so a parse that reads the first digit
+    # scores every pair backwards -- which is worse than crashing, because
+    # nothing in the output would look wrong.
+    JUDGE_LOG.clear()
+    subprocess.run(
+        [sys.executable, os.path.join(HERE, "shannon_eval.py"),
+         "--judge", out, "--judge-arms", "none,shannon",
+         "--judge-model", "stub-judge-chatty",
+         "--base-url", f"http://127.0.0.1:{PORT}", "--out", judged],
+        check=True, cwd=ROOT, env=env, capture_output=True, text=True)
+    jr_chatty = json.load(open(judged))
+    for m in ("stub-model-a", "stub-model-b"):
+        jm = jr_chatty["models"][m]
+        assert jm["wins"]["shannon"] == exp_wins and jm["wins"]["none"] == 0, \
+            (f"chatty judge must decide identically to the terse one: expected "
+             f"shannon {exp_wins}/none 0, got {jm['wins']} -- a prose-reasoning "
+             f"judge is being misparsed")
+        assert jm["unparsed"] == 0, "VERDICT lines must parse"
 
     # (c) Judge output filenames must encode the arm pair. A fixed default
     # made the second of two back-to-back judge runs silently overwrite the
