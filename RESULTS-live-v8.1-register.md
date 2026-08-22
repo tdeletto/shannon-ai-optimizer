@@ -86,7 +86,25 @@ A decided verdict requires the judge to pick the same *response* in both orders,
 
 **The mechanism is mostly unexplained**, and the obvious hypotheses do not hold. It is not compression dropping substance: v8.1's answers on this probe were *longer* (686 mean tokens vs 623). One v8.1 sample misattributes the FLP impossibility result to "Lamport and Fischer" (it is Fischer, Lynch and Paterson), where v8.0 attributed it correctly twice and never wrongly — but one error in five explains at most one of the five losses, and one-versus-zero is far too thin to claim the section degrades accuracy.
 
-**What this implies for the shipped version.** The trim removed the banlist and the shape rules — the parts measured inert. The voice rules that remain were part of the same draft that lost 5–0 here, so the trim does not exonerate them; it removed the parts that could be shown to do nothing and kept the part the judge weakly suggests may be unhelpful on open-ended prose. The decisive follow-up is `open_explain` alone at n=20, roughly 80 generations plus a re-judge — the same focused-follow-up shape used to resolve the v8.0 stance-flip signal, and now cheap because `--probes` filters judge mode too.
+### Follow-up: `open_explain` at n=20 — the 5–0 was noise
+
+The 5–0 was resolved the way the v8.0 stance-flip scare was: by re-running the one probe at four times the sample. Three arms this time, 60 generations, so the question the n=5 run conflated gets split — was the signal real, and does the *shipped* 776-word contract carry it?
+
+| comparison | v8.1 | v8.0 | v8.1 share | 95% CI | p (2-tail) | judge pos-1 |
+|---|---|---|---|---|---|---|
+| n=5, all 19 probes (draft) | 19 | 27 | 0.41 | [0.28, 0.56] | 0.302 | 0.34 |
+| n=20, `open_explain` (draft) | 6 | 9 | 0.40 | [0.20, 0.64] | 0.607 | 0.47 |
+| n=20, `open_explain` (shipped) | 4 | 10 | 0.29 | [0.12, 0.55] | 0.180 | 0.35 |
+
+**The 5–0 did not replicate.** At n=20 the draft comparison is 9–6, an undecided 0.40 with p = 0.61 — and this judge run is the cleanest of the three, with a position-1 rate of 0.47 against 0.34 in the n=5 run. Anyone who had acted on the 5–0 would have acted on nothing.
+
+**Nothing is significant, and the internal ordering argues for noise.** The shipped 776-word contract looks *worse* (0.29) than the 969-word draft (0.40) it is a subset of. If the register section degraded open-ended answers, the fuller section should degrade them more. It does not, which is the shape of sampling variation rather than an effect. The shipped comparison also drew the more position-biased judge run of the two (0.35, right at the harness's warning boundary, versus 0.47), so its 10–4 is the less trustworthy of the pair.
+
+Pooling both `open_explain` comparisons gives 10–19, p = 0.136 — still not significant, and the two share the same 20 v8.0 generations, so they are not independent and the pooled figure overstates its own evidence.
+
+**What is fair to say:** across three blind comparisons the direction consistently favours v8.0, and not one of them reaches significance. That is weak, consistent, non-significant evidence of no benefit — not evidence of harm. The earlier reading of the 5–0 as "the cleanest signal in the run, and adverse" did not survive contact with a larger sample.
+
+**What this implies for the shipped version.** The trim removed the banlist and the shape rules — the parts measured inert. The voice rules that remain were tested directly at n=20 (above) and are also undecided: 4–10 against v8.0, p = 0.18, on the more position-biased of the two judge runs. So the shipped contract is neither vindicated nor convicted. It is 139 words that nothing has shown to do anything, which under a contract ranking brevity second is an argument against carrying them.
 
 ## What the contract *is* still doing
 
