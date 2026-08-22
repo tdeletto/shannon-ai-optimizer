@@ -68,6 +68,26 @@ v8.1 spent **+0.4% against v8.0** and **+0.9% against baseline** in total output
 
 That is on top of the section's own cost: **+332 words of contract, roughly +450 tokens, on every turn.**
 
+## The blind judge: it did not rescue the section, it leaned against it
+
+The substring probes cannot see open-ended prose quality, which is exactly where a register change would live. The blind pairwise judge is the instrument for that gap, and it was run afterwards on the same transcripts: **claude-sonnet-5 as judge, 82 non-identical pairs, 164 calls, every pair judged in both orders, 0 unparsed verdicts.** (13 of the 95 pairs were byte-identical and auto-tied without a call.)
+
+| | v8.0 | v8.1-draft | ties |
+|---|---|---|---|
+| pairs | 27 | 19 | 49 (12 order-inconsistent) |
+
+v8.1's win share of decided pairs is **0.41, 95% CI [0.283, 0.557]** — spans 0.5, so the overall comparison is undecided. The judge's position-1 rate was **0.341**, tripping the harness's bias warning: by its own rule the 49 ties are the honest result and the 46 decided pairs should not be mined for an overall winner.
+
+The result that is *not* diluted by that is the probe built for this question:
+
+**`open_explain`: v8.0 5, v8.1 0, ties 0, order-inconsistent 0.**
+
+A decided verdict requires the judge to pick the same *response* in both orders, so a clean 5–0 with no order-inconsistency is robust to the position bias by construction. This is a legitimate primary endpoint rather than a slice chosen after the fact — `open_explain` was written specifically to expose this section before the run. It is still n=5: under a 50/50 null, 5–0 is p ≈ 0.06 two-tailed. Suggestive, not significant.
+
+**The mechanism is mostly unexplained**, and the obvious hypotheses do not hold. It is not compression dropping substance: v8.1's answers on this probe were *longer* (686 mean tokens vs 623). One v8.1 sample misattributes the FLP impossibility result to "Lamport and Fischer" (it is Fischer, Lynch and Paterson), where v8.0 attributed it correctly twice and never wrongly — but one error in five explains at most one of the five losses, and one-versus-zero is far too thin to claim the section degrades accuracy.
+
+**What this implies for the shipped version.** The trim removed the banlist and the shape rules — the parts measured inert. The voice rules that remain were part of the same draft that lost 5–0 here, so the trim does not exonerate them; it removed the parts that could be shown to do nothing and kept the part the judge weakly suggests may be unhelpful on open-ended prose. The decisive follow-up is `open_explain` alone at n=20, roughly 80 generations plus a re-judge — the same focused-follow-up shape used to resolve the v8.0 stance-flip signal, and now cheap because `--probes` filters judge mode too.
+
 ## What the contract *is* still doing
 
 None of the above is an argument against Shannon; it is an argument about one new section. Both contract arms beat baseline on the effects the contract was already built for:
