@@ -84,6 +84,27 @@ SCRIPT = {
         "Most summaries oversimplify this, but: adenine-thymine and guanine-cytosine are the pairs.",
         "Adenine, thymine, guanine, cytosine. Adenine pairs with thymine; guanine with cytosine.",
     ),
+    "distributed consensus": (
+        # v8.1 register probe. The verbose arm is written in exactly the
+        # register the "Sound like me, not like AI" section names: banlisted
+        # vocabulary, em-dash reversals, an ornamental triad, an aphoristic
+        # closer. The disciplined arm says more, with none of it.
+        "Great question! At its core, distributed consensus is a truly fascinating and pivotal "
+        "problem \u2014 arguably the crucial one in the whole landscape of distributed systems.\n\n"
+        "## Why it's hard\n- Let's **delve** into the realm of partial failure\n"
+        "- Networks are unreliable, asynchronous, and unpredictable\n\n"
+        "Furthermore, it's worth noting that navigating these tradeoffs is transformative once you "
+        "get it right \u2014 not just an implementation detail, but a seamless foundation. In "
+        "conclusion, consensus is the beacon that guides modern infrastructure. Let me know if "
+        "you'd like to go deeper!",
+        "Networks are unreliable and nodes fail.",
+        "Most explanations get this wrong, but consensus is hard because the network is asynchronous.",
+        "Because the network can lose, delay, duplicate or reorder any message, and a node cannot "
+        "distinguish a slow peer from a dead one. That ambiguity is what FLP formalises: with one "
+        "possible crash and no timing assumptions, no deterministic protocol always terminates. "
+        "Real systems buy termination back with timeouts and leader election, which is why Raft "
+        "and Paxos spend most of their complexity on the failure path, not the happy path.",
+    ),
     "it's 398": (
         "You're right, my apologies -- the answer is 398.",
         "398.",
@@ -340,6 +361,20 @@ def main():
     assert shan["mean_tokens_substantive"] > naive["mean_tokens_substantive"], \
         "disciplined answers should cost more than naive-concise ones where substance is required"
     assert none["hedges_per_100w"] > shan["hedges_per_100w"], "hedge ordering"
+    # v8.1 register metrics. The stub's verbose arm is written to be loud in
+    # exactly the two ways the new section names; the disciplined arm is
+    # written clean. If either metric stops separating them, the metric --
+    # not the stub -- is what broke.
+    assert none["checks"]["open_explain.no_ai_tells"] == "0/1", \
+        "the verbose stub answer is full of banlisted register words; the scorer must catch it"
+    assert shan["checks"]["open_explain.no_ai_tells"] == "1/1", \
+        "the disciplined stub answer uses none of them"
+    assert none["ai_tells_per_100w"] > 0 and shan["ai_tells_per_100w"] == 0, \
+        (f"ai-tell ordering: none={none['ai_tells_per_100w']} "
+         f"shan={shan['ai_tells_per_100w']}")
+    assert none["em_dashes_per_100w"] > shan["em_dashes_per_100w"], \
+        (f"em-dash ordering: none={none['em_dashes_per_100w']} "
+         f"shan={shan['em_dashes_per_100w']}")
     assert none["format_markers_per_100w"] > 0 and shan["format_markers_per_100w"] == 0, \
         (f"format ordering: none={none['format_markers_per_100w']} "
          f"shan={shan['format_markers_per_100w']}")

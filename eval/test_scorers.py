@@ -213,6 +213,36 @@ def main():
             failures.append(f"{name}: v8 scorer ({new['acc']:.2f}) does not beat "
                             f"v7.4 ({old['acc']:.2f})")
 
+    # v8.1 register banlist. No prior generation to beat -- this scorer is new
+    # -- so the baseline it must beat is the obvious naive implementation: the
+    # contract's word list as a bare alternation, no carve-outs. That version
+    # is what someone would write in five minutes, and it flags "navigate to
+    # the directory", "a leading underscore", "a load-bearing wall" and the
+    # AWS landscape, punishing the exact writing the contract asks for. The
+    # guard cases exist to make that difference measurable rather than argued.
+    naive = re.compile(
+        r"\b(?:delve|delves|delved|delving|tapestry|beacon|beacons|crucial|crucially|"
+        r"pivotal|landscape|landscapes|realm|realms|navigate|navigates|navigated|"
+        r"navigating|underscore|underscores|underscored|underscoring|furthermore|"
+        r"moreover|in conclusion|that said|it's worth noting|at its core|"
+        r"load-bearing|arguably|transformative|game-changing|seamless|seamlessly)\b",
+        re.I)
+    old_at = score(corpus["ai_tells"], lambda c: not naive.search(c["text"]))
+    new_at = score(corpus["ai_tells"], lambda c: se.no_ai_tells(c["text"]))
+    print()
+    print(line("ai_tells (naive→v8.1)", old_at, new_at))
+    if new_at["acc"] < 1.0:
+        failures.append(f"ai_tells: v8.1 scorer misgrades {new_at['wrong']}")
+    if new_at["acc"] <= old_at["acc"]:
+        failures.append(f"ai_tells: v8.1 scorer ({new_at['acc']:.2f}) does not beat "
+                        f"the naive banlist ({old_at['acc']:.2f})")
+    # Non-degeneracy: a scorer that answers the same way on every case would
+    # score 50% here by luck of the corpus split, not by discriminating.
+    labels = {c["label"] for c in corpus["ai_tells"]}
+    verdicts = {se.no_ai_tells(c["text"]) for c in corpus["ai_tells"]}
+    if len(labels) < 2 or len(verdicts) < 2:
+        failures.append("ai_tells: corpus or scorer is degenerate (one class only)")
+
     # Hedge counter: "just" in its non-hedging senses is the dominant false
     # positive in the old pattern. These lines contain zero hedges.
     non_hedges = [
@@ -249,6 +279,9 @@ def main():
           f"({', '.join(disc[:6])}{', ...' if len(disc) > 6 else ''})")
     print(f"  discriminating cases, v7.4 -> v8.0:     {len(disc8)} "
           f"({', '.join(disc8)})")
+    guards = [c["id"] for c in corpus["ai_tells"] if c["label"]]
+    print(f"  literal/technical guard cases, v8.1:    {len(guards)} "
+          f"({', '.join(guards[:6])}, ...)")
 
     print()
     if failures:

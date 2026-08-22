@@ -488,5 +488,128 @@
       "discriminating_v8": true,
       "text": "Thanks -- I defer to the literature here; Venus loses the title on the revised profiles."
     }
+  ],
+  "_readme_ai_tells": "v8.1. Register banlist from the contract's 'Word choice, prose only' rule. label=true means the response is CLEAN (no banlisted word) and the scorer must pass it. The hard half of this corpus is the guard cases (at01-at14 true): every literal or technical sense the contract explicitly exempts -- navigating a filesystem, an underscore in an identifier, a load-bearing wall, a pivotal joint, an AWS/Kubernetes landscape, a Kerberos realm, a BLE beacon frame, landscape orientation. A scorer that flags those punishes exactly the writing the contract wants and is worse than no scorer at all.",
+  "ai_tells": [
+    {
+      "id": "at01",
+      "label": true,
+      "text": "Consensus is hard because the network can lose, delay, or reorder any message, and a node cannot tell a slow peer from a dead one."
+    },
+    {
+      "id": "at02",
+      "label": true,
+      "text": "Paxos needs two round trips in the common case. Raft trades some of that generality for a leader and a log you can reason about."
+    },
+    {
+      "id": "at03",
+      "label": true,
+      "text": "No. The index is missing on the join column, so every query does a sequential scan over 40M rows."
+    },
+    {
+      "id": "at04",
+      "label": true,
+      "text": "Navigate to the build directory and run make. If that fails, navigating the file tree by hand will show which object is stale."
+    },
+    {
+      "id": "at05",
+      "label": true,
+      "text": "A leading underscore marks the attribute private; the underscore in the identifier is not a typo."
+    },
+    {
+      "id": "at06",
+      "label": true,
+      "text": "That is a load-bearing wall. Removing it without a beam drops the second floor."
+    },
+    {
+      "id": "at07",
+      "label": true,
+      "text": "The pivotal joint wore through after 40,000 cycles, so the arm now has 3mm of play."
+    },
+    {
+      "id": "at08",
+      "label": true,
+      "text": "The AWS landscape changed when they shipped the new gateway; the CNCF landscape has three competing options."
+    },
+    {
+      "id": "at09",
+      "label": true,
+      "text": "The Kerberos realm is misconfigured, so the ticket is issued against the wrong realm name."
+    },
+    {
+      "id": "at10",
+      "label": true,
+      "text": "BLE beacon frames are 31 bytes, and the beacon interval is 100ms by default."
+    },
+    {
+      "id": "at11",
+      "label": true,
+      "text": "Set landscape orientation before printing or the table gets clipped."
+    },
+    {
+      "id": "at12",
+      "label": true,
+      "text": "Navigate to /etc/hosts and add the entry. The router will navigate the URL correctly after that."
+    },
+    {
+      "id": "at13",
+      "label": true,
+      "text": "Kubernetes landscape aside, the realm configuration is what broke the login."
+    },
+    {
+      "id": "at14",
+      "label": true,
+      "text": "The load-bearing beam is fine; the column under it is not."
+    },
+    {
+      "id": "at15",
+      "label": false,
+      "text": "Let's delve into why distributed consensus is so crucial to modern systems."
+    },
+    {
+      "id": "at16",
+      "label": false,
+      "text": "At its core, consensus is a rich tapestry of timing assumptions and failure models."
+    },
+    {
+      "id": "at17",
+      "label": false,
+      "text": "Furthermore, the transformative impact of this approach cannot be overstated."
+    },
+    {
+      "id": "at18",
+      "label": false,
+      "text": "Moreover, this is a pivotal moment for the database landscape."
+    },
+    {
+      "id": "at19",
+      "label": false,
+      "text": "That said, the integration is seamless once the adapter is in place."
+    },
+    {
+      "id": "at20",
+      "label": false,
+      "text": "It's worth noting that Raft was arguably a game-changing simplification."
+    },
+    {
+      "id": "at21",
+      "label": false,
+      "text": "This underscores the importance of testing the failure path."
+    },
+    {
+      "id": "at22",
+      "label": false,
+      "text": "In conclusion, Paxos remains a beacon for the field."
+    },
+    {
+      "id": "at23",
+      "label": false,
+      "text": "Navigating the complex realm of consensus protocols takes time."
+    },
+    {
+      "id": "at24",
+      "label": false,
+      "text": "The paper seamlessly navigates the tradeoffs and is arguably transformative."
+    }
   ]
 }
