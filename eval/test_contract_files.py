@@ -107,10 +107,17 @@ SKILL_FILE = "shannon-v8.2.md"
 # which lost 4-10 at n=20 on open_explain at p=0.18, undecided.
 #
 # What is left of v8.1 is its rewordings of existing rules and its shift to
-# the first person, which together cost -10 words. Those are NOT measured
-# either; they ride along because they are free, and a change that is neutral
-# on evidence and negative on size cannot lose the brevity tiebreak. That is a
-# weaker warrant than a measurement and is stated here rather than implied.
+# the first person. Those are NOT measured, and NOT cheaper: measured against
+# the tokenizer, v8.2 is 941 tokens and v8.0/v7.4 is 942. The -10 words are
+# standalone em-dashes punctuated differently. The argument made at adoption
+# time -- neutral on evidence, negative on size, so it cannot lose the brevity
+# tiebreak -- does not survive that conversion, and v8.2 stands on prose
+# judgment alone.
+#
+# These ceilings are in WORDS because that is what this test can compute with
+# no API call. They are a proxy for the real budget, and v8.2 vs v8.0 is
+# exactly the case where proxy and budget disagree. When a decision turns on
+# size, count tokens.
 #
 # A ceiling that moves down is the healthy direction for this file. Move it up
 # only with a live run attached.
