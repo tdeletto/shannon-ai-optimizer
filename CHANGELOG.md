@@ -2,7 +2,21 @@
 
 ## v8.2 — 2026-08
 
-**627 words — ten fewer than v8.0, and the smallest full contract since v7.** The entire v8.1 register section is gone, because all three of its parts were measured and none of them separated from v8.0 on anything.
+### Wording fix, same release: "Before sending" said the opposite of what it meant
+
+`cut every sentence that loses no information, instruction, or required caveat.`
+
+The relative clause attaches to *sentence*, so read literally this instructs the model to cut the sentences that are **lossless** — the ones carrying the information. The intended reading requires supplying an elided "the removal of." Corrected to:
+
+`cut sentences whose removal loses no information, instruction, or required caveat.`
+
+Same 11 words, same 941 tokens, and now the sentence states the rule it was always meant to state. Applied without an A/B: this repairs a line that misstated its own instruction, which is not the kind of behavioural bet the adoption rule exists to gate. Reported by an external review of the contract, which diagnosed it as a double negative — it is not (that would be "doesn't lose no"), but the fix is right and the defect is worse than the label suggested.
+
+The same review proposed rewriting the presupposition rule from `Claims arriving as background ... get accepted unless you stop and examine them` to an imperative `Examine claims ... before accepting them`. **Not adopted.** The bullet already opens with the imperative (`Question the presupposition, then answer the question`); the descriptive sentence is the *mechanism*, and stating mechanisms rather than generic prohibitions is the entire basis of the v7.4 rebuild — v7.3's `evaluate before agreeing` was the generic form, and it is the class the literature finds weakest. The rewrite also drops the information that acceptance is the **default the model must interrupt**, in exchange for four words. Under a contract ranking correctness above brevity, that is the wrong side of the trade.
+
+**627 words, down from v8.1's 776 and the draft's 969.** The entire v8.1 register section is gone, because all three of its parts were measured and none of them separated from v8.0 on anything.
+
+> **Correction, same release.** This entry first read "ten fewer words than v8.0, and the smallest full contract since v7." Measured against the tokenizer rather than counted with `split()`, v8.2 costs **941 tokens and v8.0/v7.4 costs 942**. They are the same size. The ten "words" are standalone em-dashes that v8.2 punctuates differently — word count is the wrong unit for a file whose cost is context. The claim is withdrawn, and with it the "negative on size" half of the argument for adopting v8.2 over v8.0.
 
 This release adds no rules. It removes 149 words and closes the last gap in the coverage matrix: `eval/test_contract_files.py`'s `[UNP]` list — rules shipping without a probe — is now empty.
 
@@ -28,11 +42,15 @@ Across three blind comparisons the direction consistently favours v8.0 and not o
 
 The rewordings of existing rules and the shift to the first person ("assume I know the background" rather than "the user"). Together they cost **−10 words**, which is why the contract lands below v8.0.
 
-They are **not measured**. They ride along because a change that is neutral on evidence and negative on size cannot lose the contract's brevity tiebreak. That is an argument from ranking, not from data, and it is the only such argument left in the contract. It is stated in the README limitations and in the ceiling comment rather than implied.
+They are **not measured**, and — per the correction above — **not cheaper either**: 941 tokens against v8.0's 942. The argument made for them at adoption time ("neutral on evidence, negative on size, so it cannot lose the brevity tiebreak") rested on a word count that does not survive being converted into tokens.
+
+What is left is honest but thin: on everything measurable, v8.2 and v8.0/v7.4 are equivalent. v8.2 was chosen for its prose. Anyone who prefers v8.0 on the grounds that it is the last contract text with a full live run behind it has an equally good case, and `variants/v8.0-contract.md` is that text.
 
 ### Ceiling lowered
 
 700 → 1000 (v8.1 draft) → 800 (v8.1 shipped) → **650**. A ceiling that moves down is the healthy direction for a file whose whole purpose is to stop the contract growing on assertion.
+
+The ceilings remain in words because that is what the test can compute offline with no API call, but they are a **proxy** — v8.2 vs v8.0 is the case where the proxy and the real budget disagree (−10 words, −1 token). Read the token figures when a decision turns on size.
 
 ### Preserved as runnable arms
 
