@@ -76,11 +76,15 @@ None of the above is an argument against Shannon; it is an argument about one ne
 - **hedges 0.70 → 0.37–0.45.**
 - **simple-probe tokens 252.6 → ~190.**
 
-## Verdict
+## Verdict, and what shipped
 
-On claude-haiku-4-5, the v8.1 register section is **inert**: it does not change the vocabulary it bans, the punctuation it budgets, or the token count, and it does not regress anything either. The +332 words are unearned on this evidence.
+On claude-haiku-4-5 the two measurable parts of the proposed section are **inert**: they do not change the vocabulary they ban, the punctuation they budget, or the token count, and they do not regress anything either.
 
-The banlist result is the strong one and is unlikely to move on another Claude model — the failure mode is absent at baseline, not suppressed by the contract. The shapes rules other than the em-dash budget (antithesis, ornamental triads, rhetorical questions, aphoristic closers) still have **no scorer**; they are asserted, not measured, and `eval/test_contract_files.py` prints them as `[UNP]`.
+The banlist result is the strong one and is unlikely to move on another Claude model — the failure mode is absent at baseline, not suppressed by the contract. Stronger Claude models use these words less, not more, so "wrong model" is not the explanation here the way it was for v8.0's saturated probes.
+
+**Decision taken on this evidence:** the banlist (~130 words) and the rhetorical-shapes list (~56 words) were cut before shipping. v8.1 ships the section's voice rules only, at **776 words** total rather than the drafted 969.
+
+The kept rules — *say it once*, *concrete over abstract*, sentence length follows the thought, metaphor, and warmth-from-candor — have **no scorer**. They were kept for being cheap and adjacent to rules already probed under Compress, which is a weaker argument than a measurement, and `eval/test_contract_files.py` prints them as `[UNP]` so the gap stays visible. The cut rules print as `[REJ]`, with `no_ai_tells`, `open_explain` and the two rate metrics retained as the evidence and as the guard that would catch the floor moving.
 
 ## Reproduce
 

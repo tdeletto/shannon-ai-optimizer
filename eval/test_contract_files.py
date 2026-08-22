@@ -57,44 +57,60 @@ COVERAGE = [
     # omission is the dominant error class under instruction pressure.
     ("substance dropped under compression (IFScale 2025; Phare)",
      "keep every token correctness needs", ["multipart_fact", "multipart_fact_2"]),
-    # v8.1: the register section. Scored by `no_ai_tells` on a probe chosen for
-    # headroom -- open-ended and conceptual, where florid prose actually
-    # appears -- rather than bolted onto a short-answer probe that has none.
-    ("AI-register vocabulary tells (v8.1)",
-     "Word choice, prose only", ["open_explain"]),
+]
+
+# Rules that were WRITTEN, MEASURED, and then left out of the contract on the
+# result. The scorer and probe stay: they are the evidence for the decision and
+# the guard that would catch the floor moving. A rule is only in COVERAGE above
+# if the contract actually carries it, so nothing here is claimed as shipped.
+REJECTED_ON_EVIDENCE = [
+    ("AI-register vocabulary banlist (proposed v8.1, not adopted)",
+     "no_ai_tells", ["open_explain"],
+     "claude-haiku-4-5 with NO system prompt used 3 of the 20 banned words 7 "
+     "times in 13,264 words; delve appeared zero times. Both contract arms "
+     "then scored identically (2 hits each). The floor is at zero because the "
+     "habit is absent, so ~130 words of contract bought nothing -- see "
+     "RESULTS-live-v8.1-register.md"),
+    ("reflexive rhetorical shapes (proposed v8.1, not adopted)",
+     "em_dashes_per_100w", [],
+     "only the em-dash budget was measurable and it did not separate: paired "
+     "per-probe difference vs v8.0 was -0.122/100w, 95% CI [-0.382, +0.138]. "
+     "The antithesis, ornamental-triad, rhetorical-question and aphoristic-"
+     "closer rules never had a scorer at all"),
 ]
 
 # Rules that ship WITHOUT a probe. Not a build failure -- some rules resist
 # programmatic scoring -- but the point of the coverage matrix is that untested
 # claims stay visible, so they are named and printed rather than left implicit.
 UNPROBED = [
-    ("reflexive rhetorical shapes (v8.1)", "Shapes to avoid",
-     "em-dash density is reported as a rate; the antithesis, ornamental triad, "
-     "rhetorical-question and aphoristic-closer shapes have no scorer, so they "
-     "are asserted, not measured"),
     ("colleague warmth without praise (v8.1)", "Warmth comes from candor",
      "no scorer distinguishes warmth from flattery beyond the existing "
-     "no_praise check, which only catches the praise half"),
+     "no_praise check, which only catches the praise half -- it was 5/5 in "
+     "every arm, so the tension between this rule and No flattery did not "
+     "surface, but absence of a regression is not a measurement of the rule"),
+    ("voice rules kept from the v8.1 draft", "Say it once",
+     "say-it-once, concrete-over-abstract, sentence-length and metaphor are "
+     "prose guidance with no scorer. They were kept because they are cheap and "
+     "overlap rules already probed under Compress, NOT because they were "
+     "measured -- unlike the banlist, they were never tested either way"),
 ]
 
 SKILL_FILE = "shannon-v8.1.md"
 
 # Word ceilings (~1.35 tokens/word for English prose with markdown).
 #
-# v8.1 raised the project ceiling 700 -> 1000, which is the largest single
-# budget increase this contract has taken, so the argument is recorded here
-# rather than in a commit message. The "Sound like me, not like AI" section
-# costs +332 words (637 -> 969), roughly +450 tokens on every turn. What buys
-# it: it is the only section whose rules are concrete enough to be counted
-# rather than judged -- a word list and a punctuation density -- and design
-# principle 6 in the README is precisely that concrete rules get followed
-# where abstract ones ("be concise") do not. What it does NOT buy: any of it
-# is unmeasured until eval/shannon_eval.py's `open_explain` probe and the
-# ai-tell / em-dash rates are run live. Raise this ceiling again only with a
-# live run attached, and shrink it back if the section fails to separate.
+# v8.1 raised the project ceiling 700 -> 800. The v8.1 draft arrived at 969
+# words; it ships at 776 because the two most expensive rules in it were
+# measured and did not survive. What was cut and why is in
+# REJECTED_ON_EVIDENCE below and in RESULTS-live-v8.1-register.md.
+#
+# What the remaining +139 words buy is NOT established -- the kept voice rules
+# have no scorer. They were kept for being cheap and adjacent to rules already
+# probed, which is a weaker argument than a measurement and is recorded as
+# such. Raise this ceiling again only with a live run attached.
 CEILINGS = {
     "shannon-daily.md": 340,
-    "shannon-project.md": 1000,
+    "shannon-project.md": 800,
 }
 
 
@@ -158,6 +174,13 @@ def main():
             failures.append(f"no contract rule for: {mode} (expected phrase {phrase!r})")
         if missing:
             failures.append(f"no probe for: {mode} (missing {missing})")
+
+    print()
+    for mode, scorer, probes, why in REJECTED_ON_EVIDENCE:
+        missing = [x for x in probes if x not in probe_ids]
+        print(f"  coverage  [{'REJ' if not missing else 'GAP':>3}]  {mode} -- {why}")
+        if missing:
+            failures.append(f"probe retired along with a rejected rule: {missing}")
 
     print()
     for mode, phrase, why in UNPROBED:
