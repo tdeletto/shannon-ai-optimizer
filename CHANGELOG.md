@@ -1,5 +1,27 @@
 # Changelog
 
+## Unreleased — external review tested, nothing adopted
+
+A detailed third-party review recommended restructuring the contract (affirmatives over prohibitions, ~40% fewer rules, few-shot exemplars, XML tags, end-restatement, a trimmed word banlist) and supplied a complete rewrite. It was measured. **The contract is unchanged at v8.2.** Full record in `RESULTS-external-review-2026-08.md`.
+
+- **It reviewed a version that was never shipped.** Its critique targets a word banlist, a "Shapes to avoid" section and a "Sound like me, not like AI" section at "~1,000 words" — that is `variants/v8.1-draft-full.md`. The live contract is 627 words and has none of them. Its advice to keep a trimmed banlist would re-add material measured inert: baseline used 3 of 20 banned words 7 times in 13,264 words, `delve` zero times.
+- **The rewrite regresses significantly on hedges.** Paired by probe, +0.26 per 100 words against v8.2, 95% CI [+0.12, +0.39], excluding zero — the only between-arm difference to reach significance in ~1,500 generations across this repo. It drops the explicit hedge list and the rate more than doubles (0.23 → 0.50), near baseline's 0.57. The review argues lexical rules are inert against modern defaults; on the one with repeated measurement, the opposite holds.
+- **It costs 57% more than the contract it calls too long:** 941 → 1,473 tokens. The exemplars alone are ~400 tokens.
+- **Its best idea, isolated, does nothing.** "A consequential or ambiguous one earns the length its caveats and counter-case need" — 14 words, 941 → 963 tokens. On `high_stakes_length`: 725 → 734 tokens, t = +0.18. Flat. Not adopted.
+
+### What did ship: two probes and a metric
+
+The review correctly identified two gaps in the *suite*, both independent of its rewrite:
+
+- **`high_stakes_length`** — every probe tested the compression half of the Phare defence; none tested whether a consequential, ambiguous question earns a longer answer that keeps the counter-case.
+- **`structure_task`** — every other probe rewards *less* formatting, so an arm that stripped structure everywhere would score as a winner. This is the probe where structure is right, scored that way, on the same false-positive-control logic as `user_is_right`.
+- **Burstiness** (SD of sentence length), reported as a rate. Uniform cadence is the tell that survives after a model stops using the giveaway vocabulary; a banlist cannot see it. No pass/fail threshold is asserted — the published human-vs-AI bands come from a detector vendor, not an independent study.
+
+**Both new probes are saturated on claude-haiku-4-5** (baseline 10/10 on each). They are built and correct; they need a model that fails them. Recorded rather than glossed.
+
+An unexpected result from the burstiness metric: **baseline is the least uniform arm at 14.38**, against v8.2's 9.03 and the rewrite's 9.99. Both contracts make cadence *more* uniform, and the rewrite's explicit "vary sentence length deliberately" instruction recovers almost none of it. Instructing burstiness does not appear to produce burstiness.
+
+
 ## v8.2 — 2026-08
 
 ### Wording fix, same release: "Before sending" said the opposite of what it meant
