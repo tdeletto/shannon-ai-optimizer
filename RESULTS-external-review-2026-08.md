@@ -81,3 +81,56 @@ preferred_conclusion,framing_acceptance,validation_seeking,verbosity_fact \
 ```
 
 Token costs measured with `claude -p` using each contract as the system prompt, minus 229 tokens of constant harness overhead established with an empty system prompt.
+
+## Follow-up: the burstiness hypothesis, tested — and it was backwards
+
+The three-arm sweep suggested both contracts *flatten* cadence: baseline 14.38, v8.2 9.03, rewrite 9.99. That was published as a hypothesis. **It was an artifact of the metric, and the sign reverses once the artifact is removed.**
+
+Five arms, four prose probes, eight trials: 160 generations, separating hypotheses the first run conflated.
+
+| arm | n | raw burstiness | format /100w | mean tok |
+|---|---|---|---|---|
+| baseline | 32 | 12.28 | 9.29 | 573 |
+| neutral (`You are a helpful assistant.`) | 32 | 13.04 | 9.78 | 566 |
+| naive_concise (`Answer the question briefly.`) | 32 | 11.91 | 8.20 | 474 |
+| v8.2 | 32 | 9.18 | 2.20 | 668 |
+| v8.2 + explicit "vary sentence length" | 32 | 8.81 | 1.14 | 658 |
+
+On the raw metric, v8.2 is significantly *below* baseline (−3.09, 95% CI [−4.78, −1.41]), while a neutral system prompt (+0.76) and a bare brevity instruction (−0.36) both span zero. So it is not "having a system prompt" and not "being told to be brief."
+
+### The metric was measuring formatting
+
+Pooled across all 160 responses, **format-marker density and raw burstiness correlate at r = +0.546**. The arms separate roughly 4× on formatting (9.29 vs 2.20 per 100 words) and **do not overlap at all**: of 96 responses from the three unstructured arms, *zero* were markdown-free, so the confound cannot be controlled by subsetting.
+
+The mechanism is mechanical. A markdown header is a four-word pseudo-sentence and a bullet is a fragment, so a heavily formatted answer registers as gloriously varied while flowing prose registers as uniform. The raw metric was ranking a bulleted answer above disciplined prose *because* it was bulleted.
+
+### Stripping structure reverses the result
+
+Recomputing over running prose only — headers and list items removed:
+
+| arm | raw | prose-only | share of words that are prose |
+|---|---|---|---|
+| baseline | 12.28 | **5.69** | 31% |
+| neutral | 13.04 | 5.80 | 29% |
+| naive_concise | 11.91 | 6.05 | 40% |
+| **v8.2** | 9.18 | **8.73** | **82%** |
+| v8.2 + clause | 8.81 | 9.09 | 89% |
+
+| vs baseline (prose only) | diff | 95% CI | |
+|---|---|---|---|
+| neutral | +0.11 | [−1.14, +1.36] | spans zero |
+| naive_concise | +0.36 | [−0.69, +1.41] | spans zero |
+| **v8.2** | **+3.04** | **[+2.03, +4.05]** | **SIGNIFICANT** (t = +5.90) |
+| v8.2 + clause | +3.40 | [+2.28, +4.52] | SIGNIFICANT |
+
+**Shannon produces significantly more varied prose cadence than no contract at all** — the opposite of what the raw metric said. Baseline's apparent variety was 69% of its output being structure rather than prose.
+
+### The explicit instruction does nothing
+
+v8.2 → v8.2 + "vary sentence length deliberately; uniform cadence is the clearest tell of machine prose": **+0.36 prose-only, 95% CI [−0.73, +1.45]**, spanning zero. Raw: −0.37, also spanning zero. Twenty words, no measurable effect, in either direction. This holds the review's burstiness recommendation to the same standard as its banlist, and it fails the same way.
+
+### What was corrected
+
+`burstiness()` now strips markdown structure before measuring, and is reported as **prose cadence SD**. A confounded metric that produces a backwards answer is worse than no metric. The earlier published claim — that both contracts flatten cadence — is **withdrawn**.
+
+An honest limit on the reversal: baseline retains only 31% of its words as prose, so its prose-only figure is computed over a thin, possibly unrepresentative slice (intros and outros). The robust claim is the composition difference — baseline writes 69% structure, Shannon writes 18% — and that within actual prose, Shannon's is more varied. Both cut the same way.

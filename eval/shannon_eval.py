@@ -172,6 +172,27 @@ EM_DASH = re.compile(r"—")
 
 
 SENT_SPLIT = re.compile(r"[.!?]+[\s\n]+|\n{2,}")
+MD_HEADER = re.compile(r"^[ \t]*#{1,6}[ \t].*$", re.M)
+MD_BULLET = re.compile(r"^[ \t]*(?:[-*+]|\d{1,2}\.)[ \t]+", re.M)
+MD_BOLD = re.compile(r"\*\*([^*\n]+)\*\*")
+
+
+def prose_paragraphs(text):
+    """Strip markdown STRUCTURE, keeping running prose.
+
+    Without this, burstiness measures formatting rather than cadence, and it
+    measures it backwards. A header is a four-word pseudo-sentence and a bullet
+    is a fragment, so a heavily formatted answer scores as gloriously varied
+    while flowing prose scores as uniform. Measured raw across 160 generations,
+    format-marker density and burstiness correlate at r = +0.55, and the arms
+    separate ~4x on formatting -- so the raw number was almost entirely a
+    formatting proxy, and it ranked a bulleted no-system-prompt answer ABOVE
+    disciplined prose. Stripping structure reverses the sign.
+    """
+    t = strip_code(text)
+    t = MD_HEADER.sub("", t)
+    t = "\n".join(l for l in t.split("\n") if not MD_BULLET.match(l))
+    return MD_BOLD.sub(r"\1", t)
 
 
 def burstiness(text):
@@ -186,7 +207,7 @@ def burstiness(text):
     # signal here. An earlier cut used >=3 and discarded exactly the short
     # punchy sentences burstiness is meant to reward, scoring varied prose at
     # 0.0. Four sentences minimum so an SD is meaningful.
-    lens = [len(x.split()) for x in SENT_SPLIT.split(strip_code(text)) if len(x.split()) >= 2]
+    lens = [len(x.split()) for x in SENT_SPLIT.split(prose_paragraphs(text)) if len(x.split()) >= 2]
     if len(lens) < 4:
         return 0.0
     mean = sum(lens) / len(lens)
@@ -798,7 +819,7 @@ def summarize(name, rows, hedge_rate, format_rate, ai_tell_rate=0.0,
              f"format markers per 100 words (prose probes): {format_rate:.2f}",
              f"banlisted register words per 100 words: {ai_tell_rate:.2f}",
              f"em-dashes per 100 words: {em_dash_rate:.2f}",
-             f"sentence-length SD (burstiness, higher = less uniform): {burst:.2f}"]
+             f"prose cadence SD (burstiness of running prose, structure stripped): {burst:.2f}"]
     if clipped:
         lines.append(f"responses clipped at the token cap: {clipped} "
                      f"(token totals are a floor)")
@@ -848,7 +869,7 @@ def sweep_table(results):
                ("format/100w (simple)", lambda s: s["format_markers_per_100w"]),
                ("ai-tells/100w", lambda s: s["ai_tells_per_100w"]),
                ("em-dashes/100w", lambda s: s["em_dashes_per_100w"]),
-               ("burstiness SD", lambda s: s["burstiness_sd"])]
+               ("prose cadence SD", lambda s: s["burstiness_sd"])]
     for label, fn in metrics:
         out.append(f"\n{label}")
         out.append(" " * w + "  " + "".join(cell(a) for a in arms))

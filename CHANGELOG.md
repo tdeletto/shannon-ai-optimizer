@@ -19,7 +19,9 @@ The review correctly identified two gaps in the *suite*, both independent of its
 
 **Both new probes are saturated on claude-haiku-4-5** (baseline 10/10 on each). They are built and correct; they need a model that fails them. Recorded rather than glossed.
 
-An unexpected result from the burstiness metric: **baseline is the least uniform arm at 14.38**, against v8.2's 9.03 and the rewrite's 9.99. Both contracts make cadence *more* uniform, and the rewrite's explicit "vary sentence length deliberately" instruction recovers almost none of it. Instructing burstiness does not appear to produce burstiness.
+**Correction, same entry.** This first reported that "baseline is the least uniform arm at 14.38" and that both contracts flatten cadence. **That was a metric artifact and the sign reverses.** A dedicated 160-generation experiment (five arms, in `RESULTS-external-review-2026-08.md`) found format-marker density and raw burstiness correlate at r = +0.546: a markdown header is a four-word pseudo-sentence and a bullet is a fragment, so formatted answers score as varied and flowing prose scores as uniform. Recomputed over running prose with structure stripped, **v8.2 is significantly MORE varied than baseline** (+3.04, 95% CI [+2.03, +4.05], t = +5.90), where a neutral system prompt and a bare brevity instruction both span zero. Baseline's apparent variety was 69% of its output being structure rather than prose. `burstiness()` now strips markdown before measuring and is reported as *prose cadence SD*.
+
+The one part that survives: **an explicit "vary sentence length deliberately" instruction does nothing** — +0.36 prose-only, 95% CI [−0.73, +1.45]. Twenty words, no measurable effect. The review's burstiness recommendation fails the same test its banlist did.
 
 
 ## v8.2 — 2026-08
