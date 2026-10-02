@@ -4,8 +4,7 @@
 Two failure modes this catches, both of which have real cost:
 
 1. Body drift. `shannon-project.md` and `shannon-v9.0.md` are supposed to be
-   the same contract, differing only by YAML frontmatter and an H1, and
-   `shannon-daily.md` the same again minus the coding rules (DAILY_EDITS). Nothing
+   the same contract, differing only by YAML frontmatter and an H1. Nothing
    previously enforced that, and a one-line edit to one of them is exactly
    the kind of change that silently ships a split-brain contract.
 
@@ -174,39 +173,17 @@ SKILL_FILE = "shannon-v9.0.md"
 # only.md, and it is the first thing to test when this ceiling comes down.
 # 1050 -> 1075 for the untested load-bearing word ban (1,058 words).
 #
-# The DAILY file is, from v9.0, the full contract minus its two coding
-# rules (see daily_from_project below), so its ceiling tracks the project's.
-# It was a separate register-adaptive file through v8.2 (291 words); the
-# owner chose to give it the full contract, including the terse register,
-# and dropped the adaptivity. That choice is not measured: the sweep tested
-# the full contract in the preferences-field framing, which is what daily
-# is installed as, but never this exact text.
+# The DAILY ceiling rose 340 -> 500 at v9.0, with no run of its own. Daily
+# is v8.2's register-adaptive file plus only what the sweep credits: four
+# calibration examples and the ask-before-irreversible line (the sweep's V7
+# arm, which tied the full v9.0 contract), plus the owner's untested
+# load-bearing word ban. The rules the sweep found null as a set (V5) were
+# left out to keep the global default cheap. The sweep measured these
+# additions inside the full contract, not this file.
 CEILINGS = {
-    "shannon-daily.md": 1050,
+    "shannon-daily.md": 500,
     "shannon-project.md": 1075,
 }
-
-# The only differences allowed between shannon-project.md and
-# shannon-daily.md. Daily is the global default across every chat, so it
-# drops the rules that only make sense when writing code; the agentic rules
-# stay because they apply to any surface with files or tools.
-DAILY_EDITS = [
-    ("## Code and agentic work\n", "## Agentic work\n"),
-    ("- **Minimal diffs in chat:** when showing code, output only the lines or "
-     "functions that change; mark omissions `// ... existing code ...`. Rewrite "
-     "a whole file only when told to.\n", ""),
-    (" Don't re-request context already in this conversation, but re-read a "
-     "file before editing it if it may have changed on disk.",
-     " Don't re-request context already in this conversation."),
-]
-
-
-def daily_from_project(project):
-    for old, new in DAILY_EDITS:
-        if project.count(old) != 1:
-            return None
-        project = project.replace(old, new)
-    return project
 
 
 def read(name):
@@ -238,16 +215,12 @@ def main():
         if words > ceiling:
             failures.append(f"{name} is {words} words, over its {ceiling}-word ceiling")
 
-    # Daily must be exactly the project contract minus the coding rules.
-    expected = daily_from_project(project)
-    if expected is None:
-        failures.append("DAILY_EDITS no longer match shannon-project.md -- "
-                        "update them alongside the contract")
-    elif read("shannon-daily.md") != expected:
-        failures.append("shannon-daily.md differs from shannon-project.md beyond "
-                        "DAILY_EDITS -- they must stay in sync")
-    else:
-        print("  daily parity           shannon-daily.md == project minus coding rules  OK")
+    # The daily variant is meant to be materially lighter than the full one.
+    d, p = len(read("shannon-daily.md").split()), len(project.split())
+    print(f"  daily vs full ratio    {d}/{p} = {d / p:.2f}")
+    if d / p > 0.75:
+        failures.append("shannon-daily.md has grown too close to the full contract "
+                        "to be a distinct lightweight variant")
 
     # The frontmatter description is what makes the skill invocable; a bare
     # tagline does not tell a model when to apply the file.
