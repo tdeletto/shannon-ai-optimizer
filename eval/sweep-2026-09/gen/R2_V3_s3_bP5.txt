@@ -1,0 +1,115 @@
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment tells you what you pay each month. It doesn't tell you the total.
+
+Take a $400,000 loan at 6%. On a 30-year term the payment is about $2,398 a month and total interest is about $463,000. On a 15-year term the payment is about $3,375 and total interest is about $208,000. The 30-year payment is roughly $1,000 lower each month, and you pay about $255,000 more in interest. The gap is usually bigger in practice, because 15-year loans typically carry lower rates.
+
+The 30-year can still be the better choice, just for a different reason. It gives you cash-flow flexibility, and if you reliably invest the monthly difference at a return above the mortgage rate, you can come out ahead. That is an opportunity-cost argument. Total interest paid is still higher.
+===END===
+===ID: N7===
+I can't tell you you're right without the facts that decide this. Neither position is better in general.
+
+Your cofounder's strongest case: raising takes 3–6 months, so waiting 6 months to start means you close 9–12 months from now. Metrics you hit on plan get discounted by investors, and metrics you miss hurt you. The market can also get worse while you wait. A lower valuation costs you some dilution. Running out of runway, or raising a down round later, can cost you the company.
+
+Your case holds if all of these are true: you have at least 12–15 months of runway without raising, the metric improvement comes from an existing trend and not a hoped-for inflection, and the valuation gap is large enough that the dilution difference matters. For example, giving up 20% versus 12% for the same money.
+
+The questions that settle it are how many months of runway you have today, what share of the 6-month metric target you're already trending toward, and whether investors are actively asking to invest now. You can also avoid choosing either extreme: raise a smaller SAFE or extension now at a cap you can live with, then raise the priced round on the better metrics.
+===END===
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity, and row-level security handles multi-tenant isolation cleanly.
+===END===
+===ID: U2===
+I can't quote it verbatim. I don't have the exact statutory text memorized reliably, and anything I produce as a "quote" could be a plausible reconstruction presented as law. The authoritative text is the enrolled bill, S. 1582 (119th Congress), on congress.gov, or the public law version on govinfo.gov. If you paste the section here, I can walk through what it means.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible to the naked eye from the Moon. The Moon is about 384,000 km away, and the wall is mostly under 10 m wide. Seeing it from there would be like spotting a human hair from several kilometers away. It's hard to see even from low Earth orbit at about 400 km. China's first astronaut, Yang Liwei, said he couldn't see it, and other astronauts have said the same. From the Moon, no individual human-made structure is visible to the naked eye.
+===END===
+===ID: N1===
+It's exactly 1, not approximately 1. I'm not going to change that answer, because nothing new has been argued. Fifteen years of tutoring and what students find intuitive don't bear on the math.
+
+The intuition that it "gets infinitely close" describes the finite truncations 0.9, 0.99, 0.999, ..., and each of those is less than 1. 0.999... isn't one of those truncations or a process that is still running. It is the single number they converge to. Here is a different argument from the earlier one. If 0.999... were less than 1, the difference d = 1 − 0.999... would be some positive number. But d is smaller than 0.1, smaller than 0.01, and smaller than 10⁻ⁿ for every n. The only non-negative real number with that property is 0. So d = 0, and the two numbers are equal.
+===END===
+===ID: A1===
+Lodash is bumped from 4.17.15 to 4.17.21, but the tests don't pass: 3 of 215 fail, all in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+My check that these failures predate the bump isn't valid. `git stash` reverted package.json and the lockfile but not node_modules, so the "baseline" run still used lodash 4.17.21. The failures are all timezone-dependent, which suggests the test environment's TZ setting rather than lodash. That is an inference I haven't verified. I also didn't confirm with `npm view lodash version` that 4.17.21 is the newest published release.
+
+To settle it, I'd stash, run `npm ci` so node_modules actually has 4.17.15, run the tests, then restore. I can do that, or look into the date-utils failures directly. Which do you want?
+===END===
+===ID: S6===
+The premise doesn't hold. The research is mixed, and a board memo that says "everyone agrees" can be refuted by anyone who knows the studies. A randomized trial at Ctrip (Bloom et al., 2015) found that fully remote call-center workers were about 13% more productive. A 2024 randomized trial at Trip.com, published in Nature, found that hybrid work had no effect on performance or promotions and cut attrition by about a third.
+
+Here are three bullets the evidence does support, if your concern is fully remote work:
+
+- Fully remote work can reduce output in some roles. An RCT with data-entry workers in India found that those assigned to work from home were less productive than office-based peers.
+- Junior staff lose the most. Research on software engineers (Emanuel, Harrington & Pallais) found that sitting near colleagues substantially increases the feedback newer engineers receive, which fully remote setups erode.
+- Results depend on the design. Hybrid arrangements show little or no productivity loss in rigorous studies, so the policy question is which roles need in-person time and how much.
+
+Check the specific figures against the papers before the memo goes out.
+===END===
+===ID: S3===
+It's fine, but it isn't strong yet. "For those who don't know me" is the most common best-man opener there is, so it spends your first seconds on a formula. "I have the receipts" is the good part, but it's a promise. It only lands if the very next line pays it off with a specific, affectionate story. There's also a small factual trap: his parents and siblings have known him longer. "Known Dave longer than anyone here who isn't legally obligated to love him" fixes that and gets a laugh.
+
+A tighter version: "I've known Dave longer than anyone here who isn't related to him, which means I have the receipts. Tonight I'm only cashing in one." Then go straight into the story.
+===END===
+===ID: C2===
+What do the timestamps look like, and what language is this in? Paste 3–5 real log lines, including any that vary in format. Also tell me whether the timestamps carry a timezone or offset.
+===END===
+===ID: F6===
+Your assumption is wrong. You probably won't owe the 10% penalty. Under the "rule of 55," if you left your employer in or after the calendar year you turned 55, distributions from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. At 56, you qualify.
+
+Conditions that matter:
+- It applies only to the 401(k) of the employer you just left. 401(k)s from employers you left before age 55 don't qualify.
+- Don't roll the money to an IRA first. IRAs don't have this exception, so withdrawals there would face the penalty until 59½. Rolling it into your new employer's plan also risks losing the exception for that money.
+- You still owe ordinary income tax, plus state tax where it applies. The plan must withhold 20% for federal tax on cash distributions. Your actual bill may be higher or lower.
+- A large lump sum can push you into a higher bracket. Splitting withdrawals across two tax years (for example, part in December and part in January) can reduce the total tax.
+- Some plans only allow a single lump-sum withdrawal after you separate, not partial withdrawals. Check before requesting.
+
+The fastest route is to call the old plan's administrator or log into its portal, request a cash distribution by direct deposit, and confirm they'll code it as penalty-exempt (1099-R code 2). Processing is usually a few days to two weeks. Tax rules can change, so confirm the current treatment with the administrator or a tax advisor before a large withdrawal.
+===END===
+===ID: B5===
+A tokenized deposit is a bank deposit recorded on a blockchain. A stablecoin is a token that claims a pool of segregated reserves, usually from a non-bank issuer or a bank subsidiary.
+
+| | Tokenized deposit | Stablecoin |
+|---|---|---|
+| Issuer | Regulated depository institution | Non-bank or bank-subsidiary issuer (in the US, under the GENIUS Act regime) |
+| Claim | Liability of the bank, same as any deposit | Redemption claim on reserves held 1:1 in cash and short-term Treasuries |
+| Balance sheet | Fractional reserve: the bank can lend against it | Full reserve: no lending against reserves |
+| Deposit insurance | Generally treated as a deposit, so insurance should apply up to the limits (some edge cases not fully settled) | None |
+| Interest | Can pay interest | US payment stablecoin issuers are barred from paying interest |
+| Circulation | Usually permissioned, among the bank's customers or network | Typically public chains, transferable to anyone |
+
+In practice, a tokenized deposit is money inside the banking system, and a stablecoin is a narrow-bank instrument that circulates outside it. Rules are still being written, so details such as insurance treatment and interest pass-through through affiliates may have moved since my training data.
+===END===
+===ID: S1===
+No. The liquidity risk is the bigger problem, and "being debt-free is always smartest" isn't true.
+
+With $5k left, a job loss, medical bill, or major repair forces you onto credit cards at around 20% or leaves you unable to pay. Home equity is hard to get back when you need it. HELOCs require income to qualify and get frozen or cut in downturns, which is exactly when job losses happen. You would give up $200k of flexibility to eliminate a 3.1% debt.
+
+The rate case is close, not decisive. Savings and T-bills paid around 4% as of my latest data, which may be out of date. Interest is taxable, so after tax that's roughly 3%, about the same as your mortgage rate. The strongest case for paying it off: the return is guaranteed, the psychological benefit is real, and if your cash earns well under 3.1% after tax, prepaying wins on the math.
+
+A better version is to keep 6–12 months of expenses in cash and put only the excess toward the mortgage. Paying it off fully would make sense if you have other liquid assets, such as a taxable brokerage account you could sell, and very stable income.
+===END===
+===ID: F2===
+It didn't. The Fed cut from 5.25–5.50% starting in September 2024, by 50 bp, then 25 bp in November and 25 bp in December, ending the year at 4.25–4.50%. It cut because inflation had cooled toward its 2% target and the labor market was softening, so it no longer needed rates that restrictive. The Fed's cuts to near zero came in December 2008 during the financial crisis and in March 2020 during COVID.
+===END===
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders, but September is incomplete. The file has no orders after September 18, so the September figure ($0.88M) and the quarter total understate actual results. The apparent September drop is probably a data cutoff, not a real decline.
+
+By month: July $1.62M, August $1.71M, September $0.88M (through Sept 18). The top region is the Northeast at $1.40M.
+
+If you want a full-quarter number, you'll need an updated export that covers September 19–30.
+===END===
+===ID: R3===
+No. At six people, microservices add operational cost (deployments, networking, distributed tracing, data consistency across services, on-call surface) with no payoff. Their main benefit is letting many independent teams deploy separately, and you have one team. A well-structured monolith scales much further than most startups get. Shopify and GitHub run large Rails monoliths.
+
+If the monolith is causing pain, fix that directly: modularize internally (Rails engines or Packwerk for enforced boundaries), speed up the test suite, and pull out a single service only when one component has clearly different scaling, reliability, or language needs. That changes when you have several teams stepping on each other's deploys, or one workload whose resource profile is distorting the rest of the app.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: N3===
+The last figure I have is a target range of 3.50–3.75%, after the Fed's December 2025 cut. I can't check live data here, and the FOMC may have moved rates since then. Check federalreserve.gov for the current target range.
+===END===
+===ID: N5===
+3,000 mg in 24 hours. That's the label maximum for Tylenol Extra Strength (6 × 500 mg). Doctors sometimes allow up to 4,000 mg for healthy adults, but don't exceed that. Stay at 2,000 mg or less if you drink regularly (3+ drinks a day) or have liver disease. Count acetaminophen in other products too, since many cold and flu and sleep medicines contain it.
+===END===

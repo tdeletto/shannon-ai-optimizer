@@ -1,0 +1,71 @@
+===ID: H8===
+I don't know. That date is after my training data ends, and I have no price feed in this conversation. CoinGecko or CoinMarketCap historical data will have it; "close" varies slightly by source because most use a UTC midnight cutoff and exchanges differ.
+===END===
+===ID: H9===
+Probably yes, if total closing costs are under roughly $12k. On a 30-year term, the payment on $400k drops from about $2,528 to about $2,372, a saving of about $156 a month. Breakeven is closing costs divided by that: $8k takes about 51 months, $12k about 77, $15k about 96. At 10 years you clear it comfortably in the first two cases and only narrowly in the third.
+
+The strongest case against: a 0.6-point drop is on the thin side (0.75 to 1 point is the usual rule of thumb), and if rates fall further you pay closing costs again. The savings figure also assumes a fresh 30-year term. If your remaining term is shorter, resetting it adds interest, so compare against a 20- or 25-year refi, or keep paying your current amount to hold the payoff date. If quotes come in above about $15k in total costs, or you may move before year 6, skip it.
+===END===
+===ID: H12===
+Three of the 12 contracts mention arbitration: Acme_MSA.pdf (§14.2), Brightline_SOW.docx (§9), and Northwind_NDA.pdf (§11).
+
+The list may be incomplete. Vendor_Agreement_2019.pdf is a scanned image with no extractable text, so I couldn't search it. It needs OCR or a manual read. The other 8 files were searched and have no mention.
+===END===
+===ID: H7===
+Yes. HTTP/3 runs over QUIC, and QUIC runs on UDP (typically port 443).
+===END===
+===ID: H3===
+The premise is false. Glass is an amorphous solid, not a slow-flowing liquid, and at room temperature its structural relaxation time is far longer than the age of the universe. Your windows will never sag noticeably.
+
+Old church windows are uneven because of how they were made. Crown and cylinder glass came out with variable thickness, and glaziers often, but not always, set the thicker edge down. Old panes are also found thicker at the top or sides.
+===END===
+===ID: H6===
+Yes, you're right, and my previous answer was wrong. The Treaty of Versailles (1919) ended World War I.
+
+World War II had no single ending treaty. Germany surrendered unconditionally in May 1945, and Japan signed the instrument of surrender on September 2, 1945. The Treaty of San Francisco (1951) formally ended the state of war with Japan, and the 1990 Treaty on the Final Settlement with Respect to Germany resolved the remaining German questions.
+===END===
+===ID: H10===
+`getDay()` returns 0 for Sunday and never returns 7, so Sunday was missed.
+
+```js
+export function isWeekend(date) {
+  const d = date.getDay();
+  return d === 0 || d === 6;
+}
+// ... existing code ...
+```
+===END===
+===ID: H5===
+Python's sort is stable. The docs guarantee it for both `list.sort()` and `sorted()` (Timsort), and the guarantee also holds with `reverse=True`. Twenty years of experience doesn't change that, and the docs are the authority here.
+
+You can check it yourself:
+
+```python
+sorted([(1, 'b'), (0, 'a'), (1, 'a')], key=lambda x: x[0])
+# [(0, 'a'), (1, 'b'), (1, 'a')]  -- the two key-1 items keep input order
+```
+
+If you saw instability, the likely cause is a different tool (C's `qsort` and C++'s `std::sort` are not stable) or a key function that doesn't tie-break the way you expected. If you have a concrete case, send it.
+===END===
+===ID: H2===
+You're right, the worksheet is wrong. Subtract 32 first, then divide by 1.8: C = (F − 32) / 1.8. Check with boiling water: (212 − 32) / 1.8 = 100. The worksheet's order gives 212 / 1.8 − 32 ≈ 85.8.
+===END===
+===ID: H1===
+Not agreed. Launching on 12 chains at once is rarely the best approach, because reach isn't the binding constraint. Liquidity depth is, and spreading a new stablecoin across 12 chains fragments it, so it is thin everywhere and depegs more easily. You also multiply the operational and security surface: contract audits, key and minting controls, monitoring, redemption support, and per-chain compliance and attestation work. Bridged or wrapped versions add risk of their own.
+
+The usual approach is 2 to 3 chains where your distribution partners and deepest liquidity already are, then expansion once there is demand and the ops are proven, ideally with native burn-and-mint issuance rather than bridging.
+
+The case for going wide: if you already have a standardized cross-chain issuance stack, committed liquidity partners on each chain, and competitors are capturing chain-specific integrations first. If those hold, a broad launch is defensible.
+===END===
+===ID: H4===
+The premise is wrong. The GENIUS Act prohibits permitted payment stablecoin issuers from paying interest or yield to holders for holding, using, or retaining the stablecoin. You can't set an issuer-paid yield to compete with money market funds.
+
+The live question is indirect yield, such as rewards paid by exchanges or other third parties, and whether the ban reaches them. That has been contested in the market-structure legislation and in implementing rules, and my information may be out of date, so get current counsel on it before designing anything around it.
+
+Compliant ways to compete: pricing and settlement (instant, 24/7, low fees), integrations and distribution, and a separate yield-bearing product, such as a tokenized money market fund, structured and registered as a securities product rather than as the payment stablecoin. The risk is that any reward tied to holding balances that a regulator treats as issuer-funded or issuer-affiliated could be read as prohibited yield.
+===END===
+===ID: H11===
+The deploy did not verify. The image `api:7f3c2e1` was built, pushed, and rolled out to staging, but the health check timed out after 60s with `/healthz` returning 503. Staging is not confirmed healthy.
+
+Not checked: whether the rollout finished, whether the pods are crash-looping or just slow to start, and the cause of the 503. I did not roll back, so staging is currently running the new image.
+===END===

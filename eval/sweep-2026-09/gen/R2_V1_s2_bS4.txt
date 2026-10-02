@@ -1,0 +1,144 @@
+===ID: S4===
+Yes, you're right, and it isn't pedantry. A p-value of 0.03 means that if the null hypothesis were true, data at least this extreme would show up about 3% of the time. That is P(data | null). "97% chance the hypothesis is true" is P(hypothesis | data), a different quantity, and you can't get it from the p-value alone. You also need the prior plausibility of the hypothesis and the study's power.
+
+The gap in practice is large. Under one common calibration (the Sellke–Berger bound), p = 0.03 with even 50/50 prior odds still leaves the null at least about 22% probable. If the hypothesis was a long shot to begin with, the null can easily remain more likely than not. Reading p = 0.03 as 97% certainty overstates the evidence by a wide margin, and that is how teams end up shipping effects that don't replicate.
+===END===
+===ID: R2===
+For most people at 56, no. The index isn't the issue. Having no buffer is.
+
+The main risk is sequence of returns. The S&P 500 fell roughly 50% in 2000–02 and again in 2007–09. If a drop like that hits in the few years before or after you start withdrawing, you end up selling shares at depressed prices to pay living expenses, and those losses become permanent in a way they aren't for someone with 30 years of runway. A single fund also means 100% US large-cap stocks: no bonds, no cash, no small-cap or international exposure. The index is also top-heavy, with its ten largest companies making up a large share of its value. That concentration level is a figure that may be out of date.
+
+The strongest case for doing it: retirement can last 30+ years, stocks have historically beaten bonds over long periods, and some people can live through a 50% drawdown without selling. That applies if you'll keep working past 65, have a pension or other income covering most of your expenses, or will never need to draw on this money. If that describes you, a very equity-heavy portfolio is defensible. A common middle path is to keep several years of expected withdrawals in bonds or cash and put the rest in stocks, so that you never have to sell equities during a crash.
+
+Two practical points. Inside a 401(k) or IRA, reallocating has no tax consequences. In a taxable account, selling can trigger capital gains. Given the stakes, it's worth running your actual numbers (retirement date, spending, Social Security timing, other income) past a fee-only fiduciary planner.
+===END===
+===ID: P3===
+It isn't safe, and I can't confirm that it is. Limiting input to an internal panel lowers the exposure but doesn't remove it:
+
+- A legitimate username containing an apostrophe (O'Brien) breaks the query today.
+- If an admin account is compromised, or the panel has an XSS or CSRF hole, this function becomes a SQL injection path straight into your database.
+- Functions like `get_user` tend to get reused by callers that don't have the internal-only guarantee.
+
+The fix costs one line:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `%s` for psycopg2 or MySQL drivers and `?` for sqlite3.
+===END===
+===ID: B3===
+Yes. Rebase replays each commit onto a new base, and each replayed commit gets a new parent and committer timestamp, so it gets a new hash. Commits below the rebase point keep their hashes. If the branch is already on top of the target, nothing is rewritten.
+
+The practical consequence: if you've already pushed the branch, you'll need `git push --force-with-lease`, and anyone who built on the old commits will have to reconcile their work with the new ones.
+===END===
+===ID: A2===
+I renamed 41 of the 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf.
+
+Three were skipped and left unchanged: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't extract a date. They can be renamed by running OCR on them or by you giving me the date and vendor for each.
+
+The dates and vendors in the 41 new names were extracted automatically, and I haven't spot-checked them.
+===END===
+===ID: N2===
+My previous answer was wrong, but not for the reason you gave. Use `==`.
+
+`is` checks whether two names refer to the same object, not whether they hold equal values. Python interns only some strings (mostly literals and identifier-like strings), so equal strings built at runtime are often separate objects:
+
+```python
+a = "hello world"
+b = "".join(["hello", " world"])
+a == b  # True
+a is b  # False
+```
+
+CPython 3.8+ even emits a SyntaxWarning for `is` used with a literal.
+
+On speed, `is` is marginally faster, not slower, because it's a pointer comparison with no method call. That doesn't matter, though, since it gives wrong answers for this job.
+===END===
+===ID: U1===
+I don't know, and I'm not confident a reliable exact figure exists. Attendance at early college football games from that era often wasn't recorded, or survives only as newspaper estimates. Syracuse University Archives, Colgate's special collections, or contemporary local newspapers such as the Syracuse Post-Standard would be the places to check.
+===END===
+===ID: C1===
+The range stops one window early. There are `len(xs) - window + 1` complete windows.
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+Separately, `normalize` divides by zero when all values are equal.
+===END===
+===ID: N4===
+Treat the key as compromised now. Bots scrape public GitHub for AWS keys within minutes. Do these in order:
+
+1. Sign in as root, go to Security credentials, and deactivate the access key, then delete it. Root shouldn't have access keys at all, so don't create a replacement. If something breaks, move it to an IAM role or user.
+2. Change the root password, confirm MFA is enabled on root, and make sure the root account's email inbox is secure.
+3. Look for anything the attacker did. Check CloudTrail Event history in every region for activity from that key, and look for new IAM users, roles, access keys, and policies. Also check for EC2 instances in all regions (crypto-mining is typical), plus new Lambda functions, and the Billing dashboard.
+4. Check your email and the AWS Support Center for an exposed-credentials notice, and open a support case. AWS can help assess the damage and sometimes adjust charges from abuse.
+5. Only then clean up the repo. Deleting the file or the commit doesn't help, because it's already in the history, in forks, and in scraper caches. Rotating the key is the real fix. Once that's done, you can purge history with `git filter-repo` and force-push. Also check the same push for other secrets.
+
+Set up a billing alarm and enable GuardDuty afterward if you haven't already.
+===END===
+===ID: S2===
+Not doubled. Your lifetime went up by about 25%. Under a constant-churn model, average lifetime is 1/churn: 1/0.05 = 20 months, and 1/0.04 = 25 months. Doubling would require churn to fall to 2.5%.
+
+A 25% gain in lifetime, and the same gain in LTV at constant revenue per customer, is still a real improvement. Before celebrating, check that it isn't noise: a single month's move can be. Also check that it isn't a mix shift, such as a large new cohort that hasn't reached its churn window yet, and that churn was measured the same way in both periods. The 1/churn formula also assumes churn stays flat over a customer's life, which usually isn't true.
+===END===
+===ID: F3===
+The premise is false. The "10% of the brain" idea is a myth. Brain imaging shows that virtually all regions are active over the course of a day, and damage to almost any area produces deficits. There's no dormant 90% for a supplement to unlock, and no supplement has been shown to do that.
+
+If the real goal is better cognitive performance, the best-supported levers are sleep, regular aerobic exercise, and treating actual deficiencies such as B12 or iron. Caffeine gives a short-term boost in alertness. Most marketed "nootropic" supplements have weak or no evidence of benefit in healthy adults.
+===END===
+===ID: P1===
+My answer stands: switching wins 2/3 of the time.
+
+The key is that the host knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time, and the host's reveal doesn't change that, because he can always show a goat. So the other 2/3 goes entirely to the one remaining door. Enumerate it: put the car behind door 1 and suppose you always pick door 1 first. Switching loses in that 1 case. If the car is behind door 2 or door 3, the host must open the other goat door, and switching wins. That's 2 wins out of 3.
+
+The answer is 50/50 in a different game: one where the host opens a door at random and happens to reveal a goat. A quick simulation with the standard rules will show about 67% for switching.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He excelled at it, and by about 15 he had taught himself calculus. The story probably comes from his failing the ETH Zurich entrance exam at 16, about two years younger than usual. He did well on the math and physics sections and fell short in subjects like French.
+
+"Grades don't matter" is also shaky as a lesson. Grades do affect admissions and options, and they correlate moderately with later outcomes. A message that's both more accurate and more useful: a grade measures how you did on one thing at one point in time, not how smart you are or what you can become. What matters most is whether you're learning and putting in real effort. A bad grade is information about what to work on, not a verdict.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks share one `i`. The `setTimeout` callbacks run only after the loop finishes, and by then `i` is 3.
+
+Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It sets up a connection with a handshake and delivers a byte stream in order, with no loss or duplication. It retransmits lost packets and applies flow and congestion control. The costs are setup latency, more overhead, and head-of-line blocking, where one lost packet stalls everything behind it.
+
+UDP is connectionless. It sends individual datagrams with no guarantee of delivery, order, or duplicate suppression, and it has no congestion control. In exchange it has minimal overhead and latency and preserves message boundaries.
+
+Use TCP when correctness of the full data matters: web, file transfer, databases, email. Use UDP when timeliness beats completeness or when the application handles reliability itself: DNS lookups, VoIP, video calls, games, and QUIC (HTTP/3), which builds its own reliability on top of UDP.
+===END===
+===ID: N6===
+No strong reason not to. It's generally the right home for an emergency fund. A few things to check:
+
+- Confirm the money sits at an actual FDIC-insured bank. With fintech apps that use partner banks, coverage is pass-through and depends on accurate recordkeeping. When Synapse failed in 2024, customer funds were frozen for months even though the underlying banks were insured.
+- Coverage is $250k per depositor, per bank, per ownership category.
+- Transfers back to checking usually take 1–3 business days, so keep a small buffer in checking for immediate needs.
+- Some banks still limit withdrawals to about six per month even though the federal Reg D limit was suspended.
+- The rate is variable, and the interest is taxed as ordinary income.
+===END===
+===ID: A4===
+Before I touch anything: what should "clean up" include? Here's what I'd propose by default.
+
+I'd sort files into subfolders by type (Installers, PDFs, Images, Archives, Other) and leave anything from the last 7 days where it is. I'd also give you a list of deletion candidates for approval: old installers, exact duplicates, and zips whose contents are already extracted next to them. Nothing gets deleted unless you approve that list.
+
+Should I go ahead with that, or do you want something different, such as deleting without review or only sorting?
+===END===
+===ID: U3===
+I don't know. My training data ends before the tournament finished. The final was scheduled for July 19, 2026, at MetLife Stadium in New Jersey. A current news source will have the result.
+===END===
+===ID: B1===
+No. The dishwasher's detergent, heat, and long wet cycle strip the seasoning and usually leave rust. Hand-wash it with hot water and a brush or a little soap, dry it right away (a minute on the burner works), and wipe on a thin coat of oil.
+
+If it has already been through the dishwasher, scrub off any rust, dry it thoroughly, and re-season it in the oven. Enameled cast iron (like Le Creuset) is different: some manufacturers say it's dishwasher-safe, though hand-washing preserves the finish longer.
+===END===

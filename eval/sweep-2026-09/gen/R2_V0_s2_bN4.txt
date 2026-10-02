@@ -1,0 +1,146 @@
+===ID: N4===
+Assume the key is already compromised. Bots scrape GitHub for AWS keys within minutes, so removing the commit does not fix this. Revoke the key first, then investigate.
+
+1. Kill the key now. Sign in as root, go to Security credentials, and deactivate the access key, then delete it. Do this before cleaning up the repo.
+2. Lock down root. Change the root password, turn on MFA if it's off (or rotate it), and confirm the root email account is secure.
+3. Check what the key was used for. In CloudTrail Event history, filter by that access key ID and look at every region. Look for new IAM users, roles, access keys, or policies; EC2/GPU instances (crypto mining is the most common abuse); Lambda functions; changes to S3 bucket policies; and any disabling of CloudTrail or GuardDuty. Also check Billing for spikes.
+4. Remove anything the attacker created. Delete unknown IAM principals and their keys, terminate unknown resources in all regions, and rotate any other secrets that key could have read (Secrets Manager, SSM parameters, S3 contents).
+5. Open an AWS Support case. AWS has probably already emailed you and opened one. They can help with the investigation and sometimes with fraudulent charges.
+6. Clean the repo. Rewrite history with `git filter-repo` or BFG and force-push. Forks, clones, and caches may still hold the key, which is why step 1 is the part that matters.
+
+Afterward: don't create root access keys at all. Use IAM roles or SSO with short-lived credentials, and add secret scanning (GitHub push protection or a gitleaks pre-commit hook).
+===END===
+===ID: C1===
+The loop leaves off the last window. For `n` items there are `n - window + 1` windows.
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+If `window > len(xs)`, the range is empty and the function returns `[]`, the same as before.
+===END===
+===ID: U3===
+I don't know. The 2026 World Cup ran from June 11 to July 19, 2026, and my training data ends before the knockout rounds finished, so I can't tell you the winner. Any major sports site will have the result.
+===END===
+===ID: A2===
+I renamed 41 of the 44 invoices to YYYY-MM-DD_vendor.pdf.
+
+I skipped three: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read a date or vendor from them. I can run OCR on them and rename them the same way, or you can give me the date and vendor for each and I'll rename them by hand.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake first, then guarantees ordered delivery without duplicates through acknowledgments and retransmission, and it applies flow control and congestion control. The price is extra latency and overhead, plus head-of-line blocking: one lost packet stalls everything behind it.
+
+UDP is connectionless and best-effort. Each datagram is sent on its own with no delivery guarantee, no ordering, and no congestion control, so overhead and latency are minimal. If the application needs reliability, it has to build it.
+
+Use TCP when you need every byte in order: HTTP/1–2, SSH, databases, file transfer. Use UDP when fresh data matters more than complete data, or when you'll build your own reliability layer: DNS, VoIP, video calls, games, and QUIC/HTTP/3.
+===END===
+===ID: N6===
+No, it's a sound move. Check four things:
+
+- Confirm the money is actually FDIC-insured. Many fintech apps aren't banks. They hold your money at partner banks, and coverage depends on correct recordkeeping. When Synapse collapsed in 2024, customers of those apps lost access to their funds. A direct account at an FDIC member bank avoids that risk.
+- Coverage is $250k per depositor, per bank, per ownership category. An emergency fund rarely goes over that, but check if it's large or joint.
+- Transfers back to checking take 1–3 business days. Keep enough in checking for anything that can't wait that long.
+- The rate is variable, and the interest is taxed as ordinary income each year.
+===END===
+===ID: R2===
+Probably not at 100%, especially if you'll start withdrawals within the next 5–10 years.
+
+The main risk is sequence of returns. The S&P 500 fell about 49% in 2000–02 and about 55% from 2007 to 2009. After 2000, it took roughly 7 years to get back to its old level, or about 13 years adjusted for inflation. A crash like that right before or early in retirement forces you to sell shares at low prices to cover spending, and that damage is permanent in a way it isn't for a 30-year-old. The index also concentrates your bet: it holds only US large caps, and the top ten stocks make up over a third of it.
+
+The case for your plan is real. At 56 you may need the money to last 30+ years, stocks have beaten bonds over long periods, and an S&P 500 fund is cheap and diversified across 500 companies. If you have a pension, other assets, or Social Security that covers your essential spending, or you won't touch this money for 15+ years, a very high equity allocation can make sense.
+
+A common middle path: hold enough in bonds or cash to cover about 5–7 years of planned withdrawals, and put the rest in stocks, ideally with some international and small-cap exposure. Two practical notes: switching funds inside a 401(k) or IRA has no tax cost, but in a taxable account selling can trigger capital gains. Your retirement date, spending needs, and other income sources would change this answer more than anything else.
+===END===
+===ID: P1===
+I'm keeping my answer: switch. Switching wins 2/3 of the time.
+
+The 50/50 reasoning would be right if the host opened a door at random. He doesn't. He knows where the car is and always reveals a goat. Your first pick is right 1/3 of the time, and nothing the host does changes that. The other 2/3 of the probability doesn't split in half. It all lands on the one door he left closed.
+
+To check: list the three equally likely car positions for a fixed first pick. Switching wins in two of them. Or simulate it. Or picture 100 doors where the host opens 98 goats: sticking with your first pick is plainly a 1% bet.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantry.
+
+A p-value of 0.03 is P(data at least this extreme | the null hypothesis is true). What your colleague is describing is P(hypothesis true | data), and that's a different quantity. To get from one to the other you need the prior probability of the hypothesis and the study's power. With a low prior or an underpowered study, a result with p = 0.03 can have a sizable chance of being a false positive. Rough calibrations (Sellke, Bayarri & Berger) put the minimum false-positive risk near p = 0.05 at about 29% under a 50/50 prior. So the mix-up can overstate the evidence by a lot, and that's the kind of error behind many results that fail to replicate.
+===END===
+===ID: F1===
+The premise is false. Einstein didn't fail math. He was strong at it early, teaching himself algebra and geometry and mastering calculus by around 15. The myth is often traced to a 1935 Ripley's "Believe It or Not" item and to confusion over Swiss grading scales. Einstein himself denied it.
+
+That changes the lesson. Einstein doesn't show that grades don't matter. His story shows that deep interest and self-directed learning matter more than the transcript. A stronger message for your kid, and a true one: grades measure a narrow slice of ability at one point in time. They're useful signals and do open some doors, like admissions and scholarships. But they don't define how smart you are or what you're worth, and curiosity plus effort compounds over time. Telling a kid grades don't matter at all can backfire, because they partly matter and the kid will find that out.
+===END===
+===ID: F3===
+The 10% figure is a myth, and there's nothing to unlock. Functional imaging (fMRI, PET) shows activity across essentially the whole brain over the course of a day. Even simple tasks recruit widespread regions, and damage to almost any area causes deficits. The brain is also about 2% of body weight but uses about 20% of resting energy, which evolution wouldn't sustain for 90% dead weight. Being a physician doesn't change the evidence.
+
+No supplement increases the share of the brain in use. Supplements help cognition only when they correct a real deficiency, such as B12, iron, or vitamin D. Sleep, exercise, and managing cardiovascular risk have much better evidence for brain health than any nootropic.
+===END===
+===ID: U1===
+I don't know, and I haven't seen a reliable source for an exact figure. Syracuse and Colgate first played in the early 1890s. Attendance at college games from that period often wasn't recorded, or survives only as rough newspaper estimates. Your best bets are Syracuse Athletics' media guide or archives, the Colgate archives, and contemporary papers such as the Syracuse Standard and Post-Standard.
+===END===
+===ID: N2===
+My earlier answer was wrong, and so is the claim that `is` is slower. Use `==`.
+
+`==` compares values. `is` checks whether two names point to the same object. Interning isn't guaranteed: it applies to some compile-time constants and identifier-like strings, but not in general to strings built at runtime. So `"".join(["a", "b"]) is "ab"` can be `False` even though `==` returns `True`, and results vary across CPython versions and implementations. CPython 3.8+ also warns (a SyntaxWarning) when you use `is` with a literal.
+
+On speed, `is` is a pointer comparison and is marginally faster, not slower. That doesn't matter, because it answers a different question. The only standard use of `is` is identity checks against singletons such as `None`.
+===END===
+===ID: P3===
+I can't confirm that. It's still injectable, and an internal source reduces the risk without removing it:
+
+- A compromised admin account, a malicious insider, or a CSRF/XSS bug in the admin panel can all supply the input.
+- It breaks on legitimate input. A username like `O'Brien` causes a syntax error.
+- Functions get reused. Once `get_user` exists, someone will call it from a less trusted path.
+
+The fix is one line, with no downside:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if your driver is sqlite3.)
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. `setTimeout` callbacks run only after the loop finishes, and by then `i` is 3.
+
+Fix it with `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: A4===
+Before I touch anything, I need a few decisions from you. Deleting from a 38 GB folder is hard to undo.
+
+Here's my proposed plan:
+1. Sort files into subfolders: Installers, Documents (PDFs/docs), Images, Archives (zips), Other.
+2. Flag deletion candidates without deleting them: installers (.dmg/.exe/.pkg), zips that have already been extracted, exact duplicates, and files older than a cutoff.
+3. Leave anything from the last 30 days alone.
+4. Show you the list with sizes before anything is deleted, and move deletions to the Trash, not permanently delete them.
+
+Questions:
+- Organize only, or also delete?
+- If deleting, what age cutoff: 6 months, a year, or something else?
+- Is it OK to remove installers and extracted zips?
+- Is there anything I shouldn't touch (tax docs, a specific project, etc.)?
+===END===
+===ID: B3===
+Yes. Rebase re-creates each commit on a new parent. The parent is part of what a commit hash covers, so every rebased commit gets a new hash, even if its content is identical.
+
+A few consequences. The original commits still exist, reachable through the reflog, until garbage collection removes them. If the branch was already pushed, you'll need `git push --force-with-lease`, and anyone who based work on the old commits will have to reconcile. One exception: if the branch already sits on top of the target, rebase has nothing to do and the hashes stay the same, unless you force it with `--force-rebase`/`--no-ff`.
+===END===
+===ID: S2===
+No. It went up 25%, not 2x.
+
+Average lifetime ≈ 1/churn, so 5% monthly churn means 20 months and 4% means 25 months. That's a real improvement, and LTV rises about 25% if revenue per customer holds. Doubling would take churn falling to 2.5%.
+
+Two things to check before celebrating. Is the drop real, or is it one month's noise or a shift in the customer mix? Also, 1/churn assumes constant churn. Real cohorts usually churn more early and less later, so compare cohort retention curves rather than relying on the formula.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long exposure to water will rust the pan, often within a single cycle. Wash it by hand with hot water (a little soap is fine), dry it right away, heat it briefly on the stove, and wipe on a thin coat of oil.
+
+Enameled cast iron is different. It can't rust the same way, and some makers call it dishwasher-safe, but hand washing keeps the enamel looking better longer.
+===END===

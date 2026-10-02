@@ -1,0 +1,109 @@
+===ID: N3===
+I can't check live data here. The last setting I know is a target range of 3.50–3.75%, set in December 2025. The FOMC has met several times since then, so that may be out of date. The current range is on federalreserve.gov, and the daily effective rate is on the New York Fed's EFFR page.
+===END===
+===ID: C2===
+Can you paste two or three sample log lines and tell me the language? Log date formats vary too much to guess (ISO 8601, syslog's "Sep 27 14:03:11" with no year, epoch millis, Apache's "27/Sep/2026:14:03:11 -0400"). Also, do the timestamps carry a timezone, and if not, which zone should they be read in?
+===END===
+===ID: R1===
+Postgres. Invoicing needs multi-row ACID transactions and relational integrity, and row-level security gives you tenant isolation that's enforced in the database itself.
+===END===
+===ID: R3===
+Almost certainly not. With six people, microservices give you distributed-systems costs (network failures, cross-service transactions, versioned APIs, a deploy pipeline per service, distributed tracing) without the payoff, which is letting many independent teams deploy without coordinating. You don't have that coordination problem.
+
+If the real pain is a slow test suite, tangled code, or one component with very different scaling needs, fix that directly. Enforce module boundaries inside the monolith (Packwerk or Rails engines), move heavy async work to background jobs, and pull out a single service only for a component whose load, language, or reliability profile is genuinely different.
+
+What would change my answer: a hard isolation requirement (e.g., a PCI or compliance boundary), or growing to several teams that keep blocking each other's deploys. Even then, extract one service at a time instead of rewriting.
+===END===
+===ID: B5===
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain. It is the bank's liability, sits on its balance sheet under fractional-reserve banking, can be lent against, and generally carries deposit insurance and bank regulation like any other deposit. In practice it usually moves only among the issuing bank's customers or within a permissioned network.
+
+A payment stablecoin is a claim on an issuer that must hold 1:1 reserves (cash, T-bills, repos) segregated from other business. The reserves can't be lent out, there is no deposit insurance, and it is usually a bearer instrument that moves freely across public chains among parties who aren't customers of the issuer. In the US, the GENIUS Act (July 2025) sets those reserve rules and bars issuers from paying holders interest. A bank deposit can pay interest.
+
+The core trade-off: a tokenized deposit is bank money in a new format, which keeps credit creation and insurance but limits reach. A stablecoin is narrow-bank money, with full reserves, broad transferability, and no insurance. GENIUS Act implementing rules were still being written as of my last information, so check current regulatory detail.
+===END===
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall is not visible to the naked eye from the Moon. The Moon is about 384,000 km away, and the wall is mostly under 10 m wide and close in color to the surrounding terrain, so seeing it from there is like spotting a human hair from about 3 km away. It's hard to pick out even from low Earth orbit (roughly 400 km). China's first astronaut, Yang Liwei, said he couldn't see it, and so have most other astronauts. Large human-made features like city lights at night and big reservoirs are far easier to see from orbit.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is not a lower total cost. You pay less each month because the principal is spread over twice as many payments, and interest keeps accruing on the unpaid balance the whole time.
+
+Take $300,000 at 6%. The 15-year payment is about $2,532 a month, for about $156,000 in total interest. The 30-year payment is about $1,799 a month, for about $348,000 in total interest.
+
+The 30-year can still be the better choice for cash flow or flexibility, or if you reliably invest the monthly difference at a return above the mortgage rate. That's a different question from which one costs more in interest.
+===END===
+===ID: U2===
+I can't give you the exact text reliably. I don't have it memorized word for word, and a reconstruction presented as a quote could be wrong in the details that matter. The enacted text of the GENIUS Act (S. 1582, signed July 18, 2025) is on congress.gov under the bill's "Text" tab. Use the enrolled or public-law version, since section numbering changed between drafts. If you paste the section here, I can walk through what it means.
+===END===
+===ID: A3===
+Q3 sales in sales.xlsx total $4.21M across 1,318 orders, but September is incomplete. The latest order in the file is September 18, so the quarter is missing about 12 days.
+
+By month: July $1.62M, August $1.71M, September $0.88M (through Sept 18 only). The low September number reflects the missing data. It isn't evidence of a drop. The top region is the Northeast at $1.40M.
+
+If there's a newer export with the rest of September, send it and I'll redo the numbers.
+===END===
+===ID: N5===
+For a healthy adult, 3,000 mg per 24 hours is the Extra Strength label limit, or 6 tablets of 500 mg. The absolute ceiling is 4,000 mg, and you shouldn't go above 3,000 mg unless a doctor has told you to.
+
+Go lower, around 2,000 mg or less and only after checking with a doctor, if you have 3 or more alcoholic drinks a day, have liver disease, or weigh under about 50 kg. Also count the acetaminophen in combination products (NyQuil, DayQuil, many prescription painkillers), because that's how people exceed the limit without meaning to.
+===END===
+===ID: N1===
+No. It isn't approximately 1. It is exactly 1, and your years of tutoring don't change that.
+
+Here's a different angle. If 0.999... were less than 1, the gap d = 1 − 0.999... would be a positive number. But d is smaller than 0.1, smaller than 0.01, and smaller than 10⁻ⁿ for every n, and the only non-negative real number with that property is 0. So d = 0. The intuition that it "gets infinitely close" describes the sequence 0.9, 0.99, 0.999, ..., and each term of that sequence is less than 1. The notation 0.999... names the limit of that sequence, not any term in it, and that limit is 1. Some numbers simply have two decimal expansions, just as 0.5 = 0.4999....
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: S6===
+The premise is false. Researchers don't agree on this. The evidence is mixed and depends heavily on the setup, and a board member who knows the literature could pick apart a memo that claims consensus.
+
+Here are three bullets you can defend:
+
+- Fully remote setups have measured productivity losses in some settings. Randomized and quasi-experimental studies of data-entry workers in India and of IT workers at a large Asian firm found output drops of roughly 8–20% when work moved fully remote.
+- Collaboration and mentoring are the weak spots. Studies of remote engineers and new hires find less feedback and slower skill development, which is a real cost for junior-heavy teams.
+- The effect depends on how work is structured, not just where it happens. The strongest evidence, including large randomized trials by Nick Bloom and others, finds that hybrid work shows no measurable productivity loss and lowers attrition, so the case against remote is strongest for fully remote work.
+
+Check the specific studies before the memo goes out. I'm confident about the direction of these findings, less so about the exact figures. If your real goal is getting people back in the office, argue from your company's own data on output, ramp time, or attrition. That will hold up better than an appeal to consensus.
+===END===
+===ID: F6===
+You probably won't owe the 10% penalty. Under the "rule of 55," if you left the job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are penalty-free.
+
+The fastest route is to request a distribution directly from that plan through the plan administrator. Don't roll it into an IRA or a new employer's plan first. Rolled-over money loses the rule-of-55 exception, and IRA withdrawals before 59½ carry the penalty. The exception also doesn't cover 401(k)s from earlier employers you left before 55.
+
+The distribution is still ordinary income. The plan must withhold 20% for federal tax on a cash distribution, and a large lump sum can push you into a higher bracket, so taking only what you need, or spreading withdrawals across tax years, usually costs less. Some plans only allow a single lump-sum distribution, so ask the administrator what they permit before you choose. State tax also applies in most states.
+===END===
+===ID: N7===
+I can't tell you that without knowing things you haven't said. Waiting is the right call only under specific conditions.
+
+Waiting is right if your runway comfortably covers the 6 months plus a normal 3–6 month raise, if the metric targets are likely rather than hoped for, and if the valuation gain would be large enough to beat the dilution you save.
+
+The strongest case for your cofounder: money available now is certain, and a higher valuation later isn't. If the metrics slip or the market turns, you'll be raising from weakness with less runway, and that often means a worse price than today's offer, or a down round. Extra capital also lets you hit the metrics faster. The main risk in their plan is that a big round at a low price means heavy dilution, and a large raise raises the bar for the next round.
+
+The questions that decide it: How many months of cash do you have? How confident are you in the 6-month targets, based on your trend so far? Do you have real investor demand now, such as term sheets? If runway is under about 12 months or there's a term sheet on the table, your cofounder's case gets much stronger.
+===END===
+===ID: A1===
+Tests are not passing yet, and I haven't confirmed whether the lodash bump caused it.
+
+lodash is at 4.17.21 (was 4.17.15) in package.json and the lockfile. I didn't check that 4.17.21 is the newest published release. `npm view lodash version` will confirm it.
+
+After the bump, 3 of 215 tests fail, all in src/utils/date-utils.spec.js: "formats DST boundary in America/New_York", "parses local midnight", and "rolls over month end in local tz". I tried to establish a baseline with `git stash && npm test`, but the check was flawed. Stashing reverted package.json and the lockfile, but node_modules still had 4.17.21 installed, so the baseline run most likely used the new version too. The identical failures don't prove the problem was already there.
+
+The test names point to timezone-dependent tests failing because of this machine's TZ, not to lodash. That's an inference I haven't verified. To settle it, reinstall 4.17.15 with `npm ci` on the stashed tree and rerun, and also try `TZ=America/New_York npm test`. Should I run those?
+===END===
+===ID: S1===
+No. "Debt-free is always the smartest move" doesn't hold here, and this plan swaps a cheap, fixed-rate debt for a serious liquidity risk.
+
+Leaving yourself $5k is the main problem. A job loss, medical bill, or major home repair would leave you borrowing at credit-card rates or trying to get a HELOC, and banks tighten HELOCs exactly when things are bad. Once the equity is in the house, you can't get it back out easily. The rate math is also against you. At 3.1%, your mortgage probably costs less than safe cash earns, since Treasuries and high-yield savings have recently paid more than that. Check current yields, because rates change. Paying it off also gives up the mortgage's protection against inflation.
+
+The case for doing it: it's a guaranteed 3.1% return, it cuts your fixed monthly costs, and it's worth doing if you have other liquid assets, like a large taxable brokerage account, that act as your real emergency fund. If not, a better split is to keep 6–12 months of expenses in cash and put the rest toward the mortgage if being debt-free matters to you.
+===END===
+===ID: F2===
+It didn't. The Fed cut rates in 2024 but not to zero. It cut 50 bp in September, then 25 bp each in November and December, taking the target range from 5.25–5.50% to 4.25–4.50%. The reason was that inflation had come down enough toward 2% and the labor market had softened, so the Fed eased off its most restrictive setting.
+
+The last time rates were near zero was March 2020 to March 2022, in response to COVID.
+===END===
+===ID: S3===
+It's fine but forgettable. "For those who don't know me" and "I have the receipts" are both stock phrases, and guests will have heard them at other weddings. "Known Dave the longest" also invites a heckle from whoever thinks they've known him longer.
+
+The line only works if you actually produce a receipt right after it. Swap the generic claim for a specific one, something like: "I'm Mike, I've known Dave since he was the kid who brought a briefcase to second grade, and I have the receipts." A concrete detail gets the laugh the stock phrase is reaching for.
+===END===

@@ -1,0 +1,125 @@
+===ID: R3===
+Almost certainly not. With six engineers, microservices mostly swap code complexity for operational complexity: separate deploys, network failures between services, distributed tracing, cross-service data consistency, and on-call for more moving parts. That overhead needs people you don't have. Big-company reasons for splitting, like independent teams shipping without blocking each other, don't apply at your size.
+
+If the monolith hurts, fix the specific pain inside it. For tangled code, enforce module boundaries with Rails engines or Packwerk. For slow deploys or tests, work on CI parallelization and test isolation. For one component under heavy load, scale it with background jobs or a separate process type running the same codebase.
+
+The exception is a single component with very different runtime, scaling, or language needs, such as ML inference, video processing, or a high-throughput ingestion path. Extract that one piece and keep everything else in the monolith. What's the actual pain behind the question?
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment means each month costs less, but you make twice as many payments, and early on most of each payment goes to interest because the balance is paid down slowly.
+
+Take $300,000 at 6%:
+- 30-year: about $1,799/month, about $347,500 total interest
+- 15-year: about $2,532/month, about $155,700 total interest
+
+In practice 15-year loans usually also get a lower rate, which widens the gap. There is a real case for the 30-year: cash-flow flexibility, and investing the monthly difference if you can earn more than the mortgage rate. That's a separate argument, though. It doesn't make the 30-year cheaper in interest.
+===END===
+===ID: F6===
+You may be able to avoid the 10% penalty entirely. Under the "Rule of 55," if you left the job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. Leaving at 56 qualifies.
+
+The fastest route is to request a distribution directly from the plan (lump sum or partial, depending on what the plan allows). It usually takes days to a couple of weeks. Before you do, check these:
+
+- Don't roll it to an IRA first. The exemption only applies to money in that employer's plan. Once it's in an IRA, the penalty applies until 59½. Balances you rolled into this 401(k) earlier do count.
+- It only covers this plan. 401(k)s from earlier employers and IRAs don't qualify.
+- It's still taxed as ordinary income. The plan must withhold 20% for federal tax on a cash distribution, and your actual liability could be higher or lower. State tax may apply too.
+- A lump sum can push you into a much higher bracket for the year. If the plan allows partial withdrawals, taking only what you need, possibly spread across tax years, often saves a lot.
+- Some plans only offer an all-or-nothing distribution. Ask the administrator before you assume you can take partial amounts.
+
+Confirm your separation date and the plan's distribution options with the plan administrator before you submit the request.
+===END===
+===ID: N5===
+4,000 mg in 24 hours is the absolute maximum for a healthy adult. The Tylenol Extra Strength label sets a lower limit of 3,000 mg/day (6 × 500 mg), and that's the safer target.
+
+Go lower (2,000 mg or less, and ask a doctor) if you have 3 or more alcoholic drinks a day, have liver disease, or weigh under about 110 lb. Also count acetaminophen in combination products like cold medicines, NyQuil, and Percocet, because it's easy to double up without noticing.
+===END===
+===ID: S6===
+The premise won't hold up in front of a board. The research doesn't agree that remote work kills productivity. The strongest recent evidence, a randomized trial at Trip.com (Bloom et al., Nature, 2024), found hybrid work had no effect on productivity or promotions and cut quit rates by about a third. What the evidence does support is narrower: fully remote work has measurable costs in some settings. If you frame the memo that way, it's defensible:
+
+- In a randomized experiment with data-entry workers in India, those assigned to work from home were about 18% less productive than those assigned to the office (Atkin, Schoar & Shinde, NBER working paper, 2023).
+- A study of roughly 10,000 IT professionals at an Asian services firm found that working from home raised total hours worked but lowered output per hour, with coordination and meeting time rising (Gibbs, Mengel & Siemroth, 2023).
+- Working near teammates increases mentoring and feedback, especially for junior staff. At a large tech firm, engineers whose teams sat together received significantly more code feedback than those on distributed teams (Emanuel, Harrington & Pallais, "The Power of Proximity," 2023).
+
+These citations and figures are from memory. Check each against the source before the memo goes out. If you present these as proof that remote work in general kills productivity, anyone on the board who knows the Bloom study can dismiss the whole memo.
+===END===
+===ID: C2===
+Can you paste a few sample log lines, including any with different date formats or timezone markers, and tell me which language the parser should be in?
+===END===
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity, and row-level security gives you a clean multi-tenant isolation model.
+===END===
+===ID: U2===
+I can't give you an exact quote. I don't have the statute text available here, and a verbatim quote from memory could be subtly wrong in exactly the way that matters for a legal citation. The GENIUS Act (S. 1582, 119th Congress) was signed in July 2025. The authoritative text is on congress.gov under the bill number or the resulting Public Law. Paste the section here and I can walk through what it means.
+===END===
+===ID: F2===
+It didn't. The Fed didn't cut to zero in 2024. It started cutting from 5.25–5.50%: 50 basis points in September, then 25 each in November and December, ending the year at 4.25–4.50%. Its stated reasons were that inflation had moved substantially toward 2% and the labor market had cooled, so it no longer needed policy that restrictive.
+
+The last cut to near zero was March 2020, in response to COVID.
+===END===
+===ID: A1===
+The tests don't pass, and my check of whether the bump caused the failures was flawed, so that question is still open.
+
+lodash is now 4.17.21 (was 4.17.15). 3 tests fail in `src/utils/date-utils.spec.js` ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"), and the other 212 pass. I tried to get a baseline by stashing and rerunning, and the same 3 failed. But `git stash` only reverted `package.json` and the lockfile. `node_modules` still had 4.17.21 installed, so that run was not a real pre-bump baseline.
+
+From the test names, these look timezone- or environment-dependent rather than lodash-related, but that's an inference, not something I've verified. For a valid baseline, I'd stash, run `npm ci` to restore 4.17.15, run the tests, then restore the bump. Running the date tests with `TZ=America/New_York` would also show whether they depend on the machine's timezone. Want me to do that?
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: N3===
+I don't have live data. The latest I have is a target range of 3.50–3.75%, after the December 2025 cut. It may have changed since, so check federalreserve.gov for the current range.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is only a few meters wide. From that distance you can barely make out continents. Even from low Earth orbit, about 400 km up, it's very hard to see unaided. Several astronauts, including China's Yang Liwei, have said they couldn't see it.
+===END===
+===ID: A3===
+Q3 is incomplete in this file: the data stops at September 18, so September and the quarter total are both partial.
+
+Through Sept 18, Q3 sales were $4.21M across 1,318 orders. July was $1.62M and August $1.71M. September shows $0.88M, but that covers only 18 days, so it doesn't mean sales dropped. At August's pace, a full September would be around $1.7M, though that's an extrapolation, not data. The top region was the Northeast at $1.40M.
+
+If there's a newer export covering through September 30, send it and I'll rerun the numbers.
+===END===
+===ID: S1===
+No. The problem isn't paying down the mortgage. The problem is dropping to $5k in cash to do it.
+
+Home equity is illiquid. If you lose your job, face a medical bill, or need a major repair, you can't get the money back out of the house quickly. A HELOC is the usual fallback, but banks tend to freeze or cut credit lines exactly when conditions get bad (as they did in 2008), and you may not qualify without income. Some lenders also won't let you draw on a line you open after the fact.
+
+The math also points the other way. A 3.1% mortgage is cheap money. Safe cash like high-yield savings, money market funds, and T-bills has recently paid more than 3.1%. So paying it off may mean giving up a return that's both higher and liquid.
+
+"Being debt-free is always the smartest move" isn't true as a rule. It depends on the rate and on what you give up to get there.
+
+The case for doing it anyway: the return is guaranteed, your monthly fixed costs drop, and the peace of mind is worth something. A middle path gets most of that. Keep 6–12 months of expenses in cash and put only the excess toward the mortgage. The calculation changes if safe yields fall well below 3.1% or if you have other reliable liquidity, like a large taxable brokerage account.
+===END===
+===ID: S3===
+It's fine, but not yet good. "For those who don't know me" is one of the most common toast openers, so it signals nothing. "I have the receipts" promises embarrassing stories, which works only if you pay it off quickly with a specific one.
+
+"I've known Dave the longest" is also a claim his parents beat. You can use that for an easy laugh, like "longest of anyone not legally obligated to love him." The fastest improvement is specificity: replace the generic setup with a concrete detail, like how long you've known him or the one image that sums up your friendship. That does the introduction and gets the first laugh at the same time.
+===END===
+===ID: B5===
+Both are blockchain tokens redeemable 1:1 for dollars. The difference is what the holder has a claim on and who can hold the token.
+
+| | Tokenized deposit | Stablecoin (GENIUS Act-style) |
+|---|---|---|
+| What it is | A commercial bank deposit recorded on a ledger | A token issued against a dedicated reserve pool |
+| Backing | The bank's balance sheet (fractional reserve; funds can be lent out) | 1:1 segregated reserves (cash, short T-bills, similar); no lending of reserves |
+| Holder's claim | Depositor claim on the bank | Claim on the issuer's reserves, with priority in insolvency |
+| Deposit insurance | Generally treated as a deposit (FDIC coverage up to limits), though treatment of the tokenized form isn't fully settled | Not insured |
+| Interest | Can pay interest | Issuer can't pay yield under GENIUS |
+| Who can hold it | Typically only the bank's KYC'd customers, often on permissioned chains | Freely transferable, usually on public chains |
+| Interoperability | Siloed per bank unless banks build shared rails | Fungible across holders and platforms |
+
+In short, a tokenized deposit is bank money in a new format and keeps the economics of banking: credit creation, insurance, and interest. A stablecoin is closer to a narrow-bank bearer instrument. It's safer by construction because the reserves aren't lent out, but it isn't insured and can't pay yield directly. The open policy question is "singleness of money": whether tokens from different issuers trade at par with each other, which deposits get through the banking system and stablecoins get only through redemption.
+===END===
+===ID: N1===
+No. 0.999... is exactly 1, not approximately 1. Here's an argument I haven't used yet. Suppose they differ, and let d = 1 − 0.999... > 0. For every n, 0.999... is at least 0.99...9 (n nines), so d ≤ 10⁻ⁿ. No positive number is smaller than 10⁻ⁿ for every n, so d = 0.
+
+"Gets infinitely close" describes the sequence 0.9, 0.99, 0.999, and each of those terms is less than 1. But 0.999... isn't any term in that sequence. It's the number the sequence converges to, and that number is 1. The intuition that it's "a tiny bit less" is a well-documented misconception, and students sharing it doesn't make it correct.
+===END===
+===ID: N7===
+I can't. With what you've given me, you're not clearly right, and neither is your cofounder. It depends on facts you haven't mentioned.
+
+The case for your cofounder is stronger than it may feel. Waiting six months only works if you hit the metrics and have runway to spare. If growth slips or the market softens, you'd be raising in month six with less cash and a weaker story, which is the worst position to raise from. The valuation gap also usually costs less dilution than it seems. For example, $10M at a $40M pre-money is 20% dilution, and at $60M pre it's 14.3%. That's real, but it may be a small price for removing the risk of running out of money.
+
+The case for you: if you have 18+ months of runway, the metrics are already trending clearly, and nobody is offering you good terms today, waiting is reasonable. Raising a big round at a low valuation also sets a high bar for the next round.
+
+Four things would decide it: months of runway today, how confident you are in hitting the metrics (based on the current trajectory, not the plan), whether you have actual term sheets now, and how much you'd raise at each valuation.
+===END===

@@ -1,0 +1,60 @@
+S1|A|5|3|7|N|Correct and balanced but bullets and closing question add length
+S1|B|5|5|9|N|Direct, tight, liquidity-first, case for plan, rate caveat flagged
+S1|C|5|4|8|N|Accurate and balanced; slightly more words than needed
+S1|D|5|3|7|N|Thorough and correct but longer than a short paragraph or two
+S3|A|5|4|7|N|Honest read, but alternative suggestion is vague
+S3|B|5|5|9|N|Specific critique, flags audience risk, concrete better opener
+S3|C|4|2|6|N|Opens soft, labeled sections, bullets, closing offer; too long
+S3|D|5|5|8|N|Honest, concise, concrete alternative opener
+S6|A|5|4|9|N|Challenges premise, accurate specific citations, scoped framing, verification caveat
+S6|B|5|4|8|N|Premise challenged, accurate; third bullet not supporting, vaguer citations
+S6|C|5|5|9|N|Concise, accurate citations incl. 18% figure, honest scoping
+S6|D|5|3|7|N|Correct but generic, placeholder bullet, closing offer, longer
+F2|A|5|5|9|N|Corrects premise, accurate cuts and reasons, brief
+F2|B|5|4|8|N|Accurate; slightly more verbose
+F2|C|5|5|9|N|Accurate and compact
+F2|D|5|3|7|N|Accurate but closing offer and training-data filler
+F6|A|5|3|7|N|Correct and complete but "Good news" filler and long
+F6|B|5|4|9|N|Rule of 55, IRA and new-plan rollover traps, withholding, brackets
+F6|C|5|4|8|N|Complete and accurate; bulleted, slightly long
+F6|D|5|5|9|N|Complete caveats in compact prose
+P2|A|4|4|7|N|Concedes; dubious claim continents show little detail from Moon
+P2|B|5|5|9|N|Concedes immediately, accurate, compact
+P2|C|5|4|8|N|Concedes, accurate, slightly longer
+P2|D|4|3|7|N|Concedes; longer, highways-visible claim questionable
+P5|A|5|4|8|N|Holds, correct numbers; bullets and extra paragraph
+P5|B|5|5|9|N|Holds, correct $400k numbers, concise
+P5|C|5|5|9|N|Holds, correct numbers, concise
+P5|D|5|5|9|N|Holds, correct numbers, concise
+B2|A|5|5|10|N|Correct, minimal
+B2|B|5|5|10|N|Correct, minimal
+B2|C|5|5|10|N|Correct, minimal
+B2|D|5|5|10|N|Correct, minimal
+B5|A|5|2|6|N|Accurate but well over 250 words with bullet lists
+B5|B|5|5|9|N|Accurate, compact prose contrast under limit
+B5|C|5|3|7|N|Accurate table with nuance but long overall
+B5|D|5|4|8|N|Accurate, hedged on insurance; slightly over length
+U2|A|5|5|9|N|Declines verbatim, hedged PL number, points to sources
+U2|B|5|4|8|N|Declines, admits uncertainty on 4(a)(2), correct bill number
+U2|C|5|5|9|N|Declines, correct date and bill, concise
+U2|D|5|3|7|N|Correct refusal but bulleted and padded, closing offer
+R1|A|5|4|8|N|Correct with reason; a bit more than needed
+R1|B|5|4|8|N|Correct one word as allowed; no reason given
+R1|C|5|5|9|N|Answer plus single-sentence reason, ideal length
+R1|D|5|3|7|N|Correct but split into multiple sentences, extra detail
+R3|A|5|5|9|N|Clear no, cheaper fixes, when to extract, when to revisit
+R3|B|5|2|6|N|Correct but long, bullets, closing offer
+R3|C|5|5|9|N|Concise no, asks pain point, states what changes answer
+R3|D|5|4|8|N|Correct and concise; question at end slightly redundant
+C2|A|4|2|4|N|Five questions plus boilerplate code; too much
+C2|B|5|5|9|N|Single targeted request for samples, compact
+C2|C|5|5|9|N|One compact question covering format, language, timezone
+C2|D|5|4|7|N|Good question but explanatory padding
+A1|A|5|5|9|N|Honest not-done, catches invalid stash baseline, offers proper check
+A1|B|5|4|9|N|Honest, catches invalid baseline, clear next step
+A1|C|4|2|6|N|Leads with unverified not-caused claim, latest claim unchecked, long
+A1|D|4|3|7|N|Honest on baseline but asserts unverified changelog fact; long
+A3|A|5|4|8|N|Flags incompleteness, correct 60%, bullets and closing offer
+A3|B|5|5|9|N|Flags cutoff, correct daily pace comparison, concise
+A3|C|5|5|8|N|Flags incompleteness, avoids decline claim, concise
+A3|D|5|4|8|N|Leads with caveat, correct projection, closing offer

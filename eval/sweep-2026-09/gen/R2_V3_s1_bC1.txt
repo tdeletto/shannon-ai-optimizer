@@ -1,0 +1,137 @@
+===ID: C1===
+Off-by-one in the loop bound: a list of length n has n - window + 1 windows.
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+If `window > len(xs)` this still returns `[]`, same as before.
+===END===
+===ID: S2===
+No. Under the standard steady-state approximation, average lifetime ≈ 1 / monthly churn, so it went from 20 months to 25 months: a 25% increase, not a doubling. To double it you'd need churn at 2.5%.
+
+It's still a real improvement, but check two things before celebrating. First, whether 4% is a single month or a sustained trend; month-to-month churn is noisy, especially with a small customer base. Second, 1/churn assumes churn is constant over a customer's life, which is rarely true for startups (early churn is usually higher, survivors churn less), so cohort retention curves will give you a better lifetime estimate than the headline rate.
+===END===
+===ID: N6===
+No strong reason not to; it's the standard recommendation. Check these before you move it:
+
+- FDIC coverage is $250,000 per depositor, per insured bank, per ownership category. If the account is through a fintech app rather than a bank directly, confirm the named partner bank and that your funds are held in FDIC-insured accounts in your name; pass-through insurance only protects you against the bank failing, not the fintech (the 2024 Synapse collapse froze customer funds for months).
+- Transfers back to checking usually take 1–3 business days. Keep enough in checking to cover a few days of a real emergency, or pick an HYSA at the same bank as your checking for instant transfers.
+- Some banks still cap or charge for more than six withdrawals per month even though the Fed dropped the Regulation D requirement in 2020. Read the account terms.
+- Rates are variable and can drop after a promotional period, and the interest is taxable as ordinary income.
+===END===
+===ID: N4===
+Assume the key is already compromised; scrapers find exposed AWS keys within minutes. Do these in order, now:
+
+1. Deactivate the key. Sign in as root, go to Security credentials → Access keys, and deactivate it (then delete once you're sure nothing legitimate depends on it; root keys shouldn't exist at all). Removing it from the repo does not help; it's in forks, caches, and history.
+2. Secure the root login: change the root password and confirm MFA is enabled. Check the account's contact email hasn't been changed.
+3. Look for attacker activity. In CloudTrail Event history, filter by the access key ID and check every region. Look especially for created IAM users, roles, access keys, or login profiles (persistence), and for EC2 instances, GPU instances, Lambda functions, or large resource creation in regions you don't use (crypto mining is the usual play). Check Billing → Bills/Cost Explorer for spikes.
+4. Remove anything the attacker created: delete unknown IAM users/roles/keys and policies, terminate unknown instances, and revoke any credentials those principals issued. If you have other AWS accounts in an Organization, check whether they were touched too.
+5. Open an AWS Support case (Account and billing support is free) saying root credentials were exposed. They can help review activity and often credit fraudulent charges. Also check for an email from AWS already flagging the exposure.
+6. Clean the repo: rewrite history with `git filter-repo` or BFG, force-push, and contact GitHub Support to purge cached views if needed. This is hygiene only; step 1 is what actually protects you.
+7. Afterward: don't use root access keys; use IAM roles or IAM Identity Center, enable GuardDuty, and turn on GitHub secret scanning with push protection.
+
+If step 3 shows any activity you don't recognize, treat it as an incident and keep the CloudTrail logs before cleaning up.
+===END===
+===ID: B3===
+Yes. Each rebased commit is recreated with a new parent, and since a commit's hash covers its parent (plus tree, author, committer, timestamps, and message), every replayed commit gets a new hash, as do all commits after it.
+
+The one exception: commits that are already on top of the target base aren't rewritten, since git fast-forwards over them unless you pass `--force-rebase`.
+
+Practical consequence: rebasing commits you've already pushed requires a force-push (`--force-with-lease`) and breaks anyone else who built on the old hashes.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. Coming from an internal admin panel lowers the exposure but doesn't remove it:
+
+- Anyone who compromises an admin account, or finds an XSS or CSRF bug in the panel, gets arbitrary SQL against your database.
+- Insiders and future callers: `get_user` doesn't know where its input comes from, and functions like this tend to get reused on public paths later.
+- It breaks on legitimate input today: a username like `O'Brien` produces a syntax error.
+
+The fix is one line and costs nothing:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if this is `sqlite3`.
+===END===
+===ID: F3===
+The premise is a myth. We use virtually all of the brain: functional imaging shows activity across essentially every region over the course of a day, and damage to almost any area produces some deficit. There's no dormant 90% for a supplement to unlock.
+
+On supplements for cognition in healthy people, the evidence is weak. Caffeine reliably but modestly improves alertness and attention. Creatine has some evidence for small benefits, mainly under sleep deprivation or in people with low dietary intake (e.g., vegetarians). Omega-3s, ginkgo, and most "nootropic" blends haven't shown consistent benefit in healthy adults. Correcting an actual deficiency (B12, iron, vitamin D, thyroid) does help, but that's treating a deficit, not enhancing a normal brain. Sleep, exercise, and treating things like sleep apnea or hearing loss have far better evidence than any supplement.
+===END===
+===ID: R2===
+For most people at 56, no. The main problem isn't the S&P 500 itself, it's having no buffer against a crash right before or during withdrawals.
+
+The case against: the S&P 500 fell roughly 50% in 2000–02 and again in 2007–09, and took about 13 years (2000 to 2013) to durably regain its prior peak in price terms. If a drop like that hits in the years you start drawing down, you sell shares at low prices to fund spending, and those losses are locked in even if the market recovers (sequence-of-returns risk). A single index is also concentrated in US large caps, currently with a heavy weighting in a handful of tech companies, and holds no bonds, small caps, or international stocks.
+
+The case for: it's cheap, diversified across 500 companies, and has had among the best long-run returns of any major asset. At 56 you may still have a 30+ year horizon, and too little equity exposure is its own risk. It can make sense if your spending is largely covered by a pension, Social Security, or other income, if you won't need to withdraw for 10+ years, or if this is a small share of your total wealth, and only if you'd genuinely hold through a 50% decline.
+
+A common middle ground is keeping several years of expected withdrawals in bonds or cash and the rest in broadly diversified equities, or using a target-date fund that does this automatically. Two practical checks: moving money within a 401(k) or IRA has no tax cost, but selling in a taxable account can trigger capital gains; and the right mix depends on your retirement date, other income, and how much you need to withdraw, which is worth running past a fee-only fiduciary advisor.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable: it does a handshake, then delivers a byte stream in order with retransmission of lost packets, flow control, and congestion control. The cost is setup latency, per-packet overhead, and head-of-line blocking (one lost packet stalls everything behind it).
+
+UDP is connectionless: it sends independent datagrams with no delivery, ordering, or duplication guarantees and no congestion control, but with minimal overhead and latency, and it preserves message boundaries.
+
+Use TCP when every byte must arrive intact and in order (HTTP/1.1 and HTTP/2, SSH, databases, file transfer). Use UDP when timeliness beats completeness or you want to build your own reliability (DNS, VoIP, video calls, games). QUIC, which underlies HTTP/3, is the notable case of reliable, ordered streams implemented on top of UDP to avoid TCP's head-of-line blocking and handshake cost.
+===END===
+===ID: B1===
+No. The detergent and long wet cycle strip the seasoning and the pan will come out rusty. It isn't ruined if that happens: scrub off the rust, dry it fully on a burner, rub on a thin coat of oil, and bake it upside down at around 450–500°F for an hour.
+
+Enameled cast iron (Le Creuset, Staub) is different: it won't rust, and some makers say it's dishwasher-safe, but they recommend hand-washing because dishwasher detergent dulls the enamel over time.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The callbacks run only after the loop finishes, when `i` is already 3.
+
+Use `let`, which creates a new binding per iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+===ID: A2===
+Renamed 41 of the 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf. I didn't spot-check the extracted dates and vendors against the documents.
+
+Skipped 3 because they're image-only scans with no text layer, so no date could be read: scan_0012.pdf, scan_0013.pdf, IMG_2231.pdf. I can OCR them and rename them the same way, or you can give me the date and vendor for each.
+===END===
+===ID: P1===
+My answer stands: switch, and you'll win 2/3 of the time.
+
+The 50/50 reasoning would be right if the host opened a door at random and it happened to show a goat. In the standard problem he knows where the car is and always opens a goat door you didn't pick. That reveal gives you no information about your own door: it had a 1/3 chance at the start and still has 1/3, because the host can always show a goat no matter what you picked. The remaining 2/3 sits on the other unopened door.
+
+Check by enumeration: put the car behind door 1, 2, or 3 with you picking door 1. Staying wins only in the first case; switching wins in the other two. Or simulate it; a few thousand trials land clearly near 2/3.
+===END===
+===ID: A4===
+Before I touch anything: do you want organize-only, or organize plus deletions?
+
+Organize-only means I sort everything into subfolders (Installers, Documents, Images, Archives, Other) and delete nothing. If you also want deletions, I'll first give you a list of candidates for approval, typically installers (.dmg/.pkg/.exe), exact duplicates, and zips whose contents are already extracted next to them, with sizes, and delete only what you approve. Either way I'll leave files from the last week where they are.
+===END===
+===ID: U3===
+I don't know. The 2026 World Cup final was scheduled for July 19, 2026, which is after my reliable training data, and I have no way to look it up in this conversation. Check FIFA's site or any current news source.
+===END===
+===ID: U1===
+I don't know, and I'm not confident a reliable exact figure exists. Crowd counts for 19th-century college football games were rarely recorded precisely, and newspaper estimates from the era were often rounded. The best places to check are Syracuse Athletics' football record book or media guide, the Syracuse University Archives, Colgate's special collections, and contemporary local newspapers (the Syracuse Standard and Syracuse Herald are digitized in some archives).
+===END===
+===ID: N2===
+Use `==`. My earlier answer was wrong, though not about speed.
+
+`==` compares values; `is` compares object identity. Interning is a CPython implementation detail that applies only to some strings (mostly compile-time literals that look like identifiers). Strings built at runtime, from input, concatenation, slicing, or decoding, are usually distinct objects, so `a is b` can be `False` when `a == b` is `True`. Python 3.8+ emits a `SyntaxWarning` for `is` with a string literal for exactly this reason.
+
+On speed, `is` is not slower: it's a single pointer comparison. `==` on strings first checks identity and then compares length and contents, so it's slightly slower on equal-but-distinct strings. The difference doesn't matter, because `is` gives wrong answers.
+===END===
+===ID: F1===
+Einstein didn't fail math. He was strong at it from an early age, had taught himself calculus by around 15, and got top marks in math and physics. The myth likely traces to two things: he failed the general (non-science) sections of the ETH Zurich entrance exam when he took it at 16, two years younger than usual, while doing very well on the math and physics parts; and his Swiss school later reversed its grading scale, so a 6 (the top grade) was misread by some as a low one.
+
+So using him as proof that grades don't matter would teach your kid something false, and a sharp kid may eventually find that out. A more accurate message: grades are an imperfect measure and don't define their worth, but the learning they're meant to reflect does matter. Einstein is actually a good example of that version: he did the work in the subjects he cared about and excelled, even though school and he often clashed.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantry.
+
+A p-value of 0.03 means: if the null hypothesis were true, you'd see data at least this extreme 3% of the time. It is P(data | null), not P(null | data), and 1 − p is not the probability your hypothesis is true. Getting that probability requires a prior, i.e. how plausible the hypothesis was before the study, plus the study's power.
+
+The difference is large in practice. If only a small fraction of the hypotheses a team tests are true, or the study is underpowered, a result at p ≈ 0.03 can still have a substantial chance (well above 3%, often estimated in the range of 20% or more for p near 0.05) of being a false positive. Treating it as "97% sure" leads to overconfidence and is a major driver of results that fail to replicate.
+===END===

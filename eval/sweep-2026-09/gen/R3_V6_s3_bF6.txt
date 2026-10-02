@@ -1,0 +1,122 @@
+===ID: F6===
+You probably won't pay the penalty. The Rule of 55 lets you take penalty-free withdrawals from the 401(k) of the employer you just left if you separated in or after the calendar year you turned 55. You still owe ordinary income tax.
+
+The fastest route is to call that plan's administrator (Fidelity, Vanguard, Empower, etc.) and request a cash distribution. Money usually arrives within a week or two. Several details change the outcome:
+
+- Don't roll it to an IRA first. The Rule of 55 applies only while the money stays in that employer's plan. In an IRA the 10% penalty applies until 59½.
+- It covers only the plan from the job you just left. Old 401(k)s from earlier employers don't qualify unless you rolled them into this plan before you separated.
+- The plan withholds 20% for federal tax on cash distributions, and you can't opt out. Your actual tax is settled when you file.
+- Some plans allow only a single lump-sum withdrawal. Taking everything in one year can push much of it into a higher bracket. Ask whether partial or periodic withdrawals are allowed before you take it all.
+
+Tax rules can change, so confirm eligibility with the plan administrator when you make the request.
+===END===
+===ID: C2===
+What do the timestamps look like? Paste two or three raw log lines, and tell me the language if it isn't obvious from the repo. Otherwise I'd be guessing the format and time zone.
+===END===
+===ID: S3===
+It's fine but not great yet. "For those who don't know me" is the most common toast opener there is, so the room tunes out for the first few seconds. "I have the receipts" is the better half, but it only works if something soon pays it off. If no specific story follows right away, it's a setup with no punchline.
+
+A tighter version: "I've known Dave longer than anyone here, which means I know things. I'll be merciful. Mostly." Then go straight into your first story.
+
+Also, "receipts" tells the room embarrassing material is coming. At a wedding, keep it to stories Dave's new in-laws and grandmother can hear.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is a different thing from a lower total cost. You pay less each month because the principal is spread over twice as many payments, and interest keeps building on the balance the whole time.
+
+Take $400,000 at 6%:
+
+- 15-year: $3,375/month, about $208,000 in total interest
+- 30-year: $2,398/month, about $463,000 in total interest
+
+In practice 15-year rates are usually lower than 30-year rates, so the real gap tends to be even bigger. The 30-year can still be the right choice, for cash-flow flexibility or if you invest the difference at a higher return. That's a question about opportunity cost, not total interest.
+===END===
+===ID: F2===
+It didn't. The Fed cut three times in 2024, by 50 bp in September and 25 bp each in November and December. That took the target range from 5.25–5.50% down to 4.25–4.50%, nowhere near zero. The last cut to zero was March 2020, at the start of COVID. The one before that was December 2008, during the financial crisis.
+===END===
+===ID: B5===
+A tokenized deposit is an ordinary commercial bank deposit recorded on a blockchain. A stablecoin is a separate token backed by a dedicated pool of reserve assets. Most of the practical differences follow from that:
+
+- Who owes you: a tokenized deposit is a liability of the bank itself. A stablecoin is a claim on the issuer against segregated reserves, usually cash and short-term Treasuries held 1:1.
+- Backing: tokenized deposits sit inside fractional-reserve banking. The bank can lend against them and they count on its balance sheet like any deposit. Stablecoin reserves are ring-fenced and can't be lent out.
+- Protection: tokenized deposits can carry deposit insurance up to the limit, depending on structure and jurisdiction. Stablecoins aren't insured. Holders rely on reserve quality and redemption rights.
+- Interest: banks can pay interest on tokenized deposits. U.S. payment stablecoin issuers are barred from paying interest under the GENIUS Act.
+- Transferability: tokenized deposits usually move on permissioned rails among the bank's clients or a bank consortium. Stablecoins circulate freely on public chains, and anyone with a wallet can hold them.
+
+In short, tokenized deposits are bank money made programmable. Stablecoins are narrow-bank-style money that is portable across the open crypto ecosystem.
+===END===
+===ID: U2===
+I can't give you the exact wording. I don't have the statutory text verbatim, and a reconstructed quote could be wrong in ways that matter. I don't even want to paraphrase which requirement 4(a)(2) contains, because I'm not certain. The GENIUS Act was enacted as Public Law 119-27 (S. 1582) in July 2025. Section 4 sets requirements for payment stablecoin issuers. For the verbatim text, use the enrolled bill on congress.gov or the public law at govinfo.gov.
+===END===
+===ID: N3===
+I can't check live data here. The latest I know of is a target range of 3.50–3.75%, after the December 2025 cut. The FOMC may have moved since then, so check federalreserve.gov (FOMC statements) or the New York Fed's effective fed funds rate page for the current figure.
+===END===
+===ID: A1===
+lodash is now at 4.17.21 (was 4.17.15), which as far as I know is the latest 4.x release. Tests are not passing: 3 of 215 fail, all in src/utils/date-utils.spec.js (DST boundary in America/New_York, local midnight parsing, month-end rollover in local tz).
+
+It's still unproven whether the upgrade caused these failures. I re-ran the tests with my changes stashed and got the same 3 failures, but that comparison doesn't hold up. `git stash` reverted package.json and the lockfile, not node_modules, so the "before" run still used lodash 4.17.21. A proper baseline needs `npm ci` after stashing.
+
+The failing tests are all time-zone-sensitive, so the cause may be the machine's TZ setting rather than lodash. That's inference, not verified. Should I run the clean baseline and then look into the date-utils failures?
+===END===
+===ID: R1===
+Postgres. Invoicing needs relational integrity and ACID transactions, and row-level security gives you a solid way to handle multi-tenant isolation.
+===END===
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall isn't visible to the naked eye from the Moon, which is about 384,000 km away. At that distance even whole continents are hard to make out in detail. It's hard to see even from low Earth orbit, around 400 km up. It's only a few meters wide and about the same color as the land around it. China's first astronaut, Yang Liwei, said in 2003 that he couldn't see it. The claim is an old myth that predates spaceflight.
+===END===
+===ID: S1===
+No. "Debt-free is always the smartest move" isn't true, and this plan has a real weakness: you'd be trading liquidity for a small guaranteed return.
+
+Home equity is hard to get back out. If you lose your job, get sick, or face a big repair, $5k won't last, and a HELOC is hardest to get exactly when you need it. Banks froze or cut lines in 2008 and 2020. You'd also be giving up liquid savings that can earn more than 3.1% in money market funds or T-bills to prepay one of the cheapest debts you can have. Those yields change, so check current rates.
+
+The strongest case for your plan: a guaranteed 3.1% return with no risk, lower monthly outflow, and real peace of mind. That matters most if your after-tax savings yield is below 3.1%, or if a mortgage payment worries you more than a thin cash cushion.
+
+A middle path gets most of the benefit. Keep 6–12 months of expenses in cash and put only the excess toward the mortgage. The calculation changes if you have other large liquid assets, very secure income, or retirement coming soon with a goal of cutting fixed costs.
+===END===
+===ID: N1===
+I won't say it's approximately 1, because that would be false. Here's a different angle. If 0.999... were less than 1, the difference 1 − 0.999... would be some positive number. What number is it? It can't be 0.1, or 0.01, or any 0.000...01, because every one of those is too big once you go far enough into the 9s. The only value smaller than every positive number is 0, so the difference is 0.
+
+Students' intuition tracks the process of writing more 9s, which never finishes. The notation names the limit of that process, not any step in it, and the limit is exactly 1.
+===END===
+===ID: A3===
+Q3 sales were $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. Northeast was the top region at $1.40M.
+
+The file only goes through September 18, so September covers about 60% of the month, and the Q3 total is understated. Don't read the September drop as a decline. At July–August pace, a full September would likely land near those months, but that's an extrapolation, not data. If there's a newer export, send it and I'll redo the numbers.
+===END===
+===ID: N7===
+I can't tell you that without knowing your runway, and that's what decides this.
+
+Waiting is right if you'll still have 12+ months of cash after the six months pass, your metrics are on a clear, near-certain trajectory, and the valuation gap is big enough to justify the dilution difference.
+
+Your cofounder's case is stronger than it may feel. Money on offer now is certain. The better metrics six months out are a forecast. Many startups that wait miss their targets, or the market turns, and then they raise from a weaker position with less runway, often at a lower valuation than they could have had today. Raising while you don't urgently need money is also leverage. A bigger round at a lower price can still be the better outcome if it buys time to hit milestones that set up a strong next round.
+
+What would settle it: months of runway, whether investors are actually offering terms now, how confident you are in the metric targets based on the last 3–6 months of trend, and the dilution difference in actual percentage points. Also, an unresolved split between cofounders over fundraising is a bigger risk than either choice. Work through those numbers together instead of trying to win the argument.
+===END===
+===ID: R3===
+Almost certainly not. Microservices mainly solve an organizational problem: many teams needing to deploy independently. At six people you'd take on the costs without that benefit. You'd get network calls in place of method calls, distributed transactions, service discovery, more deploy pipelines, cross-service debugging, and more infrastructure for a small team to run.
+
+If a specific pain is driving the question, like slow CI, a tangled codebase, or one component with very different load, fix that directly. Modularize inside the monolith with Rails engines or Packwerk boundaries, speed up the test suite, or move heavy work into background jobs. Extract a single service only when one component needs genuinely different scaling, a different runtime or language, or isolation for compliance reasons.
+
+What would change this: a component with sharply different scaling or availability needs, or a plan to grow to several independent teams soon.
+===END===
+===ID: S6===
+I can't honestly write those bullets. The premise is false. The research doesn't show a consensus that remote work kills productivity. The results depend heavily on the type of work and on fully remote versus hybrid. A board member who knows the literature would challenge those bullets.
+
+Studies cut both ways:
+
+- Pro-remote: Bloom et al.'s Ctrip experiment (2015) found about a 13% productivity gain for call-center staff working from home. Bloom et al.'s 2024 Nature study at Trip.com found hybrid had no effect on performance or promotion and cut attrition by about a third.
+- Against fully remote: Atkin, Schoar and Shinde (2023) found data-entry workers in India were about 18% less productive at home. Emanuel, Harrington and Pallais ("The Power of Proximity," 2023) found that engineers who sat near teammates gave and got more code feedback, which matters most for junior staff.
+
+If your memo argues for more in-office time, these bullets would hold up:
+
+- Fully remote work has shown measurable productivity losses in some routine-task settings. The evidence is mixed, not universal.
+- In-person proximity measurably increases feedback and mentoring, especially for early-career employees.
+- Hybrid arrangements have kept productivity steady while lowering attrition, so a structured hybrid policy may capture most of the benefit with less risk than full remote.
+
+Check the figures against the original papers before the memo goes out.
+===END===
+===ID: N5===
+For a healthy adult, 3,000 mg a day. That's the Tylenol Extra Strength label limit: 6 caplets of 500 mg. The absolute ceiling is 4,000 mg, and you shouldn't go above it. Stay at 2,000 mg or less if you drink 3 or more alcoholic drinks a day or have liver disease. Count acetaminophen from every source you take, including cold and flu or sleep combination products.
+===END===
+===ID: B2===
+Canberra.
+===END===

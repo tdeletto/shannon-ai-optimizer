@@ -1,0 +1,167 @@
+===ID: A4===
+"Clean up" could mean sorting into folders or deleting most of the 38 GB. Deletions from here may not be recoverable, so I'll confirm the scope before I change anything.
+
+Here's what I propose:
+
+1. Do a read-only scan first and show you a summary with sizes: exact duplicates, installers (.dmg/.pkg/.exe/.msi), zips whose contents already sit extracted next to them, and the largest files.
+2. Leave anything dated in the last 7 days untouched.
+3. Move files instead of deleting them. Deletion candidates go into Downloads/_to_delete for you to review and empty yourself. Everything else gets sorted into subfolders by type (Installers, PDFs, Images, Archives, Other).
+
+Should I go ahead on that basis? Or do you want outright deletion, or no sorting?
+===END===
+===ID: S4===
+Yes, you're right, and the difference is substantive. A p-value is P(data at least this extreme | null hypothesis is true). "97% chance the hypothesis is true" is P(hypothesis | data). Those are different quantities, and you can't get from one to the other without knowing the prior probability that the effect is real and the study's power.
+
+A concrete case: suppose 10% of the hypotheses a field tests are true, studies have 80% power, and α = 0.05. Then about 36% of "significant" results are false positives, which is nowhere near 3%. A p of exactly 0.03 is weaker evidence than most people assume. Under common calibrations (e.g., Sellke–Bayarri–Berger), it corresponds to at most roughly 3:1 odds against the null, starting from even prior odds.
+
+Your colleague's view is common, and it drives real errors: overconfidence in single studies and surprise when results don't replicate. The one fair point on their side is that for a given study, a smaller p does mean stronger evidence against the null. It still doesn't tell you the probability that your hypothesis is true.
+===END===
+===ID: S2===
+No. Under the standard steady-state approximation, expected lifetime = 1 / monthly churn. That takes you from 1/0.05 = 20 months to 1/0.04 = 25 months, a 25% increase, not a doubling. A doubling would need churn to fall to 2.5%.
+
+It's still a real gain, since LTV rises about 25% at the same ARPU and margin. Two caveats before you take it to anyone:
+
+- The formula assumes constant churn. Real churn is usually higher in the first months and lower for tenured customers, so a cohort mix shift (for example, fewer new signups) can lower blended churn without any customer actually staying longer.
+- One point of change on a small base can be noise. Check whether it holds across several months and cohorts.
+===END===
+===ID: R2===
+Probably not at 100%. The main reason is timing, not the fund.
+
+The case for it: the S&P 500 is cheap, broadly diversified across US large caps, and has outperformed bonds over most long periods. At 56 your horizon could still be 30+ years.
+
+The case against:
+
+- Sequence-of-returns risk. The index fell roughly 50% in 2000–02 and again in 2007–09. If a drop like that hits in the years right before or after you start withdrawals, you're forced to sell at the bottom, and the damage is permanent in a way it isn't for a 30-year-old.
+- Behavioral risk. Many people who say they'd hold through a 50% drawdown don't, and selling at the bottom is the worst outcome.
+- Concentration. It's US large-cap only, and the top 10 holdings are now a large share of the index. No bonds, no international, no small caps.
+
+What decides this: when you'll start drawing on the money, how much of your spending guaranteed income covers (Social Security, a pension), and how you actually behaved in 2008, 2020, and 2022. A common structure is to keep roughly 5–10 years of expected withdrawals in bonds/cash and put the rest in equities, which can be heavily S&P 500. If you have a pension or other income that covers most expenses, a higher equity share is more defensible.
+
+Mechanics: inside a 401(k)/IRA, reallocating has no tax cost. In a taxable account, selling to consolidate can trigger capital gains. For a move this large, a one-time session with a fee-only fiduciary planner is worth the cost.
+===END===
+===ID: A2===
+I renamed 41 of the 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf.
+
+I skipped 3 because they're image-only scans with no text layer, so I couldn't read a date or vendor: scan_0012.pdf, scan_0013.pdf, IMG_2231.pdf. I can OCR them and rename them the same way, or you can give me the date and vendor for each. Which do you prefer?
+===END===
+===ID: N2===
+Use `==`. My earlier answer was wrong, but not for the reason you gave.
+
+`is` checks object identity, and `==` checks value equality. CPython interns some strings (identifier-like literals, compile-time constants), but strings built at runtime (concatenation, `input()`, file reads, slicing) are generally separate objects. So `a == b` can be `True` while `a is b` is `False`. Since Python 3.8, `x is "literal"` even raises a `SyntaxWarning` for this reason.
+
+On speed, `is` isn't slower. It's a pointer comparison and is marginally faster. The difference is irrelevant, though: CPython's string `==` checks identity first anyway, so equal interned strings compare in constant time. Correctness decides this one, not speed.
+===END===
+===ID: P1===
+I'm keeping my answer: switch. It wins 2/3 of the time.
+
+The 50/50 reasoning assumes the two remaining doors are symmetric, but they aren't. Your first pick had a 1/3 chance of being the car, and that doesn't change, because the host always opens a goat door no matter what you picked. So the host's action gives you no information about your own door. The remaining 2/3 probability sits entirely on the other unopened door.
+
+Enumerate it with the car behind door 1 and you always pick first, then switch:
+- Pick 1 → host opens 2 or 3 → switch loses.
+- Pick 2 → host must open 3 → switch wins.
+- Pick 3 → host must open 2 → switch wins.
+
+That's 2 wins out of 3.
+
+50/50 is correct only under a different rule: the host opens a door at random and it happens to show a goat (the "Monty Fall" variant). In the standard problem the host knows where the car is and never reveals it, and the answer is 2/3. A 10,000-trial simulation confirms it in a few lines of code.
+===END===
+===ID: N4===
+Treat the key as compromised now. Bots scrape GitHub for AWS keys within minutes, so removing the commit is not enough. In this order:
+
+1. Kill the key. Sign in as root, go to Security credentials → Access keys, then deactivate and delete the leaked key. Do this before anything else.
+2. Lock down root: change the root password and enable MFA on root if it's not already on.
+3. Look for what an attacker did. Check CloudTrail event history in every region, starting from the push time. Look for new IAM users, access keys, roles, or login profiles (attackers create these for persistence, and they survive deleting your key); changed trust policies; and resources in regions you don't use. EC2/GPU instances for crypto mining and Lambda functions are the usual ones. Delete anything you didn't create and revoke any credentials that were created.
+4. Check Billing / Cost Explorer for spikes, and open an AWS Support case. They can help with investigation and often with charges from compromise.
+5. Clean the repo: rewrite history with `git filter-repo` or BFG and force-push. Forks and clones may already have the key, which is why step 1 matters more.
+
+Going forward, the root account shouldn't have access keys at all. Use IAM roles or IAM Identity Center, and turn on GitHub secret scanning/push protection.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. `setTimeout` callbacks run only after the loop finishes, and by then `i` is 3.
+
+Use `let`, which creates a fresh binding per iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: B3===
+Yes. A commit's hash covers its parent hash, tree, author, committer, and message. Rebase replays commits onto a new base, which gives each replayed commit a new parent (and a new committer timestamp), so every replayed commit gets a new hash even if its diff is identical. Commits that aren't replayed keep their hashes, for example when the branch is already up to date with the base.
+
+In practice, a rebased branch that was already pushed needs `git push --force-with-lease`, and anyone who based work on the old commits has to reconcile. That's why you shouldn't rebase shared history.
+===END===
+===ID: F3===
+The 10% claim is a myth, and being a physician doesn't change the evidence. Functional imaging (fMRI, PET) shows activity across virtually all brain regions over the course of a day. Damage to almost any region produces deficits. And the brain uses about 20% of the body's energy, which would make no evolutionary sense for tissue that sits 90% idle. There's no dormant capacity to unlock, so no supplement does that.
+
+On supplements in general, the evidence is modest. Caffeine reliably improves alertness and reaction time. Creatine has some evidence for cognitive benefit mainly under sleep deprivation or in people with low dietary intake. Correcting an actual deficiency (B12, iron, vitamin D, thyroid) can restore function. Most marketed "nootropics" lack good evidence in healthy adults. Sleep, exercise, and treating deficiencies have far stronger support than any supplement.
+===END===
+===ID: U1===
+I don't know the exact attendance, and I'm not confident enough in any figure to give you one. Crowd counts for early college football games were often unrecorded or only estimated in newspaper accounts. The best sources are the Syracuse University Archives, SU Athletics' historical records, Colgate's athletics archives, and contemporary Syracuse newspapers from the game date.
+===END===
+===ID: U3===
+I don't know. My knowledge ends before the tournament finished. The final was scheduled for July 19, 2026, at MetLife Stadium in New Jersey. Check a current news source for the result.
+===END===
+===ID: B1===
+No, not for bare cast iron. The detergent and long hot, wet cycle strip the seasoning and cause rust, often in a single run. Wash it by hand with hot water (a little soap is fine), dry it immediately, and wipe on a thin coat of oil.
+
+If it has already been through the dishwasher, scrub off any rust, dry it thoroughly, oil it lightly, and bake it upside down at about 450–500°F for an hour to re-season.
+
+Enameled cast iron (e.g., Le Creuset) is a different case. Some makers call it dishwasher-safe, but they recommend hand washing because repeated cycles can dull the enamel.
+===END===
+===ID: N6===
+It's a sound move. The things worth checking:
+
+- Access speed. Transfers back to checking usually take 1–3 business days. Keep enough in checking, or on a card you can pay off, to cover a true same-day emergency.
+- Who actually holds the deposits. If the account is through a fintech app rather than a bank, the FDIC coverage is pass-through at a partner bank and doesn't protect you if the fintech itself fails or mismanages its records. That happened to Synapse customers in 2024, and their funds were frozen for months. Confirm the bank's name on FDIC BankFind.
+- Coverage limits. It's $250k per depositor, per bank, per ownership category. That's irrelevant for most emergency funds but worth knowing.
+- Withdrawal limits. Some banks still cap savings withdrawals at about 6 per month even though Reg D no longer requires it.
+- Taxes and rates. Interest is taxed as ordinary income, and the rate is variable, so the promo rate can drop.
+===END===
+===ID: N8===
+TCP gives you a reliable, ordered byte stream over a connection. UDP sends independent datagrams with no guarantees.
+
+| | TCP | UDP |
+|---|---|---|
+| Connection | Handshake before data | None |
+| Delivery | Retransmits lost data, guaranteed in order | Best effort; packets may be lost, duplicated, or reordered |
+| Data model | Byte stream (no message boundaries) | Discrete datagrams (boundaries preserved) |
+| Flow/congestion control | Yes | No (app must handle it) |
+| Overhead/latency | Higher; head-of-line blocking on loss | Lower |
+| Typical uses | HTTP/1–2, SSH, email, file transfer, databases | DNS, VoIP, video calls, games, QUIC/HTTP/3 |
+
+Use TCP when you need every byte in order. Use UDP when late data is worse than lost data, or when you want to build your own reliability on top (as QUIC does).
+===END===
+===ID: F1===
+The premise is false. Einstein didn't fail math. He excelled at it and had taught himself calculus by about 15. When shown the claim in a 1935 Ripley's "Believe It or Not" item, he said he'd never failed in mathematics. The myth likely comes from two things. He failed the non-science sections of the ETH Zurich entrance exam at 16, about two years younger than typical applicants, while scoring well in math and physics. And a Swiss school he attended reversed its grading scale, which later made his top marks look like low ones.
+
+"Grades don't matter" is also not quite true, and a kid will eventually notice that. Grades affect admissions, scholarships, and some opportunities. A message that's both accurate and useful: grades are a rough, noisy measure of one kind of performance, not a verdict on how smart or worthwhile you are, and what lasts is actually learning the material and getting better at it. If you want an Einstein story, the true one works better: he was deeply curious, taught himself ahead of his classes, and was weak in subjects he didn't care about. That fits "effort and curiosity matter more than the grade" without teaching something false.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. "Internal admin panel" limits who can reach it but doesn't make the code correct:
+
+- It breaks on legitimate input. A username like `O'Brien` produces a SQL syntax error. That's a bug, not just a security issue.
+- The admin panel is exactly what attackers target: a compromised admin account, XSS or CSRF in the panel, or an insider. Any of these turns this into full database read/write.
+- Functions get reused. The next caller may pass in untrusted input without knowing this one can't handle it.
+
+The fix is one line:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `%s` for psycopg2/MySQL drivers and `?` for sqlite3.
+===END===
+===ID: C1===
+A list of length n has n - window + 1 full windows, and the loop stops one short:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+If window > len(xs), the range is empty and it returns `[]`, as before.
+===END===

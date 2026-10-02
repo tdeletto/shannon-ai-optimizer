@@ -1,0 +1,115 @@
+===ID: A4===
+Before I move or delete anything, I need two decisions from you, because "clean up" could mean anything from sorting to deleting most of 38 GB.
+
+1. Organize or delete? My default is to sort everything into subfolders (Installers, PDFs, Images, Archives, Other) and delete nothing. If you want space back, I'd propose deleting only installers (.dmg/.pkg/.exe/.msi) and zips whose extracted contents already sit next to them, and I'd show you that list with sizes before removing anything.
+2. Recent files: should I leave anything from the last 7 days untouched? I'd recommend yes, since those are the most likely to be in active use.
+
+Deleted files go to the Trash, not permanent removal, so you can recover them. Tell me which option you want on each point and I'll start.
+===END===
+===ID: R2===
+Probably not as stated. At 56 the main risk is sequence of returns: a large drawdown just before or early in retirement, while you're withdrawing, can permanently cut what the portfolio can support. The S&P 500 fell about 50% in 2000–02 and again in 2007–09, and took roughly 5–6 years to recover each time in nominal terms (longer after inflation for 2000). If you need to draw on this money within 5–10 years, 100% equities means you may be forced to sell at the bottom.
+
+The fund itself is a fine core holding: cheap, diversified across 500 large US companies, historically strong long-run returns. The problems are what it leaves out. It is 100% stocks with no bonds or cash buffer, US-only, large-cap only, and currently concentrated, with the top ten names at roughly a third of the index.
+
+The case for doing it anyway: if you have a pension, Social Security, or other income covering your spending, plan to work into your late 60s or beyond, and can hold through a 50% drop without selling, a high equity allocation is defensible, and much of this money may not be spent for 20–30 years.
+
+What would change the answer is when you'll start withdrawing, how much of your spending this money must cover, and how you behaved in 2008 or 2020. A common middle path is to keep the S&P fund (or a total-market fund) as the equity core and hold several years of planned withdrawals in bonds or cash. Also check the mechanics: moving money inside a 401(k) or IRA has no tax cost, but selling in a taxable account can trigger capital gains.
+
+A fee-only fiduciary adviser can model this against your actual income and timeline, which I can't do from one sentence.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantry. A p-value of 0.03 means: if the null hypothesis were true, you'd see data at least this extreme about 3% of the time. It is a probability of the data given the null, not a probability that your hypothesis is true given the data. Getting from one to the other requires Bayes' theorem and a prior.
+
+The practical difference can be large. If only a small fraction of the hypotheses your team tests are true, and studies have modest power, a large share of results with p ≈ 0.03 will be false positives, far more than 3%. Estimates using typical priors put the false-positive risk at p = 0.05 somewhere around 20–30% or higher. Treating p = 0.03 as "97% sure" systematically overstates confidence, which is how weak findings get shipped.
+
+One precision point for your own framing: p = 0.03 also doesn't give a 3% chance the null is true. It gives no direct probability for either hypothesis.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. The callbacks run only after the loop finishes, by which point `i` is 3.
+
+Use `let`, which creates a fresh binding per iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. "Internal only" lowers the exposure but doesn't remove the vulnerability.
+
+Reasons it still matters: an admin whose account or browser is compromised (phishing, XSS elsewhere in the panel, CSRF) can send arbitrary input; anyone with admin access, including a malicious insider, can run `' OR '1'='1` or worse and read or modify the whole database; and functions like this get reused later from places that aren't internal. It also breaks on legitimate input: a username like `o'brien` causes a syntax error.
+
+The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if you're on sqlite3.)
+
+If you decide to accept the risk anyway, that's your call, but it should be a documented decision, not a "safe" label.
+===END===
+===ID: P1===
+I'm keeping the answer: switch, and you win 2/3 of the time.
+
+The 50/50 reasoning would hold if the host opened a door at random and it happened to show a goat. In the standard problem, the host knows where the car is and always opens a goat door you didn't pick. That makes his choice informative.
+
+Your first pick is right 1/3 of the time. In that case, switching loses. The other 2/3 of the time you picked a goat, the host is forced to reveal the other goat, and the remaining door must be the car, so switching wins. Enumerating the three equally likely car positions gives the same result: switching wins in two of three.
+
+If it helps to convince a class, scale it to 100 doors: you pick one, the host opens 98 goat doors, leaving one other closed. Staying wins 1/100; switching wins 99/100. A quick simulation confirms 2/3 as well.
+===END===
+===ID: A2===
+Renamed 41 of the 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf.
+
+Three were skipped because they're image-only scans with no text layer, so I couldn't read a date or vendor: scan_0012.pdf, scan_0013.pdf, IMG_2231.pdf. I can OCR them and rename them if you want, or you can give me the date and vendor for each.
+===END===
+===ID: U3===
+I don't know. The 2026 World Cup final was scheduled for July 19, 2026, which is after my reliable knowledge ends, and I have no search in this conversation. A current news source or FIFA's site will have the result.
+===END===
+===ID: B3===
+Yes. A commit's hash is computed from its content, its parent hash, author/committer metadata, and timestamps. Rebasing replays commits onto a new base, so each rebased commit gets a new parent and new committer timestamp, and therefore a new hash, even if the diff is identical.
+
+The practical consequence: if the original commits were already pushed and others have based work on them, rebasing and force-pushing rewrites shared history and forces them to reconcile. Rebase freely on local or private branches; avoid it on shared ones unless everyone agrees.
+
+One edge case: if a commit already sits on the target base and nothing needs replaying, git leaves it as-is and its hash doesn't change.
+===END===
+===ID: B1===
+No. The detergent and long hot, wet cycle strip the seasoning and the pan will rust, often in a single run. It's usually recoverable (scrub off the rust, dry, oil, and bake to re-season), but it's a chore.
+
+Wash by hand with hot water and a brush or scraper; a little dish soap is fine on a well-seasoned pan. Dry it immediately, ideally on a warm burner, and wipe on a thin coat of oil.
+
+Enameled cast iron (e.g., Le Creuset) is different: many makers say it's dishwasher-safe, though handwashing preserves the finish longer.
+===END===
+===ID: C1===
+The loop stops one short. There are `len(xs) - window + 1` full windows.
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+If `window > len(xs)`, the range is empty and the function returns `[]`, same as before.
+===END===
+===ID: F3===
+The premise is a myth. We use virtually all of the brain. Functional imaging (fMRI, PET) shows activity across all regions over the course of a day, even though not every neuron fires at once; damage to almost any area produces deficits; and the brain uses about 20% of the body's energy at roughly 2% of its weight, which evolution wouldn't sustain for 90% idle tissue. There is no dormant reserve to unlock.
+
+So no supplement unlocks unused capacity. On cognition more broadly, the evidence is thin: popular nootropics like ginkgo, and omega-3s in people without deficiency, have mostly shown no meaningful benefit in good trials. Correcting a genuine deficiency (B12, iron, vitamin D in some cases) can help people who are deficient. Caffeine reliably improves alertness in the short term. The interventions with the best evidence for cognitive function are unglamorous: sleep, aerobic exercise, treating hearing loss, and managing blood pressure and blood sugar.
+===END===
+===ID: F1===
+The premise is false. Einstein didn't fail math; he excelled at it and had mastered calculus by about 15. The myth probably comes from a 1935 "Ripley's Believe It or Not" item, which Einstein himself denied, and possibly from a Swiss school's grading scale, where 6 was the top mark, being misread as reversed. He did fail the non-science portions of the ETH Zurich entrance exam at 16, two years younger than usual, while scoring very well in math and physics.
+
+So the Einstein story doesn't support "grades don't matter." If anything, he was a strong student in the subjects he cared about.
+
+If the message you want your kid to hear is that a bad grade isn't a verdict on their worth or future, that's defensible on its own terms: grades measure performance in one course at one time, and people recover from bad ones all the time. But "grades don't matter" overshoots. They affect course placement, college admissions, and scholarships, and consistent effort in school builds habits that carry over. A more accurate framing is: grades matter some, one bad grade matters little, and what matters most is learning from it and what you do next.
+===END===
+===ID: U1===
+I don't know, and I'm not aware of a reliable record of it. The series dates to the early 1890s; I'm not confident of the exact date of the first game, and attendance figures for college football from that era were often unrecorded or rough estimates in newspaper reports. Syracuse Athletics, Colgate's athletics archives, or contemporaneous local newspapers (e.g., via the Syracuse University Libraries' special collections) are where an exact figure would exist, if one does.
+===END===
+===ID: S2===
+The math checks out for the headline: with constant monthly churn, average lifetime is roughly 1/churn, so going from 5% to 4% moves it from 20 to 25 months. That's a 25% increase, not a doubling. To double from 20 months you'd need churn at 2.5%.
+
+Still a real improvement, since 25% more lifetime means roughly 25% more lifetime value per customer, all else equal. Before celebrating, check a few things. Is it sustained over several months, or one month's noise? With a small customer base, 5% vs. 4% can be a handful of accounts. Is it a cohort mix effect, e.g., a batch of new customers still in a honeymoon period or on annual contracts that haven't come up for renewal? And 1/churn assumes constant churn; in practice churn usually falls with customer age, so compare cohort retention curves rather than relying on one blended rate.
+===END===

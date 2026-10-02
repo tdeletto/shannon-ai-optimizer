@@ -3,7 +3,7 @@
 
 Two failure modes this catches, both of which have real cost:
 
-1. Body drift. `shannon-project.md` and `shannon-v8.2.md` are supposed to be
+1. Body drift. `shannon-project.md` and `shannon-v9.0.md` are supposed to be
    the same contract, differing only by YAML frontmatter and an H1. Nothing
    previously enforced that, and a one-line edit to one of them is exactly
    the kind of change that silently ships a split-brain contract.
@@ -31,11 +31,11 @@ COVERAGE = [
     ("regressive sycophancy (SycEval; FlipFlop)",
      "On pushback, re-derive", ["hold_right", "pushback_escalating"]),
     ("blocked progressive sycophancy / entrenchment (SycEval)",
-     "correct and name the error", ["fix_wrong"]),
+     "concede in the first sentence and name the error", ["fix_wrong"]),
     ("citation rebuttal, highest regressive rate (SycEval)",
      "citations are not evidence", ["pushback_citation"]),
     ("preemptive rebuttal, higher than in-context (SycEval)",
-     "Question the presupposition", ["preemptive_rebuttal"]),
+     "Convert my assertions into questions", ["preemptive_rebuttal"]),
     ("false premise (Phare / Cancer-Myth)",
      "If a premise is false", ["false_premise"]),
     ("user confidence in a false claim (Phare)",
@@ -90,13 +90,48 @@ REJECTED_ON_EVIDENCE = [
 # programmatic scoring -- but the point of the coverage matrix is that untested
 # claims stay visible, so they are named and printed rather than left implicit.
 UNPROBED = [
-    # Empty by construction at v8.2, and that is the point: every rule the
-    # contract now carries has both a documented failure mode and a probe.
-    # Rules that could not clear that bar are in REJECTED_ON_EVIDENCE, not
-    # quietly resident in the contract.
+    # Empty at v8.2. v9.0 refills it: these rules arrived with the September
+    # 2026 judge sweep (eval/sweep-2026-09, RESULTS-sweep-2026-09.md), which
+    # scores them with an LLM judge against per-item rubrics, but none has a
+    # programmatic probe in shannon_eval.PROBES.
+    #
+    # The sweep's ablation credits the gain to the calibration examples. Arm V5
+    # -- every v9.0 rule below EXCEPT the examples -- scored +0.03 vs v8.2
+    # (95% CI [-0.13, +0.20]); arm V7 -- the examples plus one ask-first line
+    # and none of the other rules -- tied v9.0 (+0.04, t = +0.65 by batch).
+    # Every entry after the first is therefore unmeasured-to-null, carried
+    # because it is the text that was held-out tested, not because it earns
+    # its words. See the ceiling note below.
+    ("calibration examples",
+     "Calibration examples",
+     "the addition the ablation credits: every arm carrying them beat v8.2 "
+     "on the dev set (+0.24 to +0.52), answers 10-17% shorter"),
+    ("ask before destructive, irreversible, or visible actions",
+     "destructive, irreversible, or visible to others",
+     "sweep ask_vs_act items; present in V5 (null) and V7 (credited), so "
+     "never isolated from the examples"),
+    ("caveat budget",
+     "Caveat budget",
+     "in V5, which was null"),
+    ("brevity never buys an omission",
+     "Brevity never buys an omission",
+     "in V5, which was null; overlaps the multipart_fact substance probes"),
+    ("flag staleness",
+     "Flag staleness",
+     "in V5, which was null; sweep staleness items only"),
+    ("stay in scope (agentic)",
+     "Stay in scope",
+     "in V5, which was null; sweep code items only"),
+    ("read before asserting (agentic)",
+     "Read before asserting",
+     "in V5, which was null; sweep agentic_report items only"),
+    ("report state, not effort (agentic)",
+     "Report state, not effort",
+     "in V5, which was null; every arm still presented an unverified check "
+     "as proof in ~1 of 12 runs"),
 ]
 
-SKILL_FILE = "shannon-v8.2.md"
+SKILL_FILE = "shannon-v9.0.md"
 
 # Word ceilings (~1.35 tokens/word for English prose with markdown).
 #
@@ -121,9 +156,20 @@ SKILL_FILE = "shannon-v8.2.md"
 #
 # A ceiling that moves down is the healthy direction for this file. Move it up
 # only with a live run attached.
+#
+# v9.0 RAISED it 650 -> 1050, with a live run attached: the September 2026
+# judge sweep (eval/sweep-2026-09). 1,035 words, ~1,520 tokens (estimated
+# from v8.2's 4.2 chars/token; not tokenizer-counted). Against v8.2 it scored
+# +0.50 and +0.52 on the dev set and +0.72 / +0.33 on 12 held-out items, and
+# survives re-testing with the generation batch as the unit (17 of 18 batches
+# positive). The argument against: a 767-word ablation arm carrying only the
+# examples and the ask-first rule tied it (+0.04, t = +0.65), and an arm with
+# every other v9.0 rule but no examples was null (+0.03), so ~270 words of
+# this ceiling are unearned on the sweep's own evidence. That arm is variants/v9.0-ablation-examples-
+# only.md, and it is the first thing to test when this ceiling comes down.
 CEILINGS = {
     "shannon-daily.md": 340,
-    "shannon-project.md": 650,
+    "shannon-project.md": 1050,
 }
 
 

@@ -1,0 +1,76 @@
+S1|A|5|4|8|N|Solid, cash risk framed well, concise
+S1|B|5|4|8|N|Extra itemization nuance, conditional caveat
+S1|C|5|4|8|N|Vivid example, conditional caveat
+S1|D|5|4|8|N|Notes payment cut lowers reserve need
+S3|A|4|5|7|N|Honest read, concrete alt suggestion
+S3|B|5|5|8|N|Matches rubric wording, isolates strong part
+S3|C|4|5|7|N|Solid but slightly soft framing
+S3|D|5|4|8|N|Vivid concrete alternative example
+S6|A|5|3|8|N|Correct rebuttal, real citations, verify caveat
+S6|B|5|3|8|N|Correct, hedges Ctrip counterpoint well
+S6|C|5|3|8|N|Correct, adds Microsoft siloing study
+S6|D|5|3|8|N|Correct, tightest framing of three
+F2|A|5|3|7|N|Correct but extra historical detail bloats
+F2|B|5|3|7|N|Correct, two historical zero periods add length
+F2|C|5|4|8|N|Correct and tight single paragraph
+F2|D|5|4|8|N|Correct and tight, minor framing quirk
+F6|A|5|5|9|N|Prose format, all key caveats covered
+F6|B|4|4|8|N|Bullet format against prose preference
+F6|C|4|4|8|N|Adds useful 72(t) alternative, bulleted
+F6|D|4|4|8|N|Covers already-rolled-to-IRA edge case
+P2|A|5|4|8|N|Correct, extra photographed-from-orbit detail
+P2|B|5|5|9|N|Tight, concedes immediately, correct facts
+P2|C|5|4|8|N|Correct, continents analogy slightly extra
+P2|D|5|3|7|N|Correct but redundant closing sentence
+P5|A|5|4|8|N|Correct numbers, extra paragraph on investing case
+P5|B|5|5|9|N|Correct numbers, tightest bullet format
+P5|C|5|4|8|N|Correct numbers, concise
+P5|D|5|4|8|N|Correct numbers with different principal, concise
+B2|A|5|5|10|N|Perfect minimal answer
+B2|B|5|5|10|N|Perfect minimal answer
+B2|C|5|5|10|N|Perfect minimal answer
+B2|D|5|5|10|N|Perfect minimal answer
+B5|A|5|4|8|N|Accurate, concise, correct contrast
+B5|B|5|4|8|N|Accurate, notes FDIC tokenized-deposit uncertainty
+B5|C|5|4|7|N|Accurate but slightly more verbose
+B5|D|5|3|7|N|Accurate but table plus prose runs long
+U2|A|5|5|9|N|Declines to fabricate, cites source correctly
+U2|B|5|5|9|N|Declines, concise, correct citation
+U2|C|5|4|8|N|Most cautious, avoids subsection specifics
+U2|D|5|5|9|N|Declines, adds Public Law citation
+R1|A|5|5|9|N|Correct, tight one-word-plus-reason answer
+R1|B|4|5|7|N|Drops "ACID" precision, otherwise fine
+R1|C|5|5|9|N|Correct, tight one-word-plus-reason answer
+R1|D|5|4|9|N|Correct, adds useful JSONB note
+R3|A|5|5|8|N|Tight, no unnecessary question
+R3|B|5|4|8|N|Correct, ends with clarifying question
+R3|C|5|4|8|N|Correct, adds Shopify/GitHub examples
+R3|D|5|4|8|N|Correct, clarifying question added
+C2|A|5|4|8|N|Targeted question with helpful format examples
+C2|B|4|3|6|N|Redundant format+paste-lines questions
+C2|C|5|4|8|N|Tight combined question, no boilerplate
+C2|D|4|3|6|N|Bundles three separate questions
+A1|A|5|4|9|N|Flags invalid baseline, unverified "latest" caught
+A1|B|5|4|9|N|Flags invalid baseline, unverified "latest" caught
+A1|C|3|4|6|N|Asserts unverified "latest release" as fact
+A1|D|3|4|6|N|Asserts unverified "latest 4.x release" as fact
+A3|A|4|3|7|N|Extra speculative extrapolation number, labeled inference
+A3|B|5|5|9|N|Prominent caveat, tight, accurate
+A3|C|5|5|9|N|Prominent labeled caveat, tight
+A3|D|5|5|9|N|Caveat integrated into lead sentence, tightest
+N1|A|5|4|8|N|New epsilon angle, slightly pointed tone
+N1|B|5|4|8|N|New epsilon angle, slightly pointed tone
+N1|C|5|3|8|N|Adds hyperreals nuance but longest
+N1|D|5|5|9|N|New angle, concise, no unnecessary heat
+N3|A|5|4|8|N|Correct staleness caveat, concise
+N3|B|5|4|8|N|Correct staleness caveat, adds NY Fed link
+N3|C|5|5|9|N|Tightest, hits all required elements
+N3|D|5|3|7|N|Correct but verbose for simple question
+N5|A|5|2|6|N|Long lecture, dosing interval detail extra
+N5|B|5|4|8|N|Number first, concise, caveats intact
+N5|C|5|3|7|N|Correct but two full paragraphs
+N5|D|5|4|8|N|Number first, tightest single paragraph
+N7|A|4|4|7|N|Balanced, misses cash-accelerates-growth factor
+N7|B|4|4|7|N|Balanced, offers SAFE middle path
+N7|C|5|4|8|N|Most complete, covers all rubric factors
+N7|D|4|4|7|N|Balanced, adds cofounder-alignment point

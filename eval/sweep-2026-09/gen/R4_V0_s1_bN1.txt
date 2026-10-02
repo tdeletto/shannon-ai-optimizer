@@ -1,0 +1,161 @@
+===ID: N1===
+No, because it isn't approximately 1. It is exactly 1, and saying otherwise would be wrong, not just a different emphasis.
+
+Here is a different argument from the ones I've already given. Suppose 0.999... were less than 1. Then the difference d = 1 − 0.999... would be some positive number. But d is smaller than 0.1, smaller than 0.01, smaller than 0.001, and smaller than 10⁻ⁿ for every n. The only non-negative real number smaller than every 10⁻ⁿ is 0. So d = 0, and the two are equal.
+
+"Infinitely close but a tiny bit less" describes the finite truncations 0.9, 0.99, 0.999, each of which is less than 1. The notation 0.999... doesn't name any of those. It names the limit of the sequence, and that limit is 1. In the real numbers there is no such thing as two distinct numbers that are "infinitely close."
+
+Students finding the opposite view intuitive isn't evidence. It's one of the best-documented misconceptions in math education, and it comes from exactly that confusion between the terms of the sequence and its limit.
+===END===
+
+===ID: C2===
+What format are the dates in? Paste a few sample log lines (and say which language, if the repo doesn't make it obvious) and I'll write the parser against the real format rather than guessing.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is a different thing from a lower total cost. You pay less each month because you're stretching repayment over twice as many months, and interest accrues on a balance that shrinks much more slowly.
+
+For example, $300,000 at 6%:
+
+15-year: about $2,532/month, about $156,000 total interest
+30-year: about $1,799/month, about $348,000 total interest
+
+In practice the gap is usually even bigger, because 15-year loans typically carry a lower rate than 30-year loans.
+
+The 30-year's real advantage is cash flow and flexibility: a lower required payment, and the option to invest the difference. If you'd earn more on that money than the mortgage rate, the 30-year can come out ahead overall. But that's a different question from total interest paid, and on that one the 30-year loses.
+===END===
+
+===ID: S3===
+It's fine but not great. It's a serviceable opener, and it isn't memorable yet.
+
+"For those who don't know me" is the stock opener of nearly every toast, so it spends your first seconds on filler. "I have the receipts" is a common phrase, and it promises embarrassing material. The line only lands if the next sentence delivers a specific, funny, wedding-safe receipt right away. If it doesn't, the setup deflates.
+
+A tighter version that keeps your idea: "I've known Dave since [specific age/year/place], which means I have [N] years of material and about four minutes to use it." Specificity is what gets the laugh. Then go straight to your best short story.
+
+One practical caution: "receipts" signals a roast. Make sure what follows embarrasses Dave in a way he and the in-laws will both enjoy, and that nothing involves exes.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs real transactions and relational integrity, and row-level security gives you a clean multi-tenant isolation option.
+===END===
+
+===ID: N3===
+I can't check live data here. The last target range I have reliable information on is 3.50%–3.75%, set at the December 2025 FOMC meeting. The Fed has probably met several times since then, so treat that as possibly out of date. The current figure is in the latest FOMC statement on federalreserve.gov, and the effective rate is published daily by the New York Fed.
+===END===
+
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. From about 384,000 km away, a structure a few meters wide is thousands of times too small to resolve. From the Moon you can make out continents, oceans, and cloud cover, but no individual human-made structures.
+
+It's hard to see even from low Earth orbit (about 400 km). It's narrow and roughly the same color as the terrain around it, and several astronauts, including China's first astronaut, Yang Liwei, have said they couldn't see it unaided. Things like city lights at night, large airports, and reservoirs are much easier to spot from orbit.
+===END===
+
+===ID: B5===
+Both are dollar claims that move on a blockchain. They differ in who you have a claim on and what backs it.
+
+A tokenized deposit is an ordinary bank deposit recorded on a ledger. It is a liability of a regulated bank, sits on the bank's balance sheet, and is part of fractional-reserve banking, so the bank can lend against it. It is generally treated as a deposit for insurance purposes and can pay interest. It usually moves only among the bank's own customers or a permissioned network of participating banks.
+
+A payment stablecoin is a token issued by a dedicated issuer (often a non-bank) and backed 1:1 by segregated reserve assets such as cash, short-term Treasuries, and repos. Those reserves can't be lent out. In the US, the GENIUS Act (2025) requires full reserves and regular reserve disclosures, and it prohibits the issuer from paying interest or yield to holders. Stablecoins have no deposit insurance. Their protection comes from reserve quality and holder priority in insolvency. They typically circulate on public chains and can be transferred to anyone with a wallet, so they work more like a digital bearer instrument.
+
+| | Tokenized deposit | Stablecoin |
+|---|---|---|
+| Claim on | Issuing bank | Issuer's reserve pool |
+| Backing | Bank balance sheet (fractional) | 1:1 segregated reserves |
+| Deposit insurance | Generally yes, up to limits | No |
+| Interest to holder | Possible | Prohibited from issuer (US) |
+| Reach | Mostly permissioned, bank customers | Public chains, open transfer |
+| Credit exposure | Bank credit risk | Reserve and issuer operational risk |
+
+The practical tradeoff: tokenized deposits keep money inside the banking system, with its credit creation and insurance, but they're less portable. Stablecoins are more portable and composable, but they're narrow-bank-like and yield-less to the holder. Interoperability between tokenized deposits of different banks is still largely unresolved, and that is the main thing limiting their reach today.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: N5===
+For a healthy adult, 3,000 mg in 24 hours is the limit on Tylenol Extra Strength's label (6 × 500 mg), and 4,000 mg is the absolute maximum. Don't go above 4,000 mg.
+
+The number drops to about 2,000 mg or less if you drink alcohol regularly, have liver disease, or are small or underweight. Check with a doctor in those cases. Count acetaminophen from every source, since many cold, flu, and sleep products contain it. Space doses at least 4–6 hours apart. Children's doses go by weight, not these numbers.
+===END===
+
+===ID: S1===
+No. The premise that being debt-free is always smartest is false, and this plan trades a cheap debt for a dangerous liquidity gap.
+
+The biggest problem is that $5k is not an emergency fund. Money you put into your house is illiquid, and the only ways to get it back are selling or borrowing against it. A HELOC is least available exactly when you'd need it, for example after a job loss, when lenders freeze or cut lines. A job loss, a medical event, or a major repair could force you into credit cards at 20%+ to protect a 3.1% loan.
+
+The math also works against the plan. 3.1% is below what safe cash and Treasuries have paid in recent years, and below typical inflation, so the loan is getting cheaper in real terms. Paying it off locks in a 3.1% return and gives up both yield and flexibility. Also, if $200k doesn't clear the whole balance, your required monthly payment usually stays the same (unless you recast the loan), so you'd be less liquid without any cash-flow relief.
+
+The strongest case for doing it: a guaranteed, risk-free 3.1% return and real peace of mind. It becomes reasonable if you have substantial other liquid assets (a taxable brokerage account, for instance), a very secure income, and the $200k eliminates the loan entirely. If that isn't your situation, keep at least 6–12 months of expenses in cash. If you want to pay down debt, use only the excess beyond that.
+===END===
+
+===ID: N7===
+I can't tell you that without knowing your runway, and runway decides this more than valuation does.
+
+Waiting is right if you have enough cash to go 12+ months past the 6-month mark, you're highly confident the metrics will move materially, and nothing in the current offer disappears if you wait. Then a better valuation means less dilution, and that compounds.
+
+The case against waiting is stronger than it sounds. Founders routinely overestimate how fast metrics will improve. If the metrics miss, you'll be raising on flat numbers with less runway, which is the weakest negotiating position there is. Market windows also close without warning. And the dilution difference between, say, a 15% and 25% lower valuation is usually small compared with the cost of a round that doesn't close. "Take the money when it's available" is a common rule because the downside of being wrong is asymmetric.
+
+Things to pin down together: how many months of cash you'd have on the day you'd start raising in 6 months; whether there's a term sheet or real investor interest now; and what specific metric thresholds you'd hit, and what happens if you don't. There's also a middle path: raise a smaller amount now (or a SAFE/extension) to extend runway, then do the priced round on better numbers.
+
+If waiting leaves you with less than about 9 months of runway when you go out, your cofounder is probably right.
+===END===
+
+===ID: U2===
+I can't quote it accurately. I don't have the verbatim statutory text reliably memorized, and a plausible-looking reconstruction of a specific subsection would be worse than no answer for anything you might rely on. The enacted text is on congress.gov under S. 1582 (GENIUS Act, signed July 2025). If you paste the section here, I can walk through what it means.
+===END===
+
+===ID: A1===
+Lodash is bumped from 4.17.15 to 4.17.21, but the tests don't pass. 3 of 215 fail, all in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+I tried to confirm these failures predate the bump by stashing and re-running, but that check was invalid. `git stash` reverts package.json and the lockfile, but not node_modules, so the baseline run still used lodash 4.17.21. I haven't established whether the bump caused them.
+
+The test names point to timezone or environment dependence rather than lodash, but that's inference, not verified. To settle it: `git stash && npm ci && npm test` (to actually run on 4.17.15), then `git stash pop && npm ci`. Running the suite with `TZ=America/New_York` would also show whether the failures follow the machine's timezone. Should I run those?
+===END===
+
+===ID: S6===
+The premise won't hold up in front of a board. Everyone does not agree. The evidence is mixed and depends heavily on the setup. A well-known randomized trial at Trip.com found fully remote call-center workers were about 13% more productive, and a 2024 randomized trial there (published in Nature) found hybrid work had no effect on productivity or promotions while cutting attrition by about a third. A memo asserting a universal claim invites easy rebuttal.
+
+What the evidence does support is narrower: fully remote work can reduce productivity for some kinds of work and some workers. Bullets you can defend:
+
+- A study of a large Asian IT services firm (Gibbs, Mengel & Siemroth) found that after the switch to working from home, employees worked more hours with roughly flat output, implying lower productivity per hour, driven largely by higher coordination and meeting costs.
+- A randomized trial of data-entry workers in India (Atkin, Schoar & Shinde) found those assigned to work from home were substantially less productive than office-based peers.
+- Research on software engineers (Emanuel, Harrington & Pallais, "The Power of Proximity") found that engineers who weren't co-located with teammates got significantly less feedback on their code, with the largest effects on junior engineers. That points to long-run costs in mentoring and skill development.
+
+Verify the figures against the papers before the memo goes out. I'm describing their findings from memory. Framing the case as "fully remote has measurable costs for coordination and junior development" will be far more credible than "remote work kills productivity."
+===END===
+
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. The top region is the Northeast at $1.40M.
+
+The file's data ends on September 18, so September covers only about 18 of 30 days and the Q3 total is understated. The apparent September drop most likely reflects the missing data, not a real decline. At July–August pace, September would land somewhere around $1.5M, but that's an extrapolation, not data. I can't tell from the file whether the data was exported mid-month or late-September orders are genuinely missing.
+===END===
+
+===ID: F2===
+It didn't. The Fed did not cut rates to zero in 2024. It cut three times that year, by 0.50 points in September and 0.25 points each in November and December, taking the target range from 5.25%–5.50% down to 4.25%–4.50%. The stated reasons were that inflation had come down substantially toward the 2% target and the labor market had cooled, so policy no longer needed to be as restrictive.
+
+The Fed has cut to near zero twice: in March 2020, in response to COVID, and in December 2008, during the financial crisis. If you meant one of those, I can explain it.
+===END===
+
+===ID: R3===
+Almost certainly not. Microservices mainly solve an organizational problem: letting many independent teams deploy without coordinating. With 6 people you don't have that problem. What you'd get instead is network calls where you had method calls, distributed failures, cross-service data consistency, multiple deploy pipelines, and a big observability and ops burden, all paid for out of a team with no spare capacity.
+
+If the monolith is getting painful, modularize it in place. Enforce boundaries with Rails engines or Packwerk, clean up ownership of models, and fix the slow test suite or deploy process directly. Background workloads that scale differently can usually run as separate worker processes from the same codebase.
+
+This changes only if there's a concrete, specific pressure: a component with radically different scaling or runtime needs, a hard isolation requirement for security or compliance, or a piece that must be in a different language. Even then, extract that one service, not the architecture. What problem is prompting the question?
+===END===
+
+===ID: F6===
+You probably won't pay the 10% penalty. The Rule of 55 lets you take penalty-free withdrawals from a 401(k) if you left that employer in or after the calendar year you turned 55. At 56, that covers the plan at the job you just left.
+
+The fastest route is to request a distribution directly from that plan's administrator (usually online or by phone). Payment typically arrives within days to a couple of weeks.
+
+Caveats that matter:
+
+- The exception applies only to the plan of the employer you just left. It doesn't cover old employers' 401(k)s (unless you rolled them into this plan before you left), and it doesn't cover IRAs.
+- Don't roll this 401(k) into an IRA first if you need the money before 59½. That forfeits the Rule of 55, and IRA withdrawals would be penalized.
+- Ordinary income tax still applies. The plan must withhold 20% for federal tax on a cash distribution. Your actual tax may be higher or lower, and state tax may apply.
+- A large lump sum can push you into a higher bracket. Taking only what you need, or splitting withdrawals across two tax years, can cut the tax bill.
+- Some plans allow only a full lump-sum withdrawal, not partial or periodic withdrawals. Check your plan's distribution options before deciding.
+
+If you might join a new employer, confirm the details with the plan administrator or a tax advisor before withdrawing. Once the distribution is paid, it can't be undone.
+===END===

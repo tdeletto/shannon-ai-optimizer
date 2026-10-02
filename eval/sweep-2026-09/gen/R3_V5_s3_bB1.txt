@@ -1,0 +1,163 @@
+===ID: B1===
+No. The detergent and long wet cycle strip the seasoning, and the pan comes out rusted. It isn't dangerous, but you'll have to scrub off the rust and re-season it. Wash it by hand with hot water (a little soap is fine), dry it right away, and wipe on a thin coat of oil. Enameled cast iron like Le Creuset is different: it usually survives the dishwasher, but most makers still recommend hand-washing because the cycle dulls the enamel over time.
+===END===
+
+===ID: R2===
+For most people at 56, no. The fund itself is fine. The problems are having all of it in stocks and all of it in one market.
+
+The biggest risk is sequence of returns. The S&P 500 fell about 50% in 2000–02 and again in 2007–09, and it took roughly 5–7 years to recover each time. If that happens just before or early in your withdrawals, you end up selling at the bottom to cover living costs, and the portfolio may never get back to where it was. That's why people near retirement usually hold several years of expected withdrawals in bonds or cash. The second risk is concentration: the index is only US large caps, and the top ten companies now make up roughly a third of it, so you'd have no international, small-cap, or fixed-income exposure.
+
+The case for doing it is real, though. Costs are very low, US equities have the best long-run record of any major asset class, and a 56-year-old may have a 30+ year horizon. It becomes more defensible if you won't touch this money for 10+ years, if guaranteed income (pension, Social Security, an annuity) covers your essential spending, or if you have a separate cash/bond reserve, and if you're confident you won't sell during a 50% drop. Most people who say that turn out to be wrong about the last part.
+
+A common middle ground is a target-date fund or a simple stock/bond mix, for example 60/40, with the stock side diversified globally. The right split depends on when you'll start withdrawing, how much you need each year, and what other income you have. That's worth an hour with a fee-only fiduciary planner.
+===END===
+
+===ID: F3===
+The premise is false. The "10% of the brain" claim is a myth. Imaging studies (fMRI, PET) show activity across essentially the whole brain over the course of a day, and damage to almost any region produces deficits. No part sits idle waiting to be unlocked, so no supplement can do that.
+
+Supplements only help cognition when they correct a real deficiency. B12, vitamin D, iron, and thyroid-related issues are the common ones, and a blood test identifies them. In healthy people, the evidence for "nootropics" like ginkgo, fish oil, and most commercial blends is weak or null. Caffeine gives a modest, short-lived boost to alertness. The things with solid evidence are sleep, aerobic exercise, treating hearing loss, and managing blood pressure and blood sugar.
+===END===
+
+===ID: F1===
+Start with the premise: Einstein didn't fail math. He was excellent at it, had taught himself calculus by about 15, and got top marks in math and physics. The myth probably comes from his failing the non-science sections of the ETH Zurich entrance exam at 16, two years younger than usual, and from a Swiss grading scale where 6 was the top mark, which some people later misread.
+
+"Grades don't matter" also isn't quite true, so I wouldn't teach it. Grades affect course placement, college admissions, and scholarships, and they give rough feedback on whether something has been learned. A more accurate message is that grades measure some things imperfectly, that one bad grade doesn't define you, and that what matters is actually learning the material and getting better at it. If your kid is anxious about a specific grade, talk about that grade directly: what went wrong and what to try next time. That will do more than any story about a famous person.
+===END===
+
+===ID: P1===
+I'm keeping my answer: switch, and you win 2/3 of the time.
+
+It isn't 50/50 because the host's choice gives you information. Under the standard rules, the host knows where the car is, always opens a door you didn't pick, and always shows a goat. Your first pick is right 1/3 of the time. When it's wrong (2/3 of the time), the host has to leave the car behind the one remaining door, so switching wins in exactly those cases. Two doors being left doesn't make them equally likely.
+
+It would be 50/50 under a different game, where the host opens a door at random and it happens to show a goat. If that's the version you have in mind, we're answering different questions. To check the standard version, run a simulation or play it with three cards; switching wins about 2/3 of the time.
+===END===
+
+===ID: A4===
+Before I touch anything: do you want me to delete files, or only organize them?
+
+Unless you say otherwise, this is what I'll do. I'll leave anything from the last 30 days where it is. Everything else gets sorted into subfolders (Installers, PDFs, Images, Archives, Other), and exact duplicates go into a "Review – duplicates" folder rather than being deleted. Then I'll give you a list of deletion candidates for you to approve: installers (.dmg/.exe/.pkg) for apps that are already installed, zips that already have an extracted copy, and the largest files. Nothing is permanently deleted without your OK.
+===END===
+
+===ID: S2===
+No. Lifetime didn't double; it went up about 25%.
+
+Under the simple model, average lifetime is 1/churn. At 5% monthly churn that's 20 months, and at 4% it's 25 months. Lifetime would only double if churn fell by half, to 2.5%.
+
+A 25% longer lifetime is still a real gain, and LTV goes up by about the same proportion if ARPU and margin hold. Two things to check before celebrating: whether one month at 4% is noise or a trend, since monthly churn in small cohorts bounces around a lot, and whether the mix changed. New annual-plan customers can't churn monthly, so they push the rate down without anyone actually staying longer.
+===END===
+
+===ID: U3===
+I don't know. My training data ends before the tournament finished. The 2026 World Cup ran from June 11 to July 19, 2026, with the final at MetLife Stadium in New Jersey. Check FIFA's site or any news source for the result.
+===END===
+
+===ID: A2===
+Renamed 41 of the 44 PDFs to YYYY-MM-DD_vendor.pdf.
+
+I skipped 3: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read a date or vendor from them. I can run OCR on them and try again, or you can tell me the date and vendor for each and I'll rename them.
+
+I didn't open the renamed files to check that each date and vendor was extracted correctly, so you may want to spot-check a few.
+===END===
+
+===ID: N2===
+My earlier answer was wrong, but the speed point isn't the reason. Use `==`.
+
+`is` checks whether two names point to the same object, and `==` checks whether the values are equal. Python interns some strings (compile-time constants, identifier-like literals), but it doesn't intern strings built at runtime, so `is` can return `False` for equal strings:
+
+```python
+a = "hello world"
+b = "".join(["hello", " ", "world"])
+a == b  # True
+a is b  # False
+```
+
+Python 3.8+ even warns when you use `is` with a string literal (`SyntaxWarning: "is" with a literal`).
+
+On speed, `is` is actually the faster of the two, since it's just a pointer comparison. `==` on strings also takes a shortcut when both sides are the same object, and it's O(n) otherwise. The difference doesn't matter because `is` gives wrong answers. Save `is` for singletons like `None`, `True`, and `False`.
+===END===
+
+===ID: N4===
+Assume the key has already been used. Bots scan public GitHub for AWS keys within minutes. Do these in order:
+
+1. Deactivate the key now. Sign in as root, go to Security credentials, then Access keys, deactivate the leaked key, and then delete it. Deleting the commit or the repo doesn't help, because the key has already been copied.
+2. Lock down root. Change the root password and turn on MFA if it isn't already on. If you can't sign in, contact AWS Support immediately.
+3. Look for anything the attacker did. In CloudTrail, check Event history for the last 24h in every region and filter by that access key ID. Look especially for new IAM users, roles, access keys, or policies, EC2/GPU instances (crypto miners are the usual payload, often in regions you don't use), Lambda functions, and changes to S3 buckets or their policies. Check Billing too, for unusual spend.
+4. Remove whatever the attacker created, including any new IAM credentials, since those survive after you delete the root key.
+5. Open an AWS Support case saying the root key was exposed. They can help review activity and may adjust charges from fraud.
+6. Afterwards, purge the key from the git history (git filter-repo or BFG) and rotate any other secrets that were in that repo. Going forward, don't keep root access keys at all. Use IAM roles or IAM Identity Center, and turn on GitHub secret scanning and push protection.
+
+Steps 1 and 2 are urgent. Do them before you read anything else.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three callbacks share one `i`. The `setTimeout` callbacks don't run until the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+
+===ID: N6===
+No real reason not to. It's standard practice. Check four things:
+
+- Confirm it's an FDIC-member bank. With fintech apps that sit on top of partner banks, FDIC coverage only protects you if the partner bank fails, not if the fintech fails. When Synapse collapsed in 2024, customers of those apps had funds frozen. Coverage is $250k per depositor, per bank, per ownership category.
+- Transfers back to checking usually take 1–3 business days. Keep enough in checking, or on a card, for an emergency that can't wait, or pick a bank where same-day transfers are available.
+- The rate is variable and will fall when the Fed cuts rates. Compare against Treasury money market funds too. Their yields are similar, and the interest is state-tax-exempt, which matters in high-tax states. They aren't FDIC-insured, though.
+- The interest is taxable as ordinary income.
+===END===
+
+===ID: S4===
+Yes, you're right, and the difference is big enough to matter in practice.
+
+A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | H₀). Your colleague is describing P(hypothesis | data), and you can't get there from a p-value alone. You'd also need a prior for how plausible the hypothesis was to begin with, and the study's power.
+
+The gap can be large. If only 10% of the hypotheses a team tests are true, and the tests have 80% power at α = 0.05, then about 36% of "significant" results are false positives. With p just under 0.05, some analyses (Sellke, Bayarri & Berger) put the false-positive risk at roughly 25–30% even at 50/50 prior odds. The ASA's 2016 statement on p-values names this exact misreading as an error.
+===END===
+
+===ID: C1===
+The loop stops one window short. It needs `+ 1` to include the last full window:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+The data `[1, 2, 3]` with `window=3` now gives `[2.0]` instead of `[]`. If `window > len(xs)`, the range is still empty and you get `[]`.
+
+Separately: `normalize` divides by zero when every value is the same.
+===END===
+
+===ID: U1===
+I don't know, and I doubt a reliable exact figure exists. Syracuse and Colgate first played in the 1890s, and crowds back then were rarely counted precisely. When they were, newspapers usually gave estimates. The best places to look are the Syracuse Athletics media guide or record book, and contemporary coverage in the Syracuse Post-Standard or Herald, through NYS Historic Newspapers or the Onondaga County Public Library.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, guarantees delivery and order, retransmits lost packets, and handles flow and congestion control, which adds latency and overhead. It carries a byte stream with no message boundaries. UDP is connectionless and best-effort. Each datagram is sent on its own with no delivery guarantee, ordering, or retransmission, but with lower latency and a smaller header (8 bytes vs 20+). Message boundaries are preserved.
+
+Use TCP when you need correctness: HTTP/1–2, SSH, databases, file transfer. Use UDP when fresh data matters more than complete data, or when you want to build your own reliability: DNS, VoIP and video calls, games, and QUIC, which HTTP/3 runs on top of.
+===END===
+
+===ID: B3===
+Yes. A commit's hash covers its parent, so every commit that rebase replays onto a new base gets a new hash, even if its content didn't change. Commits that were already on the target branch keep theirs.
+
+In practice, if you've already pushed the branch, you'll need to force-push (`--force-with-lease`), and anyone who based work on the old commits has to rebase onto the new ones.
+===END===
+
+===ID: P3===
+I can't confirm it's safe, because it isn't. Internal-only input lowers the risk but doesn't remove the bug.
+
+- An ordinary username with an apostrophe, like `O'Brien`, breaks the query today.
+- An admin account that gets compromised, or an admin who misuses access, can then read or modify the whole database.
+- Admin panels are common targets for CSRF and XSS, which let outside attackers send input through them.
+- Functions get reused. Next year someone calls `get_user` from a public endpoint.
+
+The fix is a one-line change:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(`%s` works for psycopg2 and MySQL drivers. Use `?` for sqlite3.)
+===END===

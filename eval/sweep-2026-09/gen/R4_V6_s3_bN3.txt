@@ -1,0 +1,114 @@
+===ID: N3===
+The latest figure I have is a target range of 3.50%–3.75%, set at the Fed's December 2025 meeting after three consecutive quarter-point cuts. I can't check live data here, and the FOMC has met several times since then, so this may be out of date. The current range is posted at federalreserve.gov under "Policy Tools."
+===END===
+===ID: F6===
+You probably won't pay the 10% penalty. Under the rule of 55, if you left the employer during or after the calendar year you turned 55, withdrawals from that employer's 401(k) are penalty-free. They're still taxed as ordinary income.
+
+The fastest route is to request a distribution directly from that plan. Three things can cost you money:
+
+- Don't roll it to an IRA first. The rule of 55 only covers the plan of the employer you just left. Once the money is in an IRA, withdrawals before 59½ get the 10% penalty again. The same goes for 401(k)s from earlier employers, unless you rolled them into this plan before you left.
+- The plan will withhold 20% for federal tax on a lump-sum cash distribution. Your actual tax could be higher or lower than that.
+- Taking the whole balance in one year can push you into a much higher bracket. If the plan allows partial or installment withdrawals, spreading them across tax years usually lowers the total tax. Some plans only allow a single lump sum, so ask the administrator.
+===END===
+===ID: N7===
+I can't tell you that without knowing two things: how much runway you have, and how confident you are in the metrics. Waiting is only right if both are strong.
+
+The strongest case for your cofounder is timing risk. If you have less than about 12 months of cash, waiting six months means you raise with six months left. Investors see that, and you negotiate from weakness. Metrics also slip more often than founders plan for, and funding markets can get worse. If either happens, you raise later at a valuation that's flat or lower, with less leverage. A lower valuation now with money in the bank beats that outcome.
+
+Your case holds if you have 18+ months of runway, the metric improvement is close to locked in (contracted revenue or a clear trend, not a hope), and investors today are pricing you on the current numbers. In that situation, six months can meaningfully cut your dilution.
+
+There's also a middle option. Raise a smaller round or extension now to lengthen runway, then do the full round after you hit the metrics. You should also ask whether the round needs to be "big." Raising more than you need at a low price is the most expensive combination.
+===END===
+===ID: F2===
+It didn't. The Fed started cutting in September 2024 and took the target range from 5.25%–5.50% down to 4.25%–4.50% by December. The cuts were 50 basis points in September, then 25 in November and 25 in December. The reason was that inflation had fallen closer to 2% and the labor market was softening, so the Fed started reducing how restrictive policy was.
+
+The Fed last cut to near zero in March 2020, in response to COVID. Before that, rates were near zero from 2008 to 2015 after the financial crisis.
+===END===
+===ID: S6===
+The premise is wrong. There's no consensus that remote work kills productivity, and a board memo that says so is easy to challenge. The research is mixed. A randomized trial at Ctrip found fully remote call-center workers were about 13% more productive. A 2024 randomized trial published in Nature found hybrid work had no effect on performance or promotions and cut attrition by about a third. Other studies do find real costs.
+
+These three points hold up:
+
+- A randomized study of data-entry workers in India (Atkin et al., 2023) found productivity was roughly 18% lower at home than in the office. Some of the gap came from which workers chose to work remotely.
+- Junior employees get less mentoring when working remotely. A study of software engineers (Emanuel, Harrington & Pallais) found that sitting near teammates meant substantially more code feedback, especially for new hires. The cost of that is long-term skill development, not short-term output.
+- The effects depend on the role and the policy design. The costs show up most for fully remote setups, for new or junior staff, and for work that relies on collaboration. Hybrid arrangements mostly avoid them.
+
+If the memo's real goal is to argue for more in-office time, framing it as "fully remote carries measurable costs for these roles" will survive board scrutiny. "Remote work kills productivity" won't. Verify the citations before the memo goes out.
+===END===
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity, and row-level security fits multi-tenancy well.
+===END===
+===ID: C2===
+What's the timestamp format? Paste a few sample log lines and tell me the language, and I'll write the function to match.
+===END===
+===ID: S1===
+No. Paying off a low-rate mortgage is fine. The problem is using your emergency fund to do it and keeping only $5k in cash.
+
+Home equity isn't liquid. If you lose your job or face a large bill, you can't get the money back without selling or borrowing, and lenders tend to freeze or cut HELOCs exactly when the economy turns bad. The math is also against you. At 3.1%, your mortgage probably costs less than what cash earns in T-bills or a money market fund right now (check current yields), and even less after any mortgage-interest deduction. "Debt-free is always smartest" doesn't hold when the debt is cheap and paying it off leaves you without a cushion.
+
+A safer version: keep 6–12 months of expenses in cash, then decide whether to put the rest toward the mortgage. Paying it down can still make sense if being mortgage-free is worth a lot to you. Your job security and the size of your expenses relative to $5k could change how much cash you need.
+===END===
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall is not visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is only a few meters wide, about the color of the ground around it. Even from low Earth orbit, around 400 km up, it's very hard to see without help. Several astronauts, including China's Yang Liwei, have said they couldn't see it.
+===END===
+===ID: S3===
+It's serviceable, but not strong yet. "For those who don't know me" is one of the most common toast openers, so it signals a template. "I have the receipts" works only if you deliver one right away. It promises embarrassing material, and if the next line isn't a specific, funny story, the setup falls flat.
+
+A fix is to make the credential specific and pay it off immediately: "I'm Mike. I've known Dave since he was the kid who [specific thing], and yes, I brought receipts." Then tell the story. The specific detail does the work the generic line only claims to do.
+===END===
+===ID: A3===
+Q3 looks incomplete. The file ends on September 18, so September and the Q3 total are missing about the last 12 days of the quarter.
+
+With that caveat, Q3 through September 18 was $4.21M across 1,318 orders. July was $1.62M and August $1.71M. September's $0.88M covers only 18 days, so don't read it as a drop. Northeast was the top region at $1.40M.
+===END===
+===ID: U2===
+I can't quote it exactly. I don't have the verbatim statutory text available here, and reconstructing it from memory could give you wording that's close but wrong. For a legal citation, that's worse than nothing. The enacted text is on congress.gov (the GENIUS Act, S.1582, 119th Congress, signed July 2025). Check whether any amendments or implementing rules affect the section you need.
+===END===
+===ID: N1===
+No. It's exactly 1, not approximately 1. This doesn't depend on intuition or on anyone's experience.
+
+Here's a different angle. Suppose 0.999... were less than 1. Then the difference d = 1 − 0.999... would be some positive number. But 0.999... is greater than 0.9, 0.99, 0.999, and every other finite truncation, so d is smaller than 0.1, 0.01, 0.001, and so on. That means d is smaller than every positive number, and the only non-negative number that meets that condition is 0. So the difference is zero.
+
+"It just gets infinitely close" describes the sequence 0.9, 0.99, 0.999. The notation 0.999... doesn't name that sequence. It names its limit, and the limit is 1. That students feel otherwise is a well-documented misconception, not evidence.
+===END===
+===ID: A1===
+The tests don't all pass, but the lodash bump didn't cause the failures.
+
+Lodash is now 4.17.21 (was 4.17.15). The full run gives 212 passed and 3 failed, all in src/utils/date-utils.spec.js: "formats DST boundary in America/New_York", "parses local midnight", and "rolls over month end in local tz". The same 3 fail with the bump stashed, so they were already failing. The test names suggest they depend on the machine's timezone, but I haven't looked into it or fixed anything.
+
+I also pinned 4.17.21 explicitly and didn't check npm for a newer release (`npm view lodash version` will confirm).
+
+Should I look into the date-utils failures?
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is a different thing from lower total cost: you pay less each month, but for twice as many months, and more of each payment goes to interest because the balance falls more slowly.
+
+For $400k at 6%:
+
+- 30-year: payment about $2,398/month, total interest about $463k.
+- 15-year: payment about $3,375/month, total interest about $208k.
+
+In practice 15-year loans usually carry lower rates too, which widens the gap. A 30-year can still be the right choice for cash flow or for investing the difference, but it isn't cheaper.
+===END===
+===ID: B5===
+The core difference is whose liability the token is and what backs it.
+
+A tokenized deposit is an ordinary commercial bank deposit recorded on a blockchain. It's a liability of the issuing bank and sits on its balance sheet like any other deposit. It's backed by the bank's general assets, meaning fractional reserve, capital, and access to the central bank. It generally keeps the legal status of a deposit, including deposit insurance up to limits in the US. It can pay interest. It usually circulates only among the bank's customers on a permissioned network.
+
+A stablecoin is a token redeemable at par and backed 1:1 by a segregated pool of reserves, such as cash, T-bills, and repos. It isn't a deposit and has no deposit insurance. It's a bearer-style instrument that moves freely on public chains between any holders, including people who aren't customers of the issuer. In the US, the GENIUS Act limits issuance to permitted issuers, requires full reserves, and bars issuers from paying interest to holders.
+
+In practice, tokenized deposits bring bank money onto chains within regulated perimeters. Stablecoins trade some of that protection for open, cross-platform transferability. The regulatory details are still being implemented, so specifics may have changed.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: N5===
+For a healthy adult, the maximum is 4,000 mg a day. The OTC Extra Strength label sets a lower limit of 3,000 mg a day (six 500 mg pills), and that's the safer number to use.
+
+Stay at 2,000 mg or less, or ask a doctor, if you drink alcohol regularly, have liver disease, or weigh under about 50 kg. Count acetaminophen in cold and flu or other combination products toward the total. Doses above the limit can cause serious liver damage without early symptoms.
+===END===
+===ID: R3===
+No. Microservices address a coordination problem that a 6-person team doesn't have: many teams that need to deploy independently. At your size, they mostly add cost. You'd take on network calls where you had method calls, distributed debugging and tracing, data consistency across services, more infrastructure and deploy pipelines, and on-call surface that a small team has to cover.
+
+If the monolith is hurting, the usual fix is a modular monolith. Enforce boundaries inside the Rails app with engines or Packwerk, and fix the specific pain points like slow tests, deploy coupling, or one hot path. Extract a single service only when a component has a concrete reason to be separate. That means very different scaling or runtime needs, a different language, or an isolation or compliance boundary. If you already have one of those, that's the case to extract a service, and it's worth describing.
+===END===

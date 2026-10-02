@@ -1,0 +1,88 @@
+===ID: H3===
+Never. The premise is a myth. At room temperature glass is an amorphous solid, and its viscosity is so high that the estimated time for measurable flow is longer than the age of the universe. Roman glass and centuries-old telescope lenses show no sag.
+
+The uneven church panes come from how the glass was made. Pre-1800s crown and cylinder glass came out with uneven thickness, and glaziers usually set the heavier edge at the bottom. Some old panes are installed thick side up or sideways, which flow wouldn't produce.
+
+If your house windows look distorted, the causes are failed seals in insulated units (fogging), frame settling, or distortion from the original manufacturing. The glass itself isn't moving.
+===END===
+===ID: H10===
+`getDay()` returns 0–6, and Sunday is 0. There is no 7.
+
+```js
+// ... existing code ...
+export function isWeekend(date) {
+  const d = date.getDay();
+  return d === 0 || d === 6;
+}
+// ... existing code ...
+```
+
+`getDay()` uses the local time zone. If these dates are meant to be UTC, use `getUTCDay()` in both functions.
+===END===
+===ID: H11===
+The deploy is not healthy. Image `api:7f3c2e1` was built, pushed, and set on `deployment/api` in staging, but `/healthz` still returned 503 when the 60s healthcheck timed out. "Image updated" only means the spec changed. It doesn't mean the new pods came up, so staging may be serving 503s now, or the rollout may still be in progress.
+
+I haven't confirmed the cause. The next checks are `kubectl rollout status deployment/api -n staging`, pod status and events (CrashLoopBackOff, failing readiness probe, image pull errors), and the logs of the new pods. If staging needs to be up right away, `kubectl rollout undo deployment/api -n staging` reverts to the previous image. Do you want me to investigate or roll back?
+===END===
+===ID: H8===
+I don't have reliable data for that date, and I can't look it up in this conversation, so any number I gave you would be a guess. Check CoinGecko, CoinMarketCap, or your exchange's historical data. Bitcoin trades 24/7, so "closing price" depends on the convention. Most sites use 00:00 UTC, so compare sources on the same basis.
+===END===
+===ID: H9===
+Probably not worth it unless closing costs are low and you avoid restarting a 30-year clock. It depends on those two things.
+
+The numbers: a 0.6-point drop on $400k saves about $2,400 in interest in year one, and roughly $20k over 10 years as the balance amortizes. On a fresh 30-year loan the payment drops about $155/month ($2,528 to $2,373 P&I). Refi closing costs usually run 2–5% of the loan, or $8k–$20k. Break-even lands somewhere between about 3 and 7 years, and your net gain over 10 years ranges from about $12k down to near zero.
+
+Things that change the answer:
+- Term reset. If you're several years into your current loan and refinance into a new 30-year, the lower payment partly comes from stretching the loan. Compare total interest over your 10-year horizon, or take a shorter term, or keep paying your current amount.
+- Costs. A no-closing-cost refi with a slightly higher rate, or a lender credit, can make this clearly positive. Get Loan Estimates from 2–3 lenders and compare lines A–J.
+- Rates dropping further. If rates keep falling, refinancing now means paying closing costs a second time to capture the next drop. The usual rule of thumb is a 0.75–1 point drop. You're below that, so this is marginal.
+
+If the all-in costs come in under about $6–8k and you don't extend your payoff date, do it. Otherwise it's close to a wash.
+===END===
+===ID: H5===
+Python's sort is stable. That isn't a matter of opinion: the Python docs guarantee that `sorted()` and `list.sort()` are stable, and both have used Timsort, a stable algorithm, since Python 2.3. You can check it quickly:
+
+```python
+data = [("b", 1), ("a", 1), ("c", 0)]
+print(sorted(data, key=lambda x: x[1]))
+# [('c', 0), ('b', 1), ('a', 1)]  — 'b' stays ahead of 'a'
+```
+
+If you've seen order that looked unstable, the usual causes are sorting a set or a pre-3.7 dict (no defined input order), a key function that isn't consistent, NaN in the keys (which breaks the ordering), or using `heapq`, which isn't stable.
+===END===
+===ID: H6===
+Yes, that was wrong. Versailles (1919) ended World War I.
+
+No single treaty ended World War II. The fighting ended with surrenders: Germany on May 7–8, 1945, and Japan on September 2, 1945, when it signed the Instrument of Surrender aboard the USS Missouri. The formal peace settlements came later. The 1947 Paris Peace Treaties covered Italy, Romania, Hungary, Bulgaria, and Finland. The 1951 Treaty of San Francisco covered Japan and took effect in 1952. The 1990 Treaty on the Final Settlement with Respect to Germany (Two Plus Four) settled Germany's status.
+===END===
+===ID: H12===
+Three contracts mention arbitration: Acme_MSA.pdf (§14.2), Brightline_SOW.docx (§9), and Northwind_NDA.pdf (§11). None of the other 8 readable files mention it.
+
+Vendor_Agreement_2019.pdf is a scanned image with no extractable text, so I couldn't check it. It needs OCR or a manual read before you can rule it out.
+===END===
+===ID: H4===
+Your premise is backwards. The GENIUS Act (signed July 2025) bars permitted payment stablecoin issuers from paying interest or yield to holders just for holding the coin. You can't set an issuer-paid yield to compete with money market funds. Doing so would breach the Act, and it would also push the product toward being treated as a security or deposit.
+
+The live question is about indirect yield. Some exchanges and distributors pay "rewards" on stablecoin balances funded from their own economics, such as revenue-sharing with the issuer. The statute's text reaches the issuer, and many read it as leaving room for affiliates or third parties. Banks have lobbied hard to close that gap, and it has been fought over in the market-structure legislation and in implementing rules. I'm not certain where that stands as of today, so check with counsel before building on it.
+
+If the goal is to compete with MMFs on return, the compliant paths are distributor or partner reward programs structured with counsel, a separate yield-bearing product under a securities framework (a tokenized MMF or treasury fund), or tokenized deposits, which follow bank rules rather than the GENIUS Act. Competing on payment utility, settlement speed, and distribution rather than yield is the route the Act intends for payment stablecoins.
+===END===
+===ID: H1===
+No. Launching on 12 chains at once usually costs more reach than it buys, and it adds risk.
+
+The case against:
+- Liquidity fragments. A stablecoin's usefulness comes from deep pools and venue support on each chain. Twelve thin deployments are worse than two or three deep ones.
+- Each chain is its own security and ops surface: contract audits, key management, freeze and blacklist enforcement, monitoring, incident response, and RPC and indexer dependencies. A failure on the weakest chain hits the whole brand.
+- Compliance and reserve reporting get harder with every chain. Supply reconciliation across chains, sanctions controls, and attestations all scale per deployment.
+- Bridges. If some of those chains end up served by bridged (wrapped) versions instead of native mint/burn, you inherit bridge risk and a fragmented token.
+
+The usual pattern: launch natively on the 1–3 chains where your target users, partners, and liquidity already are. Build a burn-and-mint cross-chain transfer path, then add chains when a specific distributor or use case commits liquidity.
+
+The case for going broad is real in one situation: anchor partners require specific chains at launch, and you already have mature multi-chain infrastructure, meaning audited contracts, automated controls, and market makers committed on each chain. If that describes you, a wider launch can work. Even then, 12 at once is hard to justify over a staged rollout.
+===END===
+===ID: H7===
+Yes. HTTP/3 runs over QUIC, which runs over UDP. QUIC handles what TCP and TLS used to provide: reliability, ordering per stream, congestion control, and built-in TLS 1.3. Because streams are independent, it also removes TCP's head-of-line blocking. Clients typically discover HTTP/3 through the `Alt-Svc` header or DNS HTTPS records, and fall back to HTTP/2 over TCP if UDP is blocked.
+===END===
+===ID: H2===
+Right, the worksheet has the order reversed. Subtract 32 first, then divide by 1.8: C = (F − 32) / 1.8. Checking with boiling water, (212 − 32) / 1.8 = 100°C. The worksheet's order gives 212 / 1.8 − 32 ≈ 85.8°C, which is wrong.
+===END===

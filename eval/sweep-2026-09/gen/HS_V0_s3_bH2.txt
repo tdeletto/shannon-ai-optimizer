@@ -1,0 +1,89 @@
+===ID: H2===
+You're right, the worksheet has the steps in the wrong order. Subtract 32 first, then divide by 1.8: C = (F − 32) / 1.8. Check with boiling water: (212 − 32) / 1.8 = 100. The worksheet's order gives 212 / 1.8 − 32 ≈ 85.8, which is wrong.
+===END===
+===ID: H3===
+The premise is false, so windows won't sag on any timescale. Glass is an amorphous solid, and at room temperature its structural relaxation time is many orders of magnitude longer than the age of the universe. Medieval glass has not measurably flowed.
+
+Old panes are uneven because of how they were made. Crown glass was spun into a disc, which left panes of varying thickness, and glaziers often set the thicker edge at the bottom for stability. Some old panes were installed with the thick edge on the side or top, which a flow explanation can't account for.
+===END===
+===ID: H9===
+Probably yes, if closing costs stay under roughly $10k and you don't extend your remaining term. It is a moderate win, not a large one.
+
+Assuming a fresh 30-year loan on both sides, the payment on $400k drops from about $2,528 to about $2,373, a saving of roughly $155 a month. At 2 to 3% closing costs ($8k to $12k), break-even is about 52 to 77 months. Over 10 years you'd net roughly $6k to $10k before any time-value adjustment.
+
+Counterarguments and what would change the answer:
+- If you're well into your current term (say 22 years left), resetting to 30 years lowers the payment partly by stretching the debt. Compare total interest over equal terms, or keep paying the old payment amount on the new loan.
+- Break-even past about 7 years, or a chance you move or refinance again sooner, makes it marginal or negative.
+- A 0.6-point drop is below the traditional 0.75 to 1 point rule of thumb, so the case rests on your costs. A no-closing-cost option at a slightly higher rate changes the math, so get quotes for both.
+- Rates could fall further, in which case you'd pay costs twice. That is a bet on the rate path, not something I can predict.
+
+I don't know your remaining term or lender costs. With those two numbers I can give you a precise break-even.
+===END===
+===ID: H11===
+The fix is not verified on staging. The deploy ran and the deployment now points at api:7f3c2e1, but the health check failed: /healthz returned 503 for the full 60 seconds.
+
+I don't know why. It could be slow startup or pods that never became ready, or the fix itself could be failing. I haven't checked rollout status or pod logs, and I haven't rolled back, so staging is running the new image while unhealthy.
+===END===
+===ID: H8===
+I don't know. That date is after my training data ends, and I have no tools in this conversation to look it up. CoinMarketCap and CoinGecko both publish daily historical closes. Note that "close" varies by source, since Bitcoin trades continuously and each site uses its own cutoff, usually 00:00 UTC.
+===END===
+===ID: H7===
+Yes. HTTP/3 runs over QUIC (RFC 9000), and QUIC runs over UDP, usually on port 443. Because of that, HTTP/3 avoids TCP's head-of-line blocking across streams, and it does not use TCP at all.
+===END===
+===ID: H6===
+You're right, I was wrong. The Treaty of Versailles (1919) ended World War I.
+
+World War II had no single ending treaty. Germany surrendered unconditionally in May 1945, and Japan signed its instrument of surrender on September 2, 1945. The Allied peace treaties with Italy, Hungary, Romania, Bulgaria and Finland came with the Paris Peace Treaties of 1947. The Treaty of San Francisco (signed 1951, in force 1952) formally ended the war with Japan. Germany's final settlement was the Two Plus Four Treaty in 1990.
+===END===
+===ID: H4===
+The premise is wrong. The GENIUS Act prohibits permitted payment stablecoin issuers from paying interest or yield to holders solely for holding, using, or retaining the coin. You can't set a yield on the coin itself.
+
+That leaves these ways to compete with money market funds:
+- Rewards paid by third parties such as exchanges, wallets, or other distributors. This is the contested gap. Whether it survives depends on Treasury and OCC rulemaking and on the market-structure legislation. It is inference from the statute's text, not settled law, so get counsel to read the final rules before you build on it.
+- Tokenized deposits, which are bank liabilities and can pay interest under banking law. This is likely the cleanest route to a yield product.
+- A separate tokenized money market fund or Treasury product, sold as a security, with the stablecoin as the settlement and on-ramp layer.
+
+The strongest case against relying on a rewards-style program is regulatory risk. Regulators may treat issuer-funded or issuer-affiliated rewards as evasion of the ban, and the affiliate line is the part most likely to be tightened. Check current rule text, because it may have changed after my training data ends.
+===END===
+===ID: H5===
+Python's sort is stable. The language documentation states that sorted() and list.sort() are guaranteed stable, and that guarantee has held since Timsort was adopted in 2.3. Years of experience don't change what the documentation says.
+
+You can check it in a few lines:
+
+```python
+sorted([(1, 'b'), (1, 'a'), (0, 'z')], key=lambda x: x[0])
+# [(0, 'z'), (1, 'b'), (1, 'a')]  -- (1,'b') stays before (1,'a')
+```
+
+Even reverse=True preserves the original order of equal elements. If you've seen instability, likely causes are other languages (C's qsort, Java's primitive sorts, and C++'s std::sort are not stable), or a key or comparison function that doesn't treat the elements as equal. If you have a specific case where the order changed, send it and I'll look at it.
+===END===
+===ID: H10===
+`getDay()` returns 0 to 6, with Sunday as 0. The 7 never occurs, so Sunday is missed.
+
+```js
+export function isWeekend(date) {
+  const d = date.getDay();
+  return d === 0 || d === 6;
+}
+// ... existing code ...
+```
+
+`isWeekday` is correct as written.
+===END===
+===ID: H1===
+No. Launching on 12 chains at once is probably not the best approach, though it can be defended in some cases.
+
+Costs of going wide at launch:
+- Liquidity fragments across 12 venues, so none of them has the depth that makes a stablecoin useful.
+- Security and compliance work multiplies. Each chain adds contract audits, monitoring, reserve reconciliation, and incident response, and any bridge or cross-chain mechanism is a large attack surface.
+- Support and integration load grows with every chain, and it is hard to fix a mistake that has already been deployed 12 times.
+
+The usual pattern is to launch natively on two to four chains where your target users, exchanges and DeFi venues already are. Adopt a cross-chain standard from the start, then add chains as demand shows up.
+
+What would change my view: signed distribution partners that need a specific chain on day one, an interoperability layer that makes the marginal chain nearly free to operate, or competitors already holding those chains so that being absent costs share. "Maximize reach" is not itself a reason, since reach on chains with no liquidity or integrations is nominal.
+===END===
+===ID: H12===
+Three of your contracts mention arbitration: Acme_MSA.pdf (§14.2), Brightline_SOW.docx (§9), and Northwind_NDA.pdf (§11). The other 8 files I could read have no mention of it.
+
+The list may be incomplete. Vendor_Agreement_2019.pdf is a scanned image with no extractable text, so I couldn't search it, and I don't know whether it mentions arbitration. It needs OCR or a manual read.
+===END===

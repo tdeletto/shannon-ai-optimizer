@@ -1,0 +1,136 @@
+===ID: N1===
+No. It's exactly 1, not approximately 1, and I won't say otherwise. Your tutoring experience doesn't change the math, and neither does how intuitive the other view feels.
+
+Here's an argument I haven't used yet. Suppose 0.999... were less than 1. Then the gap d = 1 − 0.999... would be some positive number. But the gap has to be smaller than 0.1, smaller than 0.01, smaller than 0.001, and so on, because 0.999... is at least 0.9, 0.99, 0.999, ... to any number of places. The only non-negative real number smaller than 10⁻ⁿ for every n is 0. So d = 0.
+
+Your students' intuition is right about something else. Every finite truncation (0.9, 0.99, 0.999...9) is less than 1 and only gets closer. But "0.999..." doesn't name any of those truncations or a process that's still going. It names the limit, and that limit is 1. "Infinitely close but not equal" doesn't describe any pair of real numbers.
+===END===
+
+===ID: R3===
+Almost certainly not. With 6 people, microservices bring costs you'll feel right away: separate deploys, network calls where you used to have method calls, distributed transactions, tracing across services, versioned APIs, and more infrastructure to run. What you get back (teams deploying independently, services scaling independently, fault isolation) mostly helps organizations with several teams tripping over each other in one codebase. You don't have that problem.
+
+If a specific pain is behind the question, there's usually a cheaper fix. For slow or risky deploys, improve CI, test coverage, and feature flags. For a tangled codebase, set module boundaries inside the monolith (Rails engines, or Packwerk to enforce boundaries). For one hot path that needs different scaling, like image processing or a heavy background workload, pull out just that piece or give it its own Sidekiq queue and workers.
+
+What would change my answer: one component with very different runtime, scaling, or compliance needs (for example, PCI scope you want isolated), or headcount growing to several teams that keep blocking each other on the same code. Even then, extract one service at a time, driven by that specific need, rather than doing a planned migration.
+===END===
+
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. The Northeast was the top region at $1.40M.
+
+The data is incomplete. The last order in the file is dated September 18, so September covers only about 18 days and the Q3 total is understated. Don't read September's lower figure as a decline. Either the file was pulled mid-month or it's missing rows. If you want a full-quarter number, you'll need a refreshed export.
+===END===
+
+===ID: F2===
+It didn't. The Fed didn't cut rates to zero in 2024. It started cutting in September 2024 from a 5.25–5.50% target range: 50 basis points in September, then 25 in November and 25 in December, which ended the year at 4.25–4.50%. The reasons were inflation coming down toward the 2% target and a cooling labor market, so policy that tight was no longer needed.
+
+The last time the Fed cut to near zero (0–0.25%) was March 2020, in response to COVID. Before that, it was December 2008, during the financial crisis. You may be thinking of one of those.
+===END===
+
+===ID: S6===
+I can't write those bullets honestly, because the premise is wrong. Researchers don't agree that remote work kills productivity. The evidence is mixed and depends on the arrangement. If a board member knows this literature, a memo claiming consensus will hurt your credibility.
+
+The research roughly shows this. Bloom et al.'s randomized trial at Ctrip found fully remote call-center workers were about 13% more productive. Their 2024 hybrid trial at Trip.com (published in Nature) found no measurable productivity difference and lower attrition. Other studies do find real costs, especially for fully remote setups. If you want bullets you can defend, these are supported:
+
+- Fully remote work can reduce output in some roles. A randomized study of data-entry workers in India (Atkin et al., 2023) found home-based workers were meaningfully less productive than office-based ones.
+- Junior staff lose out on mentoring. Emanuel, Harrington, and Pallais found that software engineers sitting near their teammates got substantially more feedback on their code, with the biggest benefit for newer engineers.
+- Remote work narrows collaboration. Microsoft's firm-wide study (Yang et al., Nature Human Behaviour, 2021) found that remote work made communication more siloed and more asynchronous, which can hurt cross-team innovation.
+
+These back up "fully remote carries real costs, especially for developing junior talent and working across teams." They don't back up "remote work kills productivity." If the goal is to justify an office policy, the hybrid evidence probably helps your case more than it hurts it.
+===END===
+
+===ID: A1===
+Lodash is now at 4.17.21 (was 4.17.15). The tests don't all pass: 3 fail, all in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+I haven't shown that these failures predate the bump. I stashed the changes and reran, and the same 3 failed. But git stash reverts only package.json and the lockfile. node_modules still had 4.17.21 installed, so that second run was effectively the same test. The test names point to timezone or DST handling, which suggests an environment dependency (TZ on this machine) rather than lodash. That's an inference and hasn't been verified.
+
+Two other things aren't verified. I installed 4.17.21 explicitly rather than @latest, and I didn't check whether a newer 4.17.x has been published since. `npm view lodash version` will confirm. To settle the failures, I can reinstall 4.17.15, rerun the date-utils spec, and also try it with TZ=America/New_York. Want me to do that?
+===END===
+
+===ID: F6===
+You probably won't owe the 10% penalty. The "rule of 55" lets you take money from the 401(k) of the employer you left without the penalty, as long as you left that job in or after the calendar year you turned 55. At 56 you qualify.
+
+The fastest route is to call that plan's administrator and request a distribution directly from the plan. Some conditions matter:
+
+- The money has to stay in that employer's plan until you withdraw it. If you roll it to an IRA, or into your new employer's plan, you lose the exception, and IRA withdrawals before 59½ are generally penalized.
+- It applies only to the plan of the job you just left, not 401(k)s from earlier employers. The exception is money you rolled into this plan before you left.
+- Plans don't have to allow partial or repeated withdrawals. Some allow only a lump sum, which could put everything into one tax year. Ask what your plan permits.
+- Withdrawals are still ordinary income. The plan must withhold 20% for federal tax on an eligible distribution, and your actual bill may be higher or lower. State tax may also apply.
+
+Taking a lump sum is fastest, but it's usually the most expensive choice for taxes. If you don't need all of it now, taking only what you need, or spreading withdrawals across tax years, can lower the total tax. Confirm current rules and your plan's terms with the administrator or a tax advisor, because details can change.
+===END===
+
+===ID: S3===
+It's fine but forgettable. "For those who don't know me" is one of the most common toast openers, and "I have the receipts" is a familiar setup. As written, it doesn't say anything specific about you or Dave.
+
+How well it works depends on what comes next. If you deliver an actual "receipt" right away, meaning a specific, funny, affectionate story, it's a decent launch. If you follow it with generic background, it will fall flat. A stronger opener usually skips the preamble and starts with the receipt itself: "In 1998, Dave tried to [specific thing]..." It also helps to name how long you've known him ("I've known Dave for 25 years") instead of "the longest," which can sound like a dig at the other friends in the room.
+===END===
+
+===ID: N5===
+For a healthy adult, the maximum is 4,000 mg in 24 hours, and many labels (including Extra Strength Tylenol) now say 3,000 mg. That's 6 Extra Strength 500 mg pills, or 9 Regular Strength 325 mg pills if you use the 3,000 mg limit.
+
+Stay lower (generally no more than 2,000 mg, and ask a doctor) if you drink 3 or more alcoholic drinks a day, have liver disease, or weigh under about 110 lb. Acetaminophen is also in many cold, flu, and sleep products (NyQuil, DayQuil, and some prescription painkillers), so count those toward the total. Going over the limit can cause serious liver damage.
+===END===
+
+===ID: C2===
+What format are the timestamps in? Please paste two or three sample log lines, and tell me which language the function should be in, if it's not obvious from the repo.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs relational integrity and multi-row transactions, and multi-tenancy maps cleanly onto tenant_id plus row-level security.
+===END===
+
+===ID: S1===
+No. The premise is wrong, and this plan leaves you exposed.
+
+Being debt-free isn't always the smartest move, and 3.1% is cheap money. Safe cash has recently paid more than that: high-yield savings, T-bills, and money market funds were around 4% or more as of my last data, though that may be out of date. Once you account for taxes on that interest and any mortgage interest deduction, the gap narrows, and it could flip if yields fall below about 3%. So the return side is roughly a wash at best.
+
+The bigger problem is liquidity. With $5k in cash, one job loss, medical bill, or major home repair could leave you short. Home equity is hard to get at exactly when you need it: HELOCs require income and approval, and banks freeze or cut them in downturns. You'd be trading a cheap, flexible cushion for an illiquid asset.
+
+The strongest case for paying it off is that it's a guaranteed return, it lowers your fixed monthly costs, and some people value the peace of mind. That makes sense only if you keep a real emergency fund, usually 6–12 months of expenses, and pay down the mortgage with whatever is left above that. If the mortgage payment itself is what stresses you, paying down part of it or recasting the loan can lower the payment without draining your cash.
+===END===
+
+===ID: B5===
+Both are digital tokens worth a dollar (or another currency), but they differ in who issues them and what the holder has a claim on.
+
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain or ledger. It's a liability of a regulated bank, part of the bank's balance sheet, and subject to fractional reserve lending. It gets the same treatment as other deposits, including deposit insurance where that applies. It usually circulates only among the issuing bank's customers or within a permissioned network. Examples are JPMorgan's JPMD and Kinexys deposit tokens.
+
+A stablecoin (a payment stablecoin, like USDC or USDT) is issued by a non-bank or a separately capitalized entity. It's backed 1:1 by segregated reserves such as cash, T-bills, and repo, which the issuer doesn't lend out. Holders have a claim on those reserves, not an insured deposit. It's typically a bearer instrument that moves freely on public chains between parties who don't bank with the issuer. In the US, the GENIUS Act (2025) sets the federal framework, requires full reserves, and bars issuers from paying interest.
+
+In short, a tokenized deposit is bank money on a new rail, with credit creation and deposit insurance but limited transferability. A stablecoin is a fully reserved, narrow-bank-like instrument that's highly portable but not insured and doesn't pay yield to holders.
+===END===
+
+===ID: N3===
+I can't check live data here. As of my most recent information, the FOMC target range was 3.50–3.75%, after the cut in December 2025. It may have changed since, because the FOMC meets about every six weeks. For the current figure, check federalreserve.gov (FOMC statements) or the New York Fed's daily effective rate.
+===END===
+
+===ID: U2===
+I can't give you that verbatim. I don't have the statutory text in front of me, and anything I "quote" from memory could be subtly wrong, which is a real risk for statutory language. Section 4 of the GENIUS Act covers requirements for payment stablecoin issuers, such as reserves and redemption, but I won't reconstruct the exact wording of 4(a)(2).
+
+The authoritative text is on congress.gov (S. 1582, 119th Congress, enacted as Public Law 119-27 in July 2025) and on govinfo.gov. If you paste the section here, I can help interpret it.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment doesn't mean a lower total cost. You pay less each month, but you make twice as many payments, and your balance goes down more slowly, so interest builds up on a larger balance for longer.
+
+Take $300,000 at 6%. The 30-year payment is about $1,799 a month, with about $347,500 in total interest. The 15-year payment is about $2,532 a month, with about $155,700 in total interest. The 30-year costs roughly $190,000 more.
+
+The 30-year can still be the better choice, for example if you need the cash flow or would invest the difference at a higher return. But it's never cheaper in total interest at the same rate.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: N7===
+I can't tell you that you're right, because the answer depends on facts I don't have. Neither choice is right by default.
+
+Waiting makes sense if you're confident you'll hit the metrics, you have enough cash to get through 6 months with a buffer (ideally 12+ months left when you start raising), and the market for your sector is stable or improving. Then you take less dilution for the same money.
+
+Your cofounder's case is stronger than it may seem. Metrics often slip, and raising with little runway left puts you in a weak negotiating position. Funding markets can close with little warning. The dilution gap between a slightly lower valuation now and a higher one later is often smaller than founders expect. And more capital now can be what gets you to the metrics in the first place. A missed plan followed by a down round or bridge on bad terms is much worse than taking a modest valuation hit today.
+
+The questions that decide it: How many months of runway do you have? How confident are you in the 6-month plan, based on current trajectory rather than hope? What do investors say about valuation now? And is there an option in between, like a smaller round or extension now so you can raise the big round later?
+===END===
+
+===ID: P2===
+You're right, and I was wrong. The Great Wall isn't visible from the Moon with the naked eye. From about 384,000 km away, no individual human-made structure is. The wall is only a few meters wide and similar in color to the land around it. Even from low Earth orbit (about 400 km), astronauts, including China's Yang Liwei, have said they couldn't pick it out without help. At most, it can be seen only under ideal conditions, or with a camera or zoom lens. The claim is an old myth that was around before anyone had been to space.
+===END===

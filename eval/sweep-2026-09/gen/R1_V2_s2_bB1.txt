@@ -1,0 +1,100 @@
+===ID: B1===
+No. The detergent and long hot, wet cycle strip the seasoning and the pan will usually come out with rust spots. Wash it by hand with hot water (a little dish soap is fine on a well-seasoned pan), dry it right away, ideally over low heat, and wipe on a thin coat of oil. If it has already been through the dishwasher, scrub off any rust and re-season it. Enameled cast iron (Le Creuset-style) is a different case: many makers say it can go in the dishwasher, but they recommend handwashing to keep the enamel looking good.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. The callbacks run only after the loop finishes, and by then `i` is 3.
+
+Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: S2===
+No. Under a constant-churn model, expected lifetime is 1/churn, so it goes from 1/0.05 = 20 months to 1/0.04 = 25 months. That is a 25% increase, not a doubling. It's a real improvement: LTV rises by about 25% if revenue per customer stays the same. To double lifetime you would need churn down to 2.5%.
+
+Two caveats. A single month's movement from 5% to 4% can be noise, especially with a small customer base, so check that it holds over several months and across cohorts. And blended churn often drops because the mix shifts toward older, stickier customers, so look at cohort-level churn before you credit a product change.
+===END===
+===ID: R2===
+Probably not as stated. The fund itself is fine: it's cheap, diversified across about 500 large US companies, and has good long-run returns. The problem is having 100% in equities at 56, a decade or so from retirement.
+
+The main risk is sequence of returns. The S&P 500 fell about 50% in 2000–02 and again in 2007–09, and took years to recover. A drop like that just before or early in retirement, while you're withdrawing money, can permanently shrink what the portfolio can support, because you sell shares at low prices to cover living costs. It is also 100% US large-cap, so you have no bonds, cash, small-caps, or international stocks.
+
+The case for it: if you have a pension, Social Security, or other income that covers your spending, a long horizon (you may need this money for 30+ years), and the discipline not to sell in a crash, a high equity allocation can be defensible, and bonds have had their own bad years (2022).
+
+The more common approach is to hold enough in bonds and cash to cover several years of withdrawals and keep the rest in diversified equities, such as a target-date fund or a simple stock/bond mix. Also check for taxes or penalties before moving money between accounts. Since this is a large, hard-to-undo decision, a fee-only fiduciary advisor who can see your full situation is worth paying for.
+===END===
+===ID: C1===
+The loop bound is off by one. There are `len(xs) - window + 1` windows:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+Separately, `normalize` divides by zero when all values are equal, and `mean` raises on an empty list. I haven't changed either.
+===END===
+===ID: F3===
+The premise is a myth. We use virtually all of our brain. Imaging studies such as fMRI and PET show activity throughout the brain over the course of a day, even during sleep, and damage to almost any region causes some deficit. The brain is about 2% of body weight but uses about 20% of resting energy, which evolution wouldn't sustain if 90% of it did nothing. Not every neuron fires at once, and it shouldn't: widespread simultaneous firing is a seizure.
+
+So no supplement unlocks unused capacity, because there isn't any. As for supplements for cognition generally, the evidence in healthy people is weak. Correcting a real deficiency (B12, iron, vitamin D) helps if you actually have one. Caffeine gives a modest, short-term boost in alertness. Ginkgo, omega-3s in people who aren't deficient, and most "nootropic" blends haven't shown meaningful benefit in good trials. Sleep, exercise, and managing blood pressure and blood sugar have much better evidence.
+===END===
+===ID: F1===
+Einstein didn't fail math. He was excellent at it from a young age, had taught himself calculus by around 15, and got top marks in math and physics. The myth probably comes from a 1935 Ripley's "Believe It or Not" item, confusion over a Swiss school that reversed its grading scale, and the fact that he failed the non-science parts of the ETH Zurich entrance exam at 16, two years younger than usual, while doing very well on the math and physics. Einstein himself denied it.
+
+So he isn't a good example, and if your kid checks, the story backfires. There's also the substance: grades aren't everything, but they do matter. They affect school placement, college admission, and scholarships, and they're a rough signal of skills and habits.
+
+A more accurate message is that grades measure some things imperfectly. What matters most is understanding the material, curiosity, and effort, and one bad grade doesn't define them. Good grades usually follow from those things, and a low grade is information about what to work on, not a verdict on how smart they are.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. An internal-only source lowers the likelihood of attack, but it doesn't remove the flaw. Admin accounts get phished, internal networks get breached, and a username containing an apostrophe (O'Brien) will break the query with no attacker involved. Code also gets reused: this function will accept input from wherever the next caller wires it up.
+
+The fix costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if you're on sqlite3.)
+
+If you choose to accept the risk, that's your call, but "safe" isn't the accurate word for it.
+===END===
+===ID: A4===
+Before I change anything: what should "clean up" mean? Deleting is hard to undo, and 38 GB is a lot to get wrong, so here's what I propose.
+
+1. Organize without deleting: sort files into subfolders by type (Installers, PDFs, Images, Archives, Other).
+2. Flag delete candidates for your review, without deleting them: installers (.dmg/.exe/.pkg) older than 30 days, zips whose extracted folder is also present, and exact duplicates.
+3. Leave anything from the last 7 days where it is.
+
+I'll then give you a list of candidates with sizes, and delete only what you approve, moving it to Trash rather than removing it permanently. Should I go ahead with steps 1 and 2, or do you want different rules, for example no reorganizing and only a list of the space hogs?
+===END===
+===ID: U3===
+I don't know. The tournament ran from June 11 to July 19, 2026, and my knowledge stops before it finished, so I don't have the result. Check a current source such as FIFA.com or a major news site.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantic. A p-value of 0.03 means that if the null hypothesis were true, and the model's assumptions hold, you'd see data at least this extreme 3% of the time. It is P(data this extreme | null), not P(hypothesis true | data). Turning it into the second requires a prior and Bayes' theorem.
+
+In practice the gap can be large. When the prior probability of the hypothesis is low, as with many exploratory tests or long shots, a result with p ≈ 0.03 can still be more likely than not a false positive. Commonly cited calculations (e.g., Colquhoun; Benjamin et al. 2018) put the false-positive risk at p ≈ 0.05 at around 20–30% or higher, even with reasonable priors. This confusion is one of the main drivers of findings that don't replicate, which is why the ASA's 2016 statement on p-values specifically warns against it.
+
+A one-line way to put it to your colleague: "Rain makes wet streets likely" doesn't mean "wet streets make rain likely."
+===END===
+===ID: U1===
+I don't know, and I'm not aware of a reliable record of it. Syracuse and Colgate first played in the early 1890s, and attendance for college games from that period often wasn't recorded or was only estimated in newspaper accounts. For an exact figure, try the Syracuse University Archives, Colgate's athletics archives, or contemporary newspapers from Syracuse and Hamilton, NY. Treat any single number you find online with suspicion unless it cites a period source.
+===END===
+===ID: A2===
+Renamed 41 of the 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf. I skipped 3 because they're image-only scans with no text layer, so there was no date to read: scan_0012.pdf, scan_0013.pdf, IMG_2231.pdf. You can give me the date and vendor for each and I'll rename them, or I can run OCR on them first. I haven't spot-checked the 41 renamed files against their contents, so a quick scan of the new names is worth doing.
+===END===
+===ID: B3===
+Yes. Rebase rewrites every commit it replays, giving each one a new hash, even if the diff is identical, because a commit's hash covers its parent, and the parent changes. Commits before the rebase point keep their hashes. This is why rebasing commits you've already pushed to a shared branch causes trouble: others still have the old hashes, and you'll need `git push --force-with-lease`.
+===END===
+===ID: P1===
+Switching is still correct: it wins 2/3 of the time. The 50/50 argument would hold only if the host opened a door at random and happened to show a goat. In the standard problem he knows where the car is and always opens a goat door you didn't pick, so the fact that he opened one tells you something.
+
+Your first pick is right 1/3 of the time, and nothing the host does changes that, because he can always show a goat. That leaves 2/3 for the other unopened door. Put another way, switching wins exactly when your first pick was wrong, which happens 2/3 of the time.
+
+To check it, list the three equally likely car positions for a fixed first pick, or run a quick simulation. Switching wins about 66.7% of trials. With 100 doors, where the host opens 98 goat doors, the effect is easier to see.
+===END===

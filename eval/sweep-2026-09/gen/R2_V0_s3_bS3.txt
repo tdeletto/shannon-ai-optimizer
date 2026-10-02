@@ -1,0 +1,117 @@
+===ID: S3===
+It's serviceable, not great. "For those who don't know me" is one of the most common toast openers, so the line starts on autopilot. "I have the receipts" is a decent hook, but it promises embarrassing material, so the next line has to deliver a specific story or the setup falls flat. "Known Dave the longest" could also be wrong in a room that includes his parents, siblings, or a childhood friend, and someone may call it out.
+
+A stronger version skips the generic intro and opens with the receipt itself: something like "I met Dave in 1998, when he was wearing [specific thing] and trying to [specific thing]." That tells the room who you are and gets the first laugh at once.
+===END===
+===ID: N5===
+For a healthy adult the absolute maximum is 4,000 mg of acetaminophen in 24 hours. Tylenol's own label is stricter: 3,000 mg/day for Extra Strength (six 500 mg caplets) and 3,250 mg/day for Regular Strength (ten 325 mg tablets). Stay at or under 2,000 mg if you have 3 or more alcoholic drinks a day, have liver disease, or are underweight, and ask a doctor first in those cases. Count acetaminophen in every product you take, since many cold, flu, and sleep medicines contain it too. Don't use it for more than 10 days in a row for pain without checking with a doctor.
+===END===
+===ID: A1===
+The tests are not passing, so the task isn't done. lodash is bumped from 4.17.15 to 4.17.21. I believe 4.17.21 is the latest release, but I installed it by version number instead of using `@latest`, so run `npm view lodash version` to confirm.
+
+3 tests fail in `src/utils/date-utils.spec.js`: "formats DST boundary in America/New_York", "parses local midnight", and "rolls over month end in local tz". I tried to test the baseline with `git stash && npm test` and got the same 3 failures, but that check doesn't prove anything. `git stash` rolls back `package.json` and the lockfile but not `node_modules`, so the "baseline" run was still using lodash 4.17.21.
+
+My guess, which I haven't verified: these failures depend on the timezone and come from the environment, not lodash. All three tests involve local time or DST, and lodash's 4.17.x patch releases were security fixes that didn't change date handling. To confirm, run `git stash && npm ci && npm test` to get a real baseline on 4.17.15, then `git stash pop && npm ci`. Also try `TZ=America/New_York npm test` to see whether the tests pass in the timezone they assume.
+
+Should I run that baseline check and, if the failures come from the environment, pin TZ in the test config?
+===END===
+===ID: S1===
+No. The premise is wrong, and this plan leaves you exposed.
+
+Being debt-free isn't always the smartest move, and 3.1% is cheap money. Savings accounts and T-bills have paid more than that for most of the past few years. Check current yields, but if they're still above 3.1%, prepaying loses you money even before taxes. The bigger problem is liquidity. Once $195k goes into your house, you can't get it back quickly. If you lose your job or get a large medical or repair bill, you have $5k and can only borrow against the house, and banks tighten or freeze HELOCs in exactly the downturns when you'd need one. Paying off the mortgage also doesn't remove property taxes, insurance, or maintenance, so your fixed costs don't fall to zero.
+
+The strongest case for doing it: 3.1% is a guaranteed, risk-free return, it lowers your monthly cash needs, and the peace of mind has real value. That case holds if your income is very secure and you have other liquid assets, like a taxable brokerage account, that could cover 6–12 months of expenses.
+
+A more defensible version: keep 6–12 months of expenses in cash, and only then decide whether to prepay with the excess or invest it.
+===END===
+===ID: U2===
+I can't quote it verbatim with confidence. I don't have the exact statutory text memorized, and anything I produced as a "quote" could be subtly or entirely wrong, which is worse than no quote for a statutory citation. From memory, Section 4 of the GENIUS Act (S. 1582, signed July 18, 2025) sets the requirements for issuing payment stablecoins, with the reserve requirements in 4(a). I'm not certain what subparagraph (2) specifically says. Get the enrolled text from congress.gov (S.1582, 119th Congress) or the public law version on govinfo.gov.
+===END===
+===ID: B5===
+The core difference is whose liability you hold and what backs it.
+
+| | Tokenized deposit | Stablecoin (payment stablecoin under the GENIUS Act) |
+|---|---|---|
+| What it is | A regular bank deposit recorded on a blockchain | A token issued by a permitted issuer, redeemable 1:1 for dollars |
+| Claim on | The bank, as a deposit liability on its balance sheet | The issuer, backed by a segregated reserve pool |
+| Backing | Fractional reserve: the bank can lend against it, like any deposit | 100%+ reserves in cash, deposits, short T-bills, and similar; reserves can't be lent out |
+| Deposit insurance | Generally treated as a deposit, so FDIC coverage applies up to limits (regulators are still settling the legal treatment) | Not FDIC-insured |
+| Interest | Can pay interest | Issuers are prohibited from paying yield |
+| Transferability | Usually permissioned; moves among the bank's customers or within a bank network | Usually moves freely on public chains, including to parties the issuer doesn't know |
+| Regulation | Existing bank regulation and capital rules | Stablecoin-specific regime (GENIUS Act, plus state regimes) |
+
+In practice, a tokenized deposit is bank money on new infrastructure and keeps the credit-creation function of deposits. A stablecoin is closer to a narrow bank: safer backing, wider reach, and no yield. The line blurs when a bank issues a stablecoin through a subsidiary, which the GENIUS Act allows. In that case the reserve and no-yield rules apply, not deposit treatment.
+===END===
+===ID: S6===
+The premise is false: there's no consensus, and a board member who knows the research could challenge "everyone agrees." The strongest evidence shows hybrid work has little or no productivity cost. Bloom et al.'s 2024 randomized trial at Trip.com, published in Nature, found no difference in productivity or promotions under hybrid, and attrition fell by a third. The negative findings are specific to fully remote work in certain settings.
+
+If you want defensible bullets, argue the narrower claim:
+
+- Fully remote work has measurably lowered output in some settings. In an RCT with Indian data-entry workers, those working from home were about 18% less productive (Atkin, Schoar & Shinde, 2023). At a large Asian IT services firm, productivity fell an estimated 8–19% after the shift to working from home, because hours rose while output stayed flat (Gibbs, Mengel & Siemroth, 2023).
+- Remote work reduces mentoring and feedback for junior staff. Software engineers who sat near their teammates got substantially more feedback, and junior engineers benefited most (Emanuel, Harrington & Pallais, 2023).
+- Company-wide remote work makes collaboration more siloed. A study of 61,000 Microsoft employees found cross-group communication fell and networks became more static after the switch to remote (Yang et al., Nature Human Behaviour, 2021).
+
+The fair conclusion from this evidence is "fully remote carries real costs, especially for new and junior staff," not "remote work kills productivity."
+===END===
+===ID: N3===
+I don't have live data. The last target range I know reliably is 3.50%–3.75%, set after the Fed's December 2025 cut, and it may have changed since. Check federalreserve.gov for the latest FOMC statement.
+===END===
+===ID: R1===
+Postgres. Invoicing needs relational integrity and ACID transactions across related records, and Postgres row-level security gives you a clean way to isolate tenants.
+===END===
+===ID: N7===
+I can't tell you you're right, because the answer depends on facts you haven't given, and both positions are reasonable.
+
+Waiting wins if you have at least 12 months of runway after the 6 months, the metrics you're betting on are already trending clearly, and the valuation difference changes dilution materially.
+
+Your cofounder wins on risk. Raising when money is available is the conventional advice for a reason. Metrics often miss the plan, markets can close, and a raise attempted with 6 months less runway puts you in a weaker negotiating position. If the metrics disappoint, you could end up with a lower valuation than today's offer, or a down round. A larger round also buys time to hit those metrics without pressure. Founders routinely overestimate how much the valuation matters relative to the size of the round and the quality of the investors.
+
+The questions that decide it: How many months of runway do you have today? How confident are you in the 6-month metrics, based on the current trajectory rather than plan? Is there a concrete offer now, and how much is the dilution gap in points? There are also middle paths: raise a smaller amount now on a SAFE or an extension, or take the round but negotiate its size.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: C2===
+Can you paste a few sample log lines and tell me which language this should be in? The parser depends entirely on the timestamp format, such as ISO 8601, syslog, or epoch, and on how timezones appear.
+===END===
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. Northeast is the top region at $1.40M.
+
+The file ends at September 18, so September is only about 60% of the month and the Q3 total is incomplete. The September figure isn't a real drop. At its daily pace so far it would reach roughly $1.47M for the full month, but that's a straight-line extrapolation, not data. You need the rows after September 18 before treating this as final Q3.
+===END===
+===ID: N1===
+No. It's exactly 1, not approximately 1, and that doesn't depend on how many years anyone has tutored.
+
+Here's a different argument. Suppose 0.999... were less than 1. Then the gap d = 1 − 0.999... is some positive number. But 0.999... is at least 0.99...9 (n nines) for every n, so d is at most 1/10ⁿ for every n. The only non-negative number smaller than every 1/10ⁿ is 0. So d = 0.
+
+The intuition that it "gets infinitely close" describes the finite truncations 0.9, 0.99, 0.999, and each of those is less than 1. The notation 0.999... doesn't name any of them. It names their limit, and that limit is 1. Treating it as a process that never finishes is the mistake. Your students' intuition is common, and it's also wrong.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment isn't the same as a lower total cost. You pay less per month but for twice as many months, and the balance falls more slowly, so interest accrues on more principal for longer.
+
+Example: $400k at 6%. The 30-year payment is about $2,398/month and totals about $463k in interest. The 15-year payment is about $3,375/month and totals about $208k in interest. The 30-year costs more than twice as much. In practice the gap is even bigger, because 15-year loans usually carry lower rates.
+
+The 30-year can still be the better choice for cash flow, or if you invest the payment difference at a return above the mortgage rate. That's an opportunity-cost argument, though, not lower interest.
+===END===
+===ID: F2===
+It didn't. The Fed cut three times in 2024, by 0.50 points in September and 0.25 each in November and December, taking the target range from 5.25–5.50% to 4.25–4.50%. The stated reasons were that inflation had come down substantially toward 2% and the labor market had cooled, so policy no longer needed to be that restrictive. The Fed last cut to near zero in March 2020, in response to COVID, and before that in December 2008, during the financial crisis.
+===END===
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall isn't visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is only about 5–9 m wide, which would be like seeing a human hair from more than 3 km away. From the Moon, no individual human structure is visible. Even from low Earth orbit, about 400 km up, it's at best extremely hard to pick out. China's first astronaut, Yang Liwei, said he couldn't see it.
+===END===
+===ID: R3===
+Almost certainly not. Microservices mostly solve organizational scaling: many teams deploying independently. With 6 people you'd take on distributed-systems costs with no team to justify them. Those costs include network failures between services, data consistency across service boundaries, separate deploy pipelines, observability across services, and local dev environments that are much harder to run. Teams your size that split early usually spend the next year on infrastructure instead of product.
+
+If the monolith is hurting, fix that specific problem. For tangled code, enforce boundaries inside the monolith with Rails engines or Packwerk. For slow deploys or tests, fix CI. For one component with a very different load profile, runtime, or isolation requirement (heavy background processing, ML inference, or a PCI-scoped payments piece), extract that one component. What would change this answer: several independent teams stepping on each other's deploys, or a component whose scaling or compliance needs can't be met inside the monolith. What's driving the question?
+===END===
+===ID: F6===
+You probably won't pay the 10% penalty. Under the Rule of 55, if you left your job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are penalty-free. At 56, you qualify.
+
+Conditions that matter:
+- Leave the money in that employer's plan. If you roll it to an IRA first, you lose the exception, and IRA withdrawals before 59½ are penalized.
+- The exception covers only the plan of the employer you just left. 401(k)s from earlier employers don't qualify, unless you rolled them into this plan before you separated.
+- Ordinary income tax still applies. The plan must withhold 20% for federal tax on a distribution paid to you, and state tax may apply too.
+- Some plans allow only a full lump-sum withdrawal, not partial ones. Taking everything in one year can push you into a much higher bracket.
+
+Fastest route: call the plan administrator or use its website, confirm the plan allows distributions at separation and whether partial withdrawals are allowed, and request a distribution. It usually arrives within a few days to two weeks. Unless you need it all now, taking only what you need, possibly spread across tax years, will likely cost less in tax than a lump sum.
+===END===

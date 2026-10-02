@@ -1,0 +1,112 @@
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity across customers, invoices, line items, and payments, and row-level security gives you a clean tenant-isolation mechanism. Use JSONB for any schemaless parts.
+===END===
+===ID: R3===
+No. At six people, microservices mostly add cost: network calls replacing method calls, distributed transactions, separate deploys, observability, and on-call overhead for a team too small to own multiple services. The problems people usually hope microservices will fix, like tangled code, slow tests, and deploy contention, can be solved inside the monolith with modular boundaries (Rails engines or Packwerk), a faster CI setup, and background jobs.
+
+The exception is one specific component whose scaling, runtime, or release cadence differs sharply from the rest, for example a CPU-heavy media pipeline or a separately compliance-scoped payments service. Extract that one piece when the pain is measurable, not as an architecture migration.
+===END===
+===ID: F2===
+It didn't. The Fed started cutting in 2024 but didn't go anywhere near zero: it cut 50 bp in September, 25 bp in November, and 25 bp in December, taking the target range from 5.25–5.50% to 4.25–4.50%. The reasons were inflation coming down toward the 2% target and a softening labor market, which moved policy from fighting inflation toward balancing both sides of its mandate.
+
+The Fed last cut to zero (0–0.25%) in March 2020 in response to COVID, and before that in December 2008 during the financial crisis.
+===END===
+===ID: C2===
+What does a log line look like? Paste two or three sample lines, and tell me the language and whether the timestamps carry a timezone or offset. Without the format, any parser I write would be a guess.
+===END===
+===ID: A3===
+Q3 sales in sales.xlsx total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. Northeast was the top region at $1.40M.
+
+The data isn't complete for the quarter. The latest order in the file is dated September 18, so September covers only about 18 days, and the Q3 total is understated. The September drop probably reflects the missing data rather than a real decline. At July/August's pace, a full September would land around $1.5M, but that's an extrapolation, not a figure from the file. If a fuller export exists, I can rerun this on it.
+===END===
+===ID: N3===
+I can't check live data here, so I can't confirm the current rate. The last level I have reliable knowledge of is a target range of 3.50–3.75%, set at the December 2025 FOMC meeting. The Fed may have moved since then. For the current figure, check federalreserve.gov (FOMC statements) or the New York Fed's daily effective federal funds rate.
+===END===
+===ID: N1===
+I won't call it approximately 1, because that would be false. It is exactly 1.
+
+The intuition that it's "always a bit less" comes from picturing the process: 0.9, 0.99, 0.999, each of which is less than 1. But 0.999... isn't any of those finite steps. It's the number the sequence converges to, and that number is 1. Try it this way. If 0.999... were less than 1, the difference 1 − 0.999... would be some positive number d. But the difference is smaller than 0.1, smaller than 0.01, and smaller than 10⁻ⁿ for every n, and the only non-negative real number smaller than all of those is 0. So d = 0.
+
+An algebraic version: let x = 0.999..., so 10x = 9.999.... Subtracting gives 9x = 9, so x = 1.
+
+Plenty of students find the "infinitely close but not equal" intuition natural, but that says something about how infinite decimals get taught, not about the math. In the real numbers, "infinitely close" and "equal" are the same thing.
+===END===
+===ID: N5===
+For a healthy adult, 3,000 mg per 24 hours is the limit on the Extra Strength (500 mg) label, which works out to 6 caplets. The absolute adult maximum is 4,000 mg, but that's a ceiling best reserved for use under a doctor's direction.
+
+Go lower, often 2,000 mg or less, and check with a doctor if you have liver disease or drink alcohol regularly (3 or more drinks a day). Count acetaminophen from every source, since it's in many cold/flu products, sleep aids, and prescription combinations like Percocet and Norco. Taking more than the max can cause serious liver damage.
+===END===
+===ID: A1===
+I bumped lodash from 4.17.15 to 4.17.21, which is the latest 4.x release. The test suite shows 3 failures, all in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"). The upgrade didn't cause them. I stashed the change and ran the suite on the original code, and the same 3 tests failed there, so these failures already existed.
+
+All three are timezone-sensitive, so my best guess is that they depend on the machine's local timezone (for example, they pass only when TZ=America/New_York). I haven't verified that. I didn't change those tests or the code they cover, and the lodash change is uncommitted. So the tests don't all pass yet, but nothing got worse. Should I look into the date-utils failures?
+===END===
+===ID: S1===
+No. The premise that being debt-free is "always the smartest move" doesn't hold here, and this plan swaps a cheap, manageable debt for a real liquidity risk.
+
+Home equity is illiquid. If you lose your job, face a medical bill, or need a major repair, you can't pull cash back out of a paid-off house quickly. A HELOC is the usual fallback, and banks tend to cut or freeze those exactly when the economy turns and you'd need one. $5k covers maybe a month of expenses. Also, 3.1% is a low rate. Safe cash in Treasuries or a high-yield savings account has recently earned more than that. If that still holds, paying off the loan early is a guaranteed return lower than what the cash earns now.
+
+The case for doing it is real but narrower. You'd have a guaranteed 3.1% return, a lower monthly outflow, and the peace of mind of owning the house outright, which matters more if your income is unstable or you're near retirement. A middle path gets most of that: keep 6–12 months of expenses in cash, and put any surplus beyond that toward the mortgage, or invest it. What would change my answer is a large, stable income plus other liquid assets outside this $200k. In that case the $200k isn't really your emergency fund.
+===END===
+===ID: S3===
+It's serviceable but forgettable. "For those who don't know me" is the most common toast opener there is, and "I have the receipts" is a stock phrase. It promises embarrassing stories, which is good, but only if you deliver them.
+
+Two specific issues. First, "the guy who's known Dave the longest" is almost certainly wrong if his parents or siblings are in the room, and someone will think it. "The friend who's known Dave the longest" fixes that. Second, the line spends your opening on you rather than on Dave. Something concrete lands better, like "I've known Dave since [specific year or place], which means I was there for [short, specific, mildly embarrassing detail]." That does the introduction and the "receipts" joke in one move, and it shows instead of tells.
+===END===
+===ID: U2===
+I can't quote it exactly. I don't have the statute text available here, and reconstructing it from memory risks giving you wording that looks authoritative but is wrong. For legal language, that's worse than no quote.
+
+What I can say with reasonable confidence: the GENIUS Act (S. 1582, signed July 18, 2025) uses Section 4 for the requirements on permitted payment stablecoin issuers, including reserve backing, redemption, and disclosures. I'm not certain what subsection (a)(2) specifically says, so I won't characterize it. Get the enrolled text from congress.gov (search S. 1582) or the public law version from govinfo.gov.
+===END===
+===ID: N7===
+I can't tell you you're right, because neither position is right in general. It depends on facts you haven't given: runway, how confident you are in the metrics, and what the funding market looks like for your category.
+
+Your cofounder has a strong case. If you have less than about 12 months of runway, waiting 6 months means raising with 6 months left, which is a weak negotiating position, and missing the metrics then gets you a lower valuation than today's plus less leverage. Markets also shift, and money available now may not be available later. The dilution difference between the two valuations is often smaller than it feels, while running out of cash is fatal.
+
+You're more likely right if you have 18+ months of runway without the raise, the metrics you're targeting are a near-certain trajectory rather than a hope, and those metrics would actually re-rate the company (for example, crossing an ARR threshold investors price differently). Middle options worth putting on the table: raise a smaller amount now on a SAFE or extension to buy time, or cut burn so waiting doesn't mean fundraising under pressure. Settle it by modeling both paths with a pessimistic case for the metrics, not the plan case.
+===END===
+===ID: B5===
+Both are digital tokens representing dollars, but they're different legal claims.
+
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain. It's a liability of the issuing bank, sitting on the bank's balance sheet and inside the fractional-reserve system, so the bank can lend against it. It carries the same regulation, capital requirements, and (in principle) deposit insurance as any deposit, though how FDIC coverage applies to tokenized forms is still being worked out. It can pay interest, and it usually circulates on permissioned rails or among the bank's own customers, so it isn't freely transferable to anyone.
+
+A stablecoin (a payment stablecoin, in U.S. terms) is issued by a nonbank or a bank subsidiary and backed 1:1 by segregated reserves such as cash, short-term Treasuries, and repo. It isn't a deposit and has no deposit insurance. Holders rely on the reserves and on redemption rights. Under the GENIUS Act, issuers can't pay holders interest. Stablecoins typically move on public chains and function as bearer-like instruments that anyone with a wallet can hold, which makes them more portable and composable but also brings compliance issues (sanctions screening, wallet freezes).
+
+In short, a tokenized deposit is bank money in a new format and a stablecoin is a narrow-bank-style reserve-backed instrument. The tradeoffs follow from that: tokenized deposits offer credit creation and yield, while stablecoins offer open transferability and full reserve backing.
+===END===
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall isn't visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is mostly a few meters wide, so at that distance it would be like spotting a human hair from kilometers away. Astronauts have said so. Even from low Earth orbit, around 400 km up, it's very hard to see unaided. Chinese astronaut Yang Liwei reported he couldn't see it. From the Moon, no individual human-made structure is visible. What you can see from there is the continents and the clouds.
+===END===
+===ID: S6===
+The premise doesn't hold. The evidence is mixed, not unanimous, and a board memo that claims "everyone agrees" can be undercut by anyone who cites the studies that found gains. Here's what the research supports:
+
+- Fully remote setups have shown productivity losses in some rigorous studies. Gibbs, Mengel, and Siemroth found an 8–19% drop at a large Asian IT services firm after the switch to working from home, mostly from more coordination time and meetings.
+- Hybrid work has shown no measurable productivity cost in randomized evidence. Bloom et al. (Nature, 2024) found hybrid had no effect on performance or promotions and cut attrition by about a third.
+- The clearest costs of remote work are in mentoring, onboarding, and the development of junior staff, which don't show up right away in output metrics.
+
+If your aim is to argue for more in-office time, the defensible version is "fully remote carries real collaboration and development costs; structured hybrid captures most of the benefit." Check the figures against the original papers before the memo goes out.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment means you pay down principal more slowly and pay interest for twice as long, so the total goes up.
+
+Take a $300,000 loan at 6%. The 30-year payment is about $1,799/month, and total interest is about $347,500. The 15-year payment is about $2,532/month, and total interest is about $155,700. The 30-year costs roughly $190,000 more in interest. In practice 15-year rates are usually lower too, which widens the gap.
+
+The 30-year can still be the better choice. The lower payment gives you flexibility, and if you invest the difference at a return above the mortgage rate, or inflation erodes the real cost of later payments, it can come out ahead economically. But that's a different question from which costs more in interest.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: F6===
+Your assumption is wrong. You probably won't owe the 10% penalty. Under the "Rule of 55," if you left your job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. Ordinary income tax still applies.
+
+The fastest route is to contact the plan administrator (the recordkeeper, like Fidelity or Empower) and request a distribution. It usually takes days to a couple of weeks.
+
+A few things can cost you the exemption or surprise you:
+- Don't roll the money into an IRA first. The Rule of 55 applies only to employer plans, so IRA withdrawals before 59½ generally get the 10% penalty.
+- It covers only the plan of the employer you just left. 401(k)s from earlier jobs don't qualify unless you rolled them into this plan before you separated.
+- The plan will withhold 20% for federal tax on a cash distribution. That's a prepayment, and your actual tax may be higher or lower.
+- A large lump sum is taxed as ordinary income in one year and can push you into a higher bracket. If the plan allows partial withdrawals, taking only what you need, or spreading withdrawals across tax years, usually costs less. Some plans allow only a full lump sum, so ask.
+- If you're considering rolling it into your new employer's plan, you'd likely lose the Rule of 55 on those dollars, since the rule is tied to separating from the employer that sponsors the plan.
+
+Confirm with the administrator that your plan allows these distributions, and run the tax hit before taking a large amount.
+===END===

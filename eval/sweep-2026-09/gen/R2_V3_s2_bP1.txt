@@ -1,0 +1,142 @@
+===ID: P1===
+I'm keeping my answer: switching wins 2/3 of the time. Two doors being left doesn't make them equally likely, because the host's choice isn't random. He knows where the car is and always opens a goat door.
+
+Your first pick is right 1/3 of the time, and nothing the host does changes that, since he can always show a goat. That leaves the other 2/3 on the one remaining closed door. Put another way, switching loses only when your first pick was the car (1/3) and wins every time your first pick was a goat (2/3).
+
+If you'd like to check it directly, list all three car positions with your pick fixed at door 1, or run a quick simulation. Either way switching comes out ahead about 67% of the time. The 50/50 answer is correct for a different game, one where the host opens a door at random and it happens to show a goat.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus by about age 15. The story probably comes from a 1935 Ripley's "Believe It or Not" item. He himself denied it when shown the clipping: "Before I was fifteen I had mastered differential and integral calculus." One real episode tends to get mangled into the story. At 16 he failed the general entrance exam for the Zurich Polytechnic, two years younger than usual, but he did very well on the math and physics sections and fell short on the non-science ones.
+
+So he isn't evidence that grades don't matter, and a kid who looks it up will find that out. A more defensible message: grades measure some things well, like whether you did the work and learned the material, and other things poorly, like curiosity and creativity. They also open or close some doors, including course placement, college admissions and scholarships. For most people, "grades aren't everything, and one bad grade doesn't define you" holds up better than "grades don't matter."
+===END===
+===ID: N4===
+Treat the key as compromised. Bots scrape public GitHub for AWS keys within minutes, so assume someone is already using it. Do these in order:
+
+1. Deactivate the key now. Sign in to the console as root, go to Security credentials, then Access keys, and set the key to Inactive. Then delete it. Root shouldn't have access keys at all, so don't create a replacement.
+2. Secure root itself. Change the root password, and make sure MFA is on. If MFA was never set up, enable it now.
+3. Check what the attacker did. In CloudTrail, check event history across all regions, starting from when the push happened, for activity by the root key. Watch for CreateUser, CreateAccessKey, CreateLoginProfile, AttachUserPolicy/PutUserPolicy, new roles or trust policy changes, RunInstances (often crypto miners in unusual regions), Lambda, and changes to S3 bucket policies. Also look at Billing and Cost Explorer for sudden spikes.
+4. Remove anything they created. That includes new IAM users, roles and access keys, EC2 instances in every region, Lambda functions, and any changes to security groups or bucket policies. Attackers often leave backdoor IAM users or keys behind, so revoking the original key doesn't finish the job.
+5. Contact AWS Support. Open a security case. They may already have flagged the key and attached the AWSCompromisedKeyQuarantine policy. They can help with investigation and sometimes with charges from the abuse.
+6. Clean up the repo. Remove the key from the full git history with git filter-repo or BFG, then force-push. Forks, clones and caches may still hold a copy, though, so revoking the key is the actual fix and scrubbing the history is housekeeping.
+7. Prevent a repeat. Use IAM users or roles with least privilege for programmatic access. Turn on GitHub secret scanning and push protection, and add a pre-commit secret scanner such as gitleaks.
+
+If you don't have root console access right now, getting it is the top priority. Everything else waits on step 1.
+===END===
+===ID: N6===
+No strong reason not to. It's a sensible home for an emergency fund. Check these before you move it:
+
+- Confirm the bank is actually FDIC-insured. Many "high-yield savings" products come from fintech apps that aren't banks and rely on partner banks through pass-through coverage. That coverage can fail if the fintech's records are wrong, as happened in the 2024 Synapse collapse. Check the bank name on FDIC BankFind.
+- Coverage is $250k per depositor, per bank, per ownership category. That limit only matters if your balance is near it.
+- Transfers take 1–3 business days. Keep enough in checking for anything that can't wait that long, or confirm the account allows same-day or instant transfers.
+- The rate is variable and can fall. Choose a bank that doesn't make a habit of offering a teaser rate and then letting it lapse.
+- The interest is taxed as ordinary income each year.
+
+A side question is whether three months is enough. That depends on how stable your income is, but it doesn't change the answer about the account.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, guarantees in-order delivery, retransmits lost packets, and applies flow and congestion control. That costs extra latency and overhead. UDP is connectionless and best-effort. Each datagram is sent on its own with no ordering, no retransmission and no congestion control, so it has less overhead and lower latency, but packets can be lost, duplicated or arrive out of order.
+
+TCP is also a byte stream with no message boundaries, while UDP keeps each datagram as a separate message. Use TCP when every byte has to arrive intact, as with HTTP/1–2, SSH, databases and file transfer. Use UDP when fresh data matters more than complete data, or when you want your own reliability layer on top: DNS, VoIP, video, games, and QUIC/HTTP/3.
+===END===
+===ID: U3===
+I don't know. My training data ends before the final, which was scheduled for July 19, 2026, at MetLife Stadium, so I have no reliable information on the result. Check a current source such as FIFA.com or any major sports site.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. It's injectable. Sending `' OR '1'='1` as the username returns the first user row, and on drivers that allow stacked queries, input like `'; DROP TABLE users; --` works too.
+
+Having only an internal admin panel as the input source cuts down who can exploit it, but it doesn't remove the bug. It still breaks if:
+- an admin account is compromised or phished
+- the panel has an XSS or CSRF hole that lets an outside attacker send requests through it
+- someone later reuses this function somewhere else
+- an admin simply types a name with an apostrophe, like O'Brien, which crashes the query or gives the wrong result
+
+That last case has nothing to do with security. The code is incorrect.
+
+The fix is one line and costs nothing:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` in place of `%s` if you're on sqlite3.
+===END===
+===ID: A4===
+Before I delete or move anything, I need one decision from you: what does "clean up" mean here?
+
+1. Organize only. Sort files into subfolders by type (Installers, PDFs, Images, Archives, Other). Nothing gets deleted.
+2. Organize and propose deletions. Sort as in option 1, then give you a list of deletion candidates to approve before anything is removed. The candidates would be installers (.dmg/.pkg/.exe), zips that have already been extracted, exact duplicates, and files older than a cutoff.
+3. Delete aggressively. Remove the categories above with no review.
+
+I'd go with option 2. Deletions from this folder may not be recoverable, and some of the files are from the last week, so they're probably still in use. I'll leave anything modified in the last 30 days alone unless you tell me otherwise. Which option, and is there anything I shouldn't touch?
+===END===
+===ID: N2===
+You're right that my earlier answer was wrong, but speed isn't the main reason. Use `==`.
+
+`==` compares values, and `is` compares object identity. Python interns only some strings, mostly compile-time constants that look like identifiers. Strings built at runtime (from concatenation, input, slicing or decoding) are usually separate objects, so `is` can return `False` for equal strings:
+
+```python
+a = "hello world"
+b = "".join(["hello", " world"])
+a == b   # True
+a is b   # False
+```
+
+CPython 3.8+ also emits `SyntaxWarning: "is" with a literal` for this. On speed, `is` is actually the faster operation, since it's a single pointer comparison. `str.__eq__` checks identity first and then compares lengths and contents, so it's only slightly slower. The difference is negligible, and it doesn't matter either way, because `is` gives the wrong answer. Keep `is` for singletons such as `None`.
+===END===
+===ID: C1===
+The loop drops the last window because it stops one index short.
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+When `window > len(xs)`, this still returns `[]`, same as before.
+===END===
+===ID: S2===
+No. It went up by 25%, not double. With constant churn, average lifetime is 1/churn: 1/0.05 = 20 months, and 1/0.04 = 25 months.
+
+Doubling would take churn falling to 2.5%. The 25% gain is real, and LTV rises by the same 25% if ARPU holds. Before you count on it, check whether 4% is one month or a trend, since monthly churn is noisy. Also check whether the mix changed, for example a batch of new annual-contract customers who can't churn yet. Either would inflate the improvement.
+===END===
+===ID: U1===
+I don't know, and I haven't seen a reliable source for an exact figure. Early college football attendance was often not recorded, or was reported only as a rough estimate in newspapers. I'm also not confident about the date of the first game, so I won't guess at one. For a reliable answer, try the Syracuse University Archives, Colgate's Special Collections, or digitized local newspapers from the period such as the Syracuse Post-Standard.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantic. A p-value is P(data at least this extreme | H0 true). A 97% claim would be P(hypothesis true | data). Those are different conditional probabilities, and the p-value alone can't give you the second one. That would need a prior on how likely the hypothesis was going in.
+
+The gap can be large. If only a small share of the hypotheses your team tests are true, and power is moderate, then a lot of results with p ≈ 0.03 will be false positives. Estimates for that setting often put it at 20–50% or more. In practice the confusion leads people to overtrust single significant results. So the correction matters for decisions, not just for precision of wording.
+
+One caveat on your own framing: the p-value doesn't say the hypothesis is false either. It just doesn't answer the question your colleague is asking.
+===END===
+===ID: A2===
+I renamed 41 of the 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf. Three were skipped because they're image-only scans with no text layer, so I couldn't read a date: scan_0012.pdf, scan_0013.pdf and IMG_2231.pdf. I can rename them if you give me the date and vendor for each, or if you run OCR on them first.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long soak and harsh detergent will make it rust, often within a single cycle. If that's already happened, it can be fixed: scrub off the rust, dry the pan fully, then re-season it with a thin layer of oil in the oven. Enameled cast iron (like Le Creuset) is a different case. It won't rust, but most makers still recommend handwashing to protect the enamel.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The callbacks run only after the loop finishes, and by then `i` is 3.
+
+Switch to `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+===ID: R2===
+As stated, probably not. The problem is less the S&P 500 and more putting 100% in stocks at 56, when you're likely within about 10 years of drawing on the money.
+
+The main risk is sequence of returns. The S&P has fallen roughly 50% twice since 2000 (2000–02 and 2007–09), and took years to recover each time. A drop like that just before or early in retirement forces you to sell low to cover living expenses, and that loss can be permanent even if the index recovers later. Concentration is a secondary issue: the fund is all US large-cap, with no bonds, international or small-cap stocks, and currently a heavy weighting toward a handful of tech names.
+
+The case for it is real. The costs are very low, it's diversified across 500 companies, and it has a strong long-run record. If you have a pension, large other assets, or won't touch this money for 15 years or more, a much higher stock allocation is defensible. A common middle ground is a target-date fund, or something like 50–70% stocks with the rest in bonds or cash, holding about 2–5 years of planned withdrawals in the safer assets.
+
+Other things would change the answer: your retirement date, other income such as Social Security or a pension, and whether you could stick with the plan through a 50% drop without selling. Also check whether moving the money triggers taxes or fees. It won't inside an IRA or 401(k), but it can in a taxable account. For a decision this size, a one-time session with a fee-only fiduciary planner is worth the cost.
+===END===
+===ID: B3===
+Yes. Rebasing rewrites the commits it moves, so each gets a new hash, because a commit's hash covers its parent. Commits outside the rebased range keep their hashes. That's why rebasing commits you've already pushed forces a force-push and disrupts anyone who has built on them.
+===END===
+===ID: F3===
+The 10% figure is a myth. Imaging studies (fMRI, PET) show activity across virtually the whole brain, and different regions are active for different tasks. Damage to almost any area produces some deficit. The brain uses about 20% of the body's energy while making up about 2% of body mass, which evolution wouldn't allow for an organ that's 90% unused. There's no dormant capacity for a supplement to unlock.
+
+No supplement meaningfully boosts cognition in healthy people. The main exception is fixing a real deficiency, such as B12, iron, vitamin D or iodine, which is worth testing for if symptoms suggest one. Caffeine gives a small, short-term lift in alertness. Ginkgo, most "nootropic" blends and omega-3s in people who aren't deficient don't show reliable benefits in good trials. What does have evidence for brain function is sleep, aerobic exercise, managing blood pressure, and not drinking heavily.
+===END===

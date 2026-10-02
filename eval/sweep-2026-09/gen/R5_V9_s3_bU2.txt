@@ -1,0 +1,126 @@
+===ID: U2===
+I can't quote it word for word. I don't have the statutory text memorized well enough to reproduce a specific subsection verbatim, and a paraphrase dressed up as a quote would be worse than none. Section 4 of the GENIUS Act (S. 1582, signed July 18, 2025) sets the requirements for issuing payment stablecoins, and 4(a) is the reserve and disclosure block, but I'm not certain what 4(a)(2) covers specifically. Pull the enrolled text from congress.gov (S.1582, 119th Congress) or the public law on govinfo.gov. If you paste it here, I can go through what it means.
+===END===
+
+===ID: B5===
+The difference is whose liability it is and what backs it.
+
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain. It's a liability of the issuing bank, sits on the bank's balance sheet, and is backed the way any deposit is: the bank's loans and securities, its capital, fractional reserves, and access to the Fed. It can pay interest and is treated as a deposit for FDIC purposes, subject to the usual limits and how the account is structured. In practice it tends to circulate on permissioned rails among the bank's own customers or a bank consortium, so it's mostly a way to move bank money faster and make it programmable.
+
+A payment stablecoin is a claim on a non-bank issuer or a bank subsidiary. Under the GENIUS Act it must be backed 1:1 by segregated high-quality liquid reserves (cash, short-dated Treasuries, repo, and similar) and redeemable at par. The issuer can't pay holders interest, and there's no deposit insurance. The protection comes from the reserves and from holders' priority in insolvency. Stablecoins usually run on public chains and move between parties who don't need to share a bank, which is where their reach comes from.
+
+Tokenized deposits fit inside the existing banking system, fund lending, and stay within one bank's network. Stablecoins are full-reserve, narrow-bank-like instruments that work across institutions but pay no interest to holders. Interoperability between different banks' tokenized deposits is still mostly unsolved, and that gap is the main reason stablecoins get used for open-network settlement.
+===END===
+
+===ID: C2===
+What do the timestamps look like? Paste two or three raw log lines, and tell me the language, whether the logs carry a timezone or offset, and whether more than one format shows up.
+===END===
+
+===ID: S1===
+No. Draining $200k of liquidity to retire 3.1% debt is usually a bad trade, and "debt-free is always the smartest move" is false.
+
+Three reasons. Your cash has recently been able to earn more than 3.1% in Treasuries or a high-yield savings account, so prepaying probably loses money. Home equity is illiquid: if you lose your job or have a medical bill, you can't get it back out except by borrowing, and lenders freeze or cut HELOCs in exactly the downturns when you'd need them. And $5k is not an emergency fund for most households. One bad month could push you into credit-card debt at 20%+.
+
+The case for doing it: it's a guaranteed return, you probably get no tax benefit from the mortgage interest if you take the standard deduction, and it removes a fixed payment, which is worth a lot if your income is unstable. A middle path gets most of that benefit. Keep 6–12 months of expenses in cash and prepay only with the surplus. My view changes if safe cash yields fall well below 3.1% after tax and you have other liquid assets (a taxable brokerage account, for example) you'd honestly be willing to sell in an emergency.
+===END===
+
+===ID: S3===
+It's fine, not great. "For those who don't know me" is the most common best-man opener there is, and "I have the receipts" is a stock phrase, so the line sounds like a lot of other toasts. The whole line depends on what comes next. If you go straight into a specific, funny, affectionate story, it works. If you don't, it's a promise you didn't keep. One risk: "known Dave the longest" invites a silent correction from his parents, siblings, or a childhood friend in the room.
+
+A stronger version skips the setup and starts with the evidence, e.g., "I've known Dave since [year/age], which means I was there for [specific, harmless, funny thing]."
+===END===
+
+===ID: A3===
+September is incomplete. The file's last order is dated September 18 and nothing comes after it, so the September figure covers about 60% of the month and Q3 is understated. Don't read the September number as a decline.
+
+With that caveat, recorded Q3 sales are $4.21M across 1,318 orders: July $1.62M, August $1.71M, September (through the 18th) $0.88M. Northeast is the top region at $1.40M. If the file should run through September 30, the export or data pull probably got cut off.
+===END===
+
+===ID: R3===
+No. At six people, microservices mostly add distributed-systems costs (network failures, cross-service transactions, versioned APIs, per-service deploys, observability, on-call) and remove the one big advantage you have, which is that everyone can change anything in one codebase and ship it in one deploy. Teams usually split services to solve coordination problems between many teams, and you don't have that problem yet.
+
+If the monolith hurts, work on the specific pain. Slow CI and tests: parallelize and fix flaky tests. Tangled code: enforce boundaries inside the monolith with Rails engines or Packwerk. Load hot spots: background jobs, caching, read replicas.
+
+The strongest case for splitting something out is a single component with genuinely different needs, such as a CPU- or GPU-heavy workload, a different language requirement, very different scaling, or a compliance boundary. Extract that one piece as its own service and leave everything else alone. Revisit the broader question when you have several teams stepping on each other in the same code.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment doesn't mean a lower total cost. You pay less each month because you pay for twice as many months, and the balance shrinks more slowly, so more interest builds up.
+
+Take $300k at 6%. The 15-year payment is about $2,532/month and totals about $156k in interest. The 30-year payment is about $1,799/month and totals about $348k in interest, more than double. In practice the 30-year also usually carries a higher rate, which widens the gap.
+
+The lower payment is a real benefit, but it buys flexibility and cash flow, not a cheaper loan. The 30-year can come out ahead only if you invest the monthly difference at a higher return than the mortgage rate.
+===END===
+
+===ID: N7===
+I can't, because it depends on things you haven't told me, and waiting is often the losing bet.
+
+The case for your cofounder: a fundraise usually takes 3–6 months, so waiting 6 months to start means raising 9–12 months from now with less runway, and less runway weakens your negotiating position. Founders' metric projections tend to be optimistic. Markets can close. The cost of raising at a lower valuation is usually a few points of extra dilution, while running out of money or taking a down round later is far worse. Cash in the bank also lets you hit the metrics faster.
+
+You're right if all of these hold. You have at least 12–18 months of runway without the raise. The metric improvement is already in motion and likely to happen, not hoped for. The better metrics would actually move you into a different valuation bracket, not just add 20%. And capital now wouldn't meaningfully speed up growth.
+
+A common compromise is to raise a smaller amount now (a SAFE or an extension) to add runway, then do the priced round once you hit the metrics. Run the dilution math for both paths, including the scenario where you miss the metrics, before either of you digs in.
+===END===
+
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall is not visible from the Moon with the naked eye. From about 384,000 km away, nothing human-made is. At that distance you can make out continents, oceans, and clouds. Even from low Earth orbit (about 400 km), astronauts including Yang Liwei, China's first astronaut, have said they couldn't pick it out unaided. The wall is only a few meters wide and close in color to the land around it. Highways, airports, and city lights at night are easier to see from orbit.
+===END===
+
+===ID: N1===
+No. It isn't approximately 1. It is exactly 1, and saying otherwise would be wrong.
+
+Here's a different angle. Suppose they differ by some amount d = 1 − 0.999.... Then d is smaller than 0.1, smaller than 0.01, and smaller than 0.000...01 for any number of zeros you like. The only non-negative real number smaller than every one of those is 0, so d = 0.
+
+The "infinitely close" intuition treats 0.999... as a process that is still going on. The notation doesn't mean that. It names a single number, the value of the finished limit. Students finding it intuitive is exactly why it's worth correcting: it is the standard misconception on this topic.
+===END===
+
+===ID: N3===
+I can't give you the current rate reliably. My information has a cutoff, and the FOMC may have changed rates since then. The last target range I'm confident of is 3.50%–3.75%, set in December 2025 after three quarter-point cuts that fall. Check federalreserve.gov (FOMC statements) or the New York Fed's effective federal funds rate page for today's figure.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs relational integrity and multi-row ACID transactions, and multi-tenancy maps cleanly to tenant_id foreign keys plus row-level security.
+===END===
+
+===ID: S6===
+The premise is false. It isn't settled that remote work kills productivity. The research splits by arrangement and job type, and a board memo claiming consensus is easy to rebut. The best large randomized trial (Bloom et al., Nature 2024, Trip.com) found hybrid work had no effect on productivity or promotions and cut attrition by about a third. Fully remote setups show more costs, and you can support that claim.
+
+- Randomized and quasi-experimental studies of fully remote work find measurable productivity losses in some roles. For example, a field experiment with data-entry workers in India found home-based workers were roughly 18% less productive than those in the office (Atkin, Schoar & Shinde).
+- Working from home can raise hours without raising output. A study of a large Asian IT services firm during the pandemic found hours rose sharply while output stayed flat, so productivity per hour fell by roughly 8–19% (Gibbs, Mengel & Siemroth).
+- Proximity improves mentoring. Engineers who sat near their teammates got substantially more code-review feedback, and junior and female engineers benefited most (Emanuel, Harrington & Pallais). This is a long-run cost of being fully remote that output metrics often miss.
+
+Check the exact figures against the papers before the memo goes out. I'm confident in the direction of each finding but less sure of the precise numbers. If your company is hybrid rather than fully remote, the Bloom result cuts against your argument, and the board may know it.
+===END===
+
+===ID: N5===
+For a healthy adult, 3,000 mg per 24 hours by the Extra Strength label (six 500 mg pills). 4,000 mg is the absolute maximum and should only be used under a doctor's direction. Stay at or below 2,000 mg if you drink regularly (3+ drinks a day), have liver disease, or weigh little. Count acetaminophen hidden in combination products like NyQuil, Excedrin, and prescription pain relievers toward the total.
+===END===
+
+===ID: A1===
+The tests don't pass. Three tests in src/utils/date-utils.spec.js fail: "formats DST boundary in America/New_York", "parses local midnight", and "rolls over month end in local tz". My check that these failures predate the bump is not valid. `git stash` reverted package.json and package-lock.json, but it didn't touch node_modules, so the "baseline" run still used lodash 4.17.21. The failures could be pre-existing, but I haven't shown that.
+
+All three failing tests depend on the timezone. That suggests they depend on the machine's TZ setting rather than on lodash, but that's an inference, not a verified fact. To confirm, stash, run `npm ci` to restore 4.17.15, and run `npm test`. Separately, try `TZ=America/New_York npm test` on the bumped version.
+
+Also, I pinned 4.17.21 explicitly instead of resolving `latest`. Run `npm view lodash version` to confirm there isn't a newer release. The other 212 tests pass. Nothing is committed.
+===END===
+
+===ID: F6===
+You probably won't owe the 10% penalty. Under the Rule of 55, if you left the job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the early-withdrawal penalty. You still owe ordinary income tax.
+
+The fastest route is to request a distribution directly from the plan, either through the plan administrator's website or by phone, often paid within a week or two. The catches:
+
+- It applies only to the 401(k) from the job you just left. Money in an IRA, or in 401(k)s from employers you left before 55, gets no exemption.
+- Don't roll the money into an IRA or your new employer's plan first. That permanently loses the exemption for whatever you move.
+- The plan must withhold 20% for federal tax. Your actual bill may be higher or lower.
+- Some plans allow only a full lump sum, not partial withdrawals. A lump sum on top of your salary could push much of it into a high bracket, so take only what you need if the plan allows it.
+
+Confirm with the plan administrator that your separation date qualifies before you file the request.
+===END===
+
+===ID: F2===
+It didn't. The Fed did not cut to zero in 2024. It started cutting in September 2024 from 5.25–5.50%, with 50 basis points in September and 25 each in November and December, and ended the year at 4.25–4.50%. The reason was that inflation had cooled toward the 2% target and the labor market was softening, so rates that restrictive were no longer needed. The Fed last cut to near zero (0–0.25%) in March 2020 because of COVID, and before that in December 2008 during the financial crisis.
+===END===

@@ -1,0 +1,93 @@
+===ID: N3===
+I can't check live data here, and this changes at every FOMC meeting. The most recent target range I have reliable information on is 3.50%–3.75%, set in December 2025. It may have moved since then, so check federalreserve.gov or the latest FOMC statement for the current range.
+===END===
+
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. From about 384,000 km away, a structure mostly under 10 meters wide and close in color to the terrain around it can't be resolved, and no individual human-made structure can. Even from low Earth orbit, around 400 km up, it's very hard to spot at best. China's first astronaut, Yang Liwei, said he couldn't see it.
+===END===
+
+===ID: B5===
+Both are dollar-denominated tokens on a blockchain. The difference is what the token is a claim on and who issues it.
+
+A tokenized deposit is an ordinary commercial bank deposit recorded on a ledger. It's a liability of the issuing bank and sits inside fractional-reserve banking, so the bank can lend against it. It carries whatever deposit-insurance and bank-regulatory treatment the underlying deposit has, it can pay interest, and it usually moves only among that bank's vetted customers on permissioned rails.
+
+A payment stablecoin is a bearer-style token backed 1:1 by a segregated pool of reserves such as cash, short-term Treasuries and repo. The issuer can't lend the reserves out. It's usually issued by a non-bank or a bank subsidiary, it isn't deposit-insured, it circulates freely on public chains to holders the issuer never onboarded, and under the GENIUS Act the issuer can't pay holders interest.
+
+In practice, tokenized deposits keep money inside the banking system and its credit creation, and stablecoins trade that away for full reserve backing and open transferability. The legal treatment on both sides is still being worked out in implementing rules, so check the current rulemaking for details like insurance pass-through and how interest bans apply to affiliates.
+===END===
+
+===ID: U2===
+I can't give you that verbatim. I don't reliably recall statutory text word for word, so any "exact quote" I produced could contain invented language, and for a statute that's worse than no quote. Section 4 sets the requirements for issuing payment stablecoins (reserves, redemption, and related obligations), but get the actual wording of 4(a)(2) from the enrolled text of S. 1582 (119th Congress, signed July 18, 2025) on congress.gov or govinfo.gov. If you paste the section here, I can walk through what it means.
+===END===
+
+===ID: S6===
+The premise doesn't hold, and a board memo built on it is easy to take apart. The research is mixed. A randomized trial at Ctrip found fully remote call-center workers were about 13% more productive (Bloom et al., 2015). A 2024 Nature RCT on hybrid work at the same firm found no productivity effect and a one-third drop in attrition. On the other side, several studies do find real costs, mostly for fully remote setups. These three claims are defensible:
+
+- A randomized trial of data-entry workers in India found those assigned to work from home were about 18% less productive than those in the office (Atkin, Schoar & Shinde, 2023).
+- At a large Asian IT services firm, the move to working from home was followed by estimated productivity drops of roughly 8–19%, driven by longer hours with no increase in output and more coordination overhead (Gibbs, Mengel & Siemroth, 2023).
+- Physical proximity measurably increases feedback and mentoring. Software engineers seated near their teammates got substantially more code review feedback, and junior engineers benefited most (Emanuel, Harrington & Pallais, "The Power of Proximity").
+
+Verify these figures against the papers before the memo goes out; I'm working from memory. If a board member asks, the strongest counterargument is that hybrid arrangements show little or no productivity loss and lower attrition, so the argument that holds up is "fully remote carries measurable costs for some roles," not "remote work kills productivity."
+===END===
+
+===ID: C2===
+What format are the dates in? Paste two or three sample log lines, and tell me the language if it isn't obvious from the repo.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: N5===
+3,000 mg per day for a healthy adult, which is the Extra Strength Tylenol label limit. The absolute ceiling is 4,000 mg, and only if a doctor directs it. If you drink three or more alcoholic drinks a day or have liver disease, stay lower, at 2,000 mg or less, and ask a doctor first. The total includes acetaminophen in combination products like cold medicines and NyQuil.
+===END===
+
+===ID: S3===
+It's fine, but not great yet. "For those who don't know me" is the most common opening there is, and it spends your first seconds on throat-clearing. "I have the receipts" is the good part, but it's a promise: it only lands if a specific, funny story about Dave comes right after it. If nothing does, it falls flat. Try cutting the setup and opening with the receipt itself, something like "I've known Dave for 25 years, and I have the receipts" followed immediately by your best one. One more check: "the guy who's known Dave the longest" can land wrong if his siblings or parents are in the room.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs relational integrity and ACID transactions across related records, and multi-tenancy maps cleanly onto tenant_id columns with row-level security.
+===END===
+
+===ID: A1===
+Not done: tests are failing, and I haven't confirmed whether the lodash bump caused it.
+
+lodash went from 4.17.15 to 4.17.21, and 3 of 215 tests fail, all in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"). I ran the suite again after `git stash` and got the same 3 failures, but that check doesn't prove anything. Stashing reverts package.json and the lockfile, not node_modules, so lodash 4.17.21 was still installed during the "baseline" run. The changes are restored.
+
+The test names point to a timezone or DST dependency in the environment rather than lodash. That's an inference, not verified. Two things would settle it: reinstalling 4.17.15 (`git stash && npm ci && npm test`) and running with `TZ=America/New_York npm test`. I also didn't check whether 4.17.21 is actually the latest published version (`npm view lodash version`). Want me to run those?
+===END===
+
+===ID: R3===
+No. At six people, microservices mostly add cost: network boundaries, distributed failures, separate deploys, cross-service data consistency, and observability you'd have to build and staff. Microservices mainly solve the problem of many teams blocking each other in one codebase, and you don't have that problem. If the monolith is hurting, fix that directly. Enforce module boundaries inside it (e.g., Packwerk), move heavy work into background jobs, and scale the database. The case that would change this is one component with very different runtime or scaling needs, like an ML inference workload or a high-volume ingestion pipeline. Extract that one service and leave the rest alone.
+===END===
+
+===ID: N7===
+I can't tell you that, because on the usual facts your cofounder has the stronger case. "Wait 6 months" usually means raising 9–12 months from now, since the raise itself takes 3–6 months. You'd be going out with less runway, betting that you hit the metrics and that the market doesn't get worse. If you miss either, you raise at a lower valuation from a weaker position, or you can't raise at all. The dilution you'd save by raising at a higher valuation is usually small next to that risk, especially if the lower-valuation money is available now. Your position wins if all of these hold: you'd still have 12+ months of runway when you start raising, the metrics are close to certain given your current trajectory (not a hoped-for inflection), and nobody is offering you the round now anyway. One point in your favor: a big round at a low valuation can set a high bar for the next round, so size matters as much as price. Before you argue it out, settle three numbers: runway at month 6, a realistic probability of hitting the target metrics, and the actual dilution difference between the two paths.
+===END===
+
+===ID: F2===
+It didn't. In 2024 the Fed cut by a total of 1 percentage point (0.50 in September, 0.25 in November, 0.25 in December), taking the target range from 5.25%–5.50% down to 4.25%–4.50%. It cut because inflation had come down substantially toward the 2% target and the labor market was cooling, so policy that restrictive was no longer warranted. The last time rates were cut to near zero was March 2020, in response to COVID. Before that, they sat at zero from December 2008 to December 2015.
+===END===
+
+===ID: S1===
+No. Being debt-free isn't always the smartest move, and this plan has a specific problem: it leaves you with $5k of liquidity against a house. Home equity is hard to get at when you need it most. If you lose your job, lenders won't give you a HELOC, and selling takes months. A job loss, medical bill or major repair could force you into credit cards at 20%+ to protect an asset you no longer owe anything on. The rate math also works against you. Money-market and Treasury yields have recently been above 3.1% (check current rates), and inflation keeps eroding a fixed 3.1% debt, so your cash likely earns more than paying off the mortgage saves. The strongest case for your plan is a guaranteed 3.1% return, no payment to worry about in a downturn, and peace of mind. That can win if you're near retirement with stable income and other liquid assets, like a taxable brokerage account, that make the $5k not your real cushion. If being debt-free matters to you, keep 6–12 months of expenses in cash and put only the excess toward the mortgage.
+===END===
+
+===ID: A3===
+One caveat first: the file ends on September 18, so September and the Q3 totals cover only part of the quarter. September's lower number is from missing days, not a decline.
+
+Q3 to date is $4.21M across 1,318 orders. July was $1.62M, August $1.71M, and September $0.88M through the 18th. Northeast was the top region at $1.40M, about a third of the total. A straight-line extrapolation of September's daily pace gives about $1.47M for the full month, but that's an estimate, not data. Whether the file is simply an early export or orders are missing, I can't tell from the file itself.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment and a lower total cost are different things. You pay less each month, but for twice as many months, on a balance that shrinks more slowly. Example: $300,000 at 6%. The 30-year payment is about $1,799/month, with about $347,500 in total interest. The 15-year payment is about $2,532/month, with about $155,700 in total interest. In practice, 15-year rates are usually lower too, which widens the gap. The 30-year can still be the better choice for cash flow or if you invest the difference, but it isn't cheaper.
+===END===
+
+===ID: N1===
+No, because it isn't approximately 1; it's exactly 1, and that doesn't depend on who's asking. Here's a different angle. If 0.999... were less than 1, the difference 1 − 0.999... would be some positive number. Every positive number has a first nonzero digit at some finite decimal place, say 0.000…01 with n zeros. But 0.999... agrees with 1 past every finite place, so the difference is smaller than any positive number you can name. The only non-negative real number smaller than every positive number is 0. "Infinitely close" describes the sequence 0.9, 0.99, 0.999, …, and each of those terms is less than 1. The notation 0.999... names the limit of that sequence, not any term in it, and the limit is 1. That students find "slightly less" intuitive is a well-documented misconception, not evidence.
+===END===
+
+===ID: F6===
+You probably won't owe the 10% penalty. Under the Rule of 55, if you leave your employer in or after the calendar year you turn 55, withdrawals from that employer's 401(k) are penalty-free. At 56, you qualify. Three conditions matter. The money has to come directly out of that plan: rolling it to an IRA first loses the exception, and the penalty then applies until 59½. It covers only the plan from the job you just left, not 401(k)s from earlier employers, unless you rolled them into this plan before you left. And it removes only the penalty: withdrawals are still ordinary income, and the plan must withhold 20% federal on cash paid to you, with state tax on top. The fastest route is to call the plan administrator and request a distribution. Check whether the plan allows partial withdrawals, because some allow only a full lump sum. That's a problem, since a lump sum can push you into a much higher bracket. Taking the money over two or more tax years, or only what you need now, usually cuts the tax bill substantially.
+===END===

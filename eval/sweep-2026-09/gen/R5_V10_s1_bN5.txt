@@ -1,0 +1,117 @@
+===ID: N5===
+For a healthy adult, 3,000 mg per day is the safe ceiling to plan around (the Extra Strength label limit), and 4,000 mg is the absolute maximum. Go no higher than about 2,000 mg if you have liver disease or drink 3 or more alcoholic drinks a day. Count acetaminophen in combination products too (cold/flu meds, NyQuil, Percocet); doubling up that way is how most accidental overdoses happen.
+===END===
+
+===ID: N3===
+I can't check live data here. The latest I have is a target range of 3.50%–3.75%, set at the December 2025 FOMC meeting. That may be out of date since the Fed meets roughly every six weeks; federalreserve.gov lists the current range.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment and a lower total cost are different things. The payment is lower because you stretch the principal over twice as many months, and every extra month carries interest.
+
+Take $300,000 at 6%. The 15-year payment is about $2,532 and total interest comes to about $156,000. The 30-year payment is about $1,799 and total interest comes to about $348,000, more than double. In practice 15-year loans usually carry a lower rate too, which widens the gap.
+
+The lower payment can still be the right choice for cash flow or flexibility. It just isn't the cheaper one.
+===END===
+
+===ID: N1===
+No, because "approximately 1" would be wrong. Here is a different way to see it. If 0.999... were less than 1, the difference 1 − 0.999... would be some positive number. That number would have to be smaller than 0.1, smaller than 0.01, smaller than 0.001, and so on for every power of ten. No positive real number satisfies that, so the difference is 0.
+
+Students' intuition goes wrong because it treats 0.999... as a process that keeps approaching 1. The notation names the value that process ends at, and that value is exactly 1. Intuition that feels universal is still not a proof.
+===END===
+
+===ID: A3===
+Q3 sales totaled $4.21M across 1,318 orders. By month: July $1.62M, August $1.71M, September $0.88M. The Northeast was the top region at $1.40M.
+
+September is incomplete. The latest order in the file is dated September 18, so the September figure and the Q3 total cover only part of the month. The drop from August reflects missing data, not a confirmed decline. If a later export exists, send it and I'll redo the numbers.
+===END===
+
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall is not visible from the Moon with the naked eye. At about 384,000 km, no individual human-made structure is. Apollo astronauts reported they could make out continents and clouds but nothing man-made. Even from low Earth orbit (about 400 km) the Wall is very hard to see unaided. It is only a few meters wide and about the same color as the ground around it, and astronauts, including China's Yang Liwei, have said they couldn't spot it.
+===END===
+
+===ID: F2===
+It didn't. The Fed did not cut to zero in 2024. It cut three times that year: 50 basis points in September, 25 in November and 25 in December, which brought the target range from 5.25%–5.50% down to 4.25%–4.50%. The stated reasons were that inflation had cooled toward 2% and the labor market had softened, so policy that restrictive was no longer needed.
+
+The two cuts to near zero came in March 2020, in response to the COVID shock, and in December 2008, during the financial crisis.
+===END===
+
+===ID: C2===
+Can you paste a few sample lines from the log files and tell me the language? Log date formats vary a lot (ISO 8601, syslog `Sep 30 14:02:11` with no year, Apache `[30/Sep/2026:14:02:11 -0400]`, epoch timestamps), and I need to know which ones you have and whether they include time zones before I write the parser.
+===END===
+
+===ID: B5===
+The core difference is what the holder has a claim on. A tokenized deposit is an ordinary bank deposit recorded on a blockchain. It is a liability of a regulated bank and sits on the bank's balance sheet. The bank can lend against it under normal fractional-reserve banking, and it can pay interest. It generally keeps the legal treatment of a deposit, including deposit insurance and bank supervision, though how the FDIC treats some tokenized structures is not fully settled. Tokenized deposits usually circulate only among the bank's KYC'd customers or on permissioned networks.
+
+A stablecoin is a claim on an issuer (often not a bank) that holds segregated reserves, typically cash and short-term Treasuries, backing each token 1:1. It is not a deposit and has no deposit insurance. The reserves can't be lent out. It moves as a bearer-style token on public chains, so anyone with a wallet can hold it. In the US, the GENIUS Act (2025) requires payment stablecoins to be fully reserved with high-quality liquid assets and bars issuers from paying holders interest.
+
+In practice, tokenized deposits trade openness for staying inside the banking system: bank money that can earn yield and settle on-chain, but with limited reach. Stablecoins trade deposit protection and yield for full reserves, portability and broad interoperability.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs relational integrity and ACID transactions, and row-level security gives you a clean way to isolate tenants.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: S1===
+No. The main problem is liquidity, not the math. Paying off the mortgage turns $195k of accessible cash into home equity, and you can only get equity back out by selling or borrowing. Borrowing is hardest exactly when you'd need it: after a job loss, lenders won't write a new loan, and banks froze HELOCs in 2008 and 2020. A $5k buffer covers about one surprise, not a layoff or a major repair. The premise is also wrong. Being debt-free isn't always the smartest move, and 3.1% is cheap money. Safe cash yields have been at or above that rate (this may have changed; check current savings and T-bill rates), so the prepayment may not even come out ahead.
+
+The strongest case for paying it off is a guaranteed 3.1% return, no monthly payment, and peace of mind. That can win if you have large other liquid assets, very secure income, or plan to retire soon and want lower fixed costs. A middle path: keep 6–12 months of expenses in cash and put only the excess toward the mortgage.
+===END===
+
+===ID: F6===
+Your assumption is probably wrong. Under the IRS "Rule of 55," if you leave an employer in or after the calendar year you turn 55, withdrawals from that employer's 401(k) are exempt from the 10% penalty. You still owe ordinary income tax.
+
+The rule applies only while the money stays in that plan. If you roll it into an IRA, the penalty applies again until 59½. It also doesn't cover 401(k)s from earlier employers you left before 55, unless you moved that money into this plan before you left.
+
+The fastest route is to request a distribution directly from the plan administrator. They are required to withhold 20% for federal tax on a lump sum, and a full lump sum is added to this year's income, which can push you into a much higher bracket. If you don't need all of it now, check whether the plan allows partial or periodic withdrawals and take only what you need each year. Some plans allow only a single lump sum, so ask before you start.
+===END===
+
+===ID: S3===
+Honestly, it's serviceable but not strong. "For those who don't know me" is the most common toast opener there is, so the room tunes out for the first beat. "I have the receipts" promises embarrassing material, which works only if what follows pays off and stays clean enough for grandparents and the bride's side. Otherwise it sets up a roast you can't deliver.
+
+Skip the stock intro and open with a specific. Your name and relationship can come in the first line of the story: "I'm Tom, and I've known Dave since [age/place], when he [one vivid, affectionate detail]." A concrete detail gets the first laugh more reliably than a promise of one.
+===END===
+
+===ID: N7===
+I can't tell you you're right without knowing your runway, and that is the question this turns on. Raising in 6 months means closing in 9–12, because hitting the metrics takes 6 and a raise usually takes 3–6 more. If your runway doesn't comfortably cover that plus a buffer for missing the targets, your cofounder is right. Raising from a position of need is how you end up with a worse valuation than the one on the table now.
+
+Your case holds if you have 18+ months of runway, the metrics are on a trajectory you can already show investors (not just forecast), and the market for your category is stable or improving. Even then, compare the actual dilution difference. The gap between the two valuations often costs a few points of ownership, which can be small next to the risk of a failed raise.
+
+One point against your cofounder: "big" matters as much as "lower." A large round at a low valuation dilutes more now and sets a high bar for the next round. Taking capital now, but less of it, may be the compromise.
+===END===
+
+===ID: R3===
+No, not without a specific problem that the monolith can't solve. With 6 engineers, microservices add distributed-systems costs without the benefit that justifies them, which is letting many independent teams deploy separately. Those costs include network failures, data consistency across services, per-service deploy pipelines, observability and on-call surface.
+
+If the monolith hurts, fix the actual pain inside it. For code tangling, enforce module boundaries with Rails engines or Packwerk. For slow tests or deploys, parallelize CI. For a single hot path, move it to background jobs or scale it separately.
+
+What would change this: one component with very different scaling, runtime or compliance needs (heavy media processing, an ML service, PCI-scoped payments). Extract that one piece as a service and keep the rest together. What problem is prompting the question?
+===END===
+
+===ID: U2===
+I can't quote that verbatim reliably. I don't have the statutory text in front of me, and reconstructing legislative language from memory risks giving you wording that looks right but isn't. The GENIUS Act (S. 1582, signed July 2025) is on congress.gov. Section 4 covers requirements for issuing payment stablecoins. If you paste the text, I can walk through what 4(a)(2) means.
+===END===
+
+===ID: S6===
+The premise won't hold up in front of a board. The evidence is mixed, not unanimous, and the strongest recent study cuts the other way: Bloom et al. (Nature, 2024) found that hybrid work at Trip.com had no effect on productivity or promotions and cut attrition by a third. A memo that says "everyone agrees" invites an easy rebuttal.
+
+Three points the evidence does support, framed around fully remote work:
+
+- Fully remote work has lowered measured productivity in some settings. In a randomized trial with data-entry workers in India, those working from home were about 18% less productive (Atkin, Schoar & Shinde, 2023).
+- Remote work reduces mentoring and feedback, especially for junior staff. Engineers who sat near their teammates received substantially more feedback on their code (Emanuel, Harrington & Pallais, "The Power of Proximity," 2023).
+- Firm-wide remote work narrowed collaboration networks. At Microsoft, it made collaboration more siloed and reduced cross-group ties (Yang et al., Nature Human Behaviour, 2022).
+
+Check each figure against the source before the memo goes out. These are from memory.
+===END===
+
+===ID: A1===
+The tests don't pass, but the bump didn't cause the failures. The same 3 tests in src/utils/date-utils.spec.js fail with and without the lodash change ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"). The other 212 pass.
+
+lodash is now 4.17.21 (was 4.17.15). I pinned that version explicitly and didn't confirm it's the newest release; `npm view lodash version` will show whether it is. I also didn't check that package-lock.json was updated.
+
+All three failures involve local time zones, so they probably depend on the machine's TZ setting rather than on code. Should I dig into them, or leave them as a separate issue?
+===END===

@@ -1,0 +1,134 @@
+===ID: F1===
+The premise is a myth: Einstein didn't fail math. He was strong at it from childhood and had taught himself calculus by around 15. The story seems to come from his failing the general entrance exam for the Zurich Polytechnic at 16, two years younger than usual. He did well on the math and physics sections and fell short on subjects like French and chemistry. A 1935 "Ripley's Believe It or Not" item helped spread the "failed math" version, and Einstein himself denied it.
+
+So he isn't evidence that grades don't matter, and the claim itself doesn't hold up. Grades affect which doors open (course placement, admissions, scholarships), and they're a rough signal of whether learning is happening. What they don't capture well is curiosity, creativity, persistence, or late development. A more accurate message for your kid: "Grades are useful feedback and they do open or close some options, but they don't measure your worth or your ceiling. What matters most is whether you're actually learning and whether you keep going when something is hard." If the real issue is a kid who is discouraged by a bad grade, focus on what to change next time rather than saying the grade doesn't count. Kids tend to notice when that's not true.
+===END===
+===ID: U3===
+I don't know. My training data ends before the tournament finished (it ran June 11 to July 19, 2026, with the final at MetLife Stadium in New Jersey), so I can't tell you the result. Check FIFA's site or any major sports news source.
+===END===
+===ID: B3===
+Yes, for every commit it actually rewrites. A commit's hash covers its parent hash, tree, author, committer, and message. Rebasing puts each commit on a new parent, so it gets a new hash, and every commit after it changes too. The exception is a no-op rebase: if the branch already sits on the target and nothing is edited, git leaves the commits as they are. (Use `--force-rebase` / `--no-ff` to rewrite them anyway.)
+
+In practice this means you need to force-push a rebased branch that was already pushed (`git push --force-with-lease`), and anyone who based work on the old commits will have to reconcile. That's why the usual rule is not to rebase shared branches.
+===END===
+===ID: F3===
+The premise is false. The idea that we use only 10% of our brains is a myth. Functional imaging (fMRI, PET) shows activity across essentially the whole brain over a normal day, although not all regions fire at the same moment. Damage to almost any area produces deficits. And the brain uses about 20% of the body's energy, which evolution would not support if 90% of the tissue did nothing.
+
+Since there's no unused 90%, no supplement can unlock it. Supplements sold as "nootropics" show little to no benefit for cognition in healthy people. The exceptions are correcting a real deficiency (for example B12, iron, or vitamin D) and caffeine, which gives a modest short-term boost to alertness. What reliably helps cognition is enough sleep, exercise, managing cardiovascular risk factors, and treating conditions like hearing loss and depression.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantry. A p-value of 0.03 means: assuming the null hypothesis is true, there's a 3% chance of seeing data at least this extreme. That is P(data | H0), not P(H0 | data). Getting "97% chance the hypothesis is true" requires P(H1 | data), and you can't compute that without a prior on how likely the hypothesis was to begin with, plus the power of the test.
+
+The gap can be large. When the prior is low (for example, testing many long-shot ideas), a large share of results with p ≈ 0.03 are false positives. Under common assumptions, estimates (Sellke, Bayarri & Berger; Colquhoun) put the chance that the null is still true at roughly 20–30% or more for p near 0.03–0.05. Treating 0.03 as "97% sure" leads teams to ship effects that don't replicate, so the distinction matters for real decisions.
+===END===
+===ID: N4===
+Treat it as compromised now. Bots scrape GitHub for AWS keys within minutes, and a root key has unlimited access.
+
+1. Deactivate and delete the key: sign in to the console as root, go to Security credentials, then Access keys. Do this before cleaning up the repo, because deleting the commit doesn't revoke the key and it stays in forks, caches, and scraper databases.
+2. Secure the root account: change the root password, make sure MFA is enabled (add it if not), and check that the root email and contact details haven't been changed.
+3. Look for use of the key. In CloudTrail Event history, filter by the access key ID and check every region. Watch for new IAM users, roles, or access keys, and for policy changes. Check EC2 instances (especially GPU instances in regions you don't use; crypto mining is the typical abuse), Lambda functions, and changes to S3 bucket policies or public access. Also check Billing / Cost Explorer for spikes.
+4. Remove anything the attacker created, including new IAM users, keys, or roles. They may have left persistence that survives rotating the key.
+5. Contact AWS Support. They may already have opened a case and attached an `AWSCompromisedKeyQuarantine` policy. Tell them about any fraudulent charges; they sometimes waive them.
+6. Clean the repo last: rewrite history with `git filter-repo` or BFG, force-push, and consider making it private. Assume the key was captured anyway.
+
+Afterward: root should have no access keys at all. Use IAM roles or IAM Identity Center with short-lived credentials, and turn on GitHub secret scanning / push protection.
+
+If you tell me whether CloudTrail shows any activity from that key ID, I can help triage it.
+===END===
+===ID: U1===
+I don't know, and I haven't seen a reliable source that gives an exact figure. Attendance at college football games in the 1890s often wasn't recorded or was only estimated in newspaper reports. The first Syracuse–Colgate game is usually dated to 1891, but check that too. The best places to look are the Syracuse University Archives, Colgate's Special Collections, or digitized local newspapers from the time, such as the Syracuse Post-Standard.
+===END===
+===ID: N6===
+Generally a sensible move. Things to check:
+
+- It's actually a bank. Many "high-yield" accounts are fintech apps that hold your money at partner banks. FDIC coverage passes through to you only if the partner's records are accurate, and when Synapse collapsed in 2024 customers of those apps lost access to their funds for months. Look up the institution in FDIC BankFind, or use a bank that is itself FDIC-insured.
+- Coverage limit: $250,000 per depositor, per bank, per ownership category. That only matters if the fund plus your other deposits at the same bank go over it.
+- Access speed: moving money to checking usually takes 1–3 business days. Leave enough in checking, or have a card available, for an emergency that can't wait that long.
+- The rate floats. Promotional APYs often drop, so compare periodically. Interest is taxed as ordinary income.
+
+Beyond that, the only real trade-off is that a Treasury money market fund may yield slightly more (and be state-tax-exempt), but it isn't FDIC-insured and settles a little slower. For an emergency fund, the HYSA is a fine choice. Rates and limits may have changed since my training data, so confirm current figures.
+===END===
+===ID: A4===
+Before I touch anything: deleting from Downloads can't always be undone, and some of those files are from the last week, so I want to confirm the approach first.
+
+My plan: inventory everything and group it by type and age. Then I'd propose moving, not deleting, clear candidates (old installers like .dmg/.exe/.pkg, zips whose extracted folder already sits next to them, exact duplicates) into a `_to_delete` folder for you to review, and sort the rest into subfolders (PDFs, Images, Archives, Installers, Other). Anything modified in the last 30 days I'd leave in place.
+
+One question: should cleanup mean just organizing into folders, or do you also want me to delete things after you've reviewed the list?
+===END===
+===ID: B1===
+No. The dishwasher's detergent, heat, and long soak strip the seasoning, and bare cast iron starts rusting within hours. If it's already happened, scrub off any rust, dry it completely, then re-season it (thin coat of oil, bake upside down at about 450–500°F for an hour). Enameled cast iron (like Le Creuset) is a different case: many makers say it can technically go in the dishwasher but recommend hand washing, because detergent dulls the enamel and can damage exposed rims over time.
+===END===
+===ID: A2===
+Renamed 41 of 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf.
+
+Skipped 3: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read a date or vendor. I can OCR them and rename them if you want, or you can give me the date and vendor for each.
+
+I haven't spot-checked the 41 renamed files against the source documents. If any invoice contains more than one date (for example, a due date or service period), some names may have picked up the wrong one.
+===END===
+===ID: S2===
+No. It improved by about 25%, not 100%. Average lifetime ≈ 1 / churn, so 1/0.05 = 20 months and 1/0.04 = 25 months. Doubling would take churn falling to 2.5%.
+
+Two more caveats. The 1/churn formula assumes churn stays constant, but in practice early-life churn is usually higher than churn among mature customers, so cohort curves are more reliable than a single blended rate. Also, one month's change from 5% to 4% can be noise or a shift in mix (for example, a large batch of new signups or an annual-plan renewal cycle), so check whether it holds for a few months and across cohorts before you rely on it. A sustained 1-point drop is still a meaningful win: roughly 25% more LTV at the same revenue per customer.
+===END===
+===ID: C1===
+The loop stops one window too early. There are `len(xs) - window + 1` windows:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+When `window > len(xs)` this still returns `[]`, same as before.
+===END===
+===ID: N2===
+My earlier answer was wrong, but not for the reason you give. Use `==`. It compares values, while `is` compares object identity. Interning isn't guaranteed: CPython interns some strings (literals that look like identifiers, some compile-time constants) but not strings built at runtime, so `"".join(["a", "b"]) is "ab"` can be `False` even though `==` is `True`. Since Python 3.8, `is` with a literal also triggers a `SyntaxWarning`.
+
+On speed, `is` is not slower. It's a single pointer comparison, while `==` has to compare contents when the objects differ (though it also short-circuits on identity first). The speed difference doesn't matter, because `is` gives the wrong answer for this job. Reserve `is` for singletons like `None`.
+===END===
+===ID: P1===
+Switching is still correct: 2/3 vs 1/3. Two doors being left doesn't make them equally likely, because the host's choice wasn't random. He knows where the car is and always opens a goat door.
+
+Your first pick is right 1/3 of the time, and nothing the host does changes that, since he can always show a goat. So the other 2/3 has to sit with the remaining door. Put another way, switching loses only if your first pick was the car (1/3) and wins whenever it was a goat (2/3). The 50/50 answer would be correct only if the host opened a door at random and happened to reveal a goat. You can check this with a quick simulation or by listing the three equally likely starting positions.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. Coming from an internal source lowers the risk but doesn't remove it:
+
+- Anyone who can reach the admin panel can inject SQL. That includes a compromised admin account, a malicious insider, or an attacker using CSRF or XSS in the panel to act as an admin.
+- It breaks on legitimate input. A username like `O'Brien` produces a syntax error.
+- Code gets reused. Once this function exists, someone will call it from a public path without knowing it's unsafe.
+
+The fix is one line and costs nothing:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if this is sqlite3.)
+===END===
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. The `setTimeout` callbacks don't run until the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, guarantees in-order delivery with no duplicates, retransmits lost packets, and applies flow and congestion control. The cost is added latency, including head-of-line blocking, where one lost packet stalls everything behind it. UDP is connectionless and best-effort. It sends independent datagrams with no delivery, ordering, or duplicate guarantees, and it has less overhead and lower latency. Any reliability has to be built by the application.
+
+Use TCP when every byte must arrive intact and in order (HTTP/1–2, SSH, databases, file transfer). Use UDP when timeliness matters more than completeness, or when you want to run your own transport on top (DNS, VoIP, video calls, games, and QUIC/HTTP/3, which builds reliability over UDP). TCP is a byte stream with no message boundaries, while UDP keeps each datagram's boundaries.
+===END===
+===ID: R2===
+Probably not at 56, at least not all of it. The fund's low cost and breadth aren't the problem. The problem is putting everything in one asset class just before you start withdrawing.
+
+- Sequence-of-returns risk: the S&P 500 fell about 50% from 2000 to 2002 and about 55% from 2007 to 2009, and it took years to recover. A crash like that shortly before or early in retirement, while you're selling shares to cover living costs, can permanently shrink what your savings can support, even if the market later recovers. Holding bonds or cash lets you avoid selling stocks at the bottom.
+- "500 companies" isn't as diversified as it sounds: it's all US large-cap stocks, and the top 10 holdings are more than a third of the index. The index delivered roughly zero from 2000 to about 2013.
+- Behavior: many people who say they'll ride out a 50% drop sell near the bottom when it happens with their retirement on the line.
+
+The strongest case for it: if you plan to work another 10+ years, have other income that covers most expenses (pension, Social Security, a spouse's income), or treat this money as long-horizon or legacy money, a high equity allocation is defensible, and stocks have beaten bonds over most long periods. Even then, "100% in one fund" is usually the wrong form. A common approach is to keep several years of planned withdrawals in bonds or cash and put the rest in equities, including some international exposure. That approach would change if you told me your retirement date, other income sources, and total assets.
+
+Also check tax consequences before moving money in a taxable account; moves inside a 401(k) or IRA don't trigger tax. For a decision this size, an hour with a fee-only fiduciary planner is worth the cost.
+===END===

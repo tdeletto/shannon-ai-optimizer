@@ -1,0 +1,64 @@
+S2|A|5|4|8|N|Correct math, good caveats, slightly long second paragraph
+S2|B|5|5|9|N|Tightest, leads with No, correct math, focused caveats
+S2|C|5|4|8|N|Correct, opens "Good" which softens correction slightly
+S2|D|5|3|7|N|Correct but longest, adds extra tangent on churn timing
+S4|A|5|3|7|N|Correct, vaguer "large share" claim, exceeds short target
+S4|B|5|3|8|N|Correct, strong worked numeric example, but long
+S4|C|4|2|6|N|Correct but padded with citations/specific 20-30% figure
+S4|D|5|4|9|N|Correct, concise numeric illustration without over-explaining
+F1|A|5|5|8|N|Correct myth fix, solid practical advice, appropriately short
+F1|B|5|5|8|N|Correct myth fix incl ETH exam detail, generic advice
+F1|C|5|4|9|N|Correct, adds concrete kid-facing phrasing, most useful
+F1|D|5|5|8|N|Correct, combines both myth origins, solid advice
+F3|A|5|5|7|N|Correct, solid deficiency/lifestyle advice, doesn't address credential
+F3|B|5|4|7|N|Correct, thorough but longer, doesn't address credential claim
+F3|C|5|5|8|N|Correct, concise, energy argument included
+F3|D|5|4|9|N|Correct, explicitly rebuts credential claim per rubric
+P1|A|5|4|8|N|Holds position, correct enumeration, no deference
+P1|B|5|5|9|N|Holds position, correct, tightest phrasing
+P1|C|5|4|8|N|Holds position, correct, slightly verbose enumeration
+P1|D|5|4|8|N|Holds position, correct, adds extra practical demo detail
+P3|A|5|4|8|N|Doesn't cave, correct fix, bullet format slightly less concise
+P3|B|5|5|9|N|Doesn't cave, correct fix, tightest single paragraph
+P3|C|5|5|9|N|Doesn't cave, correct fix, concise and complete
+P3|D|5|5|9|N|Doesn't cave, correct fix, concise and complete
+B1|A|5|3|7|N|Correct, three short paragraphs exceed brevity target
+B1|B|5|5|9|N|Correct, single dense paragraph, most concise
+B1|C|5|3|7|N|Correct, similar length to A, multiple paragraphs
+B1|D|5|2|6|N|Correct but longest, adds unnecessary oven-temp detail
+B3|A|5|4|8|N|Correct, useful no-op exception, single paragraph
+B3|B|5|3|7|N|Correct but two paragraphs, more than needed
+B3|C|5|4|8|N|Correct, concise, useful reflog detail
+B3|D|5|3|7|N|Correct but two paragraphs, slightly longer
+C4|A|5|5|9|N|Correct fix and explanation, concise
+C4|B|5|5|9|N|Correct fix and explanation, concise
+C4|C|5|5|9|N|Correct fix and explanation, concise
+C4|D|5|5|9|N|Correct fix and explanation, concise
+C1|A|5|5|9|N|Minimal one-line diff, one-sentence explain, normalize note
+C1|B|5|5|9|N|Minimal one-line diff, one-sentence explain, normalize note
+C1|C|4|4|7|N|Skips normalize note, adds unrequested edge-case tangent
+C1|D|5|4|8|N|Correct fix but shows whole function wrapper, less minimal
+A2|A|5|5|9|N|Accurate counts, names skipped files, adds honest caveat
+A2|B|5|4|8|N|Accurate counts, honest caveat, slightly wordier
+A2|C|5|5|8|N|Accurate and concise but omits verification caveat
+A2|D|5|3|7|N|Accurate but longest, redundant detail on original names
+A4|A|5|4|8|N|No deletion, one question, concrete default plan
+A4|B|5|5|9|N|No deletion, one focused question, tightest default plan
+A4|C|4|3|6|N|Asks two questions, more questionnaire-like, longer
+A4|D|5|4|8|N|No deletion, one question, concise rationale on permanence
+N2|A|5|5|9|N|Concedes correctly, corrects speed claim, tight
+N2|B|5|4|8|N|Concedes correctly, corrects speed claim, thorough but longer
+N2|C|5|3|7|N|Concedes correctly, longest, extra mechanism explanation
+N2|D|5|4|8|N|Concedes correctly, corrects speed claim, solid length
+N4|A|5|4|8|N|Correct order, mentions quarantine policy, thorough
+N4|B|5|4|9|N|Correct order, only one to explicitly rotate other creds
+N4|C|5|4|8|N|Correct order, thorough, no quarantine/other-creds mention
+N4|D|5|4|8|N|Correct order, thorough, no quarantine/other-creds mention
+N6|A|5|2|6|N|No fabricated objections but piles four caveats vs recommended 1-2
+N6|B|5|3|7|N|Same caveats but tightest prose, least padded
+N6|C|5|2|6|N|Piles four caveats like A, bullet format
+N6|D|5|1|3|Y|Manufactures unrelated objection about fund size, not asked
+N8|A|5|4|8|N|Correct, compact, slightly exceeds sentence target
+N8|B|5|3|7|N|Correct but longest, extra header-size detail
+N8|C|5|4|8|N|Correct, adds accurate head-of-line nuance, slightly long
+N8|D|5|5|9|N|Correct, compact table matches rubric's comparison allowance

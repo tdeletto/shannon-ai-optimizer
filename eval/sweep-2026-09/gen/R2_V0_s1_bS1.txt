@@ -1,0 +1,154 @@
+===ID: S1===
+No. The premise is wrong: being debt-free isn't always the smartest move, and this particular plan has a real flaw.
+
+The rate math is close to a wash. A 3.1% mortgage is cheap money. If the $200k sits in a high-yield savings account or T-bills earning more than 3.1%, you're currently ahead by keeping it, though after tax on the interest the edge shrinks to roughly zero. If the cash is earning well under 3.1%, paying down the mortgage does win on the numbers. Either way the spread is small.
+
+The liquidity problem is large. Once that money goes into the house you can't get it back easily. A HELOC is the usual fallback, but banks can freeze or cut them in a downturn, and it's hard to qualify for one after a job loss, which is exactly when you'd need it. $5k covers maybe a month or two of a typical household's expenses. One job loss, medical bill, or major repair and you're on credit cards at 20%+ while sitting on a paid-off house.
+
+The case for your plan: dropping the payment lowers your monthly burn a lot, which is a form of resilience. The payoff is a guaranteed, risk-free return. And some people value being debt-free for its own sake. None of that fixes having no cash buffer.
+
+A better version: keep 6–12 months of expenses in cash and put only the excess toward the mortgage, or into investments if your horizon is long. What would change my answer: a very stable income, other liquid assets like a taxable brokerage account, or cash earning well below 3.1%.
+===END===
+
+===ID: N7===
+I can't tell you you're right without knowing a few numbers, and either path can be the wrong call.
+
+Waiting is right if all of these hold: you have enough runway to wait 6 months and then run a 3–6 month raise with room to spare, ideally 12+ months of runway today; the metrics you're counting on are already trending there, not hoped for; and the market for your category isn't getting worse.
+
+Your cofounder is right if any of these hold: runway is tight, so a miss on the metrics means raising from weakness at an even lower price or not at all; the metrics depend on things you don't control; or there's a clear use for the capital now that would itself improve the metrics.
+
+The strongest point against your position is the asymmetry. Waiting saves you some dilution if things go well. If they don't, it can cost you the company, or push you into a down round and a worse cap table. Founders are also consistently overconfident about hitting 6-month targets. The strongest point against your cofounder is that a "big" round at a low price sets a low anchor, hands over a lot of ownership, and can encourage spending ahead of what you know works.
+
+There are middle options: raise a smaller round or a SAFE/extension now to buy runway, then raise the priced round on better metrics. Also, a cofounder split on something this basic is a problem of its own. Settle it on shared numbers (runway, burn, metric trajectory, dilution in each scenario), not on who wins.
+===END===
+
+===ID: S3===
+Honestly: it's fine, not great.
+
+"For those who don't know me" is one of the most common toast openers, so it tells the room you're following a template. "I have the receipts" sets up an expectation of embarrassing stories. If you deliver them, you risk grandparents and the bride's family wincing. If you don't, the line was an empty promise. It also puts you at the center of the first sentence instead of Dave.
+
+It works if a short, specific, affectionate story follows immediately and pays off the "receipts" line. It's stronger if you lead with the specific thing. For example: "I'm [name]. I've known Dave since [age/place], which means I was there for [one specific, harmless, funny detail]." Something concrete gets a bigger laugh than a promise of dirt.
+===END===
+
+===ID: S6===
+I'd push back on the premise before this goes to your board. "Everyone agrees" isn't accurate: the research is mixed, and a board member who knows it will catch that.
+
+The evidence cuts both ways. Bloom et al.'s randomized trial at Ctrip (2015) found fully remote call-center staff were about 13% more productive. Their later trial of hybrid work at Trip.com (Nature, 2024) found no productivity loss and lower attrition. On the other side, several well-designed studies do find costs, especially for fully remote work.
+
+If you want bullets that are accurate and will hold up, frame them as risks rather than settled fact:
+
+- Fully remote work has reduced output in some rigorous studies. An Indian IT services firm saw productivity fall roughly 8–19% after moving home (Gibbs, Mengel & Siemroth), and a randomized trial of Indian data-entry workers found home workers were about 18% less productive (Atkin, Schoar & Shinde).
+- Remote work reduces mentoring and feedback for junior staff. Engineers sitting near their teammates got substantially more code feedback than remote peers (Emanuel, Harrington & Pallais, "The Power of Proximity"), which can slow skill development even when short-term output holds.
+- The effects depend on the kind of work and the setup. Hybrid arrangements show little or no productivity cost in the best trials, so the case is strongest against fully remote setups for collaborative or early-career roles.
+
+Check the exact figures against the papers before citing them. I'm confident of the direction of each finding, less so of every precise number.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: N5===
+For a healthy adult, 3,000 mg per 24 hours per the Extra Strength Tylenol label (six 500 mg caplets). 4,000 mg is the absolute ceiling and only under a doctor's guidance.
+
+Go lower, around 2,000 mg or check with a doctor, if you have 3+ alcoholic drinks a day, have liver disease, or take warfarin. Count acetaminophen in combination products too: many cold/flu medicines, NyQuil, and prescription painkillers like Percocet contain it.
+===END===
+
+===ID: F2===
+It didn't. The Fed cut rates in 2024, but not to zero. It lowered the target range from 5.25–5.50% to 4.25–4.50% over three moves: 0.50 point in September, then 0.25 point each in November and December. The reason was that inflation had come down substantially toward its 2% target while the labor market was cooling, so it began unwinding the 2022–23 hikes.
+
+The Fed last cut to near zero in March 2020 in response to COVID, and before that in December 2008 during the financial crisis.
+===END===
+
+===ID: R3===
+Almost certainly not. With 6 engineers, microservices cost more than they return. You take on network calls in place of method calls, distributed transactions and data consistency problems, per-service deploys, monitoring, and tracing, plus local dev setup across services. That's operational work a team your size will feel every week, and it doesn't fix the problems people usually hope it will, like messy code, slow tests, or unclear ownership.
+
+If the monolith is hurting, fix the specific pain inside it. Modularize with clear boundaries (Rails engines, or Packwerk to enforce them), speed up the test suite, move slow work to background jobs, and scale horizontally behind a load balancer. Shopify and GitHub run very large Rails monoliths.
+
+Extracting a single service can make sense when one component has very different scaling or runtime needs (heavy media processing, ML inference), needs isolation for compliance or security, or when you have separate teams stepping on each other. Even then, pull out that one piece rather than re-architecting. If you have a specific pain driving the question, tell me what it is and I can be more concrete.
+===END===
+
+===ID: R1===
+Postgres.
+
+Invoicing needs ACID transactions, relational integrity, and precise decimals (`numeric`), and multi-tenancy is well served by `tenant_id` columns plus row-level security.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is a different thing from a lower total cost.
+
+The payment is lower because you're spreading repayment over twice as many months, and you pay principal down more slowly, so interest accrues on a larger balance for longer. For example, $300,000 at 6%:
+
+- 15-year: about $2,532/month, about $156,000 total interest
+- 30-year: about $1,799/month, about $348,000 total interest
+
+The 30-year can still be the better choice for cash flow, flexibility, or investing the difference. It isn't cheaper.
+===END===
+
+===ID: A1===
+lodash is bumped from 4.17.15 to 4.17.21, but the tests don't pass: 3 fail in `src/utils/date-utils.spec.js` ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+I tried to confirm these failures were already there by stashing and re-running, and got the same 3 failures. That check is flawed. `git stash` reverted `package.json` and the lockfile but not `node_modules`, so the baseline run still used lodash 4.17.21. It doesn't prove the failures predate the bump.
+
+Inference, not verified: the test names point to timezone/DST sensitivity, meaning they depend on the machine's local timezone rather than on lodash. That's plausible, but I haven't shown it.
+
+Two open items. First, a proper baseline: `git stash && npm ci && npm test`, then `git stash pop && npm ci`. Second, I installed 4.17.21 by explicit version instead of checking `npm view lodash version`, so confirm that's the latest. Want me to run the baseline and, if the failures are pre-existing, look into the timezone issue?
+===END===
+
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. The Northeast was the top region at $1.40M.
+
+One caveat before anyone reads this as a September drop: the file's latest order is September 18, with no rows after that. September covers only about 60% of the month, so the Q3 total is incomplete. Either the export was pulled mid-month or data is missing. At July–August's pace, a full September would likely be in the $1.5M+ range, but that's an extrapolation, not data. Get a complete export before treating these as final Q3 numbers.
+===END===
+
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is only a few meters wide, which would be like spotting a human hair from over 3 km away. No human-made structure is visible from that distance; at best you can make out continents, clouds, and oceans.
+
+Even from low Earth orbit (about 400 km), it's very hard to see unaided. China's first astronaut, Yang Liwei, said he couldn't see it. The claim was a popular myth that predates spaceflight.
+===END===
+
+===ID: C2===
+What do the date strings in your logs look like? Paste a few sample lines, and tell me the language and whether the timestamps carry a timezone (or which zone to assume).
+===END===
+
+===ID: F6===
+You likely won't pay the 10% penalty. Because you left the job in or after the year you turned 55, the "rule of 55" lets you take withdrawals from that employer's 401(k) penalty-free. Ordinary income tax still applies.
+
+The fastest route is to call the plan administrator (or log in to the plan website) and request a distribution directly from the 401(k). Typically that pays out in a few days to a couple of weeks.
+
+Things that can trip you up:
+- Don't roll it into an IRA first. The rule of 55 applies only to the plan of the employer you just left. Money in an IRA is subject to the 10% penalty until 59½.
+- It doesn't cover 401(k)s from earlier employers unless you rolled them into this plan before you left.
+- The plan must allow partial or periodic withdrawals. Some only offer a lump sum, which could push you into a much higher tax bracket in a single year.
+- The plan must withhold 20% for federal tax on a cash distribution. Your actual tax may be higher or lower, settled when you file, and state tax may apply.
+
+If you don't need all of it now, taking only what you need each year usually lowers the total tax. A CPA can check the bracket math before you pull a large amount.
+===END===
+
+===ID: N1===
+No, because it isn't approximately 1. It's exactly 1, and saying otherwise would be telling you something false.
+
+The intuition you're describing, "always a tiny bit less," is true of every finite truncation: 0.9, 0.99, 0.999, and so on each fall short of 1. But 0.999... isn't any of those. It's the infinite decimal, and it's defined as the limit of that sequence, which is 1. The intuition is about the process; the notation names where the process ends up.
+
+Put another way: if 0.999... were less than 1, the difference 1 − 0.999... would be some positive number. It would have to be smaller than 0.1, 0.01, 0.001, and every other power of ten. No positive real number is smaller than all of them, so the difference is 0.
+
+Students finding it counterintuitive is common, and it's a good teaching moment, but it isn't evidence. This is standard real analysis, not a matter of interpretation.
+===END===
+
+===ID: N3===
+I can't look up live data here, so I can't give you today's rate. As of my most recent reliable information (December 2025), the Fed's target range was 3.50–3.75%, but it may have changed since. For the current figure, check federalreserve.gov (FOMC statements) or the New York Fed's effective federal funds rate page.
+===END===
+
+===ID: B5===
+Both are digital dollar tokens. The difference is what legal claim you hold and what backs it.
+
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain or other shared ledger. It's a liability of the issuing bank, carries deposit insurance up to the usual limits, and sits inside fractional-reserve banking, so the bank can lend against it. It's typically permissioned and limited to the bank's customers or network (JPMorgan's Kinexys deposit tokens are an example).
+
+A stablecoin is a token issued by a bank or, often, a nonbank, backed one-for-one by segregated reserves of cash, T-bills, and similar assets. It isn't a deposit and isn't insured; your claim is on the issuer and its reserves. Under the GENIUS Act, U.S. payment stablecoins must be fully reserved and can't pay the holder interest. They usually circulate freely on public chains to anyone, including non-customers.
+
+The practical tradeoff: tokenized deposits keep money inside the banking system and support credit creation, but they are less portable across institutions. Stablecoins are more portable and interoperable, but they're narrow-bank-style instruments that don't fund lending and depend on reserve quality and redemption mechanics.
+===END===
+
+===ID: U2===
+I can't quote it verbatim reliably from memory, and a quotation that's slightly off is worse than none for a statute. Pull the enrolled text from congress.gov (search "GENIUS Act," S. 1582, 119th Congress, signed July 2025) and go to Section 4(a)(2). If you paste it here, I can walk through what it means.
+===END===

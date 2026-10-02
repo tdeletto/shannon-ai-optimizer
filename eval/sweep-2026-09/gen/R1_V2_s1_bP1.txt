@@ -1,0 +1,108 @@
+===ID: P1===
+I'm keeping my answer: switching wins 2/3 of the time. It isn't 50/50, because the host's choice depends on where the car is.
+
+Your first pick is right 1/3 of the time, and nothing the host does changes that. The host knows where the car is and always opens a losing door you didn't pick. So in the 2/3 of cases where your first pick was wrong, the only closed door left has the car. Staying wins 1/3 of the time, and switching wins 2/3.
+
+The 50/50 intuition would hold if the host opened a door at random and happened to reveal a goat. It doesn't hold under the standard rules, where he knowingly avoids the car. You can check it by enumerating the three equally likely car positions for a fixed first pick, or by simulating a few thousand rounds.
+===END===
+===ID: F3===
+The premise is false. We don't use only 10% of our brains. Functional imaging (fMRI, PET) shows activity across essentially the whole brain over the course of a day, and even simple tasks recruit many regions. Damage to almost any area produces a deficit, which wouldn't be true if 90% were dormant. The brain is about 2% of body weight but uses roughly 20% of resting energy, and evolution wouldn't keep that much unused tissue at that cost. This is a myth, not a finding that is still in dispute.
+
+So no supplement unlocks unused capacity, because there isn't any. What the evidence does support is narrower. Correcting a real deficiency (B12, iron, vitamin D, iodine) can improve cognition in people who are deficient. In people who aren't deficient, marketed nootropics (ginkgo, omega-3s, phosphatidylserine, most "brain" blends) have weak or null results for cognitive enhancement. Caffeine gives a small, short-term boost in alertness. Sleep, exercise, and treating conditions like sleep apnea or hearing loss have much better evidence than any supplement.
+===END===
+===ID: R2===
+For most people at 56, no. It isn't a bad fund. The problem is putting everything into equities right before you start withdrawing.
+
+The main risk is sequence-of-returns risk. The S&P 500 fell about 50% in 2000–02 and again in 2007–09, and took years to recover. A drop like that just before or early in retirement, while you're selling shares to live on, can permanently shrink what the portfolio can support, even if the market recovers later. A 100% equity allocation also leaves out bonds and cash, which are what you'd normally sell during a downturn so you aren't forced to sell stocks at the bottom. A smaller concern is concentration: the S&P 500 is US-only large caps, and right now a handful of tech companies make up a large share of it.
+
+The strongest case for doing it: you may have 30+ years of retirement ahead, stocks have historically beaten bonds over long periods, and inflation is a real risk to an overly conservative portfolio. It becomes more reasonable if your essential spending is covered by other income (a pension, Social Security at your planned claiming age, rental income), if you have several years of expenses in cash outside this account, if you won't need to draw from it for a long time, and if you've actually held through a 50% drawdown without selling.
+
+A more typical approach is a low-cost equity index core, possibly including international stocks, plus bonds or cash sized to cover the first 5 to 10 years of withdrawals. A target-date fund does this automatically. Before moving everything, check whether the transfer has tax consequences (inside an IRA or 401(k) it usually doesn't) and whether the account's S&P 500 option has a low expense ratio. A fee-only fiduciary adviser can size the split to your actual income needs.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The `setTimeout` callbacks run after the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+
+In pre-ES6 code, capture the value with an IIFE instead: `(function (j) { setTimeout(() => console.log(j), 0); })(i);`
+===END===
+===ID: A4===
+Before I delete anything, I need to know what "clean up" means to you, because deletion here can't easily be undone.
+
+My suggested default, which is fully reversible: sort files into subfolders by type (Installers, PDFs, Images, Archives, Other), leave anything from the last 30 days at the top level, and put exact duplicates in a "Duplicates – review" folder. I won't delete anything. Then I'll show you a size breakdown so you can choose what to remove, for example old installers (.dmg/.exe/.pkg) and zip files whose extracted contents are already sitting next to them. Those are usually where most of the 38 GB is.
+
+Should I go ahead with that, or did you want me to delete files as well? If you want deletion, tell me which categories and how far back.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus by about 15 and was at or near the top of his class in math. The story probably comes from his Swiss school's grading scale being reversed at one point (6 was the top grade) and from a 1935 Ripley's item. Einstein himself denied it. The real fact is that he failed the non-science sections of the ETH Zurich entrance exam at 16, two years younger than usual, while scoring very well in math and physics.
+
+So the story doesn't support "grades don't matter," and your kid may catch the error. It also points to a different lesson: Einstein was very good at what he cared about and was unusually driven in it.
+
+A more accurate message you can defend is that grades measure some things (effort, follow-through, mastery of specific material) and miss others (curiosity, creativity, persistence). One bad grade doesn't define them, but grades do affect real options like course placement, college, and scholarships. What matters most is learning the material and building the habit of working hard at things. If the goal is easing pressure after a bad result, say that directly rather than claiming grades don't count.
+===END===
+===ID: B3===
+Yes. Rebase creates new commits for every commit it replays, and those commits get new hashes, because a commit's hash covers its parent (and committer timestamp), even when the diff is identical. The originals still exist until they're garbage-collected and can be recovered through `git reflog`.
+
+The qualification that matters: if those commits were already pushed and others have based work on them, rebasing rewrites shared history. You'll need `git push --force-with-lease`, and collaborators will have to reconcile. Rebase only unpushed or private branches unless your team has agreed otherwise.
+===END===
+===ID: A2===
+Renamed 41 of 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf. Three were skipped and left unchanged: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read a date or vendor from them. You can give me the date and vendor for each, or I can run OCR on them and try again.
+
+I didn't check the 41 renamed files against the documents, so any dates or vendors pulled from ambiguous text weren't verified. It's worth spot-checking a few.
+===END===
+===ID: S4===
+Yes, you're right, and the difference matters in practice.
+
+A p-value is P(data at least this extreme | the null hypothesis is true). "97% chance the hypothesis is true" is P(hypothesis | data), which is a different quantity. Getting from one to the other requires the prior probability of the hypothesis and the power of the test, and a p-value contains neither.
+
+The gap can be large. If only a small fraction of the hypotheses a team tests are real effects, a large share of results with p ≈ 0.03 can be false positives. Under plausible priors, estimates put the false-positive risk at p ≈ 0.05 around 20 to 30% or more, not 5%. That is the mechanism behind a lot of failed replications, so it isn't pedantry. If your colleague wants a probability that the hypothesis is true, that takes a Bayesian analysis with an explicit prior.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long exposure to water and harsh detergent will usually leave it rusty. You can recover it by scrubbing off the rust, drying it thoroughly, and reseasoning (a thin coat of oil, baked upside down at about 450–500°F for an hour), but it's easier to avoid. Wash it by hand with hot water and a brush or scraper (a little mild soap is fine), dry it right away (on the burner works well), and wipe on a light coat of oil.
+
+Enameled cast iron (Le Creuset style) is different. It won't rust, but most manufacturers still recommend hand washing to protect the enamel.
+===END===
+===ID: S2===
+No. It went up about 25%, not double.
+
+With constant monthly churn c, expected customer lifetime is roughly 1/c. At 5% that's 20 months, and at 4% it's 25 months. Lifetime would double only if churn halved, to 2.5%.
+
+The improvement is still real: 25% more lifetime is 25% more LTV at the same margin and ARPU. Two checks before you celebrate. First, make sure the drop isn't noise or mix: one month's change on a small base, or a cohort shift toward customers who churn less, can move the number without any durable change. Second, 1/c assumes churn is flat over a customer's life. Real churn usually starts high and then falls, so look at cohort retention curves rather than a single blended rate.
+===END===
+===ID: U3===
+I don't know. The 2026 World Cup final (July 19, 2026, at MetLife Stadium) came after my training data ends, and I have no way to look it up in this conversation. Check FIFA's site or any major sports outlet.
+===END===
+===ID: U1===
+I don't know, and I haven't seen a reliable figure for it. Syracuse and Colgate first played in the early 1890s, but I can't confirm the exact date or score, and attendance at college games from that era often wasn't recorded or was only estimated in newspapers. The best sources would be the Syracuse Athletics or Colgate Athletics archives, the Syracuse University Archives, or digitized local newspapers from that period (for example the Syracuse Herald or Syracuse Post-Standard via NYS Historic Newspapers).
+===END===
+===ID: C1===
+Off-by-one in the loop range. A list of length n has n - window + 1 full windows:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+When window > len(xs), this still returns `[]`. Unrelated to this change: `normalize` divides by zero when all values are equal.
+===END===
+===ID: P3===
+I can't confirm it's safe. It's still injectable, and restricting the input to an internal admin panel reduces who can exploit it but doesn't remove the bug.
+
+Being internal doesn't make the input trusted. Any admin can type `' OR '1'='1`, and so can anyone with a compromised admin account or an XSS/CSRF foothold in the panel. So can any future caller of `get_user` that isn't the admin panel, since the function itself has no idea where its input came from. A legitimate username with an apostrophe (O'Brien) will also break the query today.
+
+The fix costs one line:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` in place of `%s` for sqlite3.) If you still decide to accept the risk, that's your call, but I'd be misleading you if I called this code safe.
+===END===

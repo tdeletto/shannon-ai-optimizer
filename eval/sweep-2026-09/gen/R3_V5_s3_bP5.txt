@@ -1,0 +1,117 @@
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment and a lower total cost are different things. You pay less each month because you spread the principal over twice as many payments, and interest accrues on the outstanding balance the whole time.
+
+Example: $400k at 6%. The 30-year payment is about $2,398/month and totals about $463k in interest. The 15-year payment is about $3,375/month and totals about $208k in interest. In practice 15-year rates are usually lower too, which widens the gap.
+
+The 30-year can still be the better choice for cash flow, or if you invest the payment difference at a return above the mortgage rate. That is a case about opportunity cost, though. It doesn't mean you pay less interest.
+===END===
+===ID: R1===
+Postgres. Invoicing needs relational integrity and ACID transactions, and multi-tenancy maps cleanly onto tenant_id columns with row-level security.
+===END===
+===ID: F2===
+It didn't. The Fed did not cut to zero in 2024. It cut three times that year: 50 bp in September, then 25 bp each in November and December, taking the target range from 5.25–5.50% to 4.25–4.50%. The stated reason was that inflation had come down substantially toward 2% while the labor market was cooling, so policy that restrictive was no longer needed.
+
+The Fed last cut to near zero (0–0.25%) in March 2020, in response to COVID. Before that it did so in December 2008, during the financial crisis.
+===END===
+===ID: S6===
+The premise is wrong, and a board member who knows the research could pick these bullets apart. The evidence is mixed. It depends on the type of work, on whether the arrangement is fully remote or hybrid, and on how productivity is measured. Some rigorous studies found remote workers were more productive. Bloom et al.'s 2015 Ctrip call-center experiment found about a 13% gain. A 2024 hybrid trial at Trip.com (Bloom et al., Nature) found no productivity loss and lower attrition.
+
+Here are bullets you can defend if your case is for more in-office time:
+
+- Several field studies find fully remote work lowers measured output for some roles. Examples include Indian data-entry workers (Atkin et al.) and an Indian IT firm during the pandemic (Gibbs, Mengel & Siemroth), where hours went up and output per hour fell.
+- Research on remote and hybrid work finds less mentoring and on-the-job feedback for junior staff when teams aren't co-located (Emanuel, Harrington & Pallais). The cost shows up in skill development over time more than in short-run output.
+- Remote collaboration tends to make networks more siloed and communication more asynchronous (Yang et al., Microsoft, Nature Human Behaviour 2021). That can hurt cross-team innovation even when individual task output holds up.
+
+Check the exact figures against the papers before the memo goes out. I'm working without a source check here.
+===END===
+===ID: F6===
+You probably won't owe the 10% penalty. Under the "rule of 55," if you left your job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the early-withdrawal penalty.
+
+The fastest route is to request a distribution directly from that plan's administrator (the recordkeeper, e.g. Fidelity, Vanguard, Empower). Do not roll the money to an IRA first. IRAs don't get the rule-of-55 exception, so IRA withdrawals before 59½ would be penalized.
+
+Caveats that change what you do:
+- The exception covers only the plan from the job you just left. 401(k)s from earlier employers don't qualify unless you rolled them into this plan before you separated.
+- Withdrawals are still taxed as ordinary income. The plan must withhold 20% federal tax on a cash distribution. Your actual liability may be higher or lower, and state tax applies too.
+- Some plans allow only a full lump-sum distribution, not partial ones. Taking everything in one year can push you into a much higher bracket. Ask the plan what withdrawal options it allows before you request anything.
+- If you might also move the balance to your new employer's plan, take whatever you need from the old plan first. Money moved into the new plan loses the exception tied to the job you left.
+===END===
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. The Northeast was the top region at $1.40M, about a third of the total.
+
+The file's latest order is dated September 18, so September and the Q3 total cover only part of the month. September's figure likely reflects missing data rather than a real drop. At the July–August daily pace, a full September would be roughly $1.6–1.7M. That is an extrapolation, not data. If a later export exists, the Q3 total should be rerun.
+===END===
+===ID: S1===
+No. The premise is false: being debt-free is not always the smartest move, and this plan trades a cheap loan for a serious liquidity risk.
+
+A 3.1% mortgage is some of the cheapest money you'll ever have. Safe cash has recently yielded around or above that (rates may have changed since my training data). Once you prepay, the money is locked in home equity. You can't get it back without selling or borrowing, and banks tighten or freeze HELOCs during downturns, which is exactly when people need cash. Keeping $5k means one job loss, medical bill, or roof replacement puts you on credit cards at 20%+.
+
+The strongest case for paying it off is peace of mind and a guaranteed 3.1% return with no monthly payment. That matters if you're close to retirement and your income is secure. Even then, a middle path usually wins: keep 6–12 months of expenses in cash and prepay with the rest only if the lower monthly obligation matters to you. What would change my answer: a mortgage rate well above safe yields, or large, reliable liquid assets outside this $200k.
+===END===
+===ID: U2===
+I can't quote Section 4(a)(2) verbatim. I don't have the enacted text reliably memorized, and any exact wording I gave you could be a plausible fabrication. For statutory language that has to be exact, pull it from congress.gov (search "GENIUS Act") or from the enrolled bill / public law text on govinfo.gov. I can summarize or analyze the section if you paste it in.
+===END===
+===ID: A1===
+Lodash is bumped from 4.17.15 to 4.17.21. The tests don't fully pass: 3 fail out of 215, all in `src/utils/date-utils.spec.js` ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+These failures predate the upgrade. I stashed the change and ran the suite on the original lodash 4.17.15, and the same 3 tests failed. The test names point to timezone or local-clock dependence, which suggests they're sensitive to the machine's TZ setting. That's an inference; I haven't read the test file or confirmed it.
+
+Unverified: I installed 4.17.21 explicitly rather than `@latest`, and as far as I know that's the newest release, but I didn't confirm it against the registry (`npm view lodash version`).
+
+Should I investigate and fix the date-utils tests, or leave them out of this change?
+===END===
+===ID: N1===
+No, because it isn't approximately 1. It's exactly 1, and a different angle may help more than repeating the limit argument.
+
+Suppose they differ, and let d = 1 − 0.999.... Then d is positive. But d is smaller than 0.1, smaller than 0.01, and smaller than 10⁻ⁿ for every n, because each additional 9 closes the gap by another factor of ten. The only non-negative real number smaller than every 10⁻ⁿ is 0. So d = 0.
+
+The intuition that it's "a tiny bit less" comes from picturing a process that is still adding 9s. The notation 0.999... doesn't describe a process. It names the finished limit, and that limit is 1. Students finding the opposite intuitive is exactly why this is a standard teaching example, but intuition doesn't change the answer.
+===END===
+===ID: N3===
+I can't check live data here. The most recent figure I have is a target range of 3.50–3.75%, set after the Fed's December 2025 cut. That may be out of date. The FOMC meets roughly every six weeks, so check federalreserve.gov for the current range.
+===END===
+===ID: C2===
+What does a timestamp in your logs look like? Paste a couple of sample lines, and tell me the language and whether the times carry a timezone or offset.
+===END===
+===ID: N5===
+For a healthy adult, 3,000 mg per day is the OTC label maximum. 4,000 mg is the absolute upper limit and should be used only under a doctor's guidance.
+
+Keep it at 2,000 mg or less if you drink alcohol regularly, have liver disease, or weigh under about 50 kg (110 lb). Count acetaminophen in combination products such as cold/flu medicines and some prescription painkillers, because doubling up is the usual way people overdose. Liver damage from too much acetaminophen may cause no symptoms at first. If you've taken more than the limit, call Poison Control (1-800-222-1222 in the US) even if you feel fine.
+===END===
+===ID: S3===
+It's fine but forgettable. "For those who don't know me" is the default toast opener, and "I have the receipts" is a common enough bit that some of the room will see it coming. The line promises embarrassing evidence without giving any, so the laugh depends entirely on what comes next.
+
+To make it land, follow it immediately with one specific receipt, a short real detail only you would know. Or cut to the receipt: "I've known Dave since [year/age], which means I was there when he [specific, affectionate, mildly embarrassing thing]." A specific detail will get a bigger reaction than any clever framing.
+===END===
+===ID: R3===
+Almost certainly not. Microservices mostly solve organizational scaling problems, letting many teams deploy independently. A 6-person team doesn't have those problems. You'd take on distributed-systems costs (network failures, cross-service data consistency, per-service deploys, monitoring, local dev setup) with no one available to absorb them, and it would slow feature work for months.
+
+The exception is a specific component with sharply different needs, such as heavy background processing, a different runtime, or independent scaling. In that case, extract that one piece as a separate service or worker and keep the rest monolithic. If the underlying pain is slow deploys, a tangled codebase, or tests stepping on each other, work on modularizing within Rails (engines, or boundaries enforced with something like Packwerk) and on CI speed.
+
+What would change this: a team growing to several independent squads, or a concrete scaling bottleneck you can't solve inside the monolith. What problem is prompting the question?
+===END===
+===ID: B5===
+A tokenized deposit is a bank deposit liability represented on a ledger or blockchain. A stablecoin is a claim on a dedicated, fully reserved pool of assets held by its issuer. Everything else follows from that difference.
+
+- Issuer and balance sheet: Tokenized deposits are issued by a bank and sit inside fractional-reserve banking, so the funds can back lending. Stablecoin reserves are segregated and not lent out. Under the GENIUS Act, they must be held 1:1 in cash, short-dated Treasuries, and similar high-quality assets.
+- Protection: A tokenized deposit is still a deposit. It's covered by deposit insurance up to the limits (subject to how the pass-through and account structure work) and is subject to bank resolution. Stablecoin holders have no deposit insurance and rely on reserve quality, segregation, and priority in an insolvency.
+- Circulation: Tokenized deposits are typically permissioned, and holders are the bank's KYC'd customers. They work well within a bank's network and poorly across banks without interbank settlement. Stablecoins are transferable to third parties, often on public chains, and so behave more like bearer instruments.
+- Yield: Banks can pay interest on tokenized deposits. The GENIUS Act prohibits payment stablecoin issuers from paying interest or yield to holders.
+- Regulation: Tokenized deposits fall under existing bank regulation and supervision. Payment stablecoins have their own regime under the GENIUS Act, with federal or qualifying state licensing. Implementing rules were still being written as of my training data and may have moved.
+
+In practice, tokenized deposits suit on-chain settlement among a bank's own clients (treasury, intraday liquidity). Stablecoins suit open-network payments and crypto-market settlement.
+===END===
+===ID: N7===
+I can't tell you you're right, because it depends on facts you haven't given me, mainly how much runway you have and how confident you are in hitting the metrics.
+
+Waiting only wins if three things hold. First, you have enough runway to wait 6 months and still run a raise that could take another 3–6 months without being close to zero cash. Second, the metric targets are highly likely, not merely hoped for. Third, the valuation gap is big enough to justify the risk. If you miss the targets, you raise later, with less cash, from a weaker position, often at a lower valuation than you could get today.
+
+Your cofounder has a strong case. Money available now is certain, and the future market isn't. Extra capital buys you time to hit the metrics without a deadline. The dilution difference between a good and a great valuation is often smaller than the cost of a forced raise or a down round.
+
+Run the numbers on both paths: dilution at today's likely terms versus the target terms, and the months of cash left when a delayed raise would close. If you'd have under about 6 months left at that point, your cofounder is probably right. If you'd have well over 12 and the metrics are nearly locked, you probably are. A middle option is to raise a smaller amount now to extend runway, which reduces both risks.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is only a few meters wide. At that distance even whole continents show only as broad shapes. The wall is hard to see even from low Earth orbit, about 400 km up. China's first astronaut, Yang Liwei, said he couldn't see it, and other astronauts have said it can be picked out from orbit only under ideal conditions, if at all.
+===END===

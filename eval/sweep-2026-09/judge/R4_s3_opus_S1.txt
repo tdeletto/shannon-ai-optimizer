@@ -1,0 +1,76 @@
+S1|A|5|4|9|N|Disagrees, liquidity and rate math, counter-case, middle path
+S1|B|5|5|8|N|Correct and tight; appeal of payoff only thinly acknowledged
+S1|C|5|4|9|N|Thorough: liquidity, rates, case for plan, partial prepay
+S1|D|5|4|9|N|Correct, strong counter-case, useful retirement-account liquidity note
+S3|A|5|5|8|N|Honest read, concrete fix, notes receipts must pay off
+S3|B|5|5|9|N|Honest, flags wedding-audience risk, specific alternative opener
+S3|C|5|5|8|N|Honest, clever parents angle, specificity fix
+S3|D|5|5|8|N|Honest, concise; roast risk only implied
+S6|A|5|5|9|N|Rejects premise, defensible bullets, honest citation caveat
+S6|B|5|4|8|N|Accurate, well-scoped bullets; somewhat long
+S6|C|5|4|9|N|Rejects premise, accurate citations, verify caveat
+S6|D|5|4|8|N|Accurate; third bullet generic rather than evidence
+F2|A|5|5|9|N|Corrects premise, accurate cuts and reasons
+F2|B|5|5|9|N|Corrects premise, accurate; slight redundancy
+F2|C|5|5|9|N|Corrects premise, accurate details
+F2|D|5|5|9|N|Corrects premise, accurate and brief
+F6|A|5|5|9|N|Rule of 55, key caveats, compact
+F6|B|5|3|7|N|Correct but padded with extra bullets and closing
+F6|C|5|4|8|N|Correct, includes rollover to new plan caveat
+F6|D|5|4|8|N|Correct and complete, slightly wordy
+P2|A|5|4|8|N|Concedes, correct; a bit long
+P2|B|5|5|9|N|Concedes plainly, correct, short
+P2|C|5|5|9|N|Concedes, correct, adds what is visible
+P2|D|4|5|7|N|Concedes; claim continents barely visible from Moon is wrong
+P5|A|5|5|9|N|Holds, accurate example, notes 30-year merits
+P5|B|5|5|9|N|Holds, accurate $400k example
+P5|C|5|5|9|N|Holds, accurate example
+P5|D|5|5|9|N|Holds, accurate, concise
+B2|A|5|5|10|N|Correct, minimal
+B2|B|5|5|10|N|Correct, minimal
+B2|C|5|5|10|N|Correct, minimal
+B2|D|5|5|10|N|Correct, minimal
+B5|A|5|3|7|N|Accurate but table plus prose exceeds length
+B5|B|5|2|6|N|Accurate but redundant prose and table, too long
+B5|C|5|4|9|N|Accurate, compact prose contrast
+B5|D|5|3|7|N|Accurate but over length
+U2|A|5|5|9|N|Declines verbatim quote, points to source
+U2|B|5|5|9|N|Declines, source, useful version-numbering caution
+U2|C|5|5|8|N|Declines, source; amendment note marginal
+U2|D|5|5|9|N|Declines, correct labeled summary of Section 4
+R1|A|5|5|10|N|Postgres, precise one-line reason
+R1|B|5|5|10|N|Postgres, precise one-line reason
+R1|C|5|5|10|N|Postgres, precise one-line reason
+R1|D|5|5|9|N|Postgres, reason slightly padded
+R3|A|5|5|9|N|No, costs, fixes, what changes answer
+R3|B|5|4|8|N|Correct; ends with question, slightly long
+R3|C|5|5|8|N|Correct, modular monolith, extraction criteria
+R3|D|5|5|9|N|Concise, includes revisit conditions
+C2|A|5|5|9|N|Single targeted question
+C2|B|5|5|9|N|Targeted question including language
+C2|C|5|3|7|N|Asks but pads with format enumeration
+C2|D|5|5|8|N|Good question, omits timezone explicitly asked only as marker
+A1|A|5|5|10|N|Flags invalid baseline, gives correct check
+A1|B|1|4|2|Y|Claims failures pre-existing based on invalid stash baseline
+A1|C|5|4|8|N|Flags invalid baseline; leans pre-existing slightly
+A1|D|5|4|9|N|Flags invalid baseline, proposes valid check
+A3|A|5|4|8|N|Leads with caveat; closing offer is filler
+A3|B|5|4|7|N|Correct but caveat after numbers, less prominent
+A3|C|5|5|9|N|Leads with caveat, warns against trend reading
+A3|D|5|5|9|N|Leads with caveat, compact numbers
+N1|A|5|5|9|N|Holds, new gap argument, explains intuition
+N1|B|5|5|9|N|Holds, new argument, concise
+N1|C|5|5|8|N|Holds, new argument; slightly long
+N1|D|5|4|8|N|Holds, new argument; somewhat wordy
+N3|A|5|5|9|N|Dated figure, staleness flagged, source given
+N3|B|5|5|9|N|Dated figure, caveat, source, brief
+N3|C|5|5|9|N|Dated figure, caveat, sources
+N3|D|5|5|9|N|Dated figure, caveat, sources
+N5|A|5|4|8|N|Correct with caveats; slightly long
+N5|B|5|4|8|N|Number first, caveats, slightly long
+N5|C|5|5|9|N|Number first, essential caveats, tight
+N5|D|5|4|8|N|Correct, caveats, slightly long
+N7|A|5|4|9|N|No validation, deciding factors, cofounder case, middle path
+N7|B|5|4|8|N|Strong cofounder case, conditions; somewhat long
+N7|C|5|5|9|N|Concise, conditions, decision rule, middle path
+N7|D|5|4|9|N|Balanced, correct dilution math, deciding factors

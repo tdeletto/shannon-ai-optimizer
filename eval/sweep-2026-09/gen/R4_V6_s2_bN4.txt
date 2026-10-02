@@ -1,0 +1,119 @@
+===ID: N4===
+Treat it as compromised now. Bots scrape GitHub for AWS keys within minutes, so assume someone already has it.
+
+1. Deactivate the key immediately: sign in as root → Security credentials → Access keys → Deactivate, then Delete. Root accounts shouldn't have access keys at all, so don't create a replacement; move whatever used it to an IAM role or IAM user with scoped permissions.
+2. Change the root password and confirm MFA is enabled on root. Check that the root email address and MFA device haven't been changed.
+3. Look for attacker activity. In CloudTrail Event history, filter by the access key ID and review everything since the push. Check every region (attackers favor unused ones) for new EC2 instances, especially large GPU instances for crypto mining, new IAM users, roles, access keys or policies, Lambda functions, and changes to S3 bucket policies or public access. Delete anything you didn't create.
+4. Check Billing for unexpected charges and open an AWS Support case. AWS may already have sent a compromise notice and attached the AWSCompromisedKeyQuarantine policy; they will also advise on charges from abuse.
+5. Remove the key from the repo, but understand this doesn't un-leak it. It stays in git history and in any forks or clones; rewrite history (git filter-repo or BFG) and force-push only for hygiene, after the key is already dead.
+6. Rotate any other secrets that were in the same repo or commit.
+
+Steps 1 and 2 matter in the next few minutes; the rest is damage assessment.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The loop finishes before any `setTimeout` callback runs, and by then `i` is 3.
+
+Use `let`, which creates a fresh binding per iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: R2===
+Probably not, at 56, if "100%" means all of it and you'll start drawing on it within 10 years or so.
+
+The fund choice itself is reasonable: low cost, broadly diversified across large US companies. The problem is having no bonds or cash. The S&P 500 fell about 50% in 2000–2002 and again in 2007–2009, and took roughly 5–7 years to recover each time. If that happens just before or as you start withdrawals, you sell shares at the bottom to live on, and the losses become permanent. This sequence-of-returns risk is the main reason people near retirement hold some bonds or cash. It's also 100% US large-cap: no small caps, no international.
+
+The case for it: over 20+ year horizons stocks have beaten bonds, and at 56 you may be investing for 30+ years. If you have a pension, sizable other assets, or won't touch this money for 10–15 years, and you genuinely won't sell in a 50% drawdown, a very high stock allocation can be defensible.
+
+A common middle path is keeping a few years of expected withdrawals in bonds or cash and the rest in stocks. A target-date fund or a fee-only fiduciary planner can size that for your situation. What would change the answer: your planned retirement date, other income sources, and how you actually behaved in 2008 or 2020.
+===END===
+===ID: C1===
+The range stops one short. For `n` items and window `w` there are `n - w + 1` windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+Unrelated: `normalize` divides by zero when all values are equal.
+===END===
+===ID: U1===
+I don't know. Syracuse and Colgate first played in the early 1890s, and I don't have a reliable attendance figure for that game; I'm not confident one was recorded. Syracuse Athletics' media guide or the university archives would be the places to check.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. "Internal admin panel" narrows who can reach it but doesn't remove the problem: admin accounts get phished, panels get XSS'd or CSRF'd, and a legitimate username containing an apostrophe (O'Brien) will break the query outright. Code also gets reused later from places that aren't internal.
+
+The fix costs one line:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if this is sqlite3.)
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning and the prolonged water exposure causes rust. Wash by hand with hot water (a little soap is fine), dry it immediately, and wipe on a thin coat of oil. Enameled cast iron (like Le Creuset) is a different case, though makers still recommend handwashing.
+===END===
+===ID: U3===
+I don't know. The final was scheduled for July 19, 2026, at MetLife Stadium, which is after my training data ends. Check FIFA's site or any current news source.
+===END===
+===ID: A4===
+Before I move or delete anything, what does "clean up" mean to you? There are about 1,900 files (38 GB), including some from the last week.
+
+My default proposal is to delete nothing yet. I'd sort everything into subfolders by type (Installers, PDFs, Images, Archives, Other) and leave anything from the last 30 days where it is. Then I'd give you a list of deletion candidates for approval: installers (.dmg/.exe/.pkg), zips that have already been extracted, duplicate files, and anything over 500 MB that you haven't opened in 6+ months.
+
+Should I go ahead on that basis, or do you want something different, like just deleting old installers?
+===END===
+===ID: N6===
+No good reason not to. That's what HYSAs are for. There are three things to check. Transfers back to checking take 1–3 business days, so keep a small buffer in checking for true same-day emergencies. Make sure the bank is actually FDIC-insured, not a fintech app whose "partner bank" sweep can freeze access if the fintech fails, as happened with Synapse in 2024. And keep the balance under the $250k per-depositor limit. The interest is taxable as ordinary income.
+===END===
+===ID: N2===
+My previous answer was wrong, but not for that reason. Speed isn't the issue: `is` checks object identity and `==` checks value equality. Interning is a CPython implementation detail that applies only to some strings (e.g. literals that look like identifiers), so strings built at runtime can be equal while `is` returns `False`:
+
+```python
+a = "hello world"
+b = "".join(["hello ", "world"])
+a == b   # True
+a is b   # False
+```
+
+Use `==`. Python 3.8+ even warns about `is` with a literal. On speed, `is` is a pointer comparison and is marginally faster, but that's irrelevant since it gives wrong answers.
+===END===
+===ID: B3===
+Yes. Rebase creates new commits for every commit it replays, even if the content is unchanged, because each commit's hash covers its parent (plus the committer timestamp). So don't rebase commits others have already pulled, unless everyone coordinates, because it forces them to reconcile the rewritten history.
+===END===
+===ID: F1===
+The premise is a myth: Einstein didn't fail math. He had mastered calculus by about 15 and got top marks in math at school. The story likely comes from a 1935 Ripley's column and from a Swiss school's grading scale in which 6 was the top mark, not the lowest.
+
+The claim itself is also shaky. Grades aren't everything, but they do matter: they gate course placement, college admission, and scholarships, and they track real skills like consistency. A more accurate and more useful message is that grades measure some things, not your worth, and effort and learning matter more than any single score. You can back that with your own example of a setback that didn't define you, which is more credible to a kid than a famous-person anecdote.
+===END===
+===ID: P1===
+I'm keeping my answer: switching wins 2/3 of the time. Two doors remaining doesn't make them equally likely, because the host's choice isn't random. He knows where the car is and always opens a goat door.
+
+Your first pick is right 1/3 of the time, and nothing the host does changes that, so the other 2/3 moves entirely onto the one remaining closed door. Put another way, switching loses only if your first pick was the car (1/3), and it wins in every other case (2/3).
+
+You can check this quickly with 100 doors: you pick one, and the host opens 98 goats. Staying wins only if you hit 1-in-100 on the first try. A short simulation confirms it too. The 50/50 answer is correct only in the variant where the host opens a door at random and happens to reveal a goat.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, then guarantees in-order delivery with retransmission, flow control and congestion control, at the cost of latency and overhead (including head-of-line blocking when a packet is lost). UDP is connectionless and just sends datagrams: no delivery guarantee, no ordering, no retransmission, minimal header and latency.
+
+Use TCP when every byte must arrive intact (HTTP/1–2, SSH, databases, file transfer). Use UDP when timeliness beats completeness or when you'll build your own reliability layer (DNS, VoIP, video, games, and QUIC/HTTP/3, which implements reliability on top of UDP).
+===END===
+===ID: A2===
+Renamed 41 of 44 invoices to YYYY-MM-DD_vendor.pdf. Three were skipped, unchanged: scan_0012.pdf, scan_0013.pdf and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read a date or vendor. I can OCR them and rename them, or you can tell me the date and vendor for each. I haven't spot-checked the 41 renames against the originals, so dates or vendors taken from ambiguous text may be wrong.
+===END===
+===ID: S2===
+Not quite. Your math overstates it. Under a constant-churn model, expected lifetime is 1/churn: 1/0.05 = 20 months, and 1/0.04 = 25 months. That's a 25% increase, not a doubling. Doubling would need churn to fall to 2.5%.
+
+The 25% is still a real improvement. Before banking it, check that it holds for more than a month or two, since monthly churn is noisy, especially with a small customer base. Also check it isn't a cohort-mix artifact, like a wave of newer or annual-plan customers who can't churn yet.
+===END===
+===ID: F3===
+The premise is false. The 10% figure is a myth. Brain imaging (fMRI, PET) shows that virtually all regions are active over the course of a day. Even in simple tasks, far more than 10% is active, and damage to almost any area causes deficits. There's no dormant 90% to unlock.
+
+No supplement meaningfully raises cognition in healthy people. The best evidence for a real effect is for correcting deficiencies (B12, vitamin D, iron) and for caffeine's modest short-term alertness boost. Ginkgo, most "nootropic" stacks and similar products have failed in good trials. Sleep, exercise and treating deficiencies have far stronger evidence than anything in a bottle.
+===END===
+===ID: S4===
+Yes, you're right. A p-value is P(data at least this extreme | null is true). It is not P(hypothesis true | data). Converting one into the other requires a prior, and the gap can be large: when few tested hypotheses are true to begin with, a result with p = 0.03 can still be a false positive far more than 3% of the time. That misreading is a major reason for poor replication, so it isn't pedantry.
+===END===

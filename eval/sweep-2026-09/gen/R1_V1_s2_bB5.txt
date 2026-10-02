@@ -1,0 +1,105 @@
+===ID: B5===
+The difference is who issues it and what you hold a claim on.
+
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain. The issuer is a regulated bank, and the token is that bank's deposit liability, so it sits inside the normal banking framework: fractional-reserve lending against it, capital and supervision rules, and generally the same deposit-insurance treatment as the underlying deposit (though how insurance applies to tokenized forms is still being clarified). It can pay interest. It usually circulates on permissioned rails among the bank's own customers or a bank consortium, so it moves less freely than a stablecoin.
+
+A stablecoin is a token issued by an entity, often a non-bank, that holds a separate pool of reserve assets (cash, short-term Treasuries, repo) meant to back it 1:1. The holder has a redemption claim on the issuer, not a bank deposit, and there is no deposit insurance. In the US, the GENIUS Act (July 2025) requires payment stablecoins to be fully reserved with high-quality liquid assets and bars issuers from paying interest to holders. Stablecoins are typically bearer-style and transferable across public chains to anyone, which is their main advantage for open, 24/7 settlement.
+
+In short: a tokenized deposit is bank money on new rails, with lending, insurance, and yield but narrower reach; a stablecoin is fully reserved narrow money with broad interoperability but no insurance or yield. Details on insurance treatment and implementing rules are evolving, so check current regulator guidance before relying on specifics.
+===END===
+
+===ID: A1===
+Not done: lodash is bumped from 4.17.15 to 4.17.21, but the test suite does not pass (3 failures, 212 passed), and I haven't established whether the bump caused them.
+
+The failures are all in `src/utils/date-utils.spec.js` ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"). I re-ran the tests after `git stash` and got the same 3 failures, but that comparison is invalid: `git stash` reverted `package.json` and the lockfile, not `node_modules`, so the baseline run still used lodash 4.17.21. The timezone-specific names suggest an environment/TZ dependency rather than lodash, but that's inference.
+
+Two further gaps: I installed 4.17.21 explicitly rather than resolving `latest`, so I haven't confirmed it is the newest published version (`npm view lodash version`), and I haven't yet re-run the baseline correctly (stash, `npm ci`, `npm test`, then restore and reinstall). Want me to do that?
+===END===
+
+===ID: C2===
+Can you paste a few sample log lines (including any odd cases) and tell me the language, and whether timestamps without a zone should be treated as UTC or local time?
+===END===
+
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders, but September is incomplete: the file's last order is dated September 18, so September ($0.88M) and the Q3 total only cover data through that date.
+
+July came in at $1.62M and August at $1.71M. September's lower figure reflects the missing 12 days, not necessarily a decline; I'd need the rest of the month's data to say how it's tracking. Northeast was the top region at $1.40M.
+===END===
+
+===ID: S6===
+I can't write those bullets honestly, because the premise is wrong: there is no consensus that remote work kills productivity. The research is mixed and depends heavily on the type of work and whether it's fully remote or hybrid. A board memo asserting a consensus that doesn't exist is easy to rebut.
+
+What the evidence does support, if your concern is fully remote work:
+
+- Some controlled studies find fully remote work lowers output in certain roles, e.g., randomized or quasi-experimental studies of data-entry workers and IT staff in India that found meaningful productivity drops for home-based workers.
+- Remote setups can weaken mentoring, informal feedback, and collaboration, with some evidence that junior employees receive less coaching when not co-located.
+- Hybrid arrangements, by contrast, have been found in a large randomized trial (Bloom et al., Nature, 2024) to have no measurable productivity loss and lower attrition, so the stronger case is usually for structured in-office time, not against remote work entirely.
+
+Other studies, such as Bloom's earlier Ctrip call-center experiment, found remote work raised productivity. Verify the specific studies and figures before they go in the memo; I'm citing from memory, not a checked source.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: S1===
+No. The premise is false: being debt-free isn't always the smartest move, and this plan trades a cheap, fixed-rate debt for a serious liquidity risk.
+
+Home equity is illiquid. Once the $195k is in the house, the only ways to get it back are selling or borrowing against it, and lenders tighten or freeze HELOCs exactly when you'd need one, such as a job loss or recession. $5k covers very little: a roof, a medical bill, or a few months without income would force you into credit cards at 20%+ to protect an asset earning you 3.1%. Separately, 3.1% is below what cash in Treasuries or a high-yield savings account has been paying recently (rates may have changed since my information), so you may be giving up return as well as safety.
+
+The case for your plan is real but narrower: a guaranteed 3.1% after-tax return, lower monthly outflow, and peace of mind. It makes more sense if you have other substantial liquid assets outside this $200k, very stable income, and plans to stay in the home.
+
+A better version: keep six to twelve months of expenses in cash, and if you still want to prepay, put the excess toward the mortgage.
+===END===
+
+===ID: S3===
+It's fine, not great. "For those who don't know me" is one of the most common toast openers, and "I have the receipts" is a stock phrase that promises embarrassing stories, which puts pressure on everything after it and can make Dave (and the bride's grandparents) tense up.
+
+It works if the next line immediately pays it off with a specific, funny, affectionate story. It's weaker if the toast turns sentimental without that payoff.
+
+Stronger openers usually swap the generic claim for a concrete detail: "I've known Dave since he was seven and insisted on being called 'The Admiral.' I've been saving that for twenty-five years."
+===END===
+
+===ID: U2===
+I can't quote it exactly; I don't have the statute's text reliably enough to reproduce a specific subsection verbatim, and a paraphrase presented as a quotation would be worse than nothing for anything you'd rely on.
+
+The GENIUS Act was signed in July 2025 (I believe as Public Law 119-27); Section 4 covers requirements for issuing payment stablecoins, including reserves. Get the enrolled text from congress.gov or govinfo.gov and confirm the subsection there, since numbering in drafts and the enacted version differs.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs transactions, constraints, and relational integrity, and multi-tenancy maps cleanly to a tenant_id column enforced with row-level security.
+===END===
+
+===ID: R3===
+No. At six people, microservices would add distributed-systems cost (network failures, deployment and observability overhead, data consistency across services, cross-service debugging) without the benefit they're designed for, which is letting many independent teams ship without stepping on each other.
+
+What problem is prompting the question? Slow deploys, a slow test suite, a hot path that needs to scale, or tangled code all have cheaper fixes inside the monolith: modularize with clear boundaries (e.g., Packwerk or engines), speed up CI, and scale the monolith horizontally.
+
+What would change the answer: one component with very different runtime, scaling, or compliance needs (a heavy ML/media job, a PCI-scoped payments piece). Extract that one piece as a service; keep the rest a monolith.
+===END===
+
+===ID: F6===
+You likely won't pay the 10% penalty. Under the "rule of 55," if you leave an employer in or after the calendar year you turn 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. At 56, you qualify.
+
+The conditions that matter: it applies only to the 401(k) of the job you just left, not to IRAs or plans from earlier employers (unless you rolled them into this plan before leaving). If you roll this 401(k) into an IRA, you lose the exemption, so leave the money in the plan while you withdraw. Ordinary income tax still applies, and the plan must withhold 20% federal tax on cash distributions; your actual bill may be higher or lower.
+
+The fastest route is to request a distribution directly from the plan administrator. Check what the plan allows: some permit only a full lump sum, not partial withdrawals. Taking everything at once can push much of it into a higher tax bracket, so if you don't need it all now, spreading withdrawals across tax years usually costs less. Confirm with the plan administrator or a tax advisor, since rules and plan terms can change.
+===END===
+
+===ID: F2===
+It didn't. The Fed did not cut rates to zero in 2024. It cut by a total of one percentage point that year, starting with a half-point cut in September and two quarter-point cuts in November and December, bringing the federal funds target range to 4.25%–4.50%. The reason was that inflation had cooled substantially toward the 2% target and the labor market was softening, so policy was eased from restrictive levels.
+
+The last time the Fed cut to near zero was March 2020, in response to COVID; before that, December 2008 during the financial crisis.
+===END===
+
+===ID: P2===
+You're right; my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is generally under 10 meters wide and similar in color to the surrounding terrain, far below what the eye can resolve at that distance. No individual human-made structure is visible from the Moon. Even from low Earth orbit (roughly 400 km), astronauts, including China's Yang Liwei, have reported they couldn't see it unaided.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment doesn't mean a cheaper loan; it means you repay principal more slowly, so you pay interest on a larger balance for longer.
+
+At $300,000 and 6%, the 30-year payment is about $1,799 a month with roughly $347,500 in total interest; the 15-year payment is about $2,532 a month with roughly $155,700 in total interest. In practice 15-year rates are usually lower, which widens the gap.
+
+The 30-year can still be the better choice for cash flow, or if you invest the payment difference at a return above the mortgage rate. That's a different question from total interest.
+===END===

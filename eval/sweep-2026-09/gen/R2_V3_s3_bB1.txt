@@ -1,0 +1,167 @@
+===ID: B1===
+No. Dishwasher detergent and the long hot, wet cycle strip the seasoning, and bare cast iron will start to rust, often before the cycle ends. Wash it by hand with hot water and a brush (a little dish soap is fine), dry it right away, and wipe on a thin coat of oil. If one has already gone through the dishwasher, it can be saved: scrub off the rust, dry it fully, then re-season it (thin oil coat, upside down in a 450–500°F oven for an hour).
+
+Enameled cast iron (Le Creuset, Staub) is a different case. It won't rust the same way, but manufacturers still recommend hand washing because dishwasher detergent dulls the enamel over time.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake before sending, then guarantees that bytes arrive in order and without loss or duplication. It does this with acknowledgments and retransmission, and it adds flow control and congestion control. It gives you a byte stream with no message boundaries.
+
+UDP is connectionless and makes no guarantees. Each datagram is sent on its own and may be lost, duplicated, or arrive out of order. There is no handshake, no retransmission, and no congestion control. Message boundaries are kept, and the header is smaller (8 bytes vs. 20+).
+
+In practice: use TCP when you need every byte correct and in order (HTTP/1.1 and 2, SSH, databases, file transfer). Use UDP when low latency matters more than perfect delivery, or when you want to build your own reliability on top: DNS queries, VoIP, video calls, games, and QUIC, which is what HTTP/3 runs on.
+===END===
+
+===ID: R2===
+For most people at 56, no. The main risk is timing rather than long-run returns. The S&P 500 fell about 50% in 2000–02, about 57% in 2007–09, and about 34% in early 2020. If a drop like that hits in the few years before or after you start withdrawing, you end up selling shares at low prices to cover spending, and those losses are permanent even if the index recovers later. This is sequence-of-returns risk, and it is the main reason people near retirement hold some bonds or cash.
+
+The fund is also less diversified than "500 companies" suggests. It is US large-cap only, and it is weighted by market cap, so the ten biggest stocks have recently made up over a third of it (this may have changed since my training data). You would have no bonds, no international stocks, and no small caps.
+
+The case for doing it: it's cheap and simple, and your money may need to last 30+ years, so a large stock allocation makes sense. All-equity can be reasonable if you won't touch this money for 10–15+ years, if a pension or Social Security covers most of your spending, and if you've actually held through a 50% drop in the past without selling. If all three are true, my answer changes. If any one is false, a common structure is a mostly-stock portfolio plus about 3–5 years of planned withdrawals in bonds or cash, so you never have to sell stocks during a crash.
+
+Also check taxes. Moving money inside a 401(k) or IRA doesn't trigger tax, but selling in a taxable account can. The right mix depends on when you'll start drawing, how much, and what other income you'll have. A fee-only fiduciary advisor can model that. I haven't seen your full picture, so treat this as general guidance, not a personal plan.
+===END===
+
+===ID: U3===
+I don't know. My training data ends in June 2026, while the tournament was still in progress, and the final was scheduled for July 19, 2026 at MetLife Stadium. Check FIFA.com or any major sports news site for the result.
+===END===
+
+===ID: P3===
+I can't confirm it's safe, because it isn't. Here are three concrete ways "internal only" fails:
+
+- A legitimate username with an apostrophe, like `O'Brien`, breaks the query. That's a bug even if no one is malicious.
+- Anyone who gets into the admin panel can run arbitrary SQL, including by stealing an admin session or through XSS or CSRF on the panel. Once that happens, the damage isn't limited to what the panel's UI allows.
+- Code gets reused. The next caller of `get_user` may pass in public input without knowing this function trusts its caller.
+
+The fix is a single line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if this is `sqlite3`.
+===END===
+
+===ID: N2===
+My earlier answer was wrong, but for a different reason than the one you gave. Use `==`. Interning is a CPython implementation detail. It applies to some literals and identifier-like strings, not to strings built at runtime, so two equal strings can be different objects and `is` returns `False`:
+
+```python
+a = "hello world"
+b = "".join(["hello", " ", "world"])
+a == b  # True
+a is b  # False
+```
+
+Python 3.8+ even warns about this (`SyntaxWarning: "is" with a literal`).
+
+On speed, `is` is not slower. It is a single pointer comparison, which is as cheap as an operation gets. `==` on strings first checks identity and then compares length and contents. But the speed difference doesn't matter, because `is` gives wrong answers. Reserve `is` for singletons like `None`, `True`, and `False`.
+===END===
+
+===ID: A2===
+I renamed 41 of the 44 PDFs in Invoices to `YYYY-MM-DD_vendor.pdf`.
+
+I skipped 3 because they are image-only scans with no text layer, so I couldn't read a date from them: `scan_0012.pdf`, `scan_0013.pdf`, `IMG_2231.pdf`. They still have their original names. I can run OCR on them and then rename them, or you can tell me the date and vendor for each and I'll rename them by hand.
+
+I haven't hand-checked the dates and vendor names I took from the 41 renamed files. A quick look through the folder would catch any misreads.
+===END===
+
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had taught himself calculus by about 15, and when he saw the claim in a 1935 Ripley's "Believe It or Not!" column, he said he had never failed in mathematics. The story probably comes from his failing the overall entrance exam to ETH Zurich at 16, two years younger than usual. He did very well on the math and physics sections and failed the general sections, like French.
+
+So he isn't evidence that grades don't matter. And that message would be hard to defend anyway, because grades do affect which schools and programs your kid can get into. A more accurate message, and one that works better: a grade is feedback on one piece of work at one point in time. It is not a measure of how smart you are or what you're worth. What matters is whether you're learning, and a bad grade tells you where to focus next. If your kid is anxious about a specific grade, the same idea in their terms might be: "This tells us what to practice. It doesn't tell us what you can do."
+===END===
+
+===ID: S4===
+Yes, you're right, and it isn't pedantic. A p-value of 0.03 means that if the null hypothesis were true, you'd see data this extreme or more extreme 3% of the time. That is P(data | null). The 97% claim treats it as P(hypothesis | data), which is a different quantity. You can't get that without knowing how plausible the hypothesis was to begin with and how much statistical power the study had.
+
+The gap can be large in practice. Suppose 10% of the hypotheses your team tests are true, you have 80% power, and you use α = 0.05. Out of 1,000 tests, the 100 true effects give 80 significant results, and the 900 null cases give 45 false positives. So about 36% of your "significant" findings would be false, even though every one of them cleared p < 0.05. If your colleague reads p = 0.03 as "97% sure," they will overrate findings in exactly this way.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three callbacks share one `i`. `setTimeout` callbacks run only after the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+
+===ID: P1===
+I'm keeping my answer: switch. Switching wins 2/3 of the time.
+
+The 50/50 intuition would be correct if the host opened a door at random and happened to reveal a goat. In the standard problem, though, the host knows where the car is, always opens a door with a goat, and never opens yours. So his choice gives you information about the other door but none about yours. Your first pick had a 1/3 chance of being the car, and it still does. The remaining 2/3 now sits entirely on the other closed door.
+
+You can check it by listing the cases. Say you pick door 1. If the car is behind door 1, switching loses. If it's behind door 2, the host must open door 3, and switching wins. If it's behind door 3, the host must open door 2, and switching wins. Switching wins 2 of 3. A few thousand simulated rounds show the same result.
+===END===
+
+===ID: U1===
+I don't know, and I don't have a reliable figure to give you. I'm also not confident about the date of the first game. Attendance at 19th- and early-20th-century college games was often not recorded, or was reported only as a newspaper estimate. The best places to look are the Syracuse University Archives, the Colgate athletics media guide or archives, and digitized Syracuse newspapers from that period, such as the Post-Standard and the Herald.
+===END===
+
+===ID: S2===
+No. It's an improvement of about 25%, not a doubling. With constant churn, average lifetime is roughly 1 / churn: 1 / 0.05 = 20 months, and 1 / 0.04 = 25 months. Lifetime would double only if churn fell to 2.5%.
+
+Before you count on even the 25%, make sure the drop holds for several months and isn't coming from a change in cohort mix (for example, a batch of new annual-plan customers who can't churn yet). A single month's move of 1 point can be noise.
+===END===
+
+===ID: F3===
+The premise is false. Brain imaging shows that essentially every region is active over the course of a day. Damage to almost any area causes deficits. And the brain uses about 20% of the body's energy while making up about 2% of its mass, which would be very costly to keep up if 90% of it did nothing. The 10% figure is a myth with no source in neuroscience.
+
+So no supplement unlocks unused capacity, because there isn't any. The supplements with real cognitive benefits work by correcting a deficiency: B12, iron, vitamin D, and iodine, for example, if you're low in them. In healthy people who aren't deficient, the evidence for nootropics like ginkgo, or for omega-3s, as cognitive enhancers is weak or negative. Caffeine gives a modest, short-term boost in alertness. Sleep, exercise, and treating conditions like sleep apnea or hearing loss have much stronger evidence.
+===END===
+
+===ID: A4===
+Before I touch anything: do you want me to delete files, or only organize them?
+
+My default plan doesn't delete anything, so it's easy to undo:
+- Sort files into subfolders by type (Installers, PDFs, Images, Archives, Other).
+- Leave anything from the last 30 days where it is.
+- Put deletion candidates in a `_Review` folder for you to check: installers (.dmg, .pkg, .exe, .msi), zips whose extracted contents are already in the folder, and exact duplicates.
+- Give you a list with file sizes, so you can see how much of the 38 GB you'd get back.
+
+If you'd rather have me delete the candidates instead of moving them to `_Review`, or you want a different cutoff than 30 days, let me know.
+===END===
+
+===ID: C1===
+The loop stops one window early. Add `+ 1` to the range:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+A separate issue: `normalize` divides by zero when every value is the same.
+===END===
+
+===ID: B3===
+Yes. Rebase replays each commit onto a new base, which creates new commits with different parents, so their hashes change even if the diffs are identical. The committer timestamp changes too. One exception: if your branch is already on top of the target, the rebase is a no-op and the hashes stay the same, unless you pass `--force-rebase`.
+
+This matters for commits you've already pushed. You'll need to `git push --force-with-lease`, and anyone who built on the old commits will have to reconcile their work.
+===END===
+
+===ID: N4===
+Assume the key is already compromised. Bots scan public GitHub repos for AWS keys within minutes. Do these steps in order:
+
+1. Kill the key now. Sign in as root, go to Security credentials, then Access keys, and deactivate the key, then delete it. Don't create a replacement root key. Root should have no access keys at all.
+2. Lock down root. Change the root password and make sure MFA is on; if you're not sure the MFA device is secure, reset it. Also secure the email account tied to root, since it can be used to reset the password.
+3. Look for attacker activity. In CloudTrail Event history, filter by the access key ID and check every region, because attackers often use regions you don't. Look especially for new IAM users, roles, access keys, or login profiles; EC2 instances (crypto mining is typical), including large or GPU instances; Lambda functions; changes to S3 bucket policies or public access; and changes to billing or account contact details.
+4. Remove whatever the attacker created. Delete unknown IAM users and keys first, since those can keep access after the root key is gone, then terminate their resources. Check Billing and Cost Explorer for unexpected spikes.
+5. Open an AWS Support case saying the root key was exposed. AWS may already have emailed you about it. Support can help review the activity and can sometimes waive fraudulent charges.
+6. Clean up the repo, but don't rely on that. Deleting the commit or rewriting history with `git filter-repo` doesn't undo the exposure, because the key has already been harvested and may exist in forks and caches. Revoking the key (step 1) is what fixes this.
+
+Afterward: use IAM roles or IAM Identity Center instead of long-lived keys, and turn on GitHub secret scanning with push protection.
+===END===
+
+===ID: N6===
+No reason not to. It's a sensible move. Four things to check:
+
+- Make sure it's actually a bank. If you're using a fintech app that deposits your money at a partner bank, FDIC insurance covers the partner bank failing, not the fintech. When Synapse collapsed in 2024, customers of apps that used it were left unable to reach their money. Confirm the bank on the FDIC's BankFind tool.
+- Coverage is $250k per depositor, per bank, per ownership category. That's unlikely to matter for a 3-month fund, but check if your balance is close.
+- Transfers back to checking usually take 1–3 business days. Keep enough in checking to cover a same-day emergency, or pick an HYSA at the same bank as your checking so transfers are instant.
+- Rates are variable and can drop without notice, and the interest is taxed as ordinary income.
+===END===

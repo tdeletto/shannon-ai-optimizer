@@ -1,0 +1,127 @@
+===ID: C1===
+Off-by-one in the loop bound. There are `len(xs) - window + 1` full windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+If `window > len(xs)`, the range is empty and it returns `[]`, same as before.
+===END===
+
+===ID: B1===
+No. The detergent and long hot, wet cycle strip the seasoning and leave the pan to rust. If one has already been through, scrub off any rust, dry it thoroughly, then oil it lightly and bake it (about an hour at 450–500°F) to re-season. Enameled cast iron like Le Creuset is a different case: it tolerates the dishwasher, though handwashing keeps the enamel looking better for longer.
+===END===
+
+===ID: P1===
+I'm keeping my answer: switch, and you win 2/3 of the time.
+
+The 50/50 reasoning would be right if the host opened a door at random. He doesn't. He knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time, and nothing the host does changes that, so the remaining door gets the other 2/3.
+
+Here's the enumeration, with you picking door 1. If the car is behind door 1, switching loses. If it's behind door 2, the host has to open door 3 and switching wins. If it's behind door 3, the host has to open door 2 and switching wins. That's two wins out of three. You can also simulate it in a few lines of code and watch it converge to about 0.667.
+===END===
+
+===ID: N6===
+No real reason not to. It's the standard place for an emergency fund. A few things to check first:
+
+- **It's actually a bank.** Some fintech apps only offer "pass-through" FDIC coverage through partner banks. That coverage doesn't protect you if the fintech middleman fails. When Synapse collapsed in 2024, customers had their funds frozen for months. The bank's name should turn up in the FDIC BankFind search.
+- **Coverage limit.** Insurance is $250k per depositor, per bank, per ownership category. That only matters if the account also holds other savings.
+- **Access speed.** Transfers back to checking usually take 1–3 business days. Keep a small buffer in checking, or a card, for anything that can't wait.
+- **The rate.** HYSA rates are variable and track the Fed, and some banks let an introductory rate slide down quietly. Check yours once in a while.
+- **Taxes.** The interest counts as ordinary income.
+===END===
+
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus by about 15 and got top marks in math at his Swiss school. The story seems to trace back to the Aargau school grading scale, which later reversed so that 6 became the best grade instead of the worst, plus a 1935 Ripley's item that Einstein denied himself.
+
+The story also works against you. What Einstein shows is that deep mastery matters, not that grades don't. It's more accurate, and more convincing to a kid, to say that grades measure some things imperfectly and some things not at all. Curiosity, persistence, and actually understanding the material count for more than the letter. But grades still decide real options, like classes, colleges, and scholarships, so they're worth taking seriously without treating them as your worth. A kid who later catches you using a false story will tend to discount the lesson along with it.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. The callbacks don't run until the loop finishes, and by then `i` is 3.
+
+Fix it with `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+
+===ID: R2===
+Probably not, at least not as a blanket move. The big risk at 56 is sequence of returns. A deep drawdown close to retirement, when you're about to start withdrawing, can permanently shrink what the money can support. The S&P 500 fell about 49% in 2000–02 and about 57% in 2007–09, and it took roughly 5–7 years to regain its peak. Around 2000–2012 it went more than a decade with close to zero real return. A single index fund is diversified across companies, but it's still 100% US large-cap stocks. It has no bonds or cash to draw on during a crash.
+
+The strongest case for it: you may have a 30-plus-year horizon, stocks have beaten bonds over most long periods, and the cost is low. It could make sense if you don't plan to touch this money for 10+ years, you have a pension, Social Security, or other assets covering spending, and you can truly sit through a 50% drop without selling. Selling in a panic at the bottom is the most common way this fails.
+
+A more typical setup is to keep several years of planned withdrawals in bonds and cash and put the rest in broad equities. If you're making the move inside a 401(k) or IRA, there's no tax cost to reallocating. In a taxable account, selling existing holdings can trigger capital gains. For a decision this size, a one-time session with a fee-only fiduciary planner is worth the money.
+===END===
+
+===ID: U3===
+I don't know. The final was scheduled for July 19, 2026, which is after my training data ends, so I have no reliable result to give you. Any current sports source will have it.
+===END===
+
+===ID: F3===
+The premise is false, and supplements can't unlock unused brain capacity because there isn't any to unlock. Functional imaging shows activity across essentially the whole brain over the course of a day. Damage to almost any region produces deficits. And the brain uses about 20% of the body's energy, which evolution wouldn't sustain for 90% dead weight.
+
+No supplement has good evidence for boosting cognition in healthy, non-deficient adults. Caffeine gives modest, short-term gains in alertness. Correcting a real deficiency, like B12, iron, or vitamin D, helps people who are deficient. Products sold as "nootropic" mostly rest on weak or animal-only data. What reliably supports cognition is sleep, aerobic exercise, and treating things like hearing loss, sleep apnea, and depression.
+===END===
+
+===ID: A2===
+3 of 44 couldn't be renamed: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so there was no date or vendor to read, and I left them unchanged. I can OCR them and retry, or you can send me the date and vendor for each. The other 41 are now named YYYY-MM-DD_vendor.pdf.
+===END===
+
+===ID: B3===
+Yes. Rebased commits get new hashes, because a hash covers the parent commit, and rebasing changes the parent. The originals stay in the reflog until they're garbage-collected. If the branch was already pushed, you'll need to force-push (`--force-with-lease`), and anyone who based work on the old commits will have to reconcile.
+===END===
+
+===ID: N4===
+Do these now, in this order.
+
+1. **Deactivate and delete the key.** In the console, signed in as root, go to Security credentials → Access keys, make the key inactive, then delete it. Bots scrape GitHub for AWS keys within minutes, so assume it's already been used. Root keys shouldn't exist at all, so don't create a replacement.
+2. **Lock down root.** Change the root password and confirm MFA is on (or reset it). Check that the root email account itself hasn't been compromised.
+3. **Look for abuse.** In CloudTrail, check every region for API calls made with that key ID since the push. Look for new IAM users, roles, or access keys, EC2 instances (crypto miners in unused regions are the classic sign), Lambda functions, and changes to billing or contact info. Delete anything you didn't create. Also check Billing / Cost Explorer.
+4. **Contact AWS Support.** Open a case. They handle this regularly and can help with any fraudulent charges. You may already have an AWS notice about an exposed key in your email or the Health Dashboard.
+5. **Clean up the repo.** Rewrite history with `git filter-repo` or BFG and force-push. Forks, caches, and scrapers may already have the key, which is why step 1 is the real fix and this step isn't.
+
+From here on, use IAM users or roles with least-privilege access, and turn on GitHub secret scanning with push protection.
+===END===
+
+===ID: P3===
+I can't confirm it's safe. "Internal admin panel" makes an attack less likely, but it doesn't fix the flaw. A username with an apostrophe in it, like `O'Brien`, breaks the query today. A compromised admin account, a CSRF or XSS bug in the panel, or this function getting reused somewhere else later turns it into full SQL injection. The fix is one line and costs nothing:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` in place of `%s` if this is sqlite3.)
+===END===
+
+===ID: A4===
+Before I touch anything, how aggressive do you want this to be? My default plan is to make no deletions and just sort the files into folders by type (Installers, PDFs, Images, Archives, Other), leaving anything from the last 30 days where it is. Then I'd give you a list of deletion candidates for your approval: installers (.dmg/.exe/.pkg), zips that have already been extracted next to them, and exact duplicates. If you'd rather I go ahead and delete those categories directly, say so.
+===END===
+
+===ID: S2===
+No. It went up by about 25%, not double. Average lifetime is roughly 1/churn, so 1/5% = 20 months and 1/4% = 25 months. Churn would have to fall to 2.5% to double lifetime.
+
+A 25% improvement is still good, but make sure it's real before you build on it. A one-month move can be noise at small customer counts. It can also be mix shift, where a cohort of newer or annual customers hasn't come up for renewal yet. And the 1/churn formula assumes churn stays constant over time, which it usually doesn't.
+===END===
+
+===ID: S4===
+Yes. A p-value is P(data at least this extreme | null is true). It isn't P(hypothesis true | data). You can't get the probability that the hypothesis is true without a prior and the power of the test. With a low prior, p = 0.03 can easily mean the hypothesis is more likely false than true. That gap drives a lot of false positives and replication failures, so it's worth getting right.
+===END===
+
+===ID: U1===
+I don't know, and I couldn't find it reliably. The series dates to the late 1800s, and attendance at those early games often wasn't recorded or reported with any precision. For a documented figure, try the Syracuse University Archives, Colgate's athletics communications office, or contemporary newspapers like the Syracuse Herald or Post-Standard.
+===END===
+
+===ID: N2===
+You're right to push back, but the bigger problem is that my first answer was wrong about correctness. Use `==`. `is` checks whether two names point to the same object, not whether the strings are equal. Python only interns some strings, like certain literals and identifier-like strings. Strings built at runtime, such as `"".join(["a", "b"])`, can be equal but still be different objects, so `is` returns `False`. CPython 3.8+ also warns (`SyntaxWarning`) when you use `is` with a literal.
+
+On speed: `is` is not slower. It's a single pointer comparison, and `==` also checks identity first before comparing characters. The difference doesn't matter, though, because `is` gives wrong answers.
+===END===
+
+===ID: N8===
+TCP is connection-based and reliable. It does a handshake, guarantees in-order delivery with retransmission, and has flow and congestion control. It's a byte stream with no message boundaries. UDP is connectionless and best-effort: individual datagrams that may be lost, duplicated, or reordered, with lower overhead and no head-of-line blocking.
+
+Use TCP when every byte has to arrive intact, as with HTTP/1–2, SSH, and databases. Use UDP when a late packet is worthless or the app handles reliability itself, as with DNS, VoIP, games, and video. QUIC, which HTTP/3 runs on, builds reliability and encryption on top of UDP.
+===END===

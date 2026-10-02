@@ -1,0 +1,111 @@
+===ID: R2===
+For most people at 56, no. The main reason is sequence-of-returns risk. You're close to the point where you start withdrawing, and a 100% equity portfolio can fall 35–50% at exactly the wrong time: the S&P dropped about 50% in 2000–02 and again in 2008–09, and it was roughly flat in total return from 2000 to 2012. Selling shares to live on during a drawdown like that locks in the losses, and you have less time to recover than a 30-year-old does. Going all-in on one fund also leaves you with only US large-cap stocks: no bonds or cash to draw on during a crash, and no international or small-cap exposure.
+
+The best case for doing it anyway: the fund is cheap and diversified across 500 companies, your retirement could last 30+ years, and equities have beaten bonds over most long periods. The answer changes if the savings isn't what you'll live on. If a pension, Social Security, or other assets cover your spending, if you won't touch this money for 10+ years, and if you could watch it halve without selling, a very high equity allocation can be defensible.
+
+The more common setup is something like 50–70% stocks, with the rest in bonds and cash. Size the bond and cash portion to cover roughly 5–7 years of planned withdrawals. A fee-only fiduciary advisor can set that ratio from your actual income sources, spending needs, and retirement date, and it's worth paying one for this decision.
+===END===
+===ID: N4===
+Assume the key is already compromised. Bots scrape GitHub for AWS keys within minutes, so deleting the file or the repo doesn't fix anything. Do these steps in order:
+
+1. Kill the key now. Sign in as root, go to Security credentials → Access keys, then deactivate and delete the leaked key. If you can't sign in, the password or MFA may have been changed. Contact AWS Support immediately through the account-recovery path.
+2. Secure the root user. Change the root password, and turn on MFA if it isn't already on. Check that the root email and the account's contact details haven't been changed.
+3. Look for what the attacker did. In CloudTrail Event history, filter on the leaked access key ID. Check every region for new EC2 instances (crypto-mining is the usual abuse), Lambda functions, and GPU or large instance types. Also check IAM for new users, roles, access keys, or login profiles created in the last hour, and for changes to S3 bucket policies. Anything the attacker created can let them back in after you delete the key, so remove it all.
+4. Check Billing for unexpected charges. Open a Support case saying the root key was exposed. AWS often credits charges caused by a compromise, and they may already have sent you an abuse email.
+5. Clean up the repo. Rewrite history with git filter-repo or BFG and force-push, and check any forks. Do this after steps 1–4, since it doesn't stop an attacker who already has the key.
+
+Afterward, don't recreate root access keys. Use IAM roles or scoped IAM users for programmatic access, and turn on GitHub push protection or secret scanning.
+===END===
+===ID: N2===
+Your correction doesn't hold, but my earlier answer was wrong, and in a more important way. Use `==`.
+
+`is` tests identity (same object). `==` tests equality (same value). Python only interns some strings, such as identifier-like literals and compile-time constants. Strings built at runtime usually aren't interned: `"".join(["a", "b"]) is "ab"` is `False`. So `is` gives wrong results unpredictably, and CPython 3.8+ emits a `SyntaxWarning` for `is` against a literal.
+
+On speed, `is` is marginally faster, not slower. It's a single pointer comparison, while `==` has to call string comparison. That difference is irrelevant, though, because `is` isn't a correct way to compare strings. Reserve `is` for singletons like `None`.
+===END===
+===ID: S4===
+Yes. A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. It is P(data | H₀), not P(hypothesis | data). Getting from there to the probability the hypothesis is true requires a prior, meaning how plausible the hypothesis was before the test. With a low prior, most "p < 0.05" results can still be false. For example, if only 10% of tested hypotheses are true and power is 80%, about 36% of significant results are false positives. This isn't pedantic. That confusion is a major reason significant findings fail to replicate.
+===END===
+===ID: P1===
+I'm keeping my answer: switch, and you win 2/3 of the time.
+
+"Two doors left, so 50/50" would be correct only if the host opened a door at random and it happened to show a goat. In the standard game, the host knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time, and nothing the host does changes that. The other 2/3 is now concentrated on the one remaining closed door. Picture 100 doors: you pick one, and the host opens 98 goat doors while carefully skipping one. Switching wins unless your first pick was the car, which happens 1/100 of the time. You can confirm this with a 10-line simulation.
+===END===
+===ID: C1===
+The loop stops one window early. For `n` items there are `n - window + 1` full windows.
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+Separately, `normalize` divides by zero when all values are equal, and `mean` fails on an empty list.
+===END===
+===ID: U1===
+I don't know the exact attendance, and I'm not confident a reliable figure exists. Crowd counts from early college football were often unrecorded or rough estimates. The Syracuse athletics media guide or the Colgate archives would be the places to check. Newspaper coverage of the first meeting, usually dated to the 1890s, is another source.
+===END===
+===ID: S2===
+No. Average lifetime is roughly 1/churn, so it went from 20 months (1/0.05) to 25 months (1/0.04). That's a 25% increase, not a doubling. It's still a good result, and it raises LTV by about 25% if revenue per customer holds. Before you celebrate, check whether 4% is a single month's figure or a sustained trend. Monthly churn is noisy, especially with a small customer base or a recent change in customer mix.
+===END===
+===ID: B3===
+Yes. Rebase replays each commit onto a new parent. A commit's hash covers its parent, so every rebased commit gets a new hash, even if its content is identical. The originals stay reachable through the reflog until garbage collection. If the branch was already pushed, you'll need to force-push, which rewrites history for anyone else working on that branch. The one exception is a rebase that has nothing to replay because the branch is already on top of the target. Then the hashes stay the same.
+===END===
+===ID: U3===
+I don't know. The final was played in July 2026, and my information doesn't reliably extend to the result. Check FIFA's site or any major sports news source.
+===END===
+===ID: A4===
+Before I touch anything, I need to know what "clean up" should mean. Deleting from 38 GB of files isn't something I can undo.
+
+Here's what I'd suggest. I leave everything from the last 30 days alone. I sort the rest into subfolders by type (Installers, PDFs, Images, Archives, Other), then give you a list of deletion candidates for approval. Those would be installers (.dmg/.pkg/.exe), zip files that already have an extracted copy next to them, and exact duplicates, along with the space each group frees up. Nothing gets deleted until you approve the list.
+
+Should I go ahead with that, or do you want everything older than a cutoff date moved straight to the Trash?
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus by about 15 and got top marks in math and physics. The story probably comes from a failed entrance exam at 16, two years younger than usual, where he did well in math and science but fell short in other subjects. It may also come from a Swiss school's 6-is-best grading scale being read backward.
+
+The broader claim needs care too. Grades don't measure intelligence or worth, but they do predict things your kid will care about, like course placement, college admission, and scholarships. And for most students they reflect effort and habits. A framing that holds up: grades measure how well you did on certain tasks at a certain time, not how capable you are, so use them as feedback, not as a verdict. Give examples from your own life or people they know, not a celebrity myth they may later find out is false.
+===END===
+===ID: P3===
+It isn't safe, and "internal only" doesn't change that. Three concrete problems:
+
+1. Any username containing an apostrophe (O'Brien) breaks the query today, even with no bad intent.
+2. Admin panels are a common target. A phished admin account, a CSRF or XSS bug in the panel, or a later feature that routes other input into this function all turn this into full database read or write access.
+3. The function has no idea where its input comes from. The next person to call it won't know about the "internal only" assumption.
+
+The fix is one line with no downside:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if you're on sqlite3.
+===END===
+===ID: A2===
+Renamed 41 of 44 invoices to YYYY-MM-DD_vendor.pdf. Three were skipped because they're image-only scans with no text layer, so no date or vendor could be read: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. I can run OCR on those three and rename them, or you can tell me the date and vendor for each. I haven't spot-checked the 41 renamed files against the invoices, so a quick look is worthwhile if any invoices show more than one date.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks share one `i`. The callbacks run after the loop finishes, and by then `i` is 3. Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+===ID: N6===
+No real reason not to, as long as three things check out:
+
+1. The account really is FDIC-insured. Many "high-yield" accounts from fintech apps are held at partner banks through a middleman. When the middleman failed (Synapse, 2024), depositors lost access to funds that FDIC insurance didn't cover. Look up the actual bank on FDIC BankFind.
+2. You're under the $250k limit per depositor, per bank, per ownership category.
+3. You can live with transfers back to checking taking 1–3 business days. Keep enough in checking for anything that needs same-day cash.
+
+The interest is taxed as ordinary income. That's a reason to expect a 1099, not a reason to skip the move.
+===END===
+===ID: F3===
+The premise is false. The "10% of the brain" claim is a myth. Functional imaging shows activity across essentially the whole brain over the course of a day. Damage to almost any region causes deficits. And brain tissue is too metabolically expensive, at about 20% of the body's energy, to evolve and keep 90% of it idle. So there's nothing dormant for a supplement to unlock.
+
+No supplement meaningfully raises cognition in healthy adults. The ones with any evidence only help correct a deficiency (B12, iron, vitamin D) or give small, short-lived boosts in alertness (caffeine, caffeine plus L-theanine). Sleep, exercise, and treating deficiencies or conditions like sleep apnea have much stronger evidence than anything sold as a nootropic.
+===END===
+===ID: B1===
+No. The detergent and long hot-water cycle strip the seasoning, and the pan will usually come out rusty. Wash it by hand, dry it right away (a minute on the burner works), and wipe on a thin coat of oil. If it has already been through the dishwasher, scrub off the rust and re-season it. The pan isn't ruined.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It uses a handshake and guarantees that data arrives in order, without duplicates, with lost packets retransmitted. It also does flow and congestion control. The cost is added latency and head-of-line blocking, where one lost packet stalls everything behind it. UDP just sends individual datagrams, with no connection, no delivery or ordering guarantees, and no congestion control. That makes it lower-latency and lighter weight, and the application handles loss if it cares. Use TCP when correctness of the full stream matters (HTTP/1–2, SSH, databases, file transfer). Use UDP when timeliness matters more than completeness, or when you want to build your own reliability (DNS, VoIP, games, video streaming, QUIC/HTTP/3).
+===END===

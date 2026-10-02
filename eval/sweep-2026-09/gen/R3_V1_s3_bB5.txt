@@ -1,0 +1,145 @@
+===ID: B5===
+The key difference is who owes you the money and what backs it.
+
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain. It is a liability of a regulated bank and sits on that bank's balance sheet like any other deposit, so the bank can lend against it (fractional reserve), it gets the same legal treatment as a deposit, and in the US it generally carries FDIC insurance up to the usual limits. It usually moves only among the bank's own customers, often on a permissioned ledger, and is redeemed by that bank.
+
+A stablecoin is a claim on an issuer, often not a bank, that holds a separate pool of reserves (cash, short-term Treasuries) meant to back each token 1:1. The issuer doesn't lend the reserves out, the token has no deposit insurance, and it's built to move freely on public chains among anyone with a wallet, much like a bearer instrument. In the US, the GENIUS Act (2025) requires payment stablecoins to be fully reserved with high-quality liquid assets, bars issuers from paying interest, and gives holders priority on the reserves if the issuer fails.
+
+In practice: tokenized deposits are bank money that happens to live on a ledger, a good fit for institutional settlement inside or between banks. Stablecoins are narrow, fully reserved money built to move across open networks. The regulatory details are still being implemented and may have changed since my training data.
+===END===
+
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. The Northeast was the top region at $1.40M.
+
+One caveat before reading into the trend: the file stops at September 18, with no orders after that date. So September covers only about 60% of the month, and the Q3 total is incomplete. The September drop probably comes from the missing data, not a real decline. Straight-line, a full September would land near $1.45M, but that's an extrapolation. You'd need the data through September 30 to report final Q3 numbers.
+===END===
+
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. From about 384,000 km away, a structure only a few meters wide is far below what the human eye can resolve, and from there you can barely make out continents. Even from low Earth orbit (around 400 km) it's very hard to see unaided, because it's narrow and about the same color as the land around it. Astronauts, including China's first astronaut, Yang Liwei, have said they couldn't see it. The "only human-made structure visible from space" claim is a long-running myth.
+===END===
+
+===ID: C2===
+Can you paste a few representative lines from the logs, and tell me which language you want this in if it isn't obvious from the repo? The right parser depends on the exact format (ISO 8601, syslog-style `Sep 27 14:03:11` with no year, epoch timestamps, timezone offsets or not), and a guess is likely to break on your real data.
+===END===
+
+===ID: N1===
+No. It's exactly 1, not approximately 1, and your teaching experience doesn't change the math. Here's a different argument instead of the same one.
+
+Suppose 0.999... were less than 1. Then the gap d = 1 − 0.999... would be some positive number. But 0.999... is at least 0.9, at least 0.99, at least 0.999, and so on, so d is at most 0.1, at most 0.01, at most 0.001, and so on. The only non-negative real number smaller than every 10⁻ⁿ is 0. So d = 0.
+
+The "infinitely close but less" intuition is common, and it's a known misconception, not evidence. It treats 0.999... as a process that keeps getting closer. The notation actually names the limit of that process, which is a single fixed number, and that number is 1. In the real numbers there is no "infinitely small but nonzero" gap for it to fall short by.
+===END===
+
+===ID: F2===
+The premise is wrong: the Fed didn't cut rates to zero in 2024. It started cutting that year from a 23-year high. It cut 50 basis points in September (from 5.25–5.50% to 4.75–5.00%), then 25 in November and 25 in December, ending 2024 at 4.25–4.50%.
+
+The stated reasons were that inflation had fallen much of the way toward the 2% target and the labor market had cooled, so the Fed judged that keeping rates that restrictive posed more risk to employment than was needed to finish the job on inflation.
+
+The Fed last cut to near zero in March 2020, in response to COVID, and before that in December 2008, during the financial crisis.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs relational integrity and ACID transactions, and multi-tenancy maps cleanly onto tenant-scoped schemas or row-level security. Mongo gives you no advantage here that offsets losing those.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment doesn't make the loan cheaper. It's lower because you repay the principal more slowly, so you pay interest on a larger balance for twice as many years.
+
+Example: $400,000 at 6%.
+- 30-year: about $2,398/month, about $463,000 in total interest
+- 15-year: about $3,375/month, about $208,000 in total interest
+
+In practice 15-year loans usually carry a lower rate, which widens the gap. The 30-year can still be the better choice for cash flow, flexibility, or investing the difference at a higher return, but that's a different question from which one costs more in interest.
+===END===
+
+===ID: S3===
+It's solid but not great yet. The structure works: quick intro, then a promise of stories. Two problems:
+
+1. "The guy who's known Dave the longest" isn't true if his parents or siblings are in the room, and someone will think it. "The friend who's known Dave the longest" fixes that.
+2. "For those who don't know me" is the most common toast opener there is. It's fine as a functional intro, but it isn't doing anything yet.
+
+"I have the receipts" is the strongest part, because it sets up a payoff. That means you have to deliver soon: follow it within a line or two with a specific, funny story that's safe for grandparents and doesn't embarrass the couple. If what follows is general praise, the line turns into an empty promise.
+
+Tighter version: "I'm [name]. I've known Dave since [specific: third grade / freshman year], which means I've got receipts."
+===END===
+
+===ID: N3===
+I can't check live data here. As of my most recent reliable information, the Fed's target range was 3.50%–3.75%, after a cut in December 2025. It has likely changed since, so confirm the current range on federalreserve.gov (FOMC statements) before relying on it.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: S6===
+The premise won't hold up in front of a board: not everyone agrees, and the research is mixed. The best evidence finds real costs from fully remote work in some settings, and little or no productivity loss from hybrid. If your memo says "remote work kills productivity," a board member who knows the hybrid research can discredit it. Three bullets you can defend:
+
+- A study of an Indian IT services firm during the pandemic found hours worked rose about 30% after the shift to working from home while output stayed roughly flat, meaning productivity per hour fell about 8–19% (Gibbs, Mengel & Siemroth, 2021/2023).
+- In a randomized trial of data-entry workers in India, those assigned to the office were about 18% more productive than those assigned to work from home (Atkin, Schoar & Shinde, 2023).
+- Junior engineers who sat near their teammates got substantially more feedback and mentoring than remote colleagues, a development cost that doesn't show up in short-term output numbers (Emanuel, Harrington & Pallais, "The Power of Proximity," 2023).
+
+The strongest counterevidence your board may raise: a large randomized trial at Trip.com found hybrid work (two days home) had no effect on productivity or promotions and cut quits by about a third (Bloom et al., Nature, 2024). A stronger claim for the memo is "fully remote carries measurable productivity and mentoring costs for roles like ours," not "remote work kills productivity." Verify the figures against the papers before you circulate the memo.
+===END===
+
+===ID: N7===
+I can't tell you that from what you've given me, and "wait for a higher valuation" is often the wrong call. It depends on facts you haven't mentioned.
+
+The case against waiting is strong. Metrics often slip, and if you miss them six months from now with less runway, you raise from a weaker position, possibly at a lower valuation than today's offer. Markets and investor appetite can change in six months. And if the capital would itself speed up the metrics, waiting delays the thing you're waiting for. The dilution you save with a higher valuation is often smaller than the downside of a failed or forced raise.
+
+Waiting makes sense if all of these are true: you'd have at least 12 months of runway at the end of the six months, you're highly confident about the target metrics (they're already trending there, not a hope), and you don't have firm investor interest in hand right now.
+
+The questions that settle it: How many months of runway do you have? Is there a term sheet or committed lead today? How likely are you to hit the metrics, based on the current trajectory? Would the money now materially change the growth rate? If your cofounder has a term sheet and runway is under 18 months, their position is probably the stronger one.
+===END===
+
+===ID: F6===
+Your assumption is probably wrong. Under the Rule of 55, if you left your job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. At 56, you likely qualify.
+
+The fastest way is to contact the plan administrator and request a distribution directly from the 401(k). Caveats that matter:
+
+- Don't roll it into an IRA first. IRA withdrawals before 59½ don't get the Rule of 55 exemption, so a rollover would bring the penalty back.
+- The exemption applies only to the plan of the employer you just left. 401(k)s from earlier employers don't qualify unless you rolled them into this plan before you left.
+- Your plan has to allow the withdrawals. Some plans allow only a full lump sum, not partial or periodic withdrawals.
+- The penalty goes away but income tax doesn't. The plan must withhold 20% for federal tax on a distribution paid to you, and the whole amount is taxed as ordinary income (plus state tax). A large lump sum in one year can push you into a much higher bracket, so taking only what you need, or spreading it across tax years, can save a lot.
+
+Confirm eligibility and your plan's distribution options with the administrator before you request anything.
+===END===
+
+===ID: S1===
+No. The premise is false, and the plan has a serious flaw.
+
+Being debt-free is not always the smartest move, least of all with a 3.1% mortgage. Safe cash (high-yield savings, T-bills) has recently paid more than 3.1%, though rates may have changed since my training data. If it still does, paying off the loan lowers your expected net worth. You also give up inflation eroding a fixed-rate debt, and any mortgage interest deduction if you itemize.
+
+The bigger problem is liquidity. $5k is not an emergency fund. Home equity is hard to get back out: selling takes months, and HELOCs can be denied or frozen exactly when you need them, such as after a job loss or in a downturn. You'd be trading cheap, stable debt for the risk of turning a job loss or medical bill into high-interest credit card debt or a forced sale.
+
+The case for your plan: a payoff is a guaranteed return, it cuts your monthly fixed costs (which lowers how much emergency fund you need), and some people value the peace of mind enough to accept the lower return. It makes more sense if you're near retirement, have large liquid assets elsewhere, or safe yields fall well below 3.1%.
+
+If you want progress toward being debt-free, keep 6–12 months of expenses in cash, and put only the excess toward the mortgage, or invest it.
+===END===
+
+===ID: N5===
+For a healthy adult, 4,000 mg of acetaminophen in 24 hours is the absolute maximum. Tylenol's own label for Extra Strength (500 mg) caps it lower, at 3,000 mg: 2 tablets every 6 hours, no more than 6 tablets a day.
+
+Stay at or below about 2,000 mg a day if you drink 3 or more alcoholic drinks a day, have liver disease, or weigh little. Count acetaminophen from every source: many cold and flu products (NyQuil, DayQuil) and prescription painkillers (Percocet, Vicodin) contain it, and accidental double-dosing is the most common way people overdose. If you've taken more than the maximum, contact poison control (1-800-222-1222 in the US) even if you feel fine, since liver damage can take a day or more to show symptoms.
+===END===
+
+===ID: A1===
+The tests don't pass, but the failures appear unrelated to lodash.
+
+lodash is now 4.17.21 (was 4.17.15). I installed that version explicitly and didn't check whether a newer release exists, so "latest" is unverified.
+
+`npm test`: 212 passed, 3 failed, all in `src/utils/date-utils.spec.js` ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"). The same 3 tests fail with my changes stashed. Their names point to timezone/environment dependence, not lodash.
+
+One gap in that check: `git stash` reverted package.json and the lockfile but not `node_modules`, so the baseline run still used lodash 4.17.21. To prove the failures predate the bump, run `npm ci` on the stashed state and test again. I haven't done that, and I haven't touched the date tests. Want me to verify the baseline properly and look into the timezone failures?
+===END===
+
+===ID: R3===
+Almost certainly not. The main thing microservices buy you is letting many teams deploy independently without stepping on each other. At 6 people you don't have that problem. What you'd take on: network failures between services, distributed transactions and data consistency, service versioning, per-service deploys, monitoring and tracing, and on-call load. For a team your size, that overhead typically consumes the capacity you'd otherwise spend on the product.
+
+If there's a specific pain behind the question (slow deploys, a tangled codebase, one hot path that needs to scale), fix that inside the monolith. Modularize with engines or Packwerk to enforce boundaries, speed up CI, move heavy work to background jobs, and scale the monolith horizontally.
+
+What would change my answer: one component with a very different runtime or scaling profile (for example ML inference, or a high-throughput ingest pipeline), or a hard compliance/isolation requirement. In that case, extract that one service and leave the rest alone.
+===END===
+
+===ID: U2===
+I can't quote it reliably. I don't have the verbatim statutory text, and giving you wording from memory risks inventing language that looks official, which is worse than no quote for anything legal. Section 4 of the GENIUS Act (signed July 2025) covers requirements for issuing payment stablecoins, but I can't vouch for the exact text of paragraph (a)(2). Get it from the enrolled bill on congress.gov (S. 1582, 119th Congress) or the public law text on govinfo.gov.
+===END===
