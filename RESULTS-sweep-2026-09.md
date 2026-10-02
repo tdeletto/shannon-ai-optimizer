@@ -76,6 +76,6 @@ Pooled, v9.0 beats v8.2 in **17 of 18** batches (sign test p ≈ 0.0001). The he
 
 ## Decision
 
-v9.0 ships V8. The gain over v8.2 replicated in two dev rounds and one of two held-out sets, survived the batch-level re-test, and arrived without a hedge or formatting regression, at the cost of ~580 more tokens per turn.
+v9.0 ships V8, plus one line added after the sweep and not tested: a ban on "load-bearing" as a metaphor (23 words). The gain over v8.2 replicated in two dev rounds and one of two held-out sets, survived the batch-level re-test, and arrived without a hedge or formatting regression, at the cost of ~580 more tokens per turn.
 
 The strongest case against: on this sweep's own evidence, V7 (767 words, ~1,150 tokens estimated) is as good, and the repo's seventh principle says rules that can't be shown to do anything come out. V8 is shipped over V7 only because V8 is held-out tested and V7 is not. **A held-out run of V7 against V8 that ties should replace v9.0 with V7.** That arm is preserved as `variants/v9.0-ablation-examples-only.md`; v8.2 is preserved as `variants/v8.2-contract.md`.

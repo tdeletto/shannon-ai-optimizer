@@ -129,6 +129,10 @@ UNPROBED = [
      "Report state, not effort",
      "in V5, which was null; every arm still presented an unverified check "
      "as proof in ~1 of 12 runs"),
+    ("word ban: \"load-bearing\" as metaphor (added after the sweep)",
+     "load-bearing",
+     "the owner's personal rule, added after the sweep and never tested; "
+     "bans one phrase, so expected cost is its ~22 words of context"),
 ]
 
 SKILL_FILE = "shannon-v9.0.md"
@@ -167,9 +171,17 @@ SKILL_FILE = "shannon-v9.0.md"
 # every other v9.0 rule but no examples was null (+0.03), so ~270 words of
 # this ceiling are unearned on the sweep's own evidence. That arm is variants/v9.0-ablation-examples-
 # only.md, and it is the first thing to test when this ceiling comes down.
+# 1050 -> 1075 for the untested load-bearing word ban (1,058 words).
+#
+# The DAILY ceiling rose 340 -> 700 at v9.0 with NO run attached: the v9.0
+# changes were ported into it by hand (calibration examples, caveat budget,
+# omission/staleness rule, reworded honesty rules, an agentic paragraph, the
+# word ban), roughly doubling it. The sweep tested the full contract only;
+# whether the examples help a register-adaptive file, or cost it the
+# adaptivity, is unmeasured.
 CEILINGS = {
-    "shannon-daily.md": 340,
-    "shannon-project.md": 1050,
+    "shannon-daily.md": 700,
+    "shannon-project.md": 1075,
 }
 
 
