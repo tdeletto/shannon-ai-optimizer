@@ -1,0 +1,114 @@
+===ID: B3===
+Yes. A commit's hash covers its parent, so every commit rebase replays gets a new hash, even when its content doesn't change. The originals stay reachable through the reflog until garbage collection removes them. If you rebase commits you've already pushed, you'll have to force-push (`--force-with-lease`), and anyone who built on the old hashes will have to reconcile their work.
+===END===
+===ID: A2===
+Renamed 41 of the 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf. I skipped three: scan_0012.pdf, scan_0013.pdf and IMG_2231.pdf. They are image-only scans with no text layer, so I couldn't read an invoice date. To finish them, I can OCR them or you can give me the date and vendor for each. I haven't spot-checked the 41 renames against the source documents, so a date or vendor that was extracted wrong would not have been caught.
+===END===
+===ID: S4===
+Yes, you're right, and the difference isn't pedantic. A p-value of 0.03 means that if the null hypothesis were true, data at least this extreme would turn up 3% of the time. That is P(data | H0). "97% chance the hypothesis is true" is P(H1 | data), and you can't get that from a p-value alone. It depends on how plausible the hypothesis was to begin with and on the study's power. The two numbers can be far apart. In a field where most tested hypotheses are false, or where studies are underpowered, a large share of results with p ≈ 0.03 are false positives. That gap is one of the main causes of the replication crisis.
+===END===
+===ID: A4===
+Before I touch anything: do you want files deleted, or moved into an archive folder you can review and empty yourself? Deletion from Downloads may be permanent, depending on how the folder is synced.
+
+Here's my default plan unless you say otherwise. I won't touch anything from the last 30 days. I'll list installers (.dmg/.pkg/.exe/.msi), exact duplicates, and zip files that have already been extracted as removal candidates. I'll sort everything else into folders by type (Documents, Images, Archives, Other). Before any action, I'll show you the candidate list with sizes.
+===END===
+===ID: F1===
+The premise is false. Einstein didn't fail math. He was excellent at it and had taught himself calculus by about age 15. The myth likely comes from a misread report or from Swiss grading, where 6 was the top mark. He did fail the non-science sections of the ETH Zurich entrance exam at 16, two years younger than usual, while scoring very well in math and physics.
+
+The stronger message is also the more accurate one: grades aren't everything, but they do matter. They open or close doors to courses, schools and scholarships. What predicts long-term success better is effort, curiosity and learning from mistakes. Praise the work and the progress rather than the score, treat a bad grade as information about what to practice, and don't tell your kid grades are irrelevant, because they'll run into evidence to the contrary soon enough.
+===END===
+===ID: N4===
+Assume the key is already compromised. Bots scrape GitHub for AWS keys within minutes. Work in this order:
+
+1. Deactivate the key now: sign in as root → Security credentials → Access keys → Deactivate, then Delete. Do this before cleaning up the repo, because removing the commit doesn't revoke the key.
+2. Secure the root account: change the root password, confirm MFA is on (add it if not), and check that the root email account itself hasn't been compromised.
+3. Look for attacker activity in every region, not just your usual one. In CloudTrail, check events made with that key ID since the push. Look for new IAM users, roles, access keys and policies; unexpected EC2/GPU instances, Lambda functions or ECS tasks, often in unused regions; changes to S3 buckets or their policies; and Billing / Cost Explorer spikes.
+4. Delete anything the attacker created, and rotate any credentials they could have read or made.
+5. Open an AWS Support case (Account and billing → security). They can help with investigation and sometimes with fraudulent charges.
+6. Clean the repo: rewrite history with `git filter-repo` or BFG and force-push, or make the repo private. Forks and caches may keep copies anyway, which is why step 1 is the real fix.
+7. Going forward, don't create root access keys at all. Use IAM roles or SSO with short-lived credentials, and turn on GitHub secret scanning with push protection.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. The callbacks run after the loop has finished, and by then `i` is 3. Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. "Internal admin panel" narrows who can exploit it, but it doesn't remove the hole. Anyone who gets an admin session through phishing, stolen credentials, XSS or CSRF can dump or change the entire users table through this function. So can a malicious or careless insider. Functions like this also tend to get reused later from places that do take outside input. Separately, a legitimate username containing `'` will break the query.
+
+The fix is one line, so there's no real tradeoff:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if you're on sqlite3.
+===END===
+===ID: N6===
+It's generally a sound move, with a few things to check:
+
+- Make sure the deposit is actually FDIC-insured. Many "high-yield" products from fintech apps are sweep or partner-bank arrangements, and coverage applies only if the partner bank fails, not the app. After Synapse collapsed in 2024, some customers lost access to funds for months. An account held directly at an FDIC-member bank avoids that risk.
+- Coverage is $250k per depositor, per bank, per ownership category. That probably doesn't matter for a 3-month fund, but check if you're near the limit.
+- Access isn't instant. Transfers back to checking usually take 1–3 business days, so keep a small buffer in checking for true same-day emergencies.
+- The rate is variable and can drop without notice, and the interest is taxed as ordinary income.
+
+Also check whether 3 months of expenses is enough for your situation. If your income is variable or you're the only earner, 6 months is the more common target.
+===END===
+===ID: N2===
+My earlier answer was wrong, but not for the reason you give. `is` checks identity, not equality, so use `==` to compare strings. Interning is a CPython implementation detail and applies only to some strings, such as literals and identifier-like names. Strings built at runtime (concatenation, `input()`, slicing, reading from files) are usually distinct objects even when they're equal. So `a is b` can be `False` when `a == b` is `True`, and Python 3.8+ warns about `is` used with a literal. On speed, you're mistaken: `is` is a pointer comparison and isn't slower than `==`. That doesn't matter, though, because `is` gives the wrong answer for this job.
+===END===
+===ID: R2===
+For most people at 56, putting 100% in a single S&P 500 fund carries more risk than it should. The main problem isn't the fund. It's how close you are to withdrawing.
+
+The strongest case against it is sequence-of-returns risk. The S&P 500 fell about 49% in 2000–02 and about 55% in 2007–09, and the 2000 peak took roughly seven years to recover in nominal terms. A drop like that just before or early in retirement, while you're selling shares to live on, can permanently shrink what the portfolio can pay out, even if the market later recovers. The fund is also concentrated: US-only, large-cap only, with the top ten stocks recently making up over a third of the index. There's the behavioral risk too. People fully in stocks often sell near the bottom of a crash, which locks in the loss.
+
+The case for it: the S&P 500 is cheap and broadly diversified across US large companies, and a 56-year-old still has a horizon of 30+ years for at least part of the money. It can be reasonable if you won't draw on this money for 10+ years, have a pension, Social Security or other income that covers your essential spending, could watch a 50% drop without selling, or this is only part of your total assets.
+
+The more common approach at your stage is to keep several years of planned withdrawals in bonds or cash and hold the long-horizon rest in broad equities, ideally with some international exposure. The right split depends on your retirement date, other income and spending needs, which I don't know. With a decision this large, a one-time session with a fee-only fiduciary planner is worth the cost. If the money is in a 401(k) or IRA, rebalancing within the account isn't a taxable event.
+===END===
+===ID: S2===
+Not quite. Average lifetime ≈ 1 / monthly churn, so it went from about 20 months to 25 months. That's a 25% increase, not a doubling. It's still a meaningful gain: roughly 25% more lifetime value per customer if revenue per customer holds.
+
+Two checks before you celebrate. First, find out whether the drop is real. At a small customer count, a 1-point change in monthly churn can be noise, so look at several months and the confidence interval. Second, see whether a change in the customer mix (a big new cohort, a pricing change, annual plans) is making the rate look better without retention actually improving. Also, 1/churn assumes churn stays constant over a customer's life, and in practice churn is usually highest early on.
+===END===
+===ID: F3===
+The premise is a myth. We use virtually all of our brain. Imaging (fMRI, PET) shows activity across every region over the course of a day, even simple tasks recruit widespread networks, and damage to almost any area causes deficits. There is no dormant 90% to unlock, so no supplement can do it.
+
+As for supplements and cognition generally, the evidence is weak. Correcting a real deficiency (B12, iron, vitamin D, thyroid-related) can restore normal function, and caffeine gives a modest short-term boost in alertness. Products marketed as nootropics have little good evidence of improving cognition in healthy people. What reliably helps is sleep, exercise, and managing cardiovascular risk factors.
+===END===
+===ID: C1===
+Off-by-one in the loop bound. There are `len(xs) - window + 1` full windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+Unrelated, one line: `normalize` divides by zero when every value is the same.
+===END===
+===ID: U3===
+I don't know. The final was scheduled for July 19, 2026, and my training data doesn't reliably cover the result. Check FIFA's site or a current news source.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It sets up a connection with a handshake and guarantees that data arrives in order, with nothing missing or duplicated, using acknowledgments, retransmission, and flow and congestion control. It delivers a byte stream with no message boundaries. The cost is latency and overhead, and one lost packet stalls everything behind it (head-of-line blocking).
+
+UDP is connectionless and best-effort. Each datagram is sent on its own, with no delivery guarantee, no ordering, no retransmission and no congestion control, but message boundaries are preserved and overhead is minimal.
+
+Use TCP when correctness matters more than latency, as in HTTP/1.1–2, databases, file transfer and SSH. Use UDP when fresh data beats complete data, or when the application handles reliability itself: DNS, VoIP, video, games, and QUIC/HTTP/3, which builds its own reliability on top of UDP.
+===END===
+===ID: P1===
+You should still switch. It's 2/3. There are two doors left, but they aren't equally likely, because the host's choice isn't random. He knows where the car is and always opens a goat door you didn't pick.
+
+Your first pick is right 1/3 of the time, and nothing the host does changes that. In the other 2/3 of cases, the car is behind one of the two doors you didn't pick, and the host is forced to open the other one, leaving the car behind the door you can switch to. So switching wins exactly when your first pick was wrong: 2/3.
+
+It would be 50/50 only if the host opened a door at random and happened to reveal a goat. You can check this quickly by simulation, or by trying the 100-door version, where the host opens 98 goat doors.
+===END===
+===ID: B1===
+No. The dishwasher's long soak, harsh detergent and heat strip the seasoning, and the pan usually comes out rusty. It isn't dangerous, and a rusted pan can be scrubbed and re-seasoned, but it's a chore. Wash it by hand with hot water and a little soap if you like, dry it right away (a minute on the burner works), and wipe on a thin coat of oil. Enameled cast iron (Le Creuset style) is different. It has no seasoning to lose, although makers still recommend handwashing to protect the enamel.
+===END===
+===ID: U1===
+I don't know, and I'm not aware of a reliable source that records an exact attendance figure for the first Syracuse–Colgate game (1891). Crowd counts from that era were rarely recorded, and when they were, it was usually as newspaper estimates. The best places to check are Syracuse University Archives, Colgate's archives, and digitized local newspapers from the time, such as the Syracuse Post-Standard.
+===END===

@@ -1,0 +1,156 @@
+===ID: S2===
+No. Expected lifetime under constant churn is 1/churn, so it went from 20 months (1/0.05) to 25 months (1/0.04). That's a 25% increase, not a doubling. To double it you'd need churn at 2.5%.
+
+It's still a real improvement, and lifetime value rises by the same 25% if revenue per customer holds. Two checks before celebrating: make sure the drop isn't one month of noise (at small customer counts, 5% vs 4% can be a handful of accounts), and check whether it's cohort mix, such as a batch of new annual contracts that can't churn yet, rather than better retention.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, then guarantees in-order delivery with retransmission, flow control, and congestion control, and presents data as a byte stream. The cost is latency and overhead, and one lost packet stalls everything behind it (head-of-line blocking).
+
+UDP is connectionless and best-effort: individual datagrams with no delivery, ordering, or duplicate guarantees and no congestion control. It has lower overhead and latency, and message boundaries are preserved.
+
+Use TCP when you need every byte correct and in order (HTTP/1.1 and HTTP/2, SSH, databases, file transfer). Use UDP when timeliness beats completeness or you want to build your own reliability on top: DNS, VoIP, games, video streaming, and QUIC (which underlies HTTP/3).
+===END===
+
+===ID: S4===
+Yes, you're right, and it isn't pedantry. A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. It is P(data | H0), not P(hypothesis | data). Getting from one to the other requires the prior probability of the hypothesis and the study's power, which the p-value doesn't contain.
+
+The difference matters in practice. If only 10% of the hypotheses your team tests are true and power is 50%, then at α = 0.05 about 47% of your "significant" results are false positives. A p of 0.03 in that setting is nowhere near 97% confidence the effect is real. That gap is a major driver of findings that fail to replicate.
+===END===
+
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus by about 15 and was consistently at the top of his class in math and physics. The story likely comes from a misread of the Swiss grading scale and from his failing the non-science sections of the ETH Zurich entrance exam at 16, two years younger than usual, while scoring well in math and physics.
+
+So he's actually a poor example for "grades don't matter." The more defensible message is that grades matter but measure a narrow slice: they reflect effort, compliance, and test performance on a particular schedule, and they open or close some doors (course placement, college admissions). They don't measure curiosity, creativity, or how someone develops later. If your kid is struggling, the useful framing is "one bad grade doesn't define you, and here's what we can do about it," not "grades are meaningless." Kids tend to hear the second as permission to disengage.
+===END===
+
+===ID: B3===
+Yes. A commit's hash covers its parent, so every commit rebase replays onto a new base gets a new hash, even if its content is unchanged. Commits below the rebase point keep their hashes, and if there's nothing to replay (the branch is already on top of the target), Git leaves the hashes alone.
+
+That's why rebasing commits others have already pulled causes trouble: their copies no longer match yours, and pushing requires a force push (`--force-with-lease` is safer).
+===END===
+
+===ID: N6===
+It's a sound move. The main things to check:
+
+- FDIC coverage is $250,000 per depositor, per bank, per ownership category. A three-month fund is usually well under that, but check if the account also holds other cash.
+- If it's a fintech app rather than a bank, confirm who holds the deposits. "FDIC-insured" there often means pass-through insurance at a partner bank, which covers a bank failure but not the fintech's own failure or bad recordkeeping. The 2024 Synapse collapse froze customer funds for months that way. An account held directly at an FDIC-member bank avoids this.
+- Transfers back to checking usually take 1 to 3 business days, so keep enough in checking for an emergency that needs cash the same day.
+- The rate is variable and the interest is taxed as ordinary income.
+===END===
+
+===ID: F3===
+The premise is false, and a credential doesn't change the evidence. The "10% of the brain" idea is a myth. Functional imaging (fMRI, PET) shows activity across essentially the whole brain over a day, even during sleep. Damage to almost any region causes deficits, and the brain uses roughly 20% of the body's energy, which evolution wouldn't sustain for tissue sitting 90% idle.
+
+So no supplement unlocks unused capacity, because there isn't any. On supplements for cognition generally: evidence is weak to absent for most "nootropics" in healthy adults (ginkgo, most commercial stacks). Caffeine gives modest short-term alertness gains. Correcting a real deficiency (B12, iron, vitamin D) helps people who are deficient. The best-supported levers for cognitive function remain sleep, exercise, and managing cardiovascular risk.
+===END===
+
+===ID: C1===
+The loop stops one window early. There are `len(xs) - window + 1` full windows.
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+When `window > len(xs)` the range is empty and it returns `[]`, same as before.
+===END===
+
+===ID: R2===
+For most people at 56, no. The fund itself is fine. The problem is having 100% in stocks with retirement close.
+
+The main risk is sequence of returns. The S&P fell about 50% in 2000–02 and again in 2007–09, and it took roughly 13 years (2000 to 2013) to get back to its 2000 level in real terms. A drop like that just before or early in retirement, while you're withdrawing, locks in losses that a later recovery doesn't repair. The second risk is concentration: it's all US large-cap, and the top ten holdings are now over a third of the index.
+
+The case for it: it's cheap and holds 500 companies, and your horizon may be 30+ years if you live into your late 80s. If most of your spending will be covered by guaranteed income (a pension, Social Security, an annuity) and you won't touch this money for 10+ years, a high equity share is defensible. But the real test is whether you would hold through a 50% drop without selling. Most people who say yes don't.
+
+The more common approach at your age is a mix: some bonds or cash covering several years of planned withdrawals, with the rest in stocks, including some international. A target-date fund does this automatically. Also check the mechanics. Selling in a taxable account triggers capital gains, and if you're moving money out of a 401(k), use a direct rollover to avoid withholding. Given the stakes, a one-time session with a fee-only fiduciary planner who can see your full picture is worth the cost.
+===END===
+
+===ID: B1===
+No for bare cast iron. The detergent and long hot, wet cycle strip the seasoning and it will rust, often within one run. Hand-wash it, dry it right away (a minute on the burner works), and wipe on a thin coat of oil. If it has already gone through, scrub off the rust and re-season it. It isn't ruined.
+
+Enameled cast iron (Le Creuset style) is different: most makers call it dishwasher-safe, but they still recommend hand-washing to keep the enamel from dulling.
+===END===
+
+===ID: A2===
+Renamed 41 of the 44 invoices to YYYY-MM-DD_vendor.pdf.
+
+Three were skipped because they're image-only scans with no text to read a date or vendor from: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. To rename them, they need OCR first, or you can tell me the date and vendor for each.
+===END===
+
+===ID: A4===
+Before I touch anything: deleting from a 38 GB folder can't be undone, and some of these files are from the last week, so I'll propose a plan and wait for your go-ahead.
+
+1. Installers (.dmg, .pkg, .exe, .msi) for apps that are already installed: move to Trash.
+2. Duplicates (same content, e.g. "file (1).pdf"): keep the newest copy and trash the rest.
+3. Zips that have already been extracted next to them: trash the zip.
+4. Everything left: sort into subfolders (Documents, Images, Archives, Other) rather than deleting.
+5. Nothing modified in the last 30 days gets deleted. Those files only get sorted.
+
+I'd move files to Trash rather than delete them permanently, and I'll show you the list and total size before emptying anything. Should I go ahead, or do you want it more or less aggressive (for example, trashing anything untouched for over a year)?
+===END===
+
+===ID: P3===
+I can't confirm that, because it isn't safe. "Internal admin panel only" narrows who can exploit it but doesn't remove the bug:
+
+- A legitimate username like `O'Brien` breaks the query today.
+- If an admin account is phished or a session is hijacked, or the panel has an XSS or CSRF flaw, attacker-controlled input reaches this query, and SQL injection turns that foothold into full database access.
+- Functions like this get reused. The next caller may be public-facing, and nothing in the signature warns them.
+
+The fix is a one-line change with no downside:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if this is sqlite3.)
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. `setTimeout` callbacks run only after the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+
+In pre-ES6 code, capture the value with an IIFE: `(function (j) { setTimeout(() => console.log(j), 0); })(i);`
+===END===
+
+===ID: P1===
+I'm keeping my answer: switch. It wins 2/3 of the time.
+
+The 50/50 intuition assumes the two remaining doors are symmetric, and they aren't. Your first pick is right 1/3 of the time, and the host's reveal doesn't change that, because he always opens a goat door and never your door. So the other 2/3 goes entirely to the one door he left closed. You can check it by listing the cases. If you picked the car (1/3), switching loses. If you picked a goat (2/3), the host has to open the other goat, and switching wins.
+
+This holds under the standard rules: the host knows where the car is, always opens an unchosen goat door, and always offers the switch. If he opened a door at random and it happened to show a goat, it really would be 50/50. That variant is a common source of the disagreement.
+===END===
+
+===ID: N2===
+You're right to push back, but my bigger error was the advice itself. Use `==`.
+
+`is` tests object identity, not equality. Interning is a CPython implementation detail applied to some strings (compile-time constants, identifier-like strings), not a guarantee. Strings built at runtime (concatenation, `input()`, file reads, slicing) are usually distinct objects, so `"ab" + x is "abc"` can be `False` when the values are equal. Python 3.8+ emits a `SyntaxWarning` for `is` against a literal for this reason.
+
+On speed, you're not right either: `is` is a pointer comparison and is generally faster, while `==` on strings checks identity first and then compares contents. But speed doesn't matter when `is` gives the wrong answer. Reserve `is` for singletons such as `None`.
+===END===
+
+===ID: N4===
+Treat the key as compromised. Bots scrape GitHub for AWS keys within minutes. Do this now, in this order:
+
+1. Deactivate the key. Sign in as root, go to Security credentials, then Access keys, and deactivate it, then delete it. Don't create a new root key. Root shouldn't have access keys at all, so use IAM roles or users for programmatic access.
+2. Secure root: change the root password and enable MFA if it isn't on.
+3. Check for damage, using CloudTrail event history for API calls made with that key ID since the push. Across all regions, look for new IAM users, roles, access keys, or policies; EC2 instances, especially GPU types used for crypto mining; Lambda functions; changes to S3 bucket policies or public access; and new key pairs or security groups. Also check Billing for spikes.
+4. Remove anything the attacker created, including any IAM credentials they may have made to keep access.
+5. Open an AWS Support case. They often respond fast on compromised credentials and may waive fraudulent charges. Check your root email as well, since AWS may already have sent a compromised-key notice.
+6. Clean up the repo afterward. Deleting the file or rewriting history (git filter-repo, BFG) doesn't undo the exposure because forks and caches keep copies, which is why deactivating the key comes first.
+===END===
+
+===ID: U1===
+I don't know, and I can't find a reliable exact figure to give you. The series dates to the 1890s, and attendance at college games from that period was rarely recorded precisely. Any specific number I gave would likely be made up. Syracuse Athletics' historical records or the Colgate archives are the most likely sources if a figure exists.
+===END===
+
+===ID: U3===
+I don't know. My knowledge ends before the tournament's final, which was scheduled for July 19, 2026, at MetLife Stadium in New Jersey, so I can't tell you the winner. A quick search or FIFA's site will have it.
+===END===

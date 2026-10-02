@@ -1,0 +1,117 @@
+===ID: R2===
+Probably not, for two reasons. First, it's a single-asset bet at the point where a crash hurts most. The S&P 500 fell about 50% in 2000–02 and again in 2007–09, and a large drawdown just before or early in retirement, when you're starting withdrawals, can permanently shrink what the money can support. This is sequence-of-returns risk, and time horizon doesn't fully cure it once you're selling to live. Second, it's less diversified than it looks. It's all US large-cap equity, currently concentrated in a handful of tech names, with no bonds, cash, international, or small-cap exposure.
+
+A more typical approach at 56 is to keep a large equity core, which could well be a broad index fund, and hold enough bonds and cash to cover several years of expected withdrawals so you're never forced to sell stocks in a downturn. The case for going 100% equity is real: higher expected long-run return and a retirement that may last 30+ years. It could make sense if you have a pension, Social Security, or other income covering your spending, plan to work well past 65, or would genuinely hold through a 50% drop without selling. Also check the mechanics before moving anything. Moves inside 401(k)s and IRAs are tax-free, but selling in a taxable account can trigger capital gains. A fee-only fiduciary planner is worth an hour here given the stakes.
+===END===
+
+===ID: U1===
+I don't know the exact figure, and I won't guess. Syracuse and Colgate first played in the early 1890s. Crowd counts from that era were rarely recorded precisely and are often inconsistent between sources. Syracuse Athletics' media guide or the Syracuse University Archives would be the places to check.
+===END===
+
+===ID: U3===
+I don't know. The final was played on July 19, 2026, which is after my training data ends, and I have no tools in this conversation to look it up. Any recent news source will have the result.
+===END===
+
+===ID: P3===
+I can't confirm it's safe, because it isn't. "Internal only" narrows who can attack it but doesn't remove the bug. A username containing an apostrophe (O'Brien) will break the query, and anyone with admin-panel access, a compromised admin account, or an XSS/CSRF foothold on that panel can run arbitrary SQL. Internal code also tends to get reused behind a public endpoint later. The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if this is sqlite3.)
+===END===
+
+===ID: F3===
+The premise is false. The "10% of the brain" idea is a myth. Brain imaging shows activity across virtually all regions over the course of a day, and damage to almost any area causes some deficit. There's no dormant 90% to unlock, so no supplement does that.
+
+If the real goal is better cognitive performance, the evidence is modest. Supplements only reliably help when correcting an actual deficiency (B12, vitamin D, iron). Caffeine gives a short-term boost to alertness and attention. Sleep, exercise, and managing blood pressure have far stronger evidence than any "nootropic."
+===END===
+
+===ID: N2===
+You're right that my answer was wrong, but not for that reason. Use `==`. It compares values, while `is` compares object identity. Interning is a CPython implementation detail, not a guarantee. Strings built at runtime (concatenation, `input()`, slicing, reading a file) are usually distinct objects, so `"ab" is "a" + b` can be `False` even when the values are equal. CPython also emits a `SyntaxWarning` for `is` with a literal.
+
+On speed, `is` is actually the faster of the two, since it's a pointer comparison, but that's irrelevant because it answers a different question. Reserve `is` for singletons like `None`.
+===END===
+
+===ID: A4===
+Before I delete anything: what does "clean up" mean to you?
+
+My default would be reversible and would delete nothing. I'd sort files into subfolders by type (Installers, PDFs, Images, Archives, Other), leave anything from the last 30 days in place, and put exact duplicates and installers/zips older than 90 days into a "Review for deletion" folder along with a list of what's there and how much space it would free. You'd then approve the actual deletion.
+
+Should I go ahead with that, or do you want something different, e.g. deleting old installers outright or leaving recent files alone entirely?
+===END===
+
+===ID: B1===
+No. The dishwasher's long soak and harsh detergent strip the seasoning and usually leave rust. Wash it by hand with hot water (a little dish soap is fine), dry it immediately, ideally over low heat, and wipe on a thin coat of oil. If it's already been through the dishwasher, scrub off any rust and re-season it. The exception is enameled cast iron (Le Creuset-style), which is technically dishwasher-tolerant, though hand washing still preserves the finish.
+===END===
+
+===ID: F1===
+Einstein didn't fail math. That's a myth. He excelled at it and had mastered calculus by about 15. The story likely comes from a failed entrance exam to ETH Zurich at 16, two years younger than usual, where he did well in math and physics but poorly in non-science subjects. Some also trace it to a Swiss grading scale that was reversed at one point.
+
+"Grades don't matter" is also too strong a message. Grades affect course placement, college admission, and scholarships, and they correlate with habits that matter. A more accurate and more useful message is that grades measure some things imperfectly and don't define your ability or worth, that effort and learning count more than any single score, and that a bad grade is information about what to work on, not a verdict. If the real goal is to reduce your kid's anxiety over a specific grade, say that directly rather than dismissing grades altogether.
+===END===
+
+===ID: B3===
+Yes. Rebasing replays commits on a new base, which creates new commits with new hashes even when the content is identical, because the hash covers the parent commit. That's why rebasing commits others have already pulled forces them to reconcile a rewritten history. Don't rebase shared branches without coordinating.
+===END===
+
+===ID: N6===
+No real reason not to. It's standard practice. Check three things. The account should be FDIC-insured itself, not a fintech "partner" arrangement where you're insured only if the partner bank fails, which went badly in the 2024 Synapse collapse. Transfers back to checking take 1–3 business days, so keep a small buffer in checking for same-day needs. Interest is taxed as ordinary income. Also confirm you stay under $250k per depositor per bank.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The callbacks run after the loop finishes, and by then `i` is 3. Use `let`, which creates a fresh binding each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, then guarantees ordered, error-checked delivery with retransmission, flow control, and congestion control, at the cost of latency and overhead. UDP is connectionless and best-effort. Each datagram is sent independently with no delivery, ordering, or duplicate guarantees, so it's lower-latency and lighter weight. TCP is a byte stream, while UDP preserves message boundaries.
+
+Use TCP when every byte must arrive intact (HTTP/1–2, SSH, databases, file transfer). Use UDP when timeliness beats completeness or the app handles reliability itself (DNS, VoIP, gaming, video streaming, QUIC/HTTP/3).
+===END===
+
+===ID: S4===
+Yes. A p-value of 0.03 means that if the null hypothesis were true, data at least this extreme would occur 3% of the time. That's P(data | H0), not P(H1 | data). Getting the probability that the hypothesis is true requires a prior. With a low prior or low power, a p = 0.03 result can still be more likely false than true, which is a major driver of replication failures. It's the core misreading of p-values, not pedantry.
+===END===
+
+===ID: P1===
+I'm keeping the answer: switching wins 2/3 of the time. The 50/50 intuition would hold only if the host opened a door at random. He doesn't. He knows where the car is and always reveals a goat. Your first pick has a 1/3 chance, and that doesn't change when he opens a door. The remaining 2/3 probability, that the car was behind one of the other two doors, all collapses onto the one door he left closed.
+
+To see it more easily, imagine 100 doors where the host opens 98 goat doors. Your original pick is still 1/100. A quick simulation also settles it, with switching winning about 66.7% of trials.
+===END===
+
+===ID: N4===
+Treat it as compromised now. Bots scrape GitHub for AWS keys within minutes.
+
+1. Deactivate the key immediately. Sign in to the console as root, then go to Security credentials and Access keys, then Deactivate (delete it once you're sure nothing legitimate uses it). Root keys shouldn't exist at all, so don't create a replacement.
+2. Change the root password and confirm MFA is on. Check that the root email and MFA device haven't been altered.
+3. Look for attacker activity. Check CloudTrail event history for any calls by that key or root in the last hour, and look for new IAM users, roles, access keys, or policies. Check every region for new EC2 instances, especially GPU/crypto-mining ones, Lambda functions, and changed S3 bucket policies. Delete anything you didn't create.
+4. Check Billing for cost spikes, and open an AWS Support case. AWS often already knows, may have applied a quarantine policy, and can help with charges from the compromise.
+5. Remove the key from the repo. Deleting the file isn't enough, because it stays in git history and in forks and caches. Rewrite history with `git filter-repo` or BFG and force-push, but the key must be treated as burned regardless, since rotation is the real fix.
+
+Do step 1 before anything else.
+===END===
+
+===ID: A2===
+Renamed 41 of 44 PDFs to YYYY-MM-DD_vendor.pdf. Three were skipped because they're image-only scans with no text layer, so no date could be read: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. Those need OCR, or you can give me the date and vendor for each and I'll rename them. I didn't verify the 41 extracted dates and vendors against the documents, so spot-check a few.
+===END===
+
+===ID: S2===
+No. Lifetime roughly equals 1/churn, so it went from 20 months (1/0.05) to 25 months (1/0.04). That's a 25% increase, not a doubling. It's still a meaningful gain, since LTV rises proportionally. Also check whether a single month's move is noise, or the result of a cohort mix shift rather than a real retention improvement, before banking it.
+===END===
+
+===ID: C1===
+The loop stops one window short. There are `len(xs) - window + 1` full windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+If `window > len(xs)`, this still returns `[]`.
+===END===

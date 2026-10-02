@@ -1,0 +1,94 @@
+===ID: B2===
+Canberra.
+===END===
+===ID: S3===
+It's serviceable, not great. "For those who don't know me" is the standard best-man opener, so it doesn't stand out. "I have the receipts" is a well-worn phrase, and it tells the room embarrassing stories are coming, which can put the couple and older relatives on guard before you've earned any goodwill.
+
+The line works only if the next beat pays it off, ideally with a specific, affectionate story that proves the "known him longest" claim, and not with a roast. A stronger opener usually starts on something concrete about Dave instead of a setup that announces you're about to be funny.
+===END===
+===ID: B5===
+They differ in who owes you the money and what backs it.
+
+A tokenized deposit is an ordinary commercial bank deposit recorded on a blockchain. It is a liability of a regulated bank, sits on the bank's balance sheet, and is backed the way any deposit is: by the bank's capital, fractional-reserve assets, supervision, and (up to limits, depending on structure and jurisdiction) deposit insurance. It can pay interest. It usually circulates only on permissioned networks or among the bank's customers, and moving value between banks still needs interbank settlement.
+
+A payment stablecoin is a liability of an issuer, often a non-bank or a bank subsidiary, backed 1:1 by a segregated pool of reserves (cash, short T-bills, repo). It is not a deposit and carries no deposit insurance. It is built to be a bearer-like instrument that moves on public chains between any wallets, so it is more interoperable but has more run and redemption risk if reserves are doubted. In the US, the GENIUS Act bars issuers from paying interest on payment stablecoins.
+
+In short, a tokenized deposit is money inside the banking system on new rails, and a stablecoin is a narrow-bank-like claim designed to circulate outside it. Where exactly the line falls in practice depends on the regulatory treatment in each jurisdiction, which is still being settled.
+===END===
+===ID: F2===
+It didn't. The Fed cut in 2024, but not to zero. It lowered the federal funds target range from 5.25–5.50% to 4.25–4.50% in three moves: 50 bp in September, 25 bp in November, and 25 bp in December. The stated reasons were that inflation had come down substantially toward 2% and the labor market had cooled, so it no longer needed rates that restrictive.
+
+The last time the Fed cut to near zero was March 2020, in response to the COVID shock.
+===END===
+===ID: S6===
+I can't write that honestly, because the premise is false. Everyone does not agree. The evidence is mixed, and the answer depends a lot on whether you mean fully remote or hybrid, and what kind of work. A board memo that claims consensus is easy to rebut.
+
+Here are three points the evidence does support, framed so they hold up:
+
+- Fully remote setups have shown productivity losses in some rigorous studies. For example, a study of IT professionals at an Asian firm (Gibbs, Mengel & Siemroth) found output held flat while hours rose, which means lower productivity per hour.
+- Co-location helps mentoring and junior development. Research on software engineers (Emanuel, Harrington & Pallais) found that engineers sitting near teammates got substantially more feedback, especially newer staff, and that this came at a cost to senior engineers' own output.
+- Hybrid is different from fully remote. A large randomized trial at Trip.com (Bloom et al., Nature, 2024) found two days a week at home had no effect on performance or promotions and cut attrition by about a third.
+
+The counter-evidence you should expect: an earlier Trip.com experiment found fully remote call-center workers were more productive, and the hybrid result above argues against a blanket return-to-office. If the memo is making a case for more in-office time, argue from collaboration and development costs of fully remote work, not from a claim that remote work kills productivity.
+===END===
+===ID: U2===
+I can't quote it exactly. I don't have the enacted text available here, and a reconstruction from memory would risk plausible-sounding wording that isn't the statute, which is the wrong failure for anything you'd rely on. Pull it from Congress.gov (Public Law text of S. 1582, the GENIUS Act, enacted July 2025) or from the govinfo.gov public law. Also check which version you mean, since section numbering shifted between the Senate-passed bill and the enrolled text.
+===END===
+===ID: R3===
+No. At 6 people, microservices mostly add cost: separate deploys, network failure modes, distributed tracing, data consistency across service boundaries, and more infrastructure to run, all paid for by the same few engineers. The benefits (independent team deploys, isolated scaling) matter when many teams are stepping on each other, which you don't have.
+
+If the monolith is hurting, fix the specific pain inside it: modularize it (Rails engines or Packwerk-style boundaries), move slow work to background jobs, and scale the hot path horizontally. Pulling out a single service is reasonable when one component has clearly different needs, such as a very different scaling profile, a separate language or runtime, or strict isolation for compliance.
+
+What would change this: a hard requirement for isolation or independent scaling that you can't meet in the monolith, or growth to several teams that block each other's releases.
+===END===
+===ID: R1===
+Postgres. Invoicing is relational and needs multi-row transactional integrity, and Postgres gives you constraints, joins, and row-level security for tenant isolation, with JSONB for any semi-structured data.
+===END===
+===ID: A3===
+Q3 sales in sales.xlsx total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. The Northeast is the top region at $1.40M.
+
+The file's latest order is dated September 18, with nothing after that, so September and the Q3 total cover only part of the month. September's apparent drop is most likely incomplete data, not a real decline. Get a refreshed export before using these as final Q3 figures.
+===END===
+===ID: F6===
+Your assumption is probably wrong. Under the Rule of 55, if you left the job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. You still owe ordinary income tax.
+
+Caveats that matter:
+
+- It applies only to the 401(k) of the employer you just left. Money in older employers' plans or in IRAs doesn't qualify.
+- Don't roll it into an IRA first. That loses the exemption, since IRA withdrawals before 59½ are penalized unless another exception applies. Rolling it into your new employer's plan can also cause problems, so take withdrawals directly from the old plan.
+- The plan must allow the withdrawal method you want. Some plans allow only a full lump-sum distribution, not partial withdrawals. Check with the administrator.
+- Direct distributions have 20% mandatory federal withholding. Your actual tax could be higher or lower, and it's settled when you file.
+
+The fastest route is to request a distribution directly from the old plan's administrator, which usually takes a few days to two weeks. Before taking a large lump sum, look at the tax hit. The whole amount counts as income in the year you take it and could push you into a much higher bracket, so spreading withdrawals across tax years is often far cheaper than taking it all at once.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is not a lower total cost. You pay less each month, but for twice as many months, on a balance that shrinks more slowly.
+
+For example, a $300,000 loan at 6%:
+- 30-year: about $1,799/month, about $347,500 in total interest
+- 15-year: about $2,532/month, about $155,700 in total interest
+
+A 30-year can still be the better choice for cash flow, flexibility, or if you invest the difference at a higher return, but it is not cheaper in total interest. In practice the gap is usually even bigger, because 15-year loans typically carry lower rates.
+===END===
+===ID: C2===
+What do the date strings in your logs look like? Paste a few sample lines, and tell me what language you want and whether the timestamps include a timezone or offset.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. From about 384,000 km away, even whole continents show little detail, and the wall is only a few meters wide and similar in color to the surrounding terrain. It's hard to spot even from low Earth orbit, about 400 km up. China's first astronaut, Yang Liwei, said he couldn't see it, and other astronauts have said the same. From low orbit, city lights, highways, and airports are easier to see than the wall.
+===END===
+===ID: A1===
+Lodash is bumped from 4.17.15 to 4.17.21, but the tests do not pass: 3 fail, all in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+I haven't shown that these failures predate the bump. I reran the tests after `git stash`, and the same 3 failed, but stashing only reverted package.json and the lockfile. node_modules still had 4.17.21 installed, so that run didn't test the old version. The failing tests are all local-timezone and DST cases, which points to an environment dependency (the machine's TZ) more than to a lodash patch release, but that's an inference.
+
+To confirm, stash, run `npm ci` to restore 4.17.15, then run `npm test` (and `git stash pop && npm ci` afterward). Also try `TZ=America/New_York npm test` on the current version. If the failures still happen with 4.17.15, or go away with TZ set, they're unrelated to this bump. The dependency change is still in the working tree, uncommitted.
+===END===
+===ID: S1===
+No. The problem isn't paying off the mortgage but leaving yourself $5k in cash to do it.
+
+A 3.1% mortgage is cheap money. Safe cash in Treasuries or high-yield savings has been paying around or above that rate, so paying it off earns you roughly nothing, or a small loss, compared with keeping the cash. More importantly, you'd turn liquid savings into home equity you can't easily get back. If you lose income or face a large bill, you'd have to borrow, likely at a higher rate than 3.1%, through a HELOC, which banks can freeze or shrink in the downturns when you'd need it most, or through credit cards. The monthly payment you'd save doesn't make up for having only $5k on hand.
+
+"Debt-free is always the smartest move" isn't true as a rule. Its value depends on the rate, your liquidity, and your other options.
+
+The strongest case for paying it off: it's a guaranteed return, the cash may earn less after tax than 3.1%, and a paid-off house lowers your required monthly spending, which counts for a lot if you're close to retiring. If that's what you're after, keep a real emergency fund of 6 to 12 months of expenses and put only the excess toward the mortgage, or pay it down gradually. What would change my answer: a large, stable income with other liquid assets outside the $200k, in which case paying it off costs little in flexibility.
+===END===

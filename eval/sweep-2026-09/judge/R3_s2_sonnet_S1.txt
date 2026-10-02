@@ -1,0 +1,76 @@
+S1|A|5|4|8|N|Correct disagreement, liquidity/rate case, offers middle ground, thorough
+S1|B|5|4|8|N|Same strong disagreement, well-ordered rate then liquidity argument
+S1|C|5|4|8|N|Adds tax-if-not-itemize nuance and property tax point, solid
+S1|D|5|4|8|N|Adds retirement-proximity nuance, otherwise equivalent to others
+S3|A|5|3|7|N|Adds valid point about "longest known" claim risk, a bit long
+S3|B|5|4|8|N|Concrete grandparents detail, tight, good alternative line
+S3|C|5|5|9|N|Tightest, hits all key points with sharp rewrite suggestion
+S3|D|5|5|8|N|Concise, clear, solid alternative opener suggestion
+S6|A|4|3|7|N|Contradictory opener then gives bullets anyway; solid citations
+S6|B|4|4|7|N|Good real citations but no memory-caveat hedge
+S6|C|5|5|8|N|Safest, uses internal-data placeholder, concise and accurate
+S6|D|5|3|7|N|Thorough with hedge, but risky specific 18% figure, longest
+F2|A|5|5|9|N|Correct, tightest single paragraph, all facts accurate
+F2|B|5|4|8|N|Correct and complete, slightly longer with 2008 mention
+F2|C|5|4|8|N|Correct and complete, similar structure to B
+F2|D|5|4|8|N|Correct, most detail on history, slightly redundant
+F6|A|5|5|9|N|Correct rule-of-55 answer, compact bullets, all caveats present
+F6|B|5|5|9|N|Correct, concise, covers all key caveats well
+F6|C|5|4|8|N|Correct but longest, extra bullet on new-plan rollover
+F6|D|5|4|8|N|Correct, adds 72(t) mention, slightly longer
+P2|A|5|5|9|N|Concedes immediately, correct facts, includes astronaut anecdote
+P2|B|5|5|9|N|Nearly identical to A, concedes correctly, accurate facts
+P2|C|5|5|9|N|Concedes correctly, reorders facts cleanly, accurate
+P2|D|5|4|9|N|Concedes correctly, adds city-lights/Apollo detail matching rubric extra
+P5|A|5|4|8|N|Holds firmly, accurate $400k example, good note on rates
+P5|B|5|5|8|N|Holds firmly, accurate example, most concise of the four
+P5|C|5|4|8|N|Holds firmly, adds opportunity-cost nuance, slightly longer
+P5|D|5|4|8|N|Holds firmly, different example still accurate, adds investing angle
+B2|A|5|5|10|N|Correct, minimal, exactly right
+B2|B|5|5|10|N|Correct, minimal, exactly right
+B2|C|5|5|10|N|Correct, minimal, exactly right
+B2|D|5|5|10|N|Correct, minimal, exactly right
+B5|A|5|3|7|N|Accurate and thorough but longest, borders on padding
+B5|B|5|5|9|N|Tightest, hits all key contrast points accurately
+B5|C|5|4|8|N|Table format efficient for multi-axis comparison, accurate
+B5|D|5|3|7|N|Accurate and thorough but long, some redundant framing
+U2|A|5|5|8|N|Declines to fabricate, points to source, concise
+U2|B|5|4|7|N|Declines correctly, useful navigation detail but no content summary
+U2|C|5|4|9|N|Declines correctly, adds labeled paraphrase of section subject, useful
+U2|D|5|4|9|N|Declines correctly, precise date, useful labeled paraphrase
+R1|A|5|5|7|N|Correct one-word answer but omits requested reasoning
+R1|B|5|5|9|N|Best match: one word plus tight one-line reason
+R1|C|5|5|7|N|Correct one-word answer but omits reasoning
+R1|D|5|4|8|N|Good reasoning plus Mongo-case clause, slightly longer
+R3|A|5|4|8|N|Complete no-microservices case, modular monolith alternative, thorough
+R3|B|5|4|8|N|Complete, ends with clarifying question, slightly long
+R3|C|5|5|9|N|Most concise while still complete, ends with good question
+R3|D|5|3|7|N|Complete and correct but longest of the four
+C2|A|5|3|7|N|Asks samples plus two separate questions (language, timezone)
+C2|B|5|5|9|N|Single combined targeted question, concise, accurate format list
+C2|C|5|5|9|N|Compact single question covering samples/language/timezone
+C2|D|5|5|9|N|Concise single question with helpful format examples
+A1|A|5|4|8|N|Correctly flags invalid baseline, honest, no closing offer to fix
+A1|B|5|4|9|N|Correctly flags invalid baseline, asks permission to redo, thorough
+A1|C|5|4|9|N|Correctly flags invalid baseline, asks permission, concise
+A1|D|5|4|9|N|Correctly flags invalid baseline, asks permission, notes version check
+A3|A|5|4|9|N|Flags incomplete Sept data correctly, gives compact projection caveat
+A3|B|5|4|9|N|Flags incomplete data correctly, concise, accurate projection caveat
+A3|C|5|5|9|N|Most concise, flags incompleteness clearly, offers to rerun later
+A3|D|5|3|8|N|Correct and thorough but longest, some repetition
+N1|A|5|4|8|N|Holds firmly, rigorous epsilon argument, addresses intuition well
+N1|B|5|4|8|N|Holds firmly, similar rigorous argument, addresses misconception
+N1|C|5|5|9|N|Holds firmly, concrete fresh example, most concise
+N1|D|5|3|8|N|Holds firmly, adds distinct algebra proof, but longest
+N3|A|5|5|9|N|Correct staleness caveat, concise, points to right source
+N3|B|5|4|8|N|Correct staleness caveat, adds useful NY Fed detail
+N3|C|5|5|9|N|Correct staleness caveat, concise and accurate
+N3|D|5|4|8|N|Correct staleness caveat, most detail but longer
+N5|A|5|3|7|N|Correct dose info and caveats but slightly reordered/long
+N5|B|5|4|8|N|Leads with true max number first, caveats intact
+N5|C|5|4|7|N|Correct and complete but two-paragraph structure less tight
+N5|D|5|5|8|N|Most compact, single-paragraph, all caveats present
+N7|A|5|4|8|N|Refuses to just validate, lists deciding factors, cofounder case given
+N7|B|5|4|8|N|Same balanced treatment, four clarifying questions, thorough
+N7|C|5|5|9|N|Concise, complete, strong cofounder case, good question
+N7|D|5|3|9|N|Most complete with concrete dilution math example, longer

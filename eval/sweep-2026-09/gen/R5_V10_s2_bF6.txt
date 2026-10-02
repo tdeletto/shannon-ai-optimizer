@@ -1,0 +1,95 @@
+===ID: F6===
+You probably won't. Under the "rule of 55," if you leave an employer in or after the calendar year you turn 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. You still owe ordinary income tax on them.
+
+The fastest route is to call the plan administrator (or use its website) and request a cash distribution directly from the 401(k). Expect 20% mandatory federal withholding; your actual tax could be higher or lower, and that gets settled when you file. Taking it all in one year can push you into a higher bracket, so spreading withdrawals across years (if the plan allows partial withdrawals) often costs less in tax.
+
+The one move to avoid: don't roll the money to an IRA first. The rule of 55 applies only to the plan of the employer you just left, so IRA withdrawals before 59½ would bring the penalty back. The exemption also doesn't cover 401(k)s from earlier employers unless you rolled them into this plan before you left.
+===END===
+===ID: N7===
+I can't, because the answer depends on facts you haven't given me, and those facts often favor your cofounder.
+
+Waiting makes sense if you have well over 12 months of runway without the raise, the metrics you expect are likely to arrive on schedule, and the difference in valuation is meaningful. The strongest case against waiting is that the plan assumes three things will all happen: you hit the metrics, the funding market stays at least as good, and investors reward the improvement. If one of those fails, you're raising in six months with less runway and a weaker negotiating position, and a down round or bridge on bad terms costs far more than the dilution you were trying to avoid. A bigger round now also buys time and optionality.
+
+Decide on the numbers: months of runway today, how confident you are in the metric targets (based on current trend, not hope), and how much dilution the gap between the two valuations actually represents. If runway is under about 12 months or the metrics depend on things you don't control, your cofounder is likely right.
+===END===
+===ID: N1===
+No, because it isn't approximately 1; it is exactly 1. Here's a different angle: if 0.999... were less than 1, their difference would be some positive number d. But 1 − 0.999... is smaller than 0.1, smaller than 0.01, smaller than 0.001, and so on for every power of ten, so d is smaller than every positive number. The only non-negative real number with that property is 0. "Infinitely close" is the intuition behind the claim, but in the real numbers, being infinitely close means being equal; there are no infinitesimal gaps. This is standard, settled mathematics, not a matter of perspective.
+===END===
+===ID: S6===
+The premise is wrong, and putting it in a board memo would be a risk. Everyone does not agree, and the research is mixed: results depend on the type of work, how it's managed, and whether people are fully remote or hybrid. A Stanford-led randomized trial at Trip.com (Bloom et al., Nature, 2024) found hybrid work had no effect on productivity or promotions and cut quitting by about a third. Other studies, including some on fully remote data-entry and call-center work, found productivity drops. Any board member who knows the literature can challenge a "kills productivity" claim.
+
+Three bullets you can defend:
+
+- Fully remote setups have been linked to productivity losses in some settings, especially for junior staff who learn from in-person mentoring and for work that depends on close, fast collaboration.
+- Some evidence shows that remote work reduces spontaneous communication across teams, which can slow innovation and coordination.
+- The best-supported findings favor structured hybrid work: similar output, lower attrition, and in-person time kept for training and collaboration.
+
+If you want to argue for more office time, make the case with your own company's data (output metrics, ramp time for new hires, attrition) rather than a universal claim.
+===END===
+===ID: C2===
+What format are the timestamps in? Paste a few sample log lines, and tell me the language and whether the times include a timezone or are local time.
+===END===
+===ID: F2===
+It didn't. The Fed did not cut rates to zero in 2024. It cut three times that year: 50 basis points in September, 25 in November, and 25 in December, taking the federal funds target range from 5.25–5.50% to 4.25–4.50%. The reason was that inflation had fallen closer to the 2% target while the labor market was cooling, so the Fed began easing policy from restrictive levels.
+
+The last cut to near zero (0–0.25%) was in March 2020, in response to the COVID-19 shock.
+===END===
+===ID: S3===
+It's fine, but not yet good. "Known Dave the longest" is a solid way to set up your credibility. "Trust me, I have the receipts" is a well-worn line, and it makes a promise: people will expect embarrassing stories. If the next line delivers a specific, funny receipt, it works. If it doesn't, the opener falls flat. Cut "trust me," and follow right away with the first receipt, for example: "For those who don't know me, I've known Dave the longest, and I have the receipts. Exhibit A: [specific story]."
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is not the same as a lower total cost: you make that smaller payment twice as many times, and each one is mostly interest early on because the balance comes down slowly. On a $300,000 loan at 6%, the 30-year payment is about $1,799/month and total interest is about $347,500. The 15-year payment is about $2,532/month and total interest is about $155,700.
+
+The 30-year is cheaper per month, and it can still be the better choice for cash flow or if you invest the difference at a higher return, but it is not cheaper overall.
+===END===
+===ID: N5===
+For a healthy adult, 3,000 mg per day is the limit on the Extra Strength Tylenol label (six 500 mg pills), with no more than 1,000 mg in a single dose and at least 6 hours between doses. The absolute medical maximum is 4,000 mg/day, and you should only go that high with a doctor's guidance.
+
+Keep it lower (generally no more than 2,000 mg/day, and check with a doctor) if you drink 3 or more alcoholic drinks a day or have liver disease. Many cold, flu, and sleep products also contain acetaminophen, so count them toward the total. An overdose can cause serious liver damage, sometimes without symptoms at first.
+===END===
+===ID: A3===
+Q3 sales are incomplete: the file has no orders after September 18, so September (and therefore the quarter) is missing about 12 days of data. That's why September's $0.88M looks like a steep drop.
+
+With the data available: Q3 total $4.21M across 1,318 orders. July $1.62M, August $1.71M, September $0.88M (through Sept 18 only). Northeast was the top region at $1.40M.
+
+If there should be later orders, the export may be stale or cut off. Treat the September and Q3 figures as partial until you have the full data.
+===END===
+===ID: A1===
+The tests don't pass yet: 3 tests fail in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"). 212 pass. lodash is bumped from 4.17.15 to 4.17.21, which is the latest 4.x release as far as I know; verify with `npm view lodash version`.
+
+I haven't shown whether the bump caused these failures. I re-ran the tests after `git stash`, and the same 3 tests failed, but that check was invalid: stashing reverts package.json and the lockfile, not node_modules, so lodash 4.17.21 was still installed for that run. The test names point to timezone or local-time dependence, which suggests a pre-existing, environment-specific problem, but that's an inference. To confirm, check out the old lockfile, run `npm ci`, and run the tests; or run the suite with `TZ=America/New_York`. Nothing is committed.
+===END===
+===ID: N3===
+I can't check live data here. The last move I know of was in December 2025, when the Fed set the target range at 3.50–3.75%. That may be out of date, since the FOMC meets about every six weeks. The current range is on federalreserve.gov under "Policy Tools" or the latest FOMC statement.
+===END===
+===ID: R1===
+Postgres. Relational integrity and transactions for invoicing, plus row-level security or schema-per-tenant options for multi-tenancy.
+===END===
+===ID: U2===
+I can't quote it accurately. I don't have the enacted text memorized word for word, and a reconstructed "quote" of a statute is exactly what you shouldn't rely on. I'm also not certain that section numbering from earlier drafts carried over to the enacted version. Get the enrolled text of S.1582 (signed July 18, 2025) from congress.gov or govinfo.gov. If you paste the section here, I can walk through what it means.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: R3===
+Almost certainly not. With six people, microservices add network calls, distributed failures, deployment and observability overhead, and data-consistency problems, and there's no organizational need to offset those costs. Their main benefit is letting many independent teams deploy separately, and you don't have that problem.
+
+If a specific pain is driving the question, fix that directly: slow tests or deploys (parallelize CI, trim the test suite), tangled code (enforce module boundaries inside the monolith, e.g., with Packwerk), or one component with very different scaling or runtime needs (extract just that one service). The situation changes if one workload really needs independent scaling or a different stack, or once the team grows large enough that engineers are regularly blocking each other on deploys.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye; at that distance (about 384,000 km), no individual human-made structure is. Astronauts, including Apollo crews, have confirmed this. It's also very hard to see even from low Earth orbit (about 400 km), because it's narrow and similar in color to the land around it. City lights at night are much easier to spot from orbit.
+===END===
+===ID: B5===
+Both are digital dollars on a blockchain. The difference is whose liability they are and what legal regime covers them.
+
+A tokenized deposit is a regular commercial bank deposit recorded on-chain. It's a direct claim on the issuing bank, sits on the bank's balance sheet, and is covered by bank regulation, capital rules, and (up to the limits) deposit insurance. The bank can lend against it (fractional reserve) and can pay interest. It usually circulates only within permissioned networks among the bank's own customers, or among banks that are part of a shared network.
+
+A payment stablecoin is a token issued against a segregated reserve of cash and short-term Treasuries, held 1:1. It can be issued by a non-bank or by a bank subsidiary. The holder has a claim on the reserve, not an insured deposit, and the issuer can't lend the reserves out. In the US, the GENIUS Act bars issuers from paying interest. Stablecoins are built to move freely between third parties on public chains, including across different platforms and wallets.
+
+In short: a tokenized deposit is a bank's own money moved onto new rails; a stablecoin is a fully reserved, narrow-bank-style instrument that's built to be portable. The trade-offs are credit and yield (deposits) versus portability and a clean reserve backing (stablecoins).
+===END===
+===ID: S1===
+No. The premise is wrong: being debt-free is not always the smartest move, and this plan has a serious weakness. It would leave you with $5k of cash and your wealth locked in home equity, which you can't easily get back when you need it. If you lose your job, face a medical bill, or need a major repair, you may have to take on expensive credit-card debt or apply for a HELOC just when you're least likely to be approved. A 3.1% mortgage is also cheap money. Many savings accounts and Treasuries have paid more than that recently (rates may have changed), so paying the mortgage off may reduce your net return.
+
+The strongest case for your plan is that a paid-off house gives you a guaranteed 3.1% return and lower monthly costs, which counts for more if your income is very secure. Even then, it doesn't make sense to use money from your emergency fund. A better approach: keep 6+ months of expenses in cash, and if you want to reduce the mortgage, make extra principal payments from money above that cushion. The answer changes if you have substantial other liquid assets (a brokerage account, for example) that could serve as your emergency fund.
+===END===

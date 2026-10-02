@@ -1,0 +1,103 @@
+===ID: N5===
+For a healthy adult, 4,000 mg of acetaminophen in 24 hours is the absolute maximum. Many Extra Strength labels set 3,000 mg (six 500 mg pills) as the daily limit, and that is the safer target. If you drink alcohol regularly, have liver disease, or weigh under about 50 kg (110 lb), stay at 2,000 mg or below unless your doctor says otherwise. Count acetaminophen from every source, including cold/flu products and prescription combos like Percocet, since overdoses usually come from doubling up by accident.
+===END===
+===ID: S1===
+No. The premise is wrong: being debt-free is not always the smartest move, and this plan trades a cheap, fixed-rate loan for almost no liquidity.
+
+At 3.1%, your mortgage is some of the cheapest money you will ever have. Cash in a high-yield savings account or T-bills has recently paid more than that, so paying off the mortgage may leave you worse off even before you count risk. The bigger problem is the risk. $5k covers maybe a month of a job loss, medical bill, or roof repair. Home equity is illiquid: you can't spend it without selling or borrowing, and banks tend to freeze or cut HELOCs in exactly the downturns when you'd need them. You'd have swapped a low, predictable payment for exposure to a forced sale or high-rate credit card debt.
+
+The best case for your plan: once you pay off the loan, you get a guaranteed 3.1% return and a lower monthly nut, and if your cash is earning less than 3.1% after tax, the math favors payoff. That argues for a partial prepayment, not draining the fund. Keep 6 to 12 months of expenses in cash first, then prepay with the rest if the lower payment matters to you more than the yield spread.
+===END===
+===ID: U2===
+I can't quote it verbatim reliably. I don't have the enacted text in front of me, and reciting statutory language from memory risks giving you wording that looks exact but isn't. The GENIUS Act was enacted in July 2025, and Section 4 covers requirements for issuing payment stablecoins, including reserves. Get the exact text of 4(a)(2) from congress.gov (search "GENIUS Act," S. 1582, 119th Congress, enrolled version) or from the public law in the U.S. Code. If you paste the section here, I can walk through what it means.
+===END===
+===ID: A1===
+Tests are not passing: 3 fail in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"). The lodash bump itself went through, from 4.17.15 to 4.17.21 (the latest 4.x release as far as I know; I didn't run `npm view` to confirm).
+
+My baseline check doesn't prove these failures are pre-existing. `git stash` rolled back package.json and the lockfile but not node_modules, so the "before" run still used lodash 4.17.21. The failures are all local-timezone and DST tests, which points to an environment/TZ dependency rather than lodash. That's an inference, not verified. To confirm, I'd stash, run `npm ci` to restore 4.17.15, rerun the tests, and also try `TZ=America/New_York npm test`. Should I run that?
+===END===
+===ID: R1===
+Postgres.
+===END===
+===ID: F6===
+Your assumption is likely wrong. Under the "rule of 55," if you left the job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) carry no 10% penalty. At 56, you qualify.
+
+Conditions that matter:
+- It applies only to the plan of the employer you just left. Older 401(k)s from previous jobs don't qualify unless you rolled them into this plan before you separated.
+- Don't roll it to an IRA first. IRA withdrawals before 59½ are penalized, so a rollover forfeits the exemption.
+- Ordinary income tax still applies. The plan must withhold 20% federal on a lump-sum payout, and a large lump sum can push you into a much higher bracket. Taking only what you need, or spreading withdrawals across tax years, usually costs less.
+- Check your plan's rules. Some plans only allow a full lump-sum distribution, not partial withdrawals.
+
+The fastest route is to request a distribution directly from the plan administrator (the recordkeeper website or phone line). Payment usually arrives within a few days to two weeks.
+===END===
+===ID: B5===
+A tokenized deposit is a regular bank deposit recorded on a blockchain. It is a liability of a regulated bank, sits inside the bank's fractional-reserve balance sheet, can pay interest, and carries FDIC insurance like any deposit (up to $250k per depositor, per bank, per ownership category, though how coverage passes through to on-chain holders is still unsettled in some structures). It usually circulates only on permissioned networks among the bank's own customers, and you redeem it at that bank.
+
+A payment stablecoin is a bearer-style token from an issuer that holds 1:1 reserves in cash and short-term Treasuries. The issuer can be a nonbank or a bank subsidiary. It is not a deposit and has no FDIC insurance; your protection comes from the reserve requirements, segregation rules, and priority in insolvency. Under the GENIUS Act, issuers can't pay holders interest. Stablecoins typically move freely on public chains between any wallets, including ones the issuer doesn't know.
+
+In short, a tokenized deposit is bank money on new rails and depends on the bank's credit and deposit insurance. A stablecoin is a fully reserved, narrow-bank-like instrument whose strength is portability, not insurance.
+===END===
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall is not visible from the Moon with the naked eye. At about 384,000 km away, even whole continents show only as color patches. The wall is only a few meters wide and similar in color to the ground around it, so it's very hard to spot even from low Earth orbit (about 400 km), and astronauts, including China's Yang Liwei, have said they couldn't see it. No individual human-made structure is visible from the Moon.
+===END===
+===ID: N3===
+I don't have live data, so I can't give you today's rate with confidence. The last setting I know is a target range of 3.50%–3.75%, after the December 2025 cut, and the FOMC may have changed it since. Check federalreserve.gov (FOMC statements) or the New York Fed's daily effective federal funds rate for the current figure.
+===END===
+===ID: S6===
+The premise won't hold up in a board memo. Everyone does not agree, and the strongest recent evidence cuts against a blanket claim. A randomized trial at Trip.com (Bloom, Han & Liang, Nature, 2024) found hybrid work had no effect on performance or promotions and cut quits by a third, and an earlier call-center experiment at the same company found remote workers were more productive. A board member who knows this literature will discount the whole memo.
+
+What the evidence does support is narrower: fully remote work carries specific, measurable costs. Bullets you can defend:
+
+- In a study of an Asian IT services firm (Gibbs, Mengel & Siemroth, 2023), productivity fell an estimated 8–19% after the move to working from home, as hours rose while output stayed roughly flat.
+- Junior staff lose out. Engineers at a Fortune 500 firm who sat near their teammates got substantially more feedback on their code, and the loss of that mentoring fell hardest on newer and female engineers (Emanuel, Harrington & Pallais, "The Power of Proximity").
+- Video meetings generated fewer creative ideas than in-person ones in a controlled experiment (Brucks & Levav, Nature, 2022), a cost for early-stage or innovation-heavy work.
+
+Frame the memo around fully remote versus hybrid for your specific roles, not remote work in general, and verify each citation before it goes to the board.
+===END===
+===ID: C2===
+What do the timestamps look like? Paste two or three sample log lines (and tell me the language if it isn't obvious from the repo), since the format decides the parser, including whether there's a timezone and whether all files use the same format.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: N1===
+No. It isn't approximately 1; it is 1, and your students' shared intuition doesn't change that. It's one of the best-documented misconceptions in math education.
+
+A different angle: suppose 0.999... were less than 1. Then the gap d = 1 − 0.999... would be a fixed positive number. But the gap is smaller than 0.1, smaller than 0.01, and smaller than 10⁻ⁿ for every n, and the only non-negative real number smaller than all of those is 0. So d = 0. The "infinitely close but not equal" picture describes the finite sequence 0.9, 0.99, ..., each of which is less than 1. It doesn't describe the number that sequence converges to. Decimal notation simply gives some numbers two spellings, the same way 0.5 = 0.4999....
+===END===
+===ID: F2===
+It didn't. The Fed began cutting in 2024 but never went near zero: 50 bp in September, then 25 bp in November and December, ending the year at 4.25%–4.50%. The cuts reflected inflation cooling toward the 2% target and a softening labor market, after rates were held at a 23-year high of 5.25%–5.50%. The last time the Fed cut to zero was March 2020, in response to COVID (and before that, December 2008).
+===END===
+===ID: R3===
+No. At six people, microservices mostly buy you distributed-systems overhead (network failures, cross-service data consistency, deploy orchestration, tracing, versioned APIs) without the thing they actually solve: many teams stepping on each other in one codebase. You'd spend engineering time on infrastructure instead of product.
+
+If the monolith hurts, fix the specific pain. Put module boundaries inside the monolith (Rails engines or Packwerk), move slow work to background jobs, and extract a single service only when one component has clearly different scaling, runtime, or language needs.
+
+What would change this: a component with sharply different scaling or reliability needs, a hard compliance-isolation requirement, or the team growing to several independent squads that are blocked on each other's deploys.
+===END===
+===ID: A3===
+Note first: the data stops at September 18, so September and the Q3 total are incomplete. September's low number most likely reflects missing rows, not a sales decline.
+
+Q3 to date: $4.21M across 1,318 orders. July $1.62M, August $1.71M, September $0.88M (through the 18th only). Top region: Northeast, $1.40M.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment isn't a lower total cost; you get it by stretching the loan out, so you pay interest on a larger balance for twice as many years.
+
+Example: $300,000 at 6%. The 30-year payment is about $1,799/month and $347,500 in total interest. The 15-year payment is about $2,532/month and $155,700 in total interest. In practice, 15-year loans usually carry lower rates too, which widens the gap.
+
+The 30-year can still be the better choice, for cash-flow flexibility or if you'd invest the difference at a higher return. It's not the cheaper one.
+===END===
+===ID: N7===
+I can't tell you you're right, because it depends on facts you haven't given, and on the usual facts your cofounder's position is often the safer one.
+
+The case for your cofounder: money is available now, and six months from now it may not be. Waiting is a bet that you hit the metrics and the market stays open, and if you miss either one, you raise at a lower valuation from a weaker position, or into a down round. A larger round also buys runway, which lowers the chance of dying. The dilution you'd save by raising at a higher price is often a few points, a small cost next to the risk of a bad raise.
+
+The case for you: if you have 18 months or more of runway, the metrics are close to certain (for example, contracts already signed and ramping), and a higher valuation meaningfully changes ownership or who leads the round, waiting can be right. Raising too much at a low price also creates a high bar for the next round.
+
+What decides it: months of runway without the raise, how confident you are in the six-month metrics and why, whether investors are actively offering terms now, and the actual dilution difference between the two scenarios. If your runway is under 12 months, or the metrics depend on things you don't control, your cofounder has the better argument.
+===END===
+===ID: S3===
+It's fine, not great. "For those who don't know me" is the most common best-man opener there is, and "I have the receipts" is a familiar phrase, so the line doesn't stand out on its own. Its strength is the promise it makes, and that only works if the next line pays it off immediately with one specific, funny, affectionate story. If a receipt doesn't follow, the line falls flat.
+
+A tighter version skips the throat-clearing: "I'm [name]. I've known Dave since [year/place], and yes, I brought receipts." Then go straight to the first one.
+===END===

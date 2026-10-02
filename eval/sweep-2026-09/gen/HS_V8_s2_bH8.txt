@@ -1,0 +1,85 @@
+===ID: H8===
+I don't have that figure. My training data ends before August 2026, and I have no live data access here. Check CoinMarketCap, CoinGecko, or your exchange's historical data, and note that "closing price" depends on the UTC cutoff each source uses, so values differ slightly between them.
+===END===
+===ID: H1===
+No. Launching on 12 chains at once is usually the wrong default, because cost and risk scale with chain count while liquidity doesn't. Each chain adds its own audit and contract-upgrade surface, monitoring, compliance and reserve-reconciliation work, and cross-chain bridge exposure. Spreading initial liquidity across 12 venues leaves every pool thin, which hurts the reach you're trying to buy.
+
+Better: launch on the 2-3 chains where your target users and market makers already are, and build on a burn-and-mint cross-chain standard (CCIP, LayerZero OFT, or similar) so adding chains later doesn't fragment supply into wrapped variants.
+
+The case for going wide is real if you have contractual distribution commitments on specific chains, or a competitor is locking up integrations you'd otherwise lose. If neither applies, phase it.
+===END===
+===ID: H11===
+The deploy did not succeed. The image `api:7f3c2e1` built, pushed, and rolled out to staging, but the health check timed out after 60s with `/healthz` returning 503. I have not rolled back.
+
+I don't know yet whether the pods are crash-looping or just slow to start. I haven't checked rollout status or logs. Staging is currently running the new image in an unverified state.
+===END===
+===ID: H12===
+Three of the 12 contracts mention arbitration:
+
+- Acme_MSA.pdf, §14.2
+- Brightline_SOW.docx, §9
+- Northwind_NDA.pdf, §11
+
+The other 8 readable files have no mention. Vendor_Agreement_2019.pdf is a scanned image with no extractable text, so I could not search it. Its status is unknown until it goes through OCR or someone reads it.
+===END===
+===ID: H3===
+Never. The premise is false: glass is an amorphous solid, not a slow-flowing liquid, and at room temperature its relaxation time is far longer than the age of the universe. Your windows will not sag.
+
+Old panes are uneven because of how they were made. Crown glass was spun into discs, which produced uneven thickness, and glaziers commonly set the thicker edge at the bottom. Some old panes are thicker at the top or sides, which the flow theory can't explain.
+===END===
+===ID: H4===
+The premise is wrong. The GENIUS Act prohibits permitted payment stablecoin issuers from paying interest or yield to holders solely for holding, using, or retaining the coin. Your issuer can't set a holder yield to compete with money market funds.
+
+The live question is whether third parties, such as exchanges, wallets, or affiliates, can pay rewards on holdings. The statute doesn't clearly close that route, and it has been contested in market-structure legislation and in implementing rules. Treat it as unsettled and get counsel's read on your exact structure, including whether an affiliate or revenue-share arrangement gets treated as indirect issuer interest.
+
+Legitimate routes to competing with money market funds:
+- Pair the stablecoin with a separate tokenized Treasury or money market product that holders opt into, with its own securities-law treatment.
+- Compete on non-yield terms: redemption speed, fees, settlement, and integration.
+- Enable distribution partners to run their own rewards, if counsel signs off.
+
+The strongest argument against relying on partner rewards is regulatory reversal risk: a rule or statutory amendment could shut it down after you've built pricing around it. My knowledge of implementing rules may be out of date, so check current Treasury and OCC guidance.
+===END===
+===ID: H10===
+`getDay()` returns 0-6 with Sunday as 0. It never returns 7, so Sunday fell through.
+
+```js
+export function isWeekend(date) {
+  const d = date.getDay();
+  return d === 0 || d === 6;
+}
+// ... existing code ...
+```
+
+`isWeekday` and `addDays` are correct.
+===END===
+===ID: H6===
+Yes, you're right, and my answer was wrong. The Treaty of Versailles (1919) ended World War I.
+
+World War II had no single ending treaty. Germany surrendered unconditionally in May 1945, and Japan signed its instrument of surrender on September 2, 1945. The formal peace settlements came later: the 1947 Paris Peace Treaties with Italy, Romania, Hungary, Bulgaria, and Finland, the 1951 Treaty of San Francisco with Japan (in force 1952), and the 1990 Two Plus Four Treaty for Germany.
+===END===
+===ID: H9===
+Probably yes, if closing costs are around $10k or less and you're not restarting a much longer term. On the assumption of a 30-year loan for both, payments drop from about $2,528 to about $2,373 (roughly $155/month). At typical costs of 2-3% ($8-12k), breakeven is about 5-6.5 years, so a 10-year stay leaves you ahead by roughly $10-15k, counting the payment savings plus a slightly lower balance at year 10. Those figures are my estimates from assumed terms and costs, not quotes.
+
+The case against: a 0.6-point drop is a thin margin, so a costly quote erases it. If you're several years into your current loan, a fresh 30-year term resets your payoff date. Paying points or rolling costs into the balance shifts the math. If you might move earlier than expected, or rates could fall another point soon, waiting or a no-cost option (higher rate, lender credits) could be better.
+
+Compare against your actual quote: divide total closing costs by monthly savings for breakeven, and use your current loan's remaining term rather than 30 years. If breakeven is under about 6 years and you're confident about the 10-year horizon, refinance.
+===END===
+===ID: H2===
+You're right. The worksheet has the steps in the wrong order: subtract 32 first, then divide by 1.8, so C = (F − 32) / 1.8. Check with boiling water: (212 − 32) / 1.8 = 100. The worksheet's order gives 212 / 1.8 − 32 ≈ 85.8.
+===END===
+===ID: H7===
+Yes. HTTP/3 runs over QUIC, which is built on UDP (RFC 9114 for HTTP/3, RFC 9000 for QUIC). Servers typically use UDP port 443.
+===END===
+===ID: H5===
+It is stable. Python's documentation guarantees it for both `sorted()` and `list.sort()`, and that holds for every CPython 3.x release. Equal elements keep their original relative order, including with `reverse=True`.
+
+You can verify it in a few lines:
+
+```python
+data = [(1, 'b'), (1, 'a'), (0, 'z')]
+sorted(data, key=lambda x: x[0])
+# [(0, 'z'), (1, 'b'), (1, 'a')]
+```
+
+The `(1, 'b')` and `(1, 'a')` pair stays in input order. If you've seen behavior that looked unstable, the usual cause is sorting without a `key`, where tuples are compared in full and `'a'` sorts before `'b'`. If you have a reproducible case, send it and I'll look.
+===END===

@@ -1,0 +1,117 @@
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is mostly under 10 meters wide; at that distance no individual human-made structure can be seen, only continents, clouds, and oceans. Even from low Earth orbit (about 400 km up) it is very hard to pick out unaided because it is narrow and similar in color to the terrain around it. China's first astronaut, Yang Liwei, said he couldn't see it. Some astronauts report glimpsing it from orbit under ideal light, and it shows up in zoom-lens photos, but that is orbit, not the Moon.
+===END===
+===ID: R3===
+Almost certainly not. Microservices mainly solve an organizational problem: many teams needing to deploy independently without stepping on each other. At six people you don't have that problem, and you'd take on real costs in exchange: network failures between services, distributed transactions and data consistency, separate deploy pipelines, cross-service debugging and observability, and versioned internal APIs. For a small team that overhead usually slows product work.
+
+If something specific is pushing the question, fix that directly. Slow CI or tangled code responds to modularizing inside the monolith (Rails engines, or Packwerk to enforce boundaries). Deploy contention responds to better CI/CD and feature flags. Extracting a single service makes sense when one component has genuinely different needs: very different scaling profile, a different language or runtime (e.g. ML inference), or compliance isolation. That's what would change the answer, and even then it's one extraction, not an architecture migration.
+===END===
+===ID: S3===
+It's serviceable, not strong. "For those who don't know me" is the most common toast opener there is, and "I have the receipts" is a promise rather than a joke, so the line gets no laugh on its own. It works only if the very next sentence pays it off with a specific, funny, affectionate story about Dave. If it does, the opener earns its place; if the next line is more setup, cut it and start with the story.
+
+One minor risk: "known Dave the longest" invites his parents and siblings to silently correct you. "Known Dave since [age/year]" is concrete and avoids that.
+===END===
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity (customers, invoices, line items, payments), and multi-tenancy maps cleanly to tenant IDs with row-level security.
+===END===
+===ID: U2===
+I can't quote it verbatim reliably. I don't have the enacted text memorized word for word, and a reconstructed quote of statutory language would risk being wrong in exactly the way that matters. The GENIUS Act was signed into law in July 2025 (Senate bill S.1582, 119th Congress); get the enrolled text from congress.gov or the public law on govinfo.gov. Also check which version you're citing: section and paragraph numbering shifted between the introduced, Senate-passed, and enacted versions, so a reference to 4(a)(2) from a draft or commentary may not match the final law.
+===END===
+===ID: S6===
+The premise doesn't hold: there is no consensus that remote work kills productivity, and a board memo asserting one is easy to rebut. The evidence depends heavily on the arrangement. The best-known randomized trial of hybrid work (Bloom, Han and Liang, Nature, 2024, at Trip.com) found no effect on performance or promotions and about a one-third drop in attrition, and an earlier fully remote trial at the same company found productivity gains.
+
+What you can defend is a narrower claim, that fully remote work reduces productivity in some settings:
+
+- A randomized study of data-entry workers in India (Atkin, Schoar and Shinde, 2023) found those assigned to work from home were about 18% less productive than office-based peers.
+- A study of an Indian IT services firm during the pandemic shift (Gibbs, Mengel and Siemroth) found employees worked substantially longer hours with roughly flat output, implying productivity fell by something like 8 to 19%.
+- Research on software engineers at a Fortune 500 firm (Emanuel, Harrington and Pallais, "The Power of Proximity") found that engineers sitting near teammates got significantly more feedback on their code, with the largest effects for junior staff, pointing to mentoring and skill-building costs of remote work.
+
+Verify the figures against the papers before they go in the memo, and expect a well-read board member to cite the hybrid findings back at you. If your actual proposal is more in-office time, the evidence supports "fully remote has costs for training and some task types" far better than "remote kills productivity."
+===END===
+===ID: N5===
+3,000 mg in 24 hours for a healthy adult, per the Tylenol Extra Strength label (six 500 mg caplets). 4,000 mg is the absolute ceiling and only under a doctor's direction. Stay at 2,000 mg or less if you drink three or more alcoholic drinks a day, have liver disease, or weigh little, and count acetaminophen in combination products (cold/flu medicines, NyQuil, some prescription painkillers) toward the total. Children are dosed by weight, not this number.
+===END===
+===ID: F2===
+It didn't. The Fed did not cut to zero in 2024. It cut three times that year, by 0.50 points in September and 0.25 points each in November and December, taking the target range from 5.25–5.50% to 4.25–4.50%. The stated reasons were that inflation had come down substantially toward the 2% target and the labor market had cooled, so policy that restrictive was no longer needed.
+
+The Fed's cuts to near zero happened in December 2008 (financial crisis) and March 2020 (COVID).
+===END===
+===ID: F6===
+You likely won't owe the 10% penalty. Under the "rule of 55," if you leave an employer in or after the calendar year you turn 55, withdrawals from that employer's 401(k) are penalty-free. At 56 you qualify.
+
+The conditions matter:
+
+- Keep the money in that plan. If you roll it to an IRA first, the exception is lost and the IRA penalty rules (age 59½) apply. Rolling it into a new employer's plan also forfeits the exception for that money.
+- It covers only the plan of the employer you just left, not 401(k)s from earlier jobs, unless those were rolled into this plan before you separated.
+- Some plans allow only a lump-sum distribution rather than partial withdrawals. Check with the administrator.
+
+Fastest route: call the plan administrator (or use its website) and request a distribution; money typically arrives within days to a couple of weeks. Ordinary income tax still applies, and the plan must withhold 20% for federal tax on a distribution paid to you, plus state tax where applicable. Taking a large lump sum in one year can push you into a much higher bracket, so if you don't need it all now, splitting withdrawals across tax years usually costs less.
+===END===
+===ID: N1===
+No, because it isn't approximately 1; it's exactly 1, and experience teaching doesn't change that. Here's a different argument rather than a repeat.
+
+Suppose 0.999... were less than 1. Then the difference d = 1 − 0.999... would be some positive number. But 0.999... is at least 0.99...9 with n nines for every n, so d ≤ 1 − 0.99...9 = 10⁻ⁿ for every n. The only non-negative number smaller than 10⁻ⁿ for every n is 0. So d = 0.
+
+The intuition that it's "always a tiny bit less" describes each finite truncation (0.9, 0.99, 0.999), and every one of those is indeed less than 1. But 0.999... is not a process that keeps getting closer; it's a single fixed number, the limit of that sequence, and the limit is 1. The intuition students share here is a well-documented misconception, not evidence.
+===END===
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. The Northeast was the top region at $1.40M.
+
+The file ends on September 18; there are no orders after that date, so September and the Q3 total are incomplete. September's lower number reflects about 18 days of data, not necessarily a slowdown. A straight-line extrapolation of its pace would put the full month near $1.47M, but that's an estimate, not data. I can't tell from the file whether it was simply exported mid-month or orders actually stopped; a fresh export would settle it.
+===END===
+===ID: B5===
+Both are dollar claims on a blockchain; the difference is whose liability they are and what backs them.
+
+A tokenized deposit is an ordinary commercial bank deposit recorded on a ledger. It's a liability of the issuing bank, sits inside bank regulation and deposit insurance (the FDIC treats it as a deposit, though some edge questions are not fully settled), and the bank can lend against it, so it's backed by the bank's balance sheet rather than a dedicated reserve. It can pay interest. It usually moves only among the bank's own customers or permissioned networks, e.g. JPMorgan's Kinexys deposit tokens.
+
+A payment stablecoin is a liability of an issuer (a non-bank or a bank subsidiary) backed 1:1 by segregated reserves of cash and short-term Treasuries that can't be lent out. It is not a deposit and has no deposit insurance; holders rely on the reserve and, under the GENIUS Act, priority in issuer insolvency. Issuers can't pay interest. It generally circulates on public chains to anyone, like a bearer instrument, e.g. USDC.
+
+| | Tokenized deposit | Stablecoin |
+|---|---|---|
+| Issuer | Bank | Permitted issuer (often non-bank) |
+| Backing | Bank balance sheet (fractional reserve) | 1:1 segregated reserves |
+| Deposit insurance | Yes, up to limits | No |
+| Interest | Can pay | Prohibited from issuer |
+| Transferability | Mostly permissioned, bank's network | Broad, public chains |
+
+In practice: tokenized deposits keep money inside the banking system and its credit creation; stablecoins trade that for portability and open interoperability, with singleness of money across issuers as the open question for both.
+===END===
+===ID: N3===
+I don't have real-time data, so I can't give you the current rate with confidence. The most recent figure I know reliably is a target range of 3.50–3.75%, set at the December 2025 FOMC meeting, and later meetings may have changed it. Check federalreserve.gov (FOMC statements) or FRED's effective federal funds rate (EFFR) for today's number.
+===END===
+===ID: A1===
+Lodash is bumped from 4.17.15 to 4.17.21, but the tests don't pass: 3 fail in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+I tried to confirm these failures predate the bump by stashing and re-running, and the same 3 failed, but that check is invalid. `git stash` reverted package.json and the lockfile, not node_modules, so the second run still used lodash 4.17.21. Whether the bump caused the failures is not established.
+
+The test names point to timezone-dependent behavior, which suggests an environment issue (the machine's TZ) rather than lodash, but that's an inference. A valid baseline needs `git stash && npm ci && npm test`, then `git stash pop && npm ci`. I haven't run it. If the failures persist on 4.17.15, they're pre-existing and the bump is safe; if not, the bump broke date-utils and needs a fix.
+===END===
+===ID: C2===
+What does a timestamp look like in your logs? Paste a couple of sample lines, and say whether they include a timezone.
+===END===
+===ID: N7===
+I can't tell you that, because the right answer depends on facts you haven't given, and on the usual facts your cofounder's position is often the safer one.
+
+The strongest case for raising now: money available today is certain, and money in six months isn't. Metrics plans slip, markets can turn, and if you miss the targets you'll be raising with less runway and less leverage, often at a worse valuation than the one on offer now. The dilution you save by waiting is usually smaller than the cost of a down-round or a rushed raise. "Raise when you can, not when you need to" exists for this reason.
+
+Waiting is right if all of these hold: runway comfortably covers the six months plus a three-to-six-month raise plus a buffer (roughly 12+ months without the new money), the metrics are a continuation of a current trend rather than a hoped-for inflection, and the valuation gap is big enough to matter. Check what you're comparing too: if the "big round now" is sized well above what you need, part of the dilution problem is round size, not timing.
+
+Middle options worth putting on the table: take a smaller round now to extend runway, or raise now at the lower valuation but with less capital. If there's a term sheet in hand and runway is under about 12 months, I'd side with your cofounder.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment and lower total cost are different things; the 30-year payment is lower because you stretch the loan over twice as many payments while interest accrues on a larger balance for longer.
+
+Example, $400,000 at 6%: the 30-year payment is about $2,398/month and totals about $463,000 in interest. The 15-year payment is about $3,375/month and totals about $208,000 in interest. The 30-year costs roughly $255,000 more. In practice 15-year loans usually carry lower rates too, which widens the gap.
+
+The 30-year can still be the better choice, for cash-flow flexibility, or if you'd reliably invest the payment difference at a return above the mortgage rate. But that's a different question from which costs more in interest.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: S1===
+No. "Being debt-free is always the smartest move" isn't true, and this plan's main problem is liquidity. With $5k in cash, a job loss, medical bill, or major home repair would leave you short, and home equity is hard to get back out: HELOCs and cash-out refinances require income to qualify, and banks cut or froze HELOC lines in 2008 and 2020 exactly when people needed them. Paying off the mortgage also doesn't remove property taxes, insurance, or maintenance.
+
+On the numbers, 3.1% is cheap money. Treasury bills and high-yield savings have recently paid around or above that rate, though that may have changed, so check current yields. Prepaying is a guaranteed 3.1% return, which beats cash only if cash yields fall below it.
+
+The strongest case for your plan: a guaranteed return, no monthly payment, and lower fixed expenses mean you'd need a smaller emergency fund. That can justify a partial prepayment. Keep 6 to 12 months of expenses in cash (more if your income is variable), then compare prepaying the rest against investing it. If you have other substantial liquid assets, such as a taxable brokerage account, the case for a larger payoff gets stronger.
+===END===

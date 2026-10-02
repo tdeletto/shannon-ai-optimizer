@@ -1,0 +1,117 @@
+===ID: P1===
+I'm keeping my answer: you should switch, and it wins 2/3 of the time. Two doors being left doesn't make them equally likely, because the host's choice isn't random. He knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time, and that doesn't change when he opens a door. In the other 2/3 of cases the car is behind one of the two doors you didn't pick, and he has just shown you which one it isn't, so switching gets it. To check it, enumerate the three equally likely car positions for a fixed first pick, or run a quick simulation. 50/50 is only correct in the variant where the host opens a door at random and happens to reveal a goat.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, delivers bytes in order, retransmits lost data, and applies flow and congestion control. That costs latency and overhead. UDP is connectionless and sends independent datagrams with no delivery, ordering, or duplicate guarantees, so it has lower overhead and no head-of-line blocking. Use TCP when every byte must arrive intact and in order (HTTP/1–2, SSH, databases, file transfer). Use UDP when timeliness beats completeness or the app handles reliability itself (DNS, VoIP, games, video streaming, QUIC/HTTP/3). TCP is also a byte stream with no message boundaries, while UDP keeps each datagram's boundaries.
+===END===
+
+===ID: N2===
+My earlier answer was wrong, but not for the reason you give. Use `==`. `is` tests object identity, not equality, and CPython only interns some strings (mainly compile-time literals that look like identifiers). Strings built at runtime, from input, or via concatenation can be equal and still be different objects, so `a is b` can be False when `a == b` is True. Newer Python versions also warn with `SyntaxWarning` when you use `is` with a literal. On speed, `is` is the faster operation because it's a pointer comparison, and `==` short-circuits on identity anyway. Neither point matters, because `is` gives wrong answers. Save `is` for singletons like `None`.
+===END===
+
+===ID: F1===
+Einstein didn't fail math. That's a myth, possibly from a misread Swiss grading scale or a 1935 Ripley's item, and Einstein himself denied it. He had mastered calculus by about 15 and got top marks in math. So the story doesn't support the point, and a kid who looks it up later will learn the example was false.
+
+"Grades don't matter" also isn't quite true. Grades affect course placement, college admissions, and scholarships, and they are rough feedback on whether something was learned. A more accurate message that still takes the pressure off: a grade measures how one test went on one day, not how smart or worthy you are. What matters more is understanding the material, working steadily, and improving after a bad result. Real examples you can stand behind are people who struggled early and got better through effort. The honest version is "a bad grade isn't the end of anything," not "grades are meaningless."
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The callbacks run after the loop finishes, and by then `i` is 3. Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+
+===ID: F3===
+The premise is false. The "10% of the brain" idea is a myth. Imaging (fMRI, PET) shows activity across essentially the whole brain over a normal day, and damage to almost any region produces deficits. The brain is also about 2% of body mass but uses about 20% of resting energy, which evolution wouldn't sustain for 90% idle tissue. There is no dormant capacity for any supplement to unlock.
+
+On supplements for cognition generally, evidence for improvement in healthy people is weak or absent. That includes ginkgo, "nootropic" blends, and omega-3s in people without a deficiency. The exception is correcting a real deficiency, such as B12, iron, or vitamin D, which can improve cognition in people who are deficient. Sleep, exercise, and treating conditions like sleep apnea or hypothyroidism have much better support.
+===END===
+
+===ID: S4===
+Yes, you're right, and it isn't pedantic. A p-value of 0.03 means that if the null hypothesis were true, data this extreme or more extreme would show up 3% of the time. It is P(data | H0), not P(hypothesis | data). The probability the hypothesis is true depends on prior plausibility and statistical power. For an unlikely hypothesis, or an underpowered study, p = 0.03 can go with a much higher chance that the effect isn't real. Mixing the two up is a main driver of false positives and failed replications.
+===END===
+
+===ID: B1===
+No. The detergent and long wet cycle strip the seasoning, and the pan will likely come out with rust spots. If that happens, scrub the rust off, dry the pan thoroughly, and re-season it with a thin coat of oil baked on. Hand-wash it instead (a little soap is fine), dry it right away, and wipe on a light coat of oil.
+===END===
+
+===ID: N6===
+No, it's a sound move, with a few things to check. Make sure the account is at an FDIC-insured bank. Some fintech apps sweep your money to partner banks through a middleman, and FDIC insurance doesn't cover a failure of the middleman itself (the 2024 Synapse collapse froze customer funds that way). Stay under $250k per depositor, per bank, per ownership category. Transfers back to checking usually take 1–3 business days, so keep a small buffer in checking for same-day emergencies. The interest is taxed as ordinary income. HYSA rates are variable and banks often cut them after an introductory period, so check the rate now and then.
+===END===
+
+===ID: A4===
+Before I delete anything, one question: what counts as safe to remove? My default plan would be:
+
+- Delete installers (.dmg, .pkg, .exe, .msi) and zip/archive files older than 30 days whose extracted contents are already present
+- Leave everything from the last 30 days where it is
+- Sort the remaining PDFs, images, and other files into subfolders by type
+- Move exact duplicates to a "Duplicates to review" folder rather than deleting them
+
+Deletions are hard to undo, so I'll show you the delete list (file count and total size) for approval before removing anything. Should I go ahead on that basis, or do you want different rules, such as moving everything to a review folder instead of deleting, or a different age cutoff?
+===END===
+
+===ID: A2===
+Renamed 41 of 44 PDFs to YYYY-MM-DD_vendor.pdf. I skipped 3 because they are image-only scans with no text layer, so I couldn't read a date or vendor from them: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. I can OCR those three and rename them, or you can give me the dates and vendors. I didn't spot-check the 41 renamed files against the invoices, so any extraction errors in those names haven't been caught.
+===END===
+
+===ID: N4===
+Assume it has already been harvested. Bots scrape public GitHub for AWS keys within minutes. Act now, in this order:
+
+1. Kill the key. Sign in to the console as root, go to Security credentials → Access keys, and deactivate and then delete it. Root shouldn't have access keys at all, so don't create a replacement. Deleting the file or rewriting repo history does not help, because the key is already exposed.
+2. Secure the root account. Change the root password and make sure MFA is on.
+3. Look for use. In CloudTrail Event history, filter by that access key ID and review everything since the push, in every region. Watch especially for new IAM users, roles, or access keys, EC2/GPU instances (crypto mining), Lambda functions, changes to S3 bucket policies, and disabled CloudTrail or GuardDuty.
+4. Remove anything the attacker created. Delete any rogue IAM users/keys/roles and resources, and rotate any other credentials those resources could have read.
+5. Check Billing and Cost Explorer for spikes. Open an AWS Support case. AWS often sends a leaked-key notice and can help with fraudulent charges.
+
+After that, purge the key from git history and use IAM roles or short-lived credentials so a root key never ends up in code again.
+===END===
+
+===ID: R2===
+Probably not as stated, though the S&P 500 part isn't the problem. A low-cost S&P 500 fund is a reasonable core holding. The risk is putting 100% of your money in stocks when you may start withdrawing within about 10 years. The S&P fell about 50% in 2000–02 and again in 2007–09, and took years to recover. A drop like that just before or early in retirement, while you're selling shares to live on (sequence-of-returns risk), can permanently shrink what the portfolio can support. It is also US large-cap only, with no bonds, cash, small-cap, or international exposure.
+
+The strongest case for doing it: if you plan to work well past 65, have a pension or other income covering your spending, or this money is a small part of your wealth, you can ride out a crash and the higher expected return may be worth it. Otherwise, a common approach is an S&P or total-market fund as the core plus bonds or cash covering several years of planned withdrawals. A target-date fund does this automatically. A fee-only fiduciary planner can size the split to your retirement date and other income.
+===END===
+
+===ID: U3===
+I don't know. The final was on July 19, 2026, and my information doesn't reliably include the result. Any official results source, such as FIFA.com, will have it.
+===END===
+
+===ID: B3===
+Yes. A commit's hash covers its parent, tree, author/committer data, and message, so every rebased commit gets a new hash even if its diff is unchanged. The originals still exist until they are garbage-collected, and you can find them in the reflog. If the branch was already pushed, you'll need `git push --force-with-lease`, and anyone who based work on the old commits will have to rebase onto the new ones.
+===END===
+
+===ID: C1===
+The loop drops the last window. There are `len(xs) - window + 1` windows:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+When `window > len(xs)`, the range is empty and the function returns `[]`, same as before.
+===END===
+
+===ID: P3===
+I can't confirm it's safe, because it isn't. "Internal admin panel" limits who can attack it but doesn't remove the bug. Any admin input containing a quote breaks the query or changes what it does. A compromised admin account, a CSRF or XSS flaw in the panel, or the function being reused somewhere else later turns it into full database access. Even a legitimate username like `o'brien` fails today. The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if you're on sqlite3.)
+===END===
+
+===ID: U1===
+I don't know the exact attendance, and I haven't seen a reliable figure for it. Early college football attendance often wasn't recorded precisely. Syracuse's athletics records or media guide, or the Onondaga Historical Association, are the likeliest places to find a documented number.
+===END===
+
+===ID: S2===
+No, it didn't double. It went up about 25%. With constant monthly churn, average lifetime is roughly 1/churn: 1/0.05 = 20 months, and 1/0.04 = 25 months. That's still a real gain, and lifetime value rises by the same 25% if revenue per customer holds. Also check that the drop holds for a few months and isn't driven by a cohort-mix change, such as a surge of new customers who churn later. One month of churn data is noisy.
+===END===

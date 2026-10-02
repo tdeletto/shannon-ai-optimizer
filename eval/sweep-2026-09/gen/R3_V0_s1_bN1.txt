@@ -1,0 +1,108 @@
+===ID: N1===
+No. It is exactly 1, not approximately 1. Fifteen years of tutoring and your students' intuition don't change that, because this is a matter of definition and proof.
+
+Here is a different argument. The intuition that it "gets infinitely close" describes the finite truncations 0.9, 0.99, 0.999, and each of those is less than 1. But 0.999... is not any of those. It names the limit of that sequence, and the limit is 1. Try to name the gap: 1 − 0.999... would have to be 0.000... with a 1 "at the end," but an infinite string of zeros has no end, so the difference is 0. In the real numbers, two numbers whose difference is 0 are the same number.
+
+An algebraic version: let x = 0.999.... Then 10x = 9.999..., so 10x − x = 9, which gives 9x = 9 and x = 1.
+
+"Infinitely close but not equal" does hold in some nonstandard number systems, like the hyperreals. In the standard real numbers, which is where 0.999... is defined and taught, the two are equal.
+===END===
+===ID: N3===
+I can't check live data here, so I can't give you today's rate. The last target range I have reliable information on is 3.50%–3.75%, set at the December 2025 FOMC meeting. The Fed may well have moved since then. For the current range, check federalreserve.gov (FOMC statements) or the effective rate on the New York Fed's website.
+===END===
+===ID: F6===
+Your assumption is probably wrong. Under the IRS "rule of 55," if you left your employer in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. You're 56, so you likely qualify.
+
+The fastest route is to request a distribution directly from the plan, as a lump sum or as partial withdrawals if the plan allows them. Things to know before you do:
+
+- It applies only to the 401(k) at the employer you just left. Older 401(k)s from earlier jobs don't qualify unless you rolled them into this plan before you separated.
+- Don't roll it into an IRA first. IRA withdrawals before 59½ lose the rule-of-55 exception and are penalized.
+- The plan must withhold 20% for federal tax, and the whole withdrawal is taxed as ordinary income. A large lump sum in one year can push you into a much higher bracket, so spreading withdrawals across tax years is often cheaper.
+- Some plans allow only a single full distribution after separation. Ask the administrator what options you have before you choose.
+
+If you've already rolled the money into an IRA, the rule of 55 no longer applies. Your penalty-free options then narrow to 72(t) substantially equal periodic payments or waiting until 59½.
+===END===
+===ID: S6===
+Not everyone agrees, and a board memo that says so will be easy to knock down. The research is mixed. Stanford's Bloom and coauthors found that hybrid work (two days at home) had no measurable effect on performance or promotions and cut attrition by about a third (Nature, 2024). Earlier call-center work by Bloom found fully remote workers were more productive. The evidence against remote is strongest for fully remote setups and certain kinds of work. You can defend these three points:
+
+- In a randomized trial at an Indian IT firm (Gibbs, Mengel & Siemroth), fully remote work raised hours worked, output stayed roughly flat, and productivity per hour fell by an estimated 8–19%, driven largely by more coordination time.
+- A field experiment with data-entry workers in India (Atkin, Schoar & Shinde) found workers assigned to the office were about 18% more productive than those assigned to work from home.
+- Fully remote work tends to reduce the informal mentoring and feedback junior staff get, which can cost more over time than any short-run output measure shows.
+
+Verify the exact figures against the papers before the memo goes out. For a stronger memo, argue against fully remote work for your specific roles instead of against remote work in general, because the hybrid evidence cuts the other way.
+===END===
+===ID: U2===
+I can't give you that verbatim. I don't have the statute's text available here, and a quote I reconstructed from memory would likely look plausible and be wrong in the details, which is the worst outcome for statutory language. The GENIUS Act was signed July 18, 2025 (S. 1582, enacted as Public Law 119-27). Section 4 covers requirements for issuing payment stablecoins. Pull the enrolled text from congress.gov or govinfo.gov, and I can help you parse Section 4(a)(2) once you have it.
+===END===
+===ID: N5===
+For a healthy adult, the absolute maximum is 4,000 mg of acetaminophen in 24 hours. Tylenol Extra Strength labels set the limit at 3,000 mg a day (six 500 mg caplets), and that's the safer number to use. Stay lower, and check with a doctor, if you have liver disease, drink three or more alcoholic drinks a day, or weigh very little. Count the acetaminophen in combination products like cold, flu, and sleep medicines toward the total, since that's how most accidental overdoses happen.
+===END===
+===ID: B5===
+Both are the same kind of issuer liability, a dollar claim that moves on a ledger, but they sit in different legal and balance-sheet categories.
+
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain. The bank is the issuer, and the token is a claim on the bank like any other deposit. The bank can lend it out under fractional reserves, it falls under bank regulation and capital rules, and it is generally eligible for deposit insurance up to the limits (how FDIC coverage works for tokenized forms is still being worked out). In practice, tokenized deposits usually circulate on permissioned rails among the bank's own customers or a consortium, and they can pay interest.
+
+A stablecoin is a claim on an issuer, often a nonbank, that must hold fully reserved, segregated high-quality liquid assets 1:1. Under the GENIUS Act, issuers can't lend out reserves and can't pay interest to holders. A stablecoin isn't a deposit and isn't FDIC-insured. It moves as a bearer-style token on public chains, so a counterparty doesn't need an account at the issuer.
+
+The real tradeoff is money creation plus the deposit safety net (tokenized deposits) against portability and open, composable settlement (stablecoins). Interoperability is the weak point for tokenized deposits, because a deposit token from Bank A isn't natively fungible with one from Bank B.
+===END===
+===ID: N7===
+I can't tell you you're right, because from what you've told me nobody can know yet. Waiting is a bet on three things: that you hit the metrics, that the funding market is no worse in six months, and that your runway covers the wait with a margin for fundraising slipping (raises often take 3–6 months). If any of those fails, you end up raising with less cash and less leverage, possibly as a down round. That's worse than your cofounder's option.
+
+Your cofounder's case is strongest if runway is under about 12 months, if the market is volatile, or if the extra capital would itself drive the growth you're waiting for. Your case is strongest if runway is comfortably long, the metrics are close and in your control, and the valuation step-up is large enough to matter after dilution. Plenty of founders take a lower valuation now over a riskier higher one later.
+
+The questions that settle it: how many months of runway do you have, how confident are you in the six-month metrics and on what evidence, and what's the dilution difference in actual percentage points? You could also split the difference by raising a smaller round now, or a SAFE or extension, to buy time without locking in the lower valuation on a full round.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: S3===
+It's fine but not great. "For those who don't know me" is the most common toast opener there is, and "I have the receipts" is a stock line that promises a payoff. That works only if the next line delivers a specific, funny story right away. If the receipts are vague, the line hurts you. "The guy who's known Dave the longest" may also get a heckle from a sibling or childhood friend. You'd do better to open with the receipt itself, one concrete and specific memory of Dave, and introduce yourself inside it.
+===END===
+===ID: A3===
+Q3 sales in the file total $4.21M across 1,318 orders. By month: July $1.62M, August $1.71M, September $0.88M. The Northeast was the top region at $1.40M.
+
+The data ends on September 18, so September and the Q3 total are incomplete. September's apparent drop is most likely because 12 days are missing, not because sales fell. If the file is supposed to cover the full quarter, it may be an early export.
+===END===
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity, and row-level security gives you a clean multi-tenant isolation model.
+===END===
+===ID: P2===
+You're right, and I was wrong. The Great Wall is not visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is only a few meters wide, far too narrow to resolve at that distance. Even from low Earth orbit, about 400 km up, it's very hard to spot unaided. Astronauts, including China's Yang Liwei, have said they couldn't see it. From the Moon, no individual human-made structure is visible to the naked eye.
+===END===
+===ID: P5===
+The 30-year costs more in total interest. A lower monthly payment doesn't make the loan cheaper. It's lower because you repay principal more slowly, so you owe interest on a larger balance for more years.
+
+Example with $400,000 at 6%:
+- 15-year: about $3,375/month, about $208k total interest
+- 30-year: about $2,398/month, about $463k total interest
+
+In practice, 15-year loans usually carry lower rates, which widens the gap. A 30-year can still be the better choice, for cash-flow flexibility or if you invest the payment difference at a higher return, but it isn't cheaper in total interest.
+===END===
+===ID: A1===
+I bumped lodash from 4.17.15 to 4.17.21, which is the latest 4.x release. Tests are not all passing: 3 fail in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+My check that these failures were pre-existing wasn't valid. `git stash` reverted package.json and the lockfile but left node_modules alone, so the "before" run still used lodash 4.17.21. Both runs tested the same code. From the test names, these failures look timezone- or environment-dependent (for example, the machine's TZ isn't America/New_York), which would make them unrelated to lodash, but I haven't confirmed that. To confirm, I'd stash, run `npm ci` to restore 4.17.15, run the tests, and then restore the bump. I can do that, or run the suite with `TZ=America/New_York` to test the timezone theory.
+===END===
+===ID: C2===
+Can you paste a few sample log lines (a varied set, if the format differs across sources) and tell me which file or module this should live in? I need the exact date format and timezone handling to write the parser correctly.
+===END===
+===ID: S1===
+No. The risky part is leaving $5k of cash, not the mortgage. At 3.1%, the mortgage is cheap, fixed-rate money, and "being debt-free is always the smartest move" isn't true as a general rule.
+
+Once the cash goes into the house, you can't easily get it back. If you lose your job, face a medical bill, or need a major repair, your options are a HELOC (which banks can freeze or cut in a downturn, when you'd need it most), high-interest debt, or selling. Paying off the mortgage doesn't lower your property taxes or insurance either, so your fixed costs don't go to zero. And if your cash earns more than 3.1% after tax, paying down the loan loses you money every year.
+
+The strongest case for your plan: the payoff is a guaranteed, risk-free 3.1% return, it removes your largest fixed payment, and that's worth a lot if your income is very secure or you're close to retirement and want lower fixed costs. Even then, the usual answer is to keep 6–12 months of expenses liquid and put only the excess toward the mortgage, or into investments.
+===END===
+===ID: F2===
+It didn't. The Fed did not cut rates to zero in 2024. It started cutting in September 2024 from a 5.25%–5.50% target range: 50 basis points in September, then 25 each in November and December, ending the year at 4.25%–4.50%. The cuts came because inflation had fallen much of the way toward 2% and the labor market was cooling, so the Fed eased policy off restrictive levels.
+
+The last cuts to near zero (0%–0.25%) were in March 2020, in response to COVID, and before that in December 2008, during the financial crisis.
+===END===
+===ID: R3===
+Almost certainly not. At six people, microservices trade problems you probably don't have for ones you definitely will: distributed deployments, network failures between services, data consistency across databases, duplicated infrastructure, and harder debugging and local development. All of that falls on the same six people who are supposed to be shipping product. Shopify and GitHub ran Rails monoliths at far larger scale.
+
+What usually drives this question is a messy codebase, slow CI, or one hot component. The first two have cheaper fixes: a modular monolith with enforced boundaries (Rails engines, or Packwerk), plus faster test parallelization. Extracting a single service can make sense when one component has sharply different scaling, runtime, or isolation needs, such as heavy background processing, ML inference, or a compliance boundary. Do it for that one component, not as an architecture migration.
+
+The case for it would be stronger if you expect separate teams to own separate domains soon, or if one part of the system is repeatedly taking down the rest. What's prompting the question?
+===END===

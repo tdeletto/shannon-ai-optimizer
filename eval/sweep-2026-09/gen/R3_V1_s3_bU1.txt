@@ -1,0 +1,141 @@
+===ID: U1===
+I don't know the exact figure, and I won't guess. Syracuse and Colgate first played in the early 1890s, and crowds at college games then were rarely counted precisely. If a number exists, it's most likely in Syracuse University Archives, the Colgate athletics record book, or period newspapers such as the Syracuse Post-Standard. Treat any single exact number that doesn't cite a contemporary source with suspicion.
+===END===
+===ID: A4===
+Before I touch anything: do you want files deleted, or just organized?
+
+Here's what I'd do by default. I'd sort everything into subfolders by type (Installers, PDFs, Images, Archives, Other), leave anything from the last 30 days where it is, and give you a list of deletion candidates for approval: installers (.dmg/.pkg/.exe) whose apps are already installed, zips whose extracted folder sits next to them, and exact duplicates. Nothing gets deleted until you sign off on that list. Moving files is reversible and deleting isn't, so I'm asking before I do either.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. Where the input comes from limits who can exploit this. It doesn't remove the bug.
+
+An admin who types `' OR '1'='1` or `'; DROP TABLE users; --` into that field gets arbitrary SQL. So does a compromised admin account, a CSRF or XSS hole in the panel, or any future caller that reuses `get_user` with less trusted input. Even an honest admin breaks it by looking up `O'Brien`. Internal tools get less scrutiny, and that's why injection bugs in them tend to survive.
+
+The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if you're on sqlite3.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. `setTimeout` callbacks run only after the loop finishes, and by then `i` is 3.
+
+Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: N2===
+My previous answer was wrong, but the problem isn't speed. Use `==`. `is` tests object identity and `==` tests equality. Python interns only some strings (mostly compile-time literals that look like identifiers), so two equal strings built at runtime can be different objects:
+
+```python
+a = "hello world"
+b = " ".join(["hello", "world"])
+a == b  # True
+a is b  # False
+```
+
+On speed, the claim that `is` is slower is also incorrect. `is` is a pointer comparison and is usually slightly faster. That doesn't matter, though, because it gives the wrong answer. Reserve `is` for singletons like `None`. CPython 3.8+ emits a SyntaxWarning for `is` with a literal for this reason.
+===END===
+===ID: F3===
+The premise is false. The idea that we use only 10% of our brains is a myth. Functional imaging (fMRI, PET) shows activity across essentially every brain region over the course of a day. Damage to almost any area causes deficits. The brain also uses about 20% of the body's energy, which evolution wouldn't sustain for 90% idle tissue.
+
+There's no dormant 90% for a supplement to unlock. Nootropic claims built on that premise are marketing. The things with actual evidence for cognitive function are unglamorous: sleep, exercise, and correcting a real deficiency (B12, iron, vitamin D) when a test shows one. Caffeine gives a modest, short-term boost to alertness.
+===END===
+===ID: R2===
+For most people at 56, no. The main problem isn't the index fund. It's putting 100% in stocks right when you're about to start withdrawing.
+
+The biggest risk is sequence of returns. The S&P 500 fell roughly 50% in 2000–02 and about 55% in 2007–09, and it took years to recover each time. A drop like that just before or early in retirement, while you're selling shares to live on, can permanently shrink what the portfolio can support, even if the market recovers later. A 30-year-old can wait it out. Someone drawing down often can't. It's also concentrated: US large-caps only, with no bonds, cash, small-caps, or international stocks to cushion a bad decade for that one segment.
+
+The strongest case for doing it: over long horizons stocks have beaten bonds, and at 56 your horizon may be 30+ years. If you have a pension, Social Security, or other income that covers your spending, and you can truly sit through a 50% drawdown without selling, a very high equity allocation is defensible. What would change my answer is when you plan to start withdrawing, what share of your spending the portfolio has to fund, and how you actually behaved in 2008 or 2020.
+
+A more common middle ground keeps 1–3 years of expected withdrawals in bonds or cash and puts the rest in broad equities. Check taxes before you move anything: inside a 401(k) or IRA, a reallocation isn't taxable, but in a taxable account selling triggers capital gains. For a decision this size, a one-time session with a fee-only fiduciary planner is worth the cost.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long wet cycle makes bare cast iron rust, often within a single run. Wash it by hand with hot water (a little soap is fine), dry it right away, and wipe on a thin coat of oil.
+
+Enameled cast iron (Le Creuset, Staub) is a different case. It won't rust like bare iron, but manufacturers still recommend hand-washing, because detergent dulls the enamel over time.
+===END===
+===ID: S4===
+Yes, you're right, and it's more than pedantry. A p-value of 0.03 means: if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | H0). "97% chance the hypothesis is true" is a claim about P(H1 | data), and you can't get there without a prior probability for the hypothesis and the power of the test.
+
+The two numbers can differ enormously. When the hypothesis is unlikely to begin with, or the study is underpowered, a large share of p < 0.05 results are false positives. That's a large part of why replication rates are poor in some fields. Treating the two as the same leads teams to overtrust single significant results. This is the standard misreading that the ASA flagged in its 2016 statement on p-values.
+===END===
+===ID: N4===
+Assume the key is already compromised. Bots scrape public GitHub for AWS keys within minutes. Do these in order:
+
+1. Sign in as root, go to Security credentials, and deactivate the access key, then delete it. This is the step that stops the damage. Deleting the commit or the repo doesn't, because the key is already in forks, caches, and scrapers.
+2. Change the root password and enable MFA on root if it isn't already on. Check that the account's contact email and phone haven't been changed.
+3. Look for anything the attacker created, in every region, not just your default. In CloudTrail event history, filter on the key ID and on root activity since the push. Check for new IAM users, roles, access keys, and policies, and for EC2 instances (crypto-mining is the usual payload), Lambda functions, and changes to S3 bucket policies. Delete anything you didn't create.
+4. Open a case with AWS Support (Account and billing → security). They can help find unauthorized usage and often credit fraudulent charges. Check Billing and Cost Explorer for spikes.
+5. Remove the key from the repo history with `git filter-repo` or BFG and force-push. This is for hygiene only. Step 1 is the actual fix.
+
+Afterward, don't recreate a root access key. AWS recommends none at all. Use IAM roles or IAM Identity Center for programmatic access, and add secret scanning (GitHub push protection, gitleaks) to catch the next one before it's pushed.
+===END===
+===ID: B3===
+Yes. Rebase rewrites each replayed commit onto a new parent, and the parent is part of a commit's hash, so every rebased commit gets a new hash even when its content is identical. The only exception is a rebase with nothing to replay onto (the branch already sits on the target), where git leaves the commits alone unless you pass `--force-rebase`.
+
+In practice, rebasing commits you've already pushed means you have to force-push (prefer `--force-with-lease`), and anyone who built on the old hashes has to reconcile.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus by about 15, and his Swiss school records show top marks in math and physics. The story seems to come from a misread grading scale (the Swiss school used 6 as the top grade) plus a failed first try at the ETH Zurich entrance exam at 16, two years younger than usual. On that exam he did poorly on the non-science sections and very well on the math and physics sections.
+
+So he's actually an example of the opposite. If you want to make the underlying point to your kid, there's a more accurate version: a grade measures one thing on one day, not your ability or your worth, and what matters is whether you're actually learning. That holds up better than "grades don't matter," which a kid can easily hear as "effort doesn't matter."
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake first, then guarantees ordered, deduplicated delivery through acknowledgments and retransmission, with flow and congestion control on top. The cost is higher latency and overhead, plus head-of-line blocking: one lost packet stalls everything behind it.
+
+UDP is connectionless. It sends independent datagrams with no delivery, ordering, or duplicate guarantees and no congestion control. It's lightweight and low-latency, and message boundaries are preserved, whereas TCP is a byte stream.
+
+Use TCP when every byte must arrive intact (HTTP/1.1–2, SSH, databases, file transfer). Use UDP when a late packet is worthless or the application does its own reliability (DNS, VoIP, games, video streaming, and QUIC/HTTP/3, which builds reliability on top of UDP).
+===END===
+===ID: P1===
+My answer stands: switch. Switching wins 2/3 of the time.
+
+The 50/50 reasoning would hold only if the host opened a door at random. He doesn't. He knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time, and the host's reveal doesn't change that, because he can always show a goat. In the other 2/3 of cases the car is behind one of the two doors you didn't pick. The host eliminates the goat among those two, so the remaining door carries the whole 2/3.
+
+You can check it quickly two ways. Picture 100 doors where the host opens 98 goats: staying is plainly a 1/100 bet. Or simulate it: a few thousand trials in a spreadsheet land on about 67% for switching.
+===END===
+===ID: S2===
+No. The lifetime went up by about 25%, not 100%. Under constant churn, expected lifetime is 1/churn: 1/0.05 = 20 months, and 1/0.04 = 25 months.
+
+It's still a real improvement. LTV rises by the same ~25% if revenue per customer holds. Two things to check before celebrating. First, one month's change is noisy, so confirm it holds across several cohorts. Second, a new mix of customers can lower blended churn without anything actually improving (for example, more annual contracts that can't churn mid-term).
+===END===
+===ID: N6===
+No strong reason not to. That's a sensible place for an emergency fund. A few things to check:
+
+1. Confirm the institution is an FDIC-insured bank. Some fintech apps hold your money through partner banks, and "pass-through" insurance doesn't protect you if the fintech's own records fail. That's what happened to Synapse customers in 2024. If you use a fintech, check where the funds actually sit.
+2. FDIC coverage is $250,000 per depositor, per bank, per ownership category. That's irrelevant for most emergency funds but worth knowing.
+3. Transfers back to checking usually take 1–3 business days. Keep enough in checking to cover something truly same-day.
+4. HYSA rates are variable and will fall if the Fed cuts, so don't choose a bank on a promotional rate alone.
+5. Interest is taxed as ordinary income.
+
+Rates and the specifics of any particular bank may have changed since my training data, so check current terms.
+===END===
+===ID: A2===
+Renamed 41 of 44 invoices to YYYY-MM-DD_vendor.pdf.
+
+Three were skipped: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so no date or vendor could be extracted. They're unchanged. To rename them, either tell me the date and vendor for each or have them run through OCR first.
+
+I didn't spot-check the 41 renamed files against their contents, so it's worth a quick scan of the new names to catch any misread dates or vendors.
+===END===
+===ID: C1===
+The range stops one window too early. There are `len(xs) - window + 1` full windows.
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+If `window > len(xs)`, the range is empty and it returns `[]`, same as before.
+===END===
+===ID: U3===
+I can't answer that reliably. The 2026 final was scheduled for July 19, 2026, at MetLife Stadium, which is after the point where my information is dependable, and I won't guess a winner. Check FIFA's site or any major sports news outlet for the result.
+===END===

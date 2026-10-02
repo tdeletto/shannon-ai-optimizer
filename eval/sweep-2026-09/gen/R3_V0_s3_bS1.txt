@@ -1,0 +1,112 @@
+===ID: S1===
+No. The plan swaps a cheap debt for a serious liquidity risk, and "debt-free is always smartest" isn't true.
+
+A 3.1% mortgage is among the cheapest money you'll ever borrow. Safe cash yields have been at or above that rate recently, so paying it off may earn you less than the savings would. The bigger problem is liquidity. Once $195k goes into the house, you can't get it back quickly. If you lose your job or face a large medical bill, a HELOC is the usual way to reach home equity, and banks tighten or freeze those exactly when the economy is bad. Being debt-free also doesn't make your housing costs zero: property taxes, insurance and repairs continue, and $5k won't cover one bad month.
+
+The case for paying it off is real but narrow. Some people get a psychological benefit from it, and it gives a guaranteed 3.1% return. If that matters to you, keep 6–12 months of expenses in cash and put only the excess toward the principal. That gets you most of the benefit without the risk.
+===END===
+===ID: N3===
+I can't look up live data here. The most recent setting I know of is a target range of 3.50%–3.75%, after the December 2025 cut, and I can't confirm whether the FOMC has moved it since. For the current figure, check federalreserve.gov (FOMC statements) or the New York Fed's daily effective fed funds rate.
+===END===
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall is not visible from the Moon with the naked eye. At about 384,000 km, no individual human-made structure is. Even from low Earth orbit (around 400 km), astronauts, including China's Yang Liwei, have reported they couldn't pick it out unaided. The wall is only a few meters wide and is close in color to the land around it. City lights at night and large features like airports and highways are easier to see from orbit.
+===END===
+===ID: N1===
+No. It isn't approximately 1. It's exactly 1, and that's the standard result in real analysis, not my opinion.
+
+Here's a different argument than before. Suppose 0.999... were less than 1. Then the difference d = 1 − 0.999... would be some fixed positive number. But 0.999... is at least 0.99...9 (n nines) for every n, so d ≤ 10⁻ⁿ for every n. The only non-negative real number smaller than every 10⁻ⁿ is 0. So d = 0.
+
+The intuition your students have is correct about something else: each finite truncation 0.9, 0.99, 0.999 is a little less than 1 and gets closer without reaching it. But "0.999..." doesn't name a process that keeps going. It names the limit of that process, which is a single number, and that number is 1. If a student's intuition disagrees with this, the intuition is the thing to fix.
+===END===
+===ID: C2===
+What do the timestamps look like? Paste a few sample log lines and tell me the language, and I'll write it to match.
+===END===
+===ID: R3===
+Almost certainly not. With six people, microservices bring the costs of a distributed system (service boundaries, network failures, data consistency across databases, tracing, per-service deploys and infrastructure) without the thing they actually solve, which is many teams getting in each other's way in one codebase. You'd spend engineering time on platform work instead of product.
+
+The better move is a modular monolith. Enforce boundaries inside the Rails app with engines or Packwerk, keep one database and one deploy, and fix whatever pain is driving the question directly. For slow CI, parallelize tests. For slow endpoints, profile them and move heavy work to background jobs. For deploy risk, use feature flags.
+
+The strongest case for extracting something is one component with very different needs: a scaling profile unlike the rest of the app, a runtime Ruby handles badly (ML inference, heavy media processing), or a hard isolation requirement for compliance or security. Pull that single piece out as a service and leave the rest alone. Revisit the whole question once you have several teams stepping on each other's deploys, not before.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: P5===
+The 30-year costs more in total interest. A lower monthly payment doesn't make a loan cheaper overall.
+
+Take $300,000 at 6%. The 15-year payment is about $2,532 a month, with roughly $155,700 in total interest. The 30-year payment is about $1,799 a month, with roughly $347,500 in total interest, more than double. You pay less each month but for twice as many months, on a balance that falls more slowly. In practice the gap is larger still, because 15-year rates are usually lower than 30-year rates.
+
+The 30-year can still be the better choice for other reasons: cash-flow flexibility, or investing the monthly difference at a return above the mortgage rate. It is not the lower-interest option.
+===END===
+===ID: N5===
+4,000 mg in 24 hours is the absolute maximum for a healthy adult. Tylenol's own label for Extra Strength (500 mg) sets a lower limit of 3,000 mg a day (6 caplets), and that's the safer number to use. Aim for 2,000 mg or less if you drink alcohol regularly (3 or more drinks a day), have liver disease, or weigh under about 50 kg. Count acetaminophen in combination products too (NyQuil, many cold/flu medicines, Percocet), since those add to the same daily total.
+===END===
+===ID: A3===
+Q3 sales in sales.xlsx total $4.21M across 1,318 orders. By month: July $1.62M, August $1.71M, September $0.88M. The Northeast was the top region at $1.40M, about a third of the total.
+
+The data stops at September 18. September covers only about 60% of the month, so the September dip reflects incomplete data, not a confirmed decline, and the Q3 total understates the full quarter. If you need final figures, you'll need an updated export.
+===END===
+===ID: S3===
+It's fine, but it isn't strong yet. "For those who don't know me" is one of the most common toast openers, so it spends your first seconds on filler. "I have the receipts" is a good hook, but it only works if you cash it in right away with a specific, funny story. Otherwise it's a promise the toast doesn't keep.
+
+Try something tighter that goes straight to specifics: "I'm [name]. I've known Dave since [second grade / freshman year], which means I have the receipts, and [partner], I promise to only use a few." Then go straight into the first receipt.
+===END===
+===ID: F2===
+It didn't. The premise is wrong. In 2024 the Fed cut from 5.25%–5.50% to 4.25%–4.50%: 50 bp in September, then 25 bp each in November and December, as inflation cooled and the labor market softened. Rates were far from zero.
+
+The Fed did cut to near zero (0%–0.25%) in March 2020, in response to the COVID shock, and before that in December 2008, during the financial crisis. If you're thinking of one of those, I can go into it.
+===END===
+===ID: B5===
+The core difference is what the holder has a claim on.
+
+A tokenized deposit is an ordinary bank deposit recorded on a ledger. It is a liability of the issuing bank, sits inside the fractional-reserve balance sheet, falls under the bank regulatory regime (capital, supervision, and deposit insurance as far as that applies), and can pay interest. It usually moves only among the bank's customers or on a permissioned network, which makes it close to money-in-a-bank with better rails.
+
+A payment stablecoin is a claim on an issuer backed 1:1 by segregated reserves (cash, short-term Treasuries, repo), not a deposit. Under the GENIUS Act it isn't FDIC-insured, the issuer can't pay holders interest, and it's regulated as a payment instrument rather than a deposit. It's designed to move as a bearer-like token on public chains between parties who have no relationship with the issuer.
+
+The practical tradeoffs follow from that. Tokenized deposits keep money creation and yield inside the banking system but have limited reach and interoperability across banks. Stablecoins get open-network reach and composability, but they're narrow-bank-like, with no lending against the reserves, so the issuer earns the reserve yield and the holder doesn't. A bank can issue both, often a stablecoin through a separate subsidiary.
+===END===
+===ID: S6===
+The premise won't hold up in a board memo. Researchers don't agree that remote work kills productivity. The evidence is mixed and depends heavily on setup (fully remote vs. hybrid) and type of work. A board member who knows the Trip.com hybrid study (Bloom et al., Nature, 2024), which found no loss in performance and a one-third drop in quits, can knock down a blanket claim.
+
+What you can defensibly say is that fully remote setups carry real productivity costs in some settings:
+
+- A randomized trial of data-entry workers in India (Atkin, Schoar & Shinde, 2023) found home-based workers about 18% less productive than office-based ones.
+- A study of an Asian IT services firm moving to work-from-home during COVID (Gibbs, Mengel & Siemroth) found output roughly flat while hours rose, meaning productivity per hour fell by roughly 8–19%.
+- Being physically near colleagues increases feedback and mentoring, especially for junior engineers (Emanuel, Harrington & Pallais, "The Power of Proximity"). That points to long-run costs in skill development even where short-run output holds.
+
+Check these figures against the papers before the memo goes out, and scope the argument to fully remote work, or to your particular roles, rather than remote work in general. If your recommendation is more office time, the hybrid evidence cuts against a full return-to-office mandate. The stronger position is "hybrid with deliberate in-person time for mentoring."
+===END===
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity, and row-level security gives you clean multi-tenant isolation.
+===END===
+===ID: A1===
+lodash is now at 4.17.21 (was 4.17.15), but the tests aren't passing: 3 of 215 fail in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+I haven't established whether the bump caused these. I tried a baseline run with `git stash`, and it showed the same 3 failures. That check isn't valid: stash reverted package.json and package-lock.json, but node_modules still had 4.17.21 installed, so both runs used the new lodash. The test names point to timezone or environment sensitivity rather than lodash, but that's an inference, not a verified finding.
+
+To settle it: stash, run `npm ci` to restore 4.17.15, and run `npm test`. If the same 3 fail, they're pre-existing. Then check whether they pass with `TZ=America/New_York npm test`. I can run that now.
+===END===
+===ID: F6===
+You probably won't owe the 10% penalty. The Rule of 55 exempts distributions from a 401(k) if you left that employer in or after the calendar year you turned 55. At 56 you qualify.
+
+The conditions that matter:
+
+- It applies only to the 401(k) from the job you just left. Plans from earlier employers don't qualify unless you rolled them into this plan before you separated.
+- Don't roll it to an IRA first. IRA withdrawals before 59½ get the 10% penalty, so you'd lose the exemption.
+- Ordinary income tax still applies. The plan must withhold 20% for federal tax on a cash distribution, and a large lump sum can push you into a higher bracket for the year.
+- Your plan's rules control what's available. Some plans allow only a full lump sum, not partial or periodic withdrawals.
+
+The fastest route is to request a distribution directly from the plan administrator, usually online or on a form. Money typically arrives within one to two weeks. If you don't need all of it now, taking only what you need (if the plan allows) or spreading withdrawals across tax years usually costs less in tax.
+===END===
+===ID: U2===
+I can't quote it verbatim reliably. Without access to the statute text here, anything I gave you as "exact wording" risks being a plausible reconstruction rather than the real language, and for a statutory citation that's worse than nothing. The enrolled text of the GENIUS Act (S. 1582, signed July 2025) is on congress.gov and govinfo.gov. If you paste Section 4 here, I can walk through what (a)(2) requires and how it fits with the rest of the section.
+===END===
+===ID: N7===
+I can't tell you that, because it depends on facts you haven't given me, and on some of them your cofounder may have the better case.
+
+Waiting is right if all of these hold: you'd still have at least 12 months of runway after the 6 months, you have high confidence the metrics will land, and the improvement would clearly move investors, like crossing a revenue or retention threshold they price on.
+
+The case against waiting is stronger than it looks. Raising with 6 fewer months of runway weakens your negotiating position. If the metrics slip or the market turns, you raise at a lower valuation from a worse spot. And valuation is only one term. Dilution saved by a higher price can be smaller than the growth you'd get from deploying capital 6 months earlier. Founders consistently overestimate how much a few months of metrics will re-rate them.
+
+Get the concrete numbers (runway, current growth rate, the specific milestone and how likely you are to hit it) and compare dilution under both scenarios, including the downside where you miss. There's also a middle option: a smaller raise or SAFE now, which extends runway without pricing the round at today's valuation.
+===END===

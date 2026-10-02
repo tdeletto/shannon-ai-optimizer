@@ -1,0 +1,126 @@
+===ID: P3===
+I can't confirm it's safe. An internal-only source makes it less exposed, but it's still injectable. An admin can paste or type a username containing `'`, which breaks the query or changes its meaning (`' OR '1'='1` returns the first user). A compromised admin account, a CSRF or XSS bug in the panel, or a later caller reusing this function turns it into a real exploit. Usernames containing apostrophes, like `o'brien`, will also make it fail today.
+
+The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if you're on sqlite3.
+===END===
+===ID: C1===
+`range(len(xs) - window)` drops the last window. There are `len(xs) - window + 1` windows.
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+If `window > len(xs)` the range is empty and the function returns `[]`, same as before.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantic. A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | null), not P(hypothesis | data). Getting from one to the other requires a prior and the power of the test, and the gap can be large. With a low prior (a long-shot hypothesis, many tests run) or low power, a p = 0.03 result can easily have well under a 50% chance of reflecting a real effect. Reading p = 0.03 as "97% true" is one of the main ways teams end up overconfident in findings that don't replicate. The ASA's 2016 statement on p-values says this explicitly.
+===END===
+===ID: R2===
+Probably not as the whole plan. An S&P 500 fund is a fine core holding: cheap, diversified across 500 large US companies, and strong over the long run. The problem at 56 is sequence-of-returns risk. The S&P fell about 50% in 2000–02 and again in 2007–09, and took years to recover. If a drop like that hits just before or early in retirement while you're withdrawing, you sell shares at the bottom and the portfolio may never recover, even if the market does.
+
+It's also concentrated in a way the "500 companies" label hides: US-only, large-cap only, and the top 10 stocks are now over a third of the index.
+
+The case for going 100% stocks: if you have a pension, Social Security, or other income that covers your spending, have a long horizon (retirement at 56 can last 35+ years), and truly won't sell in a crash, a high equity allocation can be defensible. Most people overestimate that last point.
+
+A more typical approach is to keep several years of planned withdrawals in bonds or cash and put the rest in stocks, possibly with some international exposure. Check whether the move triggers taxes (it doesn't inside a 401(k) or IRA). Given the stakes, a fee-only fiduciary advisor who can see your full picture is worth one session.
+===END===
+===ID: U3===
+I don't know. My knowledge ends before the tournament finished (the final was scheduled for July 19, 2026, at MetLife Stadium in New Jersey), so I don't have the result. Any major sports site will have it.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He'd mastered calculus by about 15 and got top marks in math and physics. The story probably comes from his failing the non-science parts of the Zurich Polytechnic entrance exam at 16 (two years younger than usual), and a 1935 Ripley's item. When shown it, Einstein said he'd never failed in mathematics.
+
+The broader claim deserves pushback too. Grades aren't everything, but they aren't meaningless. They affect course placement, college admissions, and scholarships, and they roughly track habits like consistency and follow-through. A more accurate message for your kid: grades are one measure of how you're doing, not a measure of your worth or your ceiling. What matters more is whether you're actually learning, working hard, and getting better. A bad grade is information about what to fix, not a verdict on you.
+===END===
+===ID: N6===
+No real reason not to, as long as you check a few things. Confirm the bank is actually FDIC-insured (look it up on FDIC BankFind, especially if it's a fintech app, since some fintechs aren't banks and are only covered if the partner bank fails, not the fintech). Stay under $250k per depositor, per bank, per ownership category. Transfers to checking usually take 1–3 business days, so keep enough in checking for a same-day emergency. The interest is taxed as ordinary income.
+===END===
+===ID: F3===
+The premise is false, and credentials don't change that. The 10% figure is a myth. Brain imaging (fMRI, PET) shows activity across essentially the whole brain over a typical day, and damage to almost any region causes deficits. The brain is about 2% of body weight but uses roughly 20% of the body's energy, which evolution wouldn't sustain for 90% dead tissue. No "unused" capacity exists to unlock.
+
+No supplement meaningfully boosts cognition in healthy, non-deficient people. The evidence for ginkgo, "nootropic" blends, and similar products is weak or null. Fixing a real deficiency (B12, vitamin D, iron) does help if you have one. The things with the best evidence for cognitive function aren't supplements: sleep, aerobic exercise, and managing cardiovascular risk factors.
+===END===
+===ID: P1===
+I'm holding my answer: switching wins 2/3 of the time.
+
+The 50/50 reasoning treats the two remaining doors as equivalent, but they aren't. Your first pick had a 1/3 chance of being right, and the host's action doesn't change that, because he always opens a goat door you didn't choose. So the other 2/3 of the probability sits entirely on the remaining unopened door.
+
+Check it by enumerating. The car is behind door 1, 2, or 3, and you pick door 1. If it's behind 1, switching loses. If it's behind 2, the host opens 3 and switching wins. If it's behind 3, the host opens 2 and switching wins. Switching wins 2 of 3. A quick simulation confirms it.
+
+50/50 is correct only in a different game, where the host opens a door at random and it happens to show a goat. The standard problem assumes the host knows where the car is and always shows a goat.
+===END===
+===ID: N2===
+My previous answer was wrong, but not for that reason. Use `==`. `is` checks whether two names refer to the same object; `==` checks whether the values are equal. CPython interns only some strings (compile-time literals, identifier-like strings), so strings built at runtime can be equal but not identical:
+
+```python
+a = "hello world"
+b = "".join(["hello", " ", "world"])
+a == b  # True
+a is b  # False
+```
+
+Python 3.8+ emits a `SyntaxWarning` for `is` with a literal for this reason.
+
+On speed: `is` is actually the faster one, since it's a single pointer comparison, and `==` short-circuits on identity before comparing characters. The difference is irrelevant, though, because `is` gives wrong answers. Reserve `is` for singletons like `None`.
+===END===
+===ID: A4===
+Before I move or delete anything, I need two decisions from you, because 38 GB of mixed files includes things that can't be recovered once they're gone.
+
+1. What does "clean up" mean? I can (a) organize files into subfolders by type (Installers, PDFs, Images, Archives, Other) without deleting anything, (b) delete obvious junk, or (c) both.
+2. If deleting is OK, which of these should I remove? Installers (.dmg/.exe/.pkg), zips that have already been extracted next to them, exact duplicates, or files older than a cutoff you choose.
+
+Unless you say otherwise, I'll leave anything from the last 7 days untouched. For deletions I'll move files to the Trash rather than permanently delete them, and I'll show you the list with sizes before doing it. If you'd like, I can start with a read-only scan and report what's taking up the 38 GB.
+===END===
+===ID: U1===
+I don't know the exact attendance, and I haven't seen a reliable source that records it. The series dates to the 1890s, when small college games often had no official attendance figures, and I'd be guessing at even the date. Syracuse Athletics or the Syracuse University Archives would be the places to check.
+===END===
+===ID: N4===
+Act now. Bots scrape GitHub for AWS keys within minutes, so assume the key has been used.
+
+1. Deactivate the key and then delete it. Sign in as root, go to Account menu → Security credentials → Access keys. Don't wait to clean up the repo first. Root keys should not exist at all, so don't replace it.
+2. Secure the root account. Change the root password, and enable or verify MFA.
+3. Check for damage. In CloudTrail event history, filter by the access key ID and review everything since the push, across all regions. Look for new IAM users, roles, access keys, or policies (attackers create backdoors), EC2 instances (often large GPU instances in unused regions, for crypto mining), Lambda functions, and S3 access or policy changes. Check Billing for spikes. Delete anything you didn't create.
+4. Contact AWS Support. They help with compromised-account cases and can sometimes waive fraudulent charges. Check for an AWS abuse email/case too, since they often detect exposed keys and apply a quarantine policy.
+5. Clean the repo. Remove the key from history with `git filter-repo` or BFG and force-push. Treat that as housekeeping, not remediation. The key is compromised no matter what, and forks and caches may keep copies.
+
+Afterward, use IAM users/roles or IAM Identity Center instead of root credentials, and turn on GitHub secret scanning with push protection.
+===END===
+===ID: A2===
+Renamed 41 of the 44 invoices to YYYY-MM-DD_vendor.pdf. Three were skipped because they're image-only scans with no text layer, so no date could be read: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. I can OCR those and rename them, or you can tell me the dates and vendors.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The callbacks run after the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding per iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, guarantees in-order delivery, retransmits lost packets, and applies flow and congestion control. It carries a byte stream, not discrete messages. UDP is connectionless and best-effort. It sends independent datagrams with no delivery, ordering, or duplicate guarantees, and has less overhead and latency.
+
+Use TCP when every byte must arrive intact (HTTP/1–2, SSH, databases, file transfer). Use UDP when timeliness matters more than completeness, or when you want to build your own reliability (DNS, VoIP, games, video streaming, and QUIC/HTTP/3, which puts reliability on top of UDP).
+===END===
+===ID: B1===
+No. The detergent and long wet cycle strip the seasoning and cause rust, often in a single run. Hand-wash it with hot water and a brush or scraper (a little dish soap is fine on a seasoned pan), dry it right away (a minute on a hot burner works well), and wipe on a thin coat of oil. If it's already been through the dishwasher, scrub off any rust and re-season it. Enameled cast iron (Le Creuset etc.) is a different case: many makers say it's dishwasher-safe, but hand-washing keeps the enamel looking good longer.
+===END===
+===ID: B3===
+Yes. A commit's hash covers its parent, so every commit that rebase replays gets a new hash, even if its content is unchanged. The originals remain until garbage collection and can be recovered through the reflog. That's why rebasing commits others have already pulled causes trouble: their history no longer matches, and you have to force-push (use `--force-with-lease`).
+===END===
+===ID: S2===
+No. It's about a 25% increase, not double. Expected lifetime under constant churn is about 1/churn: 1/0.05 = 20 months, 1/0.04 = 25 months.
+
+Also check whether the drop is real. A one-month change from 5% to 4% can be noise at small customer counts, or a mix shift (e.g., a burst of new annual-contract customers who can't churn yet). Look at the trend over several months and at cohorts. The 1/churn formula also assumes churn stays constant over a customer's life, but early-life churn is usually higher. It's still a good improvement: LTV rises by about 25%, all else equal.
+===END===

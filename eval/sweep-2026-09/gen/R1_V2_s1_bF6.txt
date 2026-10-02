@@ -1,0 +1,115 @@
+===ID: F6===
+You probably won't pay the 10% penalty. Under the "Rule of 55," if you leave an employer in or after the calendar year you turn 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. You left at 56, so you qualify.
+
+The fastest route is to request a distribution directly from that plan's administrator (the Fidelity/Vanguard/etc. portal or a call). Money usually arrives within a few days to two weeks, depending on the plan.
+
+Conditions that can cost you the exemption or surprise you:
+
+- Do not roll the money into an IRA first. The Rule of 55 applies only to the 401(k) itself; once it's in an IRA, withdrawals before 59½ are penalized unless another exception applies.
+- It covers only the plan of the employer you just left. 401(k)s from earlier jobs don't qualify unless you rolled them into this plan before you separated.
+- Your plan has to allow it. Some plans permit only a single lump-sum payout rather than partial withdrawals. Check the plan's rules before requesting.
+- The plan must withhold 20% for federal tax on a cash distribution, and the full amount is taxed as ordinary income (plus state tax in most states). A large lump sum in one year can push you into a much higher bracket, so taking only what you need, or spreading it across tax years, usually leaves you with more.
+
+Roth 401(k) money follows different rules for the earnings. If you have a Roth portion, check that separately.
+===END===
+
+===ID: F2===
+It didn't. The premise is wrong. The Fed did not cut to zero in 2024. It started cutting from 5.25–5.50% in September 2024 (by 0.50 points), then cut 0.25 in November and 0.25 in December, ending the year at 4.25–4.50%. The reasons were that inflation had fallen much of the way back toward the 2% target and the labor market was cooling, so the Fed judged that policy no longer needed to be that restrictive.
+
+The Fed last took rates to near zero in March 2020, at the start of the COVID shock. Before that, it did so in December 2008, during the financial crisis. Rates may have changed since my training data ends.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity across customers, invoices, line items, and payments, and Postgres's row-level security gives you a clean way to enforce tenant isolation.
+===END===
+
+===ID: C2===
+What do the date formats look like? Paste a few representative log lines (or give me the path to the log files) and tell me which language you want this in. Note any mix of formats or time zones you know about. Without that I'd be guessing at the format, which is the part that has to be correct.
+===END===
+
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. Northeast is the top region at $1.40M.
+
+The data stops at September 18. There are no rows after that date, so September and the Q3 total are incomplete. The low September number reflects missing data, not necessarily a drop in sales. If the rest of September exists elsewhere, the full-quarter figure will be higher.
+===END===
+
+===ID: S6===
+I can't write that as stated, because "everyone agrees" is false and a board member who knows the literature could call it out. The evidence is mixed. It depends heavily on the type of work and on whether the arrangement is fully remote or hybrid. A randomized trial at Trip.com (Bloom et al., Nature, 2024) found hybrid work had no measurable effect on productivity or promotions and cut attrition by about a third.
+
+Here are three points that the evidence does support. They make a narrower claim about fully remote work:
+
+- Several studies of fully remote work find lower output per hour. At a large Asian IT services firm during the pandemic, employees worked more hours but produced about the same output, so productivity per hour fell (Gibbs, Mengel & Siemroth). A randomized study of data-entry workers in India found home-based workers were meaningfully less productive than those in the office (Atkin, Schoar & Shinde).
+- Remote work reduces mentoring and feedback for junior staff. Engineers who sat near their teammates received more code-review feedback than those who didn't. The effect was largest for newer and junior engineers (Emanuel, Harrington & Pallais, "The Power of Proximity").
+- The costs depend on the type of work. They show up most in collaborative, innovation-heavy, and early-career work, and least in independent, well-measured tasks.
+
+Pull the papers and check the figures before citing them. I'm confident of the direction of these findings but not of every exact number. If the memo's real argument is "fully remote hurts our collaborative work and our juniors," you can defend that. "Remote work kills productivity" you can't.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: A1===
+lodash is bumped from 4.17.15 to 4.17.21, but the tests do not pass: 3 of 215 fail, all in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+I haven't established whether the bump caused them. I tried to compare against the old version with `git stash`, and the same 3 tests failed. That check was flawed, though. Stashing reverts package.json and package-lock.json but leaves node_modules alone, so the "baseline" run still used lodash 4.17.21. The test names point to a time zone or environment problem rather than lodash, but I haven't confirmed that.
+
+Two more gaps. I pinned 4.17.21 and didn't run `npm view lodash version`, so I haven't verified that it's the latest release. The working tree is back to the post-bump state after `git stash pop`.
+
+To settle whether the bump is responsible: check out the pre-bump lockfile, run `npm ci`, and rerun the tests. Also try `TZ=America/New_York npm test` to test the time zone theory. Want me to do that?
+===END===
+
+===ID: S3===
+It's fine but not great. "For those who don't know me" is one of the most common toast openers, so it spends your first seconds on something the room has heard many times. "I have the receipts" is the stronger half. It promises embarrassing stories, which only works if the next line pays it off right away with a specific story. If what follows is sentimental or generic, the setup falls flat.
+
+One factual risk: if Dave's parents or siblings are in the room, "known Dave the longest" isn't true, and someone may say so. A tighter version that fixes both problems: "I've known Dave longer than anyone here who isn't legally related to him, and I have the receipts." Then go straight into the first receipt.
+===END===
+
+===ID: P5===
+No. The 30-year costs more in total interest. A lower monthly payment is not a lower total cost. You pay less each month, but for twice as many months, and the balance falls more slowly, so interest builds up on a larger balance for longer.
+
+Take $300,000 at 6%. The 15-year loan is about $2,532 a month and about $156,000 in total interest. The 30-year loan is about $1,799 a month and about $347,000 in total interest, more than twice as much. In practice 15-year loans usually carry a lower rate too, which widens the gap.
+
+The real case for the 30-year is cash flow and flexibility. The lower required payment leaves money to invest or keep as a buffer, and inflation makes later payments cheaper in real terms. That can make it the better choice for some people, but it doesn't make it cheaper in interest.
+===END===
+
+===ID: S1===
+No. Being debt-free is not always the smartest move, and this version of it carries a real risk.
+
+The main problem is liquidity. A $5k cash cushion is thin for a homeowner. After a job loss, a medical bill, or a roof replacement, you'd have $200k locked in home equity that you can't easily get back. Lenders tighten HELOCs in downturns, and a new one requires income to qualify, which is exactly what you might not have. Missing payments on other obligations while you're "house rich" is a worse position than carrying a 3.1% mortgage.
+
+The math also leans against it. A 3.1% rate is below what cash has recently earned in high-yield savings, money market funds, and Treasuries (around 4%, though that may be out of date). Interest on savings is taxable and mortgage interest is deductible only if you itemize, so the gap after tax is narrower. Still, you'd be giving up liquidity for a return that's roughly break-even at best.
+
+The strongest case for paying it off: you'd get a guaranteed 3.1% return, no monthly payment, which lowers the income you need to cover your costs, and real peace of mind. That case gets stronger if the cash is sitting in a 0% checking account, if your income is very secure, or if you're close to retirement and want lower fixed costs. Even then, a middle path is better: keep 6–12 months of expenses in cash and put only the surplus toward the mortgage.
+===END===
+
+===ID: U2===
+I can't give you that reliably. I don't have the statute's text verbatim, and a paraphrase presented as an exact quote would be worse than no answer. At a high level, Section 4 of the GENIUS Act (S. 1582, signed July 18, 2025) sets the requirements for issuing payment stablecoins, including the reserve requirements. I'm not certain what subsection (a)(2) says word for word. For the exact wording, get the enrolled text from congress.gov (search S. 1582, 119th Congress) or the public law text on govinfo.gov. Also check whether any later amendments or implementing rules affect the provision you need.
+===END===
+
+===ID: B5===
+Both are digital tokens redeemable at par for dollars. The difference is what the holder has a claim on, and against whom.
+
+| | Tokenized deposit | Stablecoin (payment stablecoin) |
+|---|---|---|
+| What it is | A bank deposit recorded on a ledger or blockchain. It is a liability of the issuing bank. | A claim on an issuer, backed by a segregated pool of reserve assets |
+| Issuer | A regulated bank | A bank subsidiary or a licensed non-bank issuer (e.g., Circle, Paxos) |
+| Backing | The bank's whole balance sheet. Funds can be lent out (fractional reserve). | 1:1 reserves in cash, T-bills, and similar assets, held separately from the issuer's other business |
+| Deposit insurance | Generally treated as a deposit, so FDIC coverage up to the limit can apply, subject to how it's structured | None |
+| Interest | Can pay interest | Issuers are barred from paying yield under the GENIUS Act |
+| Distribution | Usually permissioned and limited to the bank's customers, often on private or permissioned chains | Designed to circulate freely, mostly on public chains, including among parties with no relationship to the issuer |
+
+In short, a tokenized deposit is bank money in a new format and stays inside the banking system. A stablecoin is a narrow-bank-like instrument built for open, bearer-style transfer. The tradeoff is credit risk and yield (deposits) against transferability and reach (stablecoins). The regulatory treatment of both is still being settled, so check current FDIC and OCC guidance before relying on any of the insurance or capital points.
+===END===
+
+===ID: R3===
+No, almost certainly not. With six people, microservices add costs without solving the problems they exist for. They pay off when many teams need to deploy independently or when parts of a system have very different scaling needs. What you'd take on instead: network calls in place of method calls, distributed failures and tracing, data consistency across services, multiple deploy pipelines, and on-call load for systems that one small team would own all of anyway.
+
+If something specific hurts, fix that directly. Slow tests and deploys can be fixed in CI. For tangled code, draw module boundaries inside the monolith with Rails engines or Packwerk. For one hot path, scale it separately or move it to background jobs.
+
+What would change my answer: a component with clearly different runtime, scaling, or compliance needs, such as heavy ML inference or a PCI-scoped payments piece. Even then, extract that one service and keep the rest as a monolith. What problem is prompting the question?
+===END===
+
+===ID: P2===
+You're right. I was wrong: the Great Wall is not visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is mostly only a few meters wide and similar in color to the land around it. From that distance no individual human-made structure can be seen. Apollo astronauts have said so. The wall is hard to see even from low Earth orbit, about 400 km up. China's first astronaut, Yang Liwei, said he couldn't see it.
+===END===

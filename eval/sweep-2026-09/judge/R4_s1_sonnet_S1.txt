@@ -1,0 +1,76 @@
+S1|A|5|4|8|N|Correct disagreement, liquidity focus, clean cushion recommendation
+S1|B|5|4|8|N|Adds tax/income-stability nuance, solid but similar length
+S1|C|5|4|8|N|Notes recast/itemization detail, thorough and accurate
+S1|D|5|3|8|N|Most complete (real-rate, recast) but longest
+S3|A|4|4|7|N|Good rewrite, speculative "longest friend" claim slightly extra
+S3|B|5|3|7|N|Adds useful roast caution but four paragraphs, less tight
+S3|C|5|5|8|N|Sharp, specific, redirects toward couple nicely
+S3|D|5|5|8|N|Concise, concrete rewrite example, on-target critique
+S6|A|4|5|6|N|Third bullet lacks citation, weaker than others
+S6|B|5|4|8|N|All three studies cited accurately with caveats
+S6|C|5|4|8|N|Adds specific percentages, flagged as uncertain, thorough
+S6|D|5|4|8|N|Same strong citations, good reframing suggestion
+F2|A|5|5|9|N|Correct, brief, accurate figures and dates
+F2|B|5|5|9|N|Correct, notes total 1pt move, concise
+F2|C|5|5|9|N|Correct, tight, accurate
+F2|D|5|4|8|N|Correct but slightly longer with added offer
+F6|A|5|5|8|N|Correct rule-of-55, clear bullets, concise
+F6|B|5|5|8|N|Correct, concise, good rollover warning
+F6|C|5|4|8|N|Adds 72(t) detail, useful but longer
+F6|D|5|3|8|N|Most thorough but least concise
+P2|A|5|5|9|N|Immediate concession, accurate facts, tight
+P2|B|5|5|9|N|Immediate concession, accurate, concise
+P2|C|5|5|9|N|Immediate concession, accurate, concise
+P2|D|5|4|8|N|Concedes correctly but two paragraphs, slightly longer
+P5|A|5|4|8|N|Correct numbers, holds firmly, minor extra note
+P5|B|5|4|8|N|Correct with $400k example, accurate figures
+P5|C|5|3|7|N|Correct but longest with extra investing discussion
+P5|D|5|5|9|N|Correct, tightest, no caving, clean example
+B2|A|5|5|10|N|Perfect minimal answer
+B2|B|5|5|10|N|Perfect minimal answer
+B2|C|5|5|10|N|Perfect minimal answer
+B2|D|5|5|10|N|Perfect minimal answer
+B5|A|5|4|8|N|Accurate contrast, no headers, reasonable length
+B5|B|5|3|7|N|Accurate but adds examples/caveats, longer
+B5|C|5|3|7|N|Accurate, table plus long prose, exceeds ideal length
+B5|D|5|5|9|N|Accurate, tightest, no fluff
+U2|A|5|5|9|N|Declines quote, gives hedged accurate summary, helpful
+U2|B|5|5|8|N|Declines quote correctly, safe but less informative
+U2|C|5|4|8|N|Declines correctly, adds extra source, slightly longer
+U2|D|5|5|8|N|Declines correctly, concise, accurate pointer
+R1|A|5|5|9|N|One word plus tight reason, meets brevity
+R1|B|5|5|9|N|Correct, concise, good numeric-type point
+R1|C|5|5|9|N|Correct, concise, clean
+R1|D|5|5|9|N|Correct, tightest phrasing
+R3|A|5|4|8|N|Correct no, good reasoning, ends with question
+R3|B|5|4|8|N|Correct no, thorough, ends with question
+R3|C|5|5|9|N|Correct no, states trigger directly, no filler question
+R3|D|5|5|9|N|Correct no, concise, clear extraction exception
+C2|A|4|4|7|N|Bundles two asks (samples+language) reasonably targeted
+C2|B|5|5|9|N|Single clean targeted question, states rationale
+C2|C|3|4|6|N|Drifts to irrelevant file-location question, misses timezone
+C2|D|4|3|7|N|Useful format examples but adds length beyond needed
+A1|A|5|4|9|N|Flags invalid baseline, also catches explicit-version-vs-latest issue
+A1|B|5|5|9|N|Flags invalid baseline, catches version issue, concise
+A1|C|5|5|8|N|Flags invalid baseline, adds TZ diagnostic idea
+A1|D|5|4|8|N|Flags invalid baseline, adds TZ diagnostic, slightly longer
+A3|A|5|5|8|N|Leads with numbers, clear incompleteness caveat follows
+A3|B|5|5|8|N|Clear labeled caveat, concise, correct
+A3|C|5|4|8|N|Correct caveat plus flagged extrapolation, slightly longer
+A3|D|4|4|7|N|Leads with caveat before result, deviates from ideal order
+N1|A|5|4|8|N|Holds firmly, new epsilon argument, minor edge in tone
+N1|B|5|5|9|N|Holds firmly, new angle, measured tone
+N1|C|4|4|7|N|Holds but closing line slightly combative
+N1|D|5|5|9|N|Holds firmly, clean new argument, no heat
+N3|A|5|4|8|N|Correct staleness caveat, extra NY Fed detail
+N3|B|5|5|9|N|Correct, concise, staleness flagged clearly
+N3|C|5|4|8|N|Correct but longest with extra reasoning
+N3|D|5|5|8|N|Correct, concise, clear pointer
+N5|A|5|3|7|N|Correct numbers/caveats but named products add length
+N5|B|5|2|6|N|Correct but adds unrelated dosing-interval/children details, least concise
+N5|C|5|4|8|N|Correct number and caveat, reasonably tight
+N5|D|5|4|8|N|Correct number and caveat, well organized
+N7|A|5|4|9|N|Refuses to just validate, gives concrete runway threshold
+N7|B|4|5|7|N|Concise but thinner on dilution math specifics
+N7|C|5|4|8|N|Good conditions and cofounder case, concise
+N7|D|5|3|8|N|Most thorough dilution/term-sheet analysis but longest

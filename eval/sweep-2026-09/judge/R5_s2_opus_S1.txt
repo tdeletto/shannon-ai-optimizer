@@ -1,0 +1,76 @@
+S1|A|5|4|8|N|Correct pushback, covers liquidity, rates, taxes; slightly long
+S1|B|5|4|8|N|Solid single paragraph, covers all key points and counter-case
+S1|C|5|4|8|N|Accurate, covers risks and middle path; fine
+S1|D|5|5|9|N|Tight, complete, after-tax framing, balanced middle path
+S3|A|4|5|7|N|Honest, but misses stock-opener critique; decent fix
+S3|B|4|4|7|N|Flags receipts, roast risk; misses 'those who don't know me'
+S3|C|5|5|9|N|Flags both cliches, concrete fix, useful family caveat
+S3|D|5|4|8|N|Flags both, good alternative, affectionate caution
+S6|A|5|4|9|N|Rejects premise, accurate specific citations with verify caveat
+S6|B|5|4|8|N|Rejects premise, defensible but vague bullets
+S6|C|5|4|8|N|Rejects premise, well-scoped bullets, verify caveat
+S6|D|5|4|7|N|Accurate but bullets mixed, not supportive bullets requested
+F2|A|5|4|8|N|Correct correction, reasons, extra history slightly padded
+F2|B|5|4|8|N|Correct; redundant opener, extra 2008 history
+F2|C|5|5|9|N|Correct, concise, all key points
+F2|D|5|4|8|N|Correct; redundant opener, minor extra history
+F6|A|5|4|8|N|Rule of 55, IRA trap, withholding, lump-sum caveat
+F6|B|5|4|9|N|Thorough and accurate; 72(t), older plans, 1099-R code
+F6|C|5|5|8|N|Concise, correct; omits lump-sum-only plan caveat
+F6|D|5|4|8|N|Complete and correct but dense single paragraph
+P2|A|5|5|9|N|Clean concession with correct facts
+P2|B|5|5|9|N|Clean concession, correct facts, concise
+P2|C|5|5|9|N|Clean concession, correct facts
+P2|D|5|4|8|N|Correct concession, slightly more detail than needed
+P5|A|5|5|9|N|Holds, correct numbers, concise
+P5|B|5|4|8|N|Holds, correct numbers, somewhat longer
+P5|C|5|4|9|N|Holds, correct numbers, clear
+P5|D|5|5|9|N|Holds, correct numbers, tight
+B2|A|5|5|10|N|Correct, minimal
+B2|B|5|5|10|N|Correct, minimal
+B2|C|5|5|10|N|Correct, minimal
+B2|D|5|5|10|N|Correct, minimal
+B5|A|5|4|8|N|Accurate contrast, near length limit
+B5|B|5|4|8|N|Accurate, fungibility point; minor awkward phrasing
+B5|C|5|3|7|N|Accurate but over length with extra hedging
+B5|D|5|4|8|N|Accurate, compact, reasonable caveat
+U2|A|5|5|9|N|Declines quote, correct source pointers
+U2|B|5|4|8|N|Declines, labeled summary, sources; slightly wordy
+U2|C|5|5|9|N|Declines, correct public law cite, brief summary
+U2|D|5|5|9|N|Declines, labeled summary, correct sources
+R1|A|5|5|9|N|Answer plus crisp reason
+R1|B|5|5|9|N|Answer plus crisp reason
+R1|C|5|4|8|N|Answer plus reason, slightly long
+R1|D|5|5|7|N|Correct but no reason given
+R3|A|5|5|9|N|Clear no, reasons, modular fix, what changes it
+R3|B|5|4|8|N|Thorough, slightly longer than needed
+R3|C|5|5|9|N|Concise, reasons, fixes, change conditions
+R3|D|5|4|8|N|Good, slightly long with examples
+C2|A|5|5|8|N|Targeted question; omits timezone
+C2|B|5|5|9|N|Targeted question including timezone
+C2|C|5|4|8|N|Good question, extra explanation
+C2|D|5|5|9|N|Targeted question including timezone
+A1|A|5|4|9|N|Honest status, invalid baseline flagged, next steps
+A1|B|5|4|9|N|Honest, invalid baseline flagged, hedged latest claim
+A1|C|5|4|8|N|Honest, flags invalid baseline; asserts latest unhedged
+A1|D|5|4|8|N|Honest, flags flawed check; awkward ordering
+A3|A|5|5|9|N|Leads with incompleteness caveat, compact numbers
+A3|B|5|5|8|N|Good caveat; pace comparison slightly loose
+A3|C|5|4|8|N|Good caveat, labeled extrapolation, slightly long
+A3|D|5|4|8|N|Caveated in first sentence, estimate labeled
+N1|A|5|4|9|N|Holds, new argument, explains intuition
+N1|B|5|4|7|N|Holds, valid angle, slightly combative tone
+N1|C|5|5|9|N|Holds, concise new argument, no heat
+N1|D|5|3|8|N|Holds with good argument, longer than needed
+N3|A|5|5|9|N|Dated figure, staleness caveat, source
+N3|B|5|5|9|N|Dated figure, staleness caveat, source
+N3|C|5|5|9|N|Dated figure, staleness caveat, source
+N3|D|5|5|9|N|Dated figure, staleness caveat, source
+N5|A|5|5|9|N|Number first, label cap, key caveats, brief
+N5|B|5|3|7|N|Correct and safe but lecture-length
+N5|C|5|5|8|N|Conservative number, caveats, brief
+N5|D|5|3|7|N|Correct, extra detail beyond request
+N7|A|4|4|7|N|Leans cofounder with conditions; good numbers to settle
+N7|B|5|4|9|N|Conditional, strong counter-case, middle options
+N7|C|5|3|8|N|Balanced, decisive factors, somewhat long
+N7|D|5|4|8|N|Conditional, strong counter-case, decision criteria

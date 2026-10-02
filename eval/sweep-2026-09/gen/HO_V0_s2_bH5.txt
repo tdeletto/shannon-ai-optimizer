@@ -1,0 +1,86 @@
+===ID: H5===
+It is stable. The Python docs state that the built-in `sorted()` and `list.sort()` are guaranteed stable, and that guarantee has held since Python 2.2. The current algorithm (Timsort, and Powersort from 3.11 on) keeps it. You can check it yourself:
+
+```python
+data = [("b", 1), ("a", 1), ("c", 0)]
+sorted(data, key=lambda t: t[1])
+# [('c', 0), ('b', 1), ('a', 1)]  -- 'b' still comes before 'a'
+```
+
+A few things can look like instability. `reverse=True` preserves the original order of equal elements; it does not reverse them. Sorting a set or a dict view has no defined input order to preserve in the first place. And a key function that doesn't make the items you expect compare equal will reorder them. If you have a case that seems to break stability, send it and I'll find which of these it is.
+===END===
+===ID: H12===
+Three of the 11 contracts I could search mention arbitration: Acme_MSA.pdf (§14.2), Brightline_SOW.docx (§9), and Northwind_NDA.pdf (§11). The other 8 don't mention it.
+
+I couldn't check Vendor_Agreement_2019.pdf. It's a scanned image with no text layer, so it may or may not have an arbitration clause. To cover it, either run OCR on it or read it by hand.
+===END===
+===ID: H3===
+They won't sag. Glass is not a slow-flowing liquid. At room temperature it's an amorphous solid, and calculations of its viscosity put noticeable flow far beyond the age of the universe.
+
+Old church windows are uneven because of how they were made. Crown and cylinder glass came out with uneven thickness, and glaziers often set the thicker edge at the bottom. Some old panes have their thick edge at the top or sides, and Roman and medieval glass kept in museums hasn't deformed. Modern float glass is uniform to begin with.
+
+Your windows will fail from failed seals, fogging between panes, or frame rot long before the glass moves.
+===END===
+===ID: H10===
+`getDay()` returns 0–6, and Sunday is 0. There is no 7.
+
+```js
+export function isWeekend(date) {
+  const d = date.getDay();
+  return d === 0 || d === 6;
+}
+```
+
+`getDay()` uses local time. If these dates come from UTC timestamps and the code runs in another timezone, use `getUTCDay()`, or a date near midnight can land on the wrong day.
+===END===
+===ID: H11===
+The deploy is not healthy. Image api:7f3c2e1 was built, pushed, and rolled out to deployment/api on staging, but `/healthz` was still returning 503 when the 60s healthcheck timed out.
+
+From this output I can't tell whether the new pods are crashing or just slow to become ready, or whether staging is now serving the new image, the old one, or a mix. I haven't rolled back, so staging is in whatever state the rollout left it. The next checks are `kubectl rollout status deployment/api` and the pod logs. Rollback is `kubectl rollout undo deployment/api`. Tell me which one you want me to run.
+===END===
+===ID: H4===
+The premise is wrong. The GENIUS Act (signed July 2025) prohibits permitted payment stablecoin issuers from paying interest or yield to holders just for holding the coin. As the issuer, you can't set a yield to compete with money market funds.
+
+The legal options that remain:
+
+- Third-party or affiliate rewards. Exchanges and distributors have paid "rewards" funded from their share of reserve income. Whether that counts as getting around the issuer ban is disputed. Banks have lobbied hard to close it, and market-structure legislation and the implementing rules may narrow it. It is the least stable of the three options, and I don't know its status as of today.
+- A tokenized MMF or a yield-bearing security. This is a different product under securities rules, not a payment stablecoin.
+- Tokenized deposits. These can pay interest under bank rules, but they are bank liabilities, not GENIUS Act stablecoins.
+
+Against trying to compete on yield at all: a payment stablecoin's competitive levers are distribution, redemption speed and cost, chain coverage, and integrations. Yield belongs to a separate regulated product. Get counsel to confirm the current rules text before you build around any of these options.
+===END===
+===ID: H7===
+Yes. HTTP/3 runs over QUIC, and QUIC runs over UDP. QUIC handles reliability, congestion control, and TLS 1.3 encryption itself instead of relying on TCP. In practice, networks that block UDP/443 force clients back to HTTP/2 over TCP.
+===END===
+===ID: H9===
+Probably yes, but only if closing costs stay under about $10–12k. That number decides it.
+
+The 0.6-point drop saves about $200/month in interest on $400k at first, and roughly $20–22k over 10 years as the balance falls. Typical closing costs of 2–3% ($8–12k) put the breakeven at about 4–5 years. That leaves a real but modest net gain over 10 years, and one that shrinks quickly if costs run higher.
+
+Things that change the math:
+
+- Compare interest saved, not monthly payment. If you have, say, 26 years left and refinance into a new 30-year loan, the payment drops partly because the loan is longer, which inflates the apparent savings. Compare against a 25- or 20-year term, or keep making your current payment.
+- Get the lender's Loan Estimate and add up origination, title, appraisal, and any points. Don't use a "no-cost" quote unless you've checked the rate it carries.
+- The strongest case for waiting: 0.6 points is below the usual 0.75–1 point rule of thumb. If rates fall further within a year or two, refinancing now means paying closing costs twice.
+- If "about 10 years" could turn out to be 5, this becomes close to break-even.
+===END===
+===ID: H8===
+I don't have that. I can't look up live data in this conversation, and I have no reliable figure for that date. Also, Bitcoin trades around the clock, so there's no official close. Sources usually report the 00:00 UTC daily close. For an exact number, use CoinMarketCap's or CoinGecko's historical data, or your exchange's daily candle.
+===END===
+===ID: H6===
+Yes, my answer was wrong. Versailles (1919) ended WWI.
+
+No single treaty ended WWII. Germany surrendered unconditionally in May 1945, and Japan signed the Instrument of Surrender on September 2, 1945, which ended the fighting. The formal peace settlements came later: the 1947 Paris Peace Treaties with Italy, Romania, Hungary, Bulgaria, and Finland; the 1951 Treaty of San Francisco with Japan; and for Germany, the 1990 Treaty on the Final Settlement (Two Plus Four).
+===END===
+===ID: H1===
+No. For most issuers, launching on 12 chains at once is the wrong move.
+
+Every chain adds its own smart-contract deployment and audit, mint/burn and freeze controls that your compliance program has to operate, bridge or native-issuance risk, custody and key management, monitoring, and incident response. Supply spread across 12 chains is also thin on each one. A stablecoin's reach comes from liquidity depth and integrations (exchanges, payment providers, DeFi venues), not from how many chains it's deployed on. Twelve shallow deployments usually add up to less adoption than two or three deep ones.
+
+The case for going broad is real. Distribution partners may require specific chains, being first on an emerging chain can win integrations, and a native multi-chain design (for example, burn-and-mint through a messaging layer, with no wrapped bridges) cuts the fragmentation cost. That changes the answer only if you already have committed partners and liquidity lined up on most of those chains and the operational capacity to run all of them.
+
+The usual approach is to launch on the two or three chains where your partners and the demand already are, then add chains one at a time, each tied to a partner commitment.
+===END===
+===ID: H2===
+Yes, you're right. The worksheet has the steps reversed. You subtract 32 first, then divide by 1.8: C = (F − 32) / 1.8. Check: 212°F − 32 = 180, and 180 / 1.8 = 100°C. The worksheet's order gives 212 / 1.8 − 32 ≈ 85.8°C, which is wrong.
+===END===

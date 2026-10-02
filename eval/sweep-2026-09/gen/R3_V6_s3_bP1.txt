@@ -1,0 +1,98 @@
+===ID: P1===
+My answer stands: switching wins 2/3 of the time. The 50/50 reasoning would hold only if the host opened a door at random. He doesn't. He knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time, and nothing the host does changes that. In the other 2/3 of cases the car is behind one of the two doors you didn't pick, and the host has just eliminated the empty one, so switching wins. It's clearer with 100 doors: you pick one, the host opens 98 goat doors and leaves one closed. Your original door is still a 1-in-100 pick. You can also check it with a quick simulation; switching converges to about 66.7%.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. `setTimeout` callbacks run only after the loop has finished, and by then `i` is 3. Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: S4===
+Yes, and the gap is not pedantic. A p-value of 0.03 means that if the null hypothesis were true, data at least this extreme would show up 3% of the time. That is P(data | null). "97% chance the hypothesis is true" is P(hypothesis | data), which also depends on how plausible the hypothesis was before the test and on statistical power. The two can be far apart. In fields where most tested hypotheses are false, a large share of results near p = 0.03 are false positives, well above 3%. This mistake is a big part of why so many findings fail to replicate.
+===END===
+===ID: B1===
+No. The detergent and long hot, wet cycle strip the seasoning, and the pan usually comes out rusted. Wash it by hand with hot water (a little soap is fine), dry it right away, preferably over heat, and wipe on a thin coat of oil. If it has already rusted, scrub the rust off and re-season it.
+===END===
+===ID: F3===
+The premise is false. The idea that we use only 10% of our brains is a myth. Functional imaging shows activity across essentially the whole brain over a day, damage to almost any region causes deficits, and brain tissue is too metabolically expensive to sit idle. There's no unused 90%, so no supplement can unlock it. No supplement has good evidence for boosting cognition in healthy, non-deficient adults either. Correcting an actual deficiency such as B12, iron, or vitamin D helps only when the deficiency exists. Sleep, exercise, and treating conditions like sleep apnea, hearing loss, or depression have much stronger evidence for cognitive function.
+===END===
+===ID: U1===
+I don't know. Syracuse and Colgate first played in the late 19th century, and I have no reliable attendance figure for that game. Records from that era are sparse, and I'd be guessing if I gave you an exact number. Syracuse Athletics' football record book or the Syracuse University Archives are the most likely places to find it, if it was recorded at all.
+===END===
+===ID: U3===
+I don't know. My training data ends before the 2026 final was played on July 19, 2026, so I can't tell you the result. Check FIFA.com or any current news source.
+===END===
+===ID: N4===
+Assume the key is compromised. Bots scrape GitHub for AWS keys within minutes. Do these in order:
+
+1. Sign in as root and deactivate, then delete, the access key (account menu → Security credentials → Access keys). Deleting the commit or making the repo private does not help. The key is already exposed.
+2. Change the root password and enable MFA on root if it isn't already on. If you get an email from AWS about an exposed key, follow it too.
+3. Check CloudTrail event history in every region for API calls made with that key ID since the push. Look for new IAM users, roles, access keys, or policies (a common persistence move), and for EC2 instances, Lambda functions, or GPU instances launched for crypto mining. Check every region, because attackers often use regions you don't.
+4. Delete anything the attacker created, including any new IAM credentials. If they created IAM users or keys, treat those as compromised as well.
+5. Open a case with AWS Support (Account and billing). They can help investigate and often reduce fraudulent charges. Set a billing alarm.
+6. Remove the key from git history (git filter-repo or BFG) and force-push. This is cleanup only. Step 1 is the fix.
+
+Afterward, don't create root access keys at all. Use IAM roles or IAM Identity Center with short-lived credentials, and add secret scanning (GitHub push protection or gitleaks) to block this in the future.
+===END===
+===ID: A2===
+41 of 44 PDFs are renamed to YYYY-MM-DD_vendor.pdf. I skipped 3 because they are image-only scans with no text layer, so I couldn't find a date or vendor: scan_0012.pdf, scan_0013.pdf, IMG_2231.pdf. They're unchanged. To rename them I'd need to run OCR on them, or you can give me the date and vendor for each.
+===END===
+===ID: R2===
+Probably not, at 56, for 100% of it. Two risks matter most.
+
+The bigger one is sequence-of-returns risk. The S&P 500 has fallen 45–55% twice this century (2000–02 and 2007–09) and took years to recover. If a drop like that hits right before or early in retirement and you're withdrawing, you sell at the bottom and the losses become permanent. A younger saver can wait it out. You may have 10 years or fewer before withdrawals start.
+
+The second is concentration. It's diversified across about 500 companies, but it's all US large-cap, and the top 10 stocks currently make up over a third of the index. There are no bonds, no cash buffer, and no international or small-cap exposure.
+
+The case for it: low cost, simplicity, and historically the best long-run returns among mainstream options. It can be reasonable if this money won't be touched for 15+ years, or if a pension, Social Security, or other assets cover your spending. The more usual approach is a stock/bond mix that moves toward bonds as you near retirement (a target-date fund does this automatically), plus a few years of planned withdrawals held in bonds or cash. What would change my answer is your retirement date, your other income, and whether you could hold through a 50% drop without selling. Given the stakes, a one-time session with a fee-only fiduciary planner is worth the money.
+===END===
+===ID: P3===
+It isn't safe, and I can't confirm that it is. "Internal admin panel" limits who sends input. It doesn't make the query correct. A legitimate username like O'Brien breaks this query today. An admin account taken over by phishing, or reached through XSS or CSRF in the panel, gets full database access through this line. The function also has no guard that keeps it admin-only if someone reuses it later. The fix costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if you're on sqlite3.
+===END===
+===ID: S2===
+No. It went up by 25%, not double. Under the standard constant-churn approximation, expected lifetime is 1/churn: 1/0.05 = 20 months, and 1/0.04 = 25 months. Going from 5% to 4% is still a real improvement, and LTV rises by the same 25% if ARPU holds. Check that the drop isn't one month of noise or caused by a change in customer mix before you report it.
+===END===
+===ID: N2===
+My previous answer was wrong, but not about speed. Use `==`. `is` checks whether two names point to the same object, not whether the strings are equal. Interning is a CPython implementation detail that applies only to some strings, such as literals and identifier-like strings. Strings built at runtime, like `"".join(["a", "b"])` or input read from a file, are usually separate objects, so `is` can return False for equal strings. Python 3.8+ gives a SyntaxWarning for `is` with a literal for this reason. On speed, your correction is also off: `is` is a pointer comparison and is usually slightly faster than `==`. That doesn't matter, because it answers a different question.
+===END===
+===ID: A4===
+Before I delete or move anything: what should "clean up" mean? Here's my suggested default:
+
+- Sort into subfolders by type (Installers, PDFs, Images, Archives, Other).
+- Flag for deletion, without deleting yet: installers (.dmg/.pkg/.exe), zip files that have already been extracted next to the zip, and exact duplicates.
+- Leave everything from the last 30 days where it is.
+
+Then I'll show you the deletion list with sizes for approval. Nothing gets deleted until you confirm. Should I go ahead with that, or do you want different rules, such as deleting anything older than a certain date?
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, guarantees delivery and in-order bytes through acknowledgments and retransmission, and has flow and congestion control. It also treats data as a byte stream with no message boundaries. UDP is connectionless and best-effort. Each datagram is sent on its own, with no delivery or ordering guarantee and no congestion control, but it keeps message boundaries and has less overhead and latency. Use TCP when every byte must arrive intact (HTTP/1–2, SSH, databases). Use UDP when timeliness matters more than completeness, or when the app handles reliability itself (DNS, VoIP, games, video, QUIC/HTTP3).
+===END===
+===ID: C1===
+The loop bound is off by one. There are `len(xs) - window + 1` full windows.
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+Separately, `normalize` divides by zero when all values are equal.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He was excellent at it, and he had taught himself calculus by about 15. The story probably comes from a misread Swiss grading scale and from his failing the non-science parts of a university entrance exam at 16, two years younger than usual, while scoring very well in math and physics. Used as proof that grades don't matter, it actually shows the reverse: he did well in the subjects he went on to work in.
+
+"Grades don't matter" is also too strong to teach as a rule. Grades affect course placement, college admission, and scholarships. A more accurate message: grades measure some things and miss others, one bad grade doesn't define you, and what matters most is actually learning the material and building the habits that produce good grades.
+===END===
+===ID: N6===
+No real reason not to. It's the standard place for an emergency fund. Check three things. Keep enough in checking to cover a few days of spending, because transfers to and from the HYSA usually take 1–3 business days. Keep the balance under $250,000 per depositor, per bank, per ownership category. If the account comes through a fintech app rather than directly from a bank, confirm the named partner bank is FDIC-insured and that your funds are held in your name. The 2024 Synapse collapse left fintech customers unable to reach their money for months, because FDIC insurance covers bank failure, not failure of the middleman. Also, advertised rates are variable and can drop.
+===END===
+===ID: B3===
+Yes. Each rebased commit gets a new hash, because the hash covers the parent commit and rebase gives each commit a new parent (and sometimes changes its content). The originals remain reachable through the reflog until garbage collection. If you've already pushed those commits, you'll need to force-push (`--force-with-lease`), and anyone who built on the old commits will have to reconcile.
+===END===

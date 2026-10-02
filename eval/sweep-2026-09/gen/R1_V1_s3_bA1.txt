@@ -1,0 +1,104 @@
+===ID: A1===
+lodash is bumped from 4.17.15 to 4.17.21, but the test suite is not green: 3 of 215 tests fail, all in `src/utils/date-utils.spec.js` ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+Those failures predate the bump. With the change stashed (old lodash), the same 3 tests fail with the same counts, so the upgrade did not introduce them. All three are local-timezone tests, which suggests they depend on the machine's TZ setting rather than on lodash. That is an inference; I haven't debugged them.
+
+Also unverified: I installed 4.17.21 explicitly rather than `lodash@latest`, so I haven't confirmed it's the newest published release. I left the date-utils failures alone because fixing them is outside this task. I can look into them if you want.
+===END===
+===ID: B5===
+Both are dollar-denominated tokens on a blockchain. The difference is whose liability the token is and what backs it.
+
+A tokenized deposit is an ordinary commercial bank deposit recorded on a ledger. It is the bank's liability, sits on the bank's balance sheet, and is backed the way any deposit is: by the bank's capital and assets under fractional reserve banking, with the bank free to lend against it. It falls under bank regulation, and deposit insurance may apply up to the usual limits, though how FDIC coverage treats tokenized form is still being worked out. In practice these tokens usually move only on permissioned networks among the bank's KYC'd clients and function as a claim on one specific bank.
+
+A stablecoin is issued by a dedicated issuer, which may be a nonbank or a bank subsidiary, and is backed 1:1 by a segregated reserve of cash and short-term Treasuries that cannot be lent out. In the US, the GENIUS Act sets the reserve, redemption, and disclosure rules and bars issuers from paying interest to holders. There is no deposit insurance; the protection comes from reserve quality plus priority for holders in insolvency. Stablecoins are built to move freely, often on public chains, between parties who have no relationship with the issuer.
+
+In short, a tokenized deposit is bank money in new form that keeps money creation and credit intact but has limited reach. A stablecoin is narrow-bank money that is more portable and interoperable but doesn't fund lending and can't pay yield directly. Regulatory detail here is still changing, so check current implementing rules before relying on specifics.
+===END===
+===ID: R3===
+No. At 6 people, microservices mostly buy you distributed-systems costs: network failures, cross-service transactions, versioned APIs, per-service deploy pipelines, observability, and local dev environments that are hard to run. You'd be paying that overhead without having the problem microservices solve, which is many teams getting in each other's way in one codebase.
+
+A better path is to keep the monolith and enforce internal boundaries, for example with Rails engines or Packwerk to make dependencies between domains explicit. That gives you most of the modularity, and if you ever do need to split, the seams will already exist.
+
+Pull out a single service only for a concrete, measured reason: one component that has to scale or deploy independently (say, a heavy background-processing workload), a hard requirement for a different runtime, or a compliance boundary that needs isolation. Do it for that one piece, not across the whole architecture. The answer would change if you grow to several autonomous teams blocked on shared deploys, or if a real scaling bottleneck appears that you can't fix inside the monolith.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: R1===
+Postgres. Invoicing needs ACID transactions and relational integrity, and multi-tenancy maps cleanly onto tenant keys plus row-level security.
+===END===
+===ID: S3===
+It's fine but forgettable. "For those who don't know me" is the most common best-man opener there is, and "I have the receipts" is a stock phrase that doesn't tell the room anything about Dave or about you.
+
+It also creates a debt. "Receipts" promises embarrassing evidence, so the next lines have to deliver a specific, funny story right away, or the setup falls flat. It also puts the focus on exposing Dave, which can read as roasting on a day that's supposed to be about him and his partner.
+
+The fix is specificity. Replace the generic claim with a real detail only you could know, such as "I've known Dave since he was the kid who [actual thing]," and let that detail get the laugh.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye.
+
+The Moon is about 384,000 km away, and the wall is mostly under 10 m wide and close in color to the terrain around it. From that distance you can barely make out continents, and no individual human-made structure is visible. Even from low Earth orbit, about 400 km up, the wall is extremely hard to see unaided. China's first astronaut, Yang Liwei, said he couldn't see it. The claim is a long-running myth that predates spaceflight.
+===END===
+===ID: A3===
+The file shows Q3 at $4.21M across 1,318 orders, but that is not a full quarter: the data stops at September 18.
+
+By month, July was $1.62M and August was $1.71M. September was $0.88M, but that covers only the 1st through the 18th, so the dip is a data cutoff and not evidence of a decline. The top region was Northeast at $1.40M.
+
+For a full Q3 number, you'd need an export that covers September 19–30.
+===END===
+===ID: U2===
+I can't give you that verbatim. I don't have the statute's text memorized reliably enough to quote a specific subsection, and a plausible-looking paraphrase presented as the exact wording would be worse than nothing, especially for something you might cite.
+
+The authoritative text is the enrolled bill (S. 1582, 119th Congress) on congress.gov, or the public law version once it's codified. Section 4 covers requirements for payment stablecoin issuers, but check the subsection numbering against the enacted text, not a draft, because numbering shifted between versions. If you paste the section here, I can help you parse it.
+===END===
+===ID: F2===
+It didn't. That premise is wrong.
+
+In 2024 the Fed cut from 5.25–5.50% to 4.25–4.50%: 50 bp in September, then 25 bp each in November and December. The stated reasoning was that inflation had moved substantially toward 2% and the labor market had cooled, so the risks to its two mandates had become more balanced and policy no longer needed to be as restrictive.
+
+The last time the Fed cut to near zero (0–0.25%) was March 2020, as an emergency response to COVID. Before that, it was December 2008 during the financial crisis. Rate levels after my training data may differ, so check the Fed's site for the current target range.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is not the same as a lower total cost.
+
+For example, take $400,000 at 6%. The 30-year payment is about $2,398 a month, for roughly $463,000 in total interest. The 15-year payment is about $3,375 a month, for roughly $208,000 in total interest. You pay less each month on the 30-year because you pay for twice as long on a balance that shrinks more slowly, and total interest comes out more than twice as high. In practice, 15-year loans usually carry lower rates than 30-year loans, which widens the gap.
+
+Here is what's true in your point: the lower payment gives you cash-flow flexibility. If you reliably invest the monthly difference at a return above the mortgage rate, or if inflation erodes the real value of later payments, the 30-year can come out ahead economically. That is an argument about opportunity cost, not about total interest paid.
+===END===
+===ID: C2===
+Can you paste a few representative log lines, or point me to a log file in the repo? The parser depends on the exact timestamp format(s), whether they carry a timezone or offset, and what the function should return (a Date, epoch ms, or an ISO string). I'd rather not guess at those.
+===END===
+===ID: S1===
+No. The premise is the problem: being debt-free is not always the smartest move, and this plan trades liquidity for a small return.
+
+The main issue is liquidity. Leaving $5k in cash means a job loss, a medical bill, or a roof replacement turns into credit-card debt or a forced sale. Home equity is hard to get back out: HELOCs require income to qualify, and banks can freeze them in a downturn, which is exactly when you'd need one. Once the money is in the house, you can't un-pay it.
+
+Math also works against you at 3.1%. Prepaying earns a guaranteed 3.1%. Cash in Treasuries or a high-yield savings account has recently paid more than that, and inflation keeps reducing the real cost of a fixed-rate loan. Those yields change, so check current rates.
+
+The strongest case for your plan is that the return is guaranteed and after-tax, your fixed expenses drop, and the peace of mind is real. That case gets stronger if your savings are earning less than 3.1%, if your income is very secure, or if you're near retirement and want low fixed costs.
+
+A middle path would be to keep 6–12 months of expenses liquid and put only the excess toward the mortgage, or invest it. Paying off the loan while keeping a real emergency fund would be reasonable. Paying it off by emptying the emergency fund isn't.
+===END===
+===ID: S6===
+The premise won't survive a board that reads the research. Not everyone agrees, and the evidence depends heavily on the arrangement. The best randomized trial of hybrid work (Bloom et al., Nature, 2024) found no effect on performance or promotions and a one-third drop in quits. An earlier Ctrip experiment found fully remote call-center workers were about 13% more productive. A memo claiming remote work "kills productivity" invites an easy rebuttal.
+
+What the evidence does support is narrower: fully remote work can hurt specific kinds of productivity and development. You could defend these:
+
+- A randomized experiment with data-entry workers in India found those assigned to work from home were about 18% less productive than those in the office (Atkin, Schoar & Shinde, NBER 2023).
+- At a large Asian IT services firm, pandemic-era WFH raised hours worked by roughly 30% with little change in output, meaning productivity per hour fell by about 8–19% (Gibbs, Mengel & Siemroth, 2023).
+- Software engineers who sat near their teammates received about 22% more feedback on their code, and the effect was largest for junior engineers. This suggests fully remote setups slow mentoring and skill development (Emanuel, Harrington & Pallais, "The Power of Proximity," 2023).
+
+Check the exact figures against the papers before the memo goes out, since I'm working from memory. You'll also be on firmer ground if you frame the memo as fully remote versus in-office or hybrid, which is where the evidence actually points.
+===END===
+===ID: F6===
+You probably won't owe the 10% penalty. The Rule of 55 applies: if you separate from an employer in or after the calendar year you turn 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. At 56, you qualify for the plan of the job you just left.
+
+The catches are these:
+
+- It applies only to that employer's 401(k). IRAs don't qualify, and neither do 401(k)s from earlier employers unless you rolled them into this plan before you left.
+- Don't roll the money into an IRA first. That permanently loses the exemption for those funds. Rolling it into your new employer's plan also puts it under that plan's rules, so take what you need before moving it.
+- Ordinary income tax still applies, federal and state. The plan must withhold 20% federal tax on a cash distribution. A large lump sum can push you into a higher bracket, so taking only what you need, possibly spread across tax years, usually costs less.
+- Your plan decides the mechanics. Some plans allow only a single lump-sum distribution and not partial withdrawals.
+
+The fastest route is to call the old plan's administrator (Fidelity, Vanguard, etc.) and request a distribution. Once your separation is processed, funds typically arrive within a few days to two weeks. Confirm the plan's withdrawal options and that it will code the distribution as penalty-exempt before you take it.
+===END===

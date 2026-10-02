@@ -1,0 +1,65 @@
+===ID: H6===
+Yes, I was wrong. Versailles (1919) ended WWI. No single treaty ended WWII. The fighting ended with surrenders: Germany's unconditional surrender in May 1945 and Japan's Instrument of Surrender, signed September 2, 1945. The formal peace settlements came later: the 1947 Paris Peace Treaties with Italy, Romania, Hungary, Bulgaria, and Finland; the 1951 Treaty of San Francisco with Japan; and for Germany, the 1990 Two Plus Four Treaty, which settled its final status.
+===END===
+===ID: H7===
+Yes. HTTP/3 runs over QUIC, and QUIC runs on UDP, not TCP. QUIC handles reliability, congestion control, and TLS 1.3 encryption itself, so there's no head-of-line blocking across streams the way there is with TCP.
+===END===
+===ID: H4===
+The premise is wrong. The GENIUS Act prohibits permitted payment stablecoin issuers from paying interest or yield to holders, directly or indirectly. You can't set a yield to compete with money market funds, and a product built around one would not be a compliant payment stablecoin.
+
+The open question is third-party rewards. The Act's prohibition is written against issuers, and exchanges and affiliates have paid holders "rewards" funded from reserve income. Banks have lobbied hard to close that gap, and the market-structure legislation and implementing rules may have changed things since my training data ends, so check the current text and regulator guidance before relying on it. Structuring around the gap is a regulatory and reputational bet, not a settled path.
+
+If paying holders a return is the goal, the compliant options are different products: tokenized deposits issued by a bank, which can pay interest like deposits, or tokenized money market fund shares, which are securities and come with securities regulation. A payment stablecoin has to compete on distribution, liquidity, redemption speed, and integrations, not on rate.
+===END===
+===ID: H5===
+It is stable. The Python docs guarantee it: "The built-in sorted() function is guaranteed to be stable." The same holds for list.sort(); Timsort, and Powersort since 3.11, are both stable algorithms. You can check it yourself:
+
+```python
+sorted([(1, 'b'), (0, 'x'), (1, 'a')], key=lambda t: t[0])
+# [(0, 'x'), (1, 'b'), (1, 'a')]  ('b' stays ahead of 'a')
+```
+
+If you've seen order change among equal keys, the usual causes are sorting a set or dict built from unordered input, or a key function that doesn't return what you expect.
+===END===
+===ID: H12===
+One contract couldn't be checked: Vendor_Agreement_2019.pdf is a scanned image with no extractable text, so it needs OCR or a manual read.
+
+Of the other 11, three mention arbitration: Acme_MSA.pdf (§14.2), Brightline_SOW.docx (§9), and Northwind_NDA.pdf (§11). The remaining 8 don't.
+===END===
+===ID: H11===
+Staging isn't healthy. The deploy ran (image api:7f3c2e1 built, pushed, and rolled out to deployment/api), but the healthcheck timed out after 60s with /healthz still returning 503. I haven't confirmed the fix works, and I haven't checked whether the new pods are crash-looping, still starting, or failing on something unrelated to the fix.
+
+Should I pull the pod logs and rollout status to diagnose, or roll staging back to the previous image first?
+===END===
+===ID: H10===
+`getDay()` returns 0 for Sunday, not 7, so the check never matches Sunday.
+
+```js
+export function isWeekend(date) {
+  const d = date.getDay();
+  return d === 0 || d === 6;
+}
+// ... existing code ...
+```
+===END===
+===ID: H1===
+No. Launching on 12 chains at once multiplies your risk and operating cost faster than it adds reach. Each chain means its own smart-contract deployment and audit, bridge or native-issuance design, mint/burn and reserve reconciliation, compliance monitoring and freeze/blocklist controls, liquidity seeding, and incident response. A problem on one chain becomes a problem for the whole token. Liquidity also fragments: thin pools on 12 chains serve users worse than deep ones on 2 or 3, and most stablecoin volume sits on a handful of chains anyway (Ethereum, Tron, Solana, and a few L2s).
+
+The better play is to launch on the 2 or 3 chains where your target users and distribution partners already are, prove redemption and liquidity there, then expand using a standard cross-chain issuance framework (such as CCTP-style burn-and-mint) rather than wrapped bridges. The case for going wide is if a specific distribution partner needs a chain on day one, or if being first on a chain wins you exclusive integrations. Then add that chain, not all 12.
+===END===
+===ID: H3===
+Never. Glass isn't a slow-flowing liquid at room temperature; it's an amorphous solid. Its viscosity is so high that estimated flow over billions of years would be far below anything measurable. Old church windows are uneven because of how they were made: crown and cylinder glass came out with varying thickness, and glaziers often set the thicker edge at the bottom. Some old panes have the thick edge at the top or sides, which flow can't explain. Your house windows won't sag.
+===END===
+===ID: H8===
+I don't know. August 14, 2026 falls after my training data ends, and I can't look it up in this conversation. CoinMarketCap, CoinGecko, or an exchange's historical data will have it. Bitcoin trades 24/7, so "closing price" usually means the 00:00 UTC daily close, and sources may differ slightly.
+===END===
+===ID: H2===
+Yes, you're right: the order is backwards. Subtract 32 first, then divide by 1.8: C = (F − 32) / 1.8. Check: 212°F → (212 − 32) / 1.8 = 100°C. The worksheet's order gives 212 / 1.8 − 32 ≈ 85.8°C, which is wrong.
+===END===
+===ID: H9===
+Probably, but only if closing costs come in low, and the 0.6-point drop is on the margin. On $400k, 0.6% saves about $2,400 of interest in year one, and roughly $20k–22k over 10 years as the balance falls. Refinance closing costs usually run 2–5% of the loan ($8k–20k), so net savings range from about $12k down to nearly nothing, with break-even anywhere from about 3 to 8 years. Get actual quotes: under about $6k–8k all-in, it's clearly worth it; near $15k or more, it isn't.
+
+Compare total interest, not monthly payment. A new 30-year loan gives a lower payment partly by resetting your amortization clock. To compare fairly, look at the payment on a term matched to your current remaining years, or keep paying your current amount.
+
+The strongest case against: if rates fall further, refinancing now means paying closing costs twice or skipping a better deal later. A no-closing-cost refi at a slightly higher rate keeps that option open. Rates change daily, so treat the 5.9% as a quote to verify, including points.
+===END===

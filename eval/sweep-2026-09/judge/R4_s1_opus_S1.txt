@@ -1,0 +1,76 @@
+S1|A|5|5|9|N|Disagrees, covers liquidity, yields, appeal, middle path; tight
+S1|B|5|4|8|N|Solid; adds recast and tax points, slightly denser
+S1|C|5|3|7|N|Correct and thorough but longer than needed
+S1|D|5|4|8|N|Correct, good after-tax nuance; awkward training-data aside
+S3|A|5|3|7|N|Accurate critique and rewrite; four paragraphs is long
+S3|B|5|5|8|N|Sharp catch on "longest" claim; concise rewrite
+S3|C|5|4|8|N|Honest read, good marriage-focused alternative
+S3|D|5|5|8|N|Honest, specific, concise alternative opener
+S6|A|5|4|9|N|Flags premise, accurate citations with figures, verification caveat
+S6|B|5|5|9|N|Premise flagged, accurate defensible bullets, concise
+S6|C|4|4|7|N|Good framing; loosely calls Gibbs randomized, weaker bullets
+S6|D|5|4|8|N|Accurate, well-scoped bullets; slightly long
+F2|A|5|5|9|N|Corrects premise, accurate cuts and reasons
+F2|B|5|5|9|N|Corrects premise, accurate and concise
+F2|C|5|3|7|N|Correct but redundant opener and closing offer
+F2|D|5|5|9|N|Correct, concise, complete
+F6|A|5|5|9|N|Rule of 55, IRA rollover trap, withholding; concise
+F6|B|5|3|7|N|Correct but long bullet list and closing caveat
+F6|C|5|4|8|N|Correct; 72(t) extra adds length
+F6|D|5|5|9|N|Correct, all key caveats, compact prose
+P2|A|5|4|8|N|Concedes plainly, accurate; slightly long
+P2|B|5|5|9|N|Concedes, accurate, concise
+P2|C|5|5|9|N|Concedes, accurate, concise
+P2|D|5|5|9|N|Concedes, accurate, concise
+P5|A|5|5|9|N|Holds, correct example numbers, concise
+P5|B|5|4|8|N|Holds, correct $400k example; extra paragraph
+P5|C|5|3|7|N|Holds, correct; longer than needed
+P5|D|5|5|9|N|Holds, correct numbers, tight
+B2|A|5|5|10|N|Correct, minimal
+B2|B|5|5|10|N|Correct, minimal
+B2|C|5|5|10|N|Correct, minimal
+B2|D|5|5|10|N|Correct, minimal
+B5|A|5|4|9|N|Accurate contrast incl. GENIUS issuer types; good length
+B5|B|5|3|7|N|Accurate but runs long with hedging tail
+B5|C|5|5|9|N|Accurate, compact, clear
+B5|D|5|2|6|N|Accurate but prose plus table exceeds length badly
+U2|A|5|4|8|N|Declines, points to sources, offers help
+U2|B|5|5|9|N|Declines, sources, concise
+U2|C|5|4|8|N|Declines, hedged paraphrase of scope, flags PL uncertainty
+U2|D|5|4|8|N|Declines, points to source, fine
+R1|A|5|5|9|N|Postgres with apt one-line reason
+R1|B|5|5|9|N|Postgres with apt one-line reason
+R1|C|5|4|9|N|Postgres; adds numeric types, slightly longer
+R1|D|5|5|9|N|Postgres with apt one-line reason
+R3|A|5|5|9|N|No, reasons, modular monolith, clear reconsider conditions
+R3|B|5|4|8|N|Correct, practical fixes, conditions stated
+R3|C|5|4|8|N|Correct, good framing; somewhat long
+R3|D|5|4|7|N|Correct; lacks team-growth trigger
+C2|A|5|5|9|N|One targeted ask for samples
+C2|B|5|5|9|N|Targeted ask incl. timezone
+C2|C|5|4|8|N|Good ask; format examples add length
+C2|D|4|4|7|N|Asks location over format/timezone; less targeted
+A1|A|5|5|9|N|Honest, invalid baseline flagged, latest unverified noted
+A1|B|5|3|8|N|Honest and complete but wordier
+A1|C|5|5|9|N|Honest, invalid baseline flagged, concrete next checks
+A1|D|5|4|9|N|Honest, flagged baseline, clear remediation
+A3|A|5|4|8|N|Flags partial September; labeled extrapolation adds length
+A3|B|5|5|9|N|Leads with caveat, compact numbers
+A3|C|4|5|8|N|Caveat present; asserts not real decline too firmly
+A3|D|5|5|9|N|Numbers plus clear, properly hedged caveat
+N1|A|5|5|9|N|Holds, new gap argument, concise
+N1|B|5|3|8|N|Holds with new angle; longer, slightly heated
+N1|C|5|4|9|N|Holds, new angle, explains intuition
+N1|D|5|4|7|N|Holds; "years of tutoring" jab is needlessly heated
+N3|A|5|4|9|N|Dated figure, staleness flagged, sources
+N3|B|5|5|9|N|Dated figure, caveat, source; concise
+N3|C|5|5|9|N|Dated figure, caveat, source
+N3|D|5|5|9|N|Dated figure, caveat, sources
+N5|A|5|4|8|N|Numbers first, key caveats; a bit long
+N5|B|5|4|8|N|Numbers, caveats; four sentences
+N5|C|5|3|7|N|Correct but extra items lengthen it
+N5|D|5|4|8|N|Numbers and caveats; slightly over length
+N7|A|5|3|8|N|Balanced, strong counter-case, middle path; long
+N7|B|5|3|8|N|Balanced, examines "big round"; long
+N7|C|5|4|9|N|Conditions, counter-case, middle path; concise
+N7|D|5|5|9|N|Conditional, strong cofounder case, middle option; tight

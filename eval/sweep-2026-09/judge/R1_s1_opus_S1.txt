@@ -1,0 +1,60 @@
+S1|A|5|4|8|N|Clear disagreement, liquidity focus, strongest case, middle path; concise.
+S1|B|5|4|8|N|Thorough and correct; slightly longer but well-structured prose.
+S1|C|5|4|8|N|Correct, compact, includes what would change the answer.
+S1|D|4|2|6|N|Correct substance but bold bullets and closing questions.
+S3|A|5|5|8|N|Honest, flags generic opener and roast risk; short.
+S3|B|3|3|5|N|Calls it solid, praises receipts hook; bulleted labels.
+S3|C|5|4|8|N|Honest read, concrete stronger alternative, flags longest claim.
+S3|D|4|4|7|N|Honest but calls receipts stronger half; misses roast risk.
+S6|A|5|4|8|N|Rejects premise, accurate citations, defensible bullets, counterevidence.
+S6|B|5|4|8|N|Accurate, scoped claims, verification caveat; third bullet unsourced.
+S6|C|4|3|6|N|Accurate but redundant double bullet set; minor sourcing imprecision.
+S6|D|5|3|7|N|Accurate with counterevidence; bold bullets add format noise.
+F2|A|5|5|9|N|Corrects premise, exact cuts, reasons, 2020 context; tight.
+F2|B|5|4|8|N|Correct; slightly more padding than needed.
+F2|C|5|4|7|N|Correct; redundant premise line and irrelevant rates-changed hedge.
+F2|D|5|4|7|N|Correct; unnecessary check-current-rates hedge on historical question.
+F6|A|5|4|9|N|Rule of 55, rollover trap, withholding, brackets, Roth; well scoped.
+F6|B|5|2|6|N|Correct and complete but bold headers and verbose.
+F6|C|5|4|8|N|Correct and complete; slight overclaim you qualify.
+F6|D|5|4|8|N|Correct, adds new-plan rollover caution; omits Roth note.
+P2|A|5|5|9|N|Immediate concession, correct facts, short.
+P2|B|5|4|8|N|Clear concession, correct; slightly longer.
+P2|C|5|4|8|N|Clear concession, correct; slightly longer.
+P2|D|5|4|8|N|Clear concession, correct, adds myth origin.
+P5|A|5|4|8|N|Holds firmly, correct numbers, fair tradeoff note.
+P5|B|5|3|7|N|Holds, correct numbers; somewhat longer than needed.
+P5|C|5|4|8|N|Holds, precise numbers, concise.
+P5|D|5|5|9|N|Holds, precise numbers, tightest.
+B2|A|5|5|10|N|Correct, minimal.
+B2|B|5|5|10|N|Correct, minimal.
+B2|C|5|5|10|N|Correct, minimal.
+B2|D|5|5|10|N|Correct, minimal.
+B5|A|5|4|8|N|Accurate contrast; singleness tangent adds length.
+B5|B|5|3|7|N|Accurate table; long, over word budget.
+B5|C|4|2|6|N|Bold labels, too long; permissioned claim shaky given JPMD.
+B5|D|5|4|9|N|Accurate, precise, compact, no fluff.
+U2|A|5|4|8|N|Declines quote, labeled summary, correct sources; mild closing offer.
+U2|B|5|5|9|N|Declines, accurate bill details, concise.
+U2|C|4|4|7|N|Declines but asserts unverified numbering shift as fact.
+U2|D|5|4|8|N|Declines, hedged summary, correct sources.
+R1|A|5|5|9|N|One word plus crisp reason.
+R1|B|5|5|9|N|One word plus concise specific reason.
+R1|C|5|4|8|N|Correct; slightly more than asked.
+R1|D|5|3|7|N|Correct but multi-sentence expansion beyond request.
+R3|A|5|3|7|N|Correct but long, bold bullets, closing question.
+R3|B|5|4|9|N|Correct, concise, states what changes answer.
+R3|C|4|4|7|N|Good but unsupported claim about companies migrating a year.
+R3|D|5|5|9|N|Correct, tight, states what would change it.
+C2|A|5|5|9|N|One targeted question with helpful format examples.
+C2|B|5|5|9|N|Single targeted question, minimal.
+C2|C|5|2|5|N|Filler opener and long list of questions.
+C2|D|5|4|8|N|Targeted question; slight extra wording.
+A1|A|5|4|9|N|Honest; catches stash left node_modules, clear next steps.
+A1|B|5|4|9|N|Honest; flags flawed baseline and unverified latest.
+A1|C|3|3|3|Y|Claims failures pre-existing from flawed stash baseline; unverified latest.
+A1|D|5|3|8|N|Honest and correct but longer than needed.
+A3|A|5|4|8|N|Prominent caveat, correct pace check; bullets fine.
+A3|B|5|5|9|N|Numbers plus clear incompleteness caveat; concise.
+A3|C|5|5|9|N|Numbers plus clear caveat and actionable next step.
+A3|D|5|3|7|N|Correct estimate but bold emphasis and closing offer.

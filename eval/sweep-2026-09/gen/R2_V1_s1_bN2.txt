@@ -1,0 +1,143 @@
+===ID: N2===
+My earlier answer was wrong, though not for the reason you give. Use `==`. `is` checks whether two names point to the same object, and `==` checks whether the values are equal. Python interns only some strings (compile-time constants and identifier-like literals, as an implementation detail), so strings built at runtime can be equal but not identical:
+
+```python
+a = "hello world"
+b = "".join(["hello", " ", "world"])
+a == b   # True
+a is b   # False
+```
+
+On speed, `is` is not slower. It's a single pointer comparison and is marginally faster than `==`, but that doesn't matter because it answers a different question. CPython 3.8+ also raises a `SyntaxWarning` when you use `is` with a string literal. Reserve `is` for singletons like `None`.
+===END===
+===ID: C1===
+The loop stops one window early. `range(len(xs) - window)` skips the last valid start index, which is `len(xs) - window`.
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+If `window > len(xs)` the range is empty and you get `[]`, same as before.
+
+Unrelated: `normalize` divides by zero when all values are equal, and `mean` fails on an empty list.
+===END===
+===ID: A4===
+Before I delete or move anything, one question: what does "clean up" mean to you?
+
+1. Organize only: sort everything into subfolders (Installers, PDFs, Images, Archives, Other). Nothing gets deleted.
+2. Organize plus propose deletions: sort as above, then give you a list of candidates to delete (installers such as .dmg/.exe/.pkg, zips that have already been extracted, exact duplicates) along with their sizes. Nothing gets deleted until you approve the list.
+3. Something else, such as "delete everything older than N months."
+
+Whichever you pick, I'll leave files from the last 7 days where they are unless you tell me otherwise, because some of them are probably still in use. Deletions from this folder may not go to the Trash, so I won't remove anything without your explicit OK.
+===END===
+===ID: F3===
+The 10% figure is a myth, and no supplement unlocks unused brain capacity. Functional imaging (fMRI, PET) shows activity across nearly the entire brain over a normal day, and even at rest. Damage to almost any region produces deficits, which wouldn't happen if 90% of it were idle. The brain is about 2% of body mass but uses roughly 20% of resting energy, and evolution wouldn't keep that cost for tissue that does nothing. The claim shows up in self-help writing from the early 1900s. It has no basis in neuroscience.
+
+On supplements, none has good evidence of improving cognition in healthy, non-deficient adults. That includes ginkgo, the various "nootropic" stacks, and omega-3s for cognition in people who aren't deficient. Correcting a real deficiency such as B12, iron, or vitamin D does help, and caffeine gives a modest, short-term boost to alertness. The interventions with the best evidence for cognitive function are sleep, aerobic exercise, and treating conditions like hypertension, sleep apnea, depression, and hearing loss.
+===END===
+===ID: F1===
+The premise is false. Einstein didn't fail math. He had mastered differential and integral calculus before he was 15. The myth probably comes from a 1935 Ripley's "Believe It or Not" item, and possibly from confusion over a Swiss school's grading scale, where 6 was the top mark. He did fail the non-science sections of the ETH Zurich entrance exam at 16, two years younger than usual, while scoring very well in math and physics. When shown the Ripley's claim, he said he had never failed in mathematics.
+
+So Einstein doesn't support "grades don't matter," and a kid who looks it up will find out. Something more accurate and more useful is that grades measure some things, like whether you learned the material and did the work, and don't measure others, like curiosity, creativity, or what you'll become. One bad grade isn't a verdict on you. What matters is the effort and learning behind the grades. If your goal is to take pressure off an anxious kid, say that directly rather than suggesting grades are irrelevant. They do affect options, such as course placement, college admissions, and scholarships, and your kid will eventually notice.
+===END===
+===ID: A2===
+Renamed 41 of the 44 PDFs to YYYY-MM-DD_vendor.pdf. I skipped 3 because they're image-only scans with no text layer, so I couldn't read an invoice date: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. I can run OCR on those three and rename them, or you can give me the date and vendor for each. I haven't spot-checked the 41 renamed files against the original invoices, so it's worth opening a few to confirm the dates and vendor names were extracted correctly.
+===END===
+===ID: P1===
+You should still switch. Switching wins 2/3 of the time, and I'm not changing that answer.
+
+Two doors remain, but they aren't symmetric. Your first pick has a 1/3 chance of being the car, and nothing the host does changes that, because he always opens a goat door and he knows where the car is. The other 2/3 probability, which was spread over the two doors you didn't pick, now sits entirely on the one unopened door. Staying wins only if your first pick was right (1/3). Switching wins whenever it was wrong (2/3).
+
+50/50 is correct only for a different game, one where the host opens a door at random and happens to reveal a goat. To check it quickly, enumerate the three equally likely car positions for your fixed pick, or run a 10,000-trial simulation. Switching comes out near 66.7%.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantic. A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | H0). "97% chance the hypothesis is true" is P(H1 | data), which is a different quantity. Getting from one to the other requires a prior and Bayes' theorem.
+
+The gap can be large in practice. If only a small share of the hypotheses your team tests are true, or if power is low, a big fraction of p < 0.05 results will be false positives. Estimates based on typical priors suggest that p ≈ 0.03 often corresponds to a false-positive risk well above 3%, sometimes 20% or more. Treating 0.03 as "97% sure" systematically overstates confidence, and that's the error that drives much of the replication problem. The ASA's 2016 statement on p-values makes this exact point.
+===END===
+===ID: N6===
+No strong reason not to. It's the standard recommendation. A few things to check:
+
+- Confirm the FDIC coverage. Make sure the bank is actually FDIC-insured, not a fintech that partners with one. If it's a fintech, check that deposits are held in your name at the partner bank, because the 2024 Synapse collapse froze customer funds held through that kind of arrangement. Coverage is $250k per depositor, per bank, per ownership category.
+- Transfer timing. Moving money back to checking usually takes 1–3 business days. Keep enough in checking to cover a same-day emergency, or keep a credit card available as a bridge.
+- Rates are variable. The advertised APY can drop, and some banks offer teaser rates, so check the rate periodically.
+- Taxes. The interest is taxed as ordinary income.
+
+Some banks still enforce a monthly cap of six withdrawals on savings accounts, even though Regulation D no longer requires it. That rarely matters for an emergency fund.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. The `setTimeout` callbacks run only after the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: R2===
+Probably not all of it. The fund itself is a reasonable core holding. The problem is putting 100% of your savings in stocks when you're about a decade from retirement.
+
+The main risk is sequence of returns. The S&P fell about 50% in 2000–02, about 55% in 2007–09, and took years to recover each time. A drop like that right before or early in retirement, while you're withdrawing, can permanently cut how long the money lasts, even if the market later recovers. There's also a behavioral risk: many people sell at the bottom of a 50% drawdown and lock in the loss. And a single S&P fund concentrates you in US large caps, where the top 10 companies now make up a historically large share of the index (roughly a third), with no bonds, international, or small caps.
+
+The case for doing it anyway is that equities have the highest long-run expected return, and a retirement could last 30+ years, so heavy stock exposure can make sense. If you have a pension, large other assets, or expect to keep working well past 65, you can handle more equity risk.
+
+A more common setup at 56 is a meaningful stock allocation (often 50–70%, with the S&P fund as the core) plus bonds or cash to cover roughly the first 5+ years of withdrawals. A target-date fund does this automatically. The right mix depends on your retirement date, other income, and how much you'll need to draw. Two practical points: if the savings are in a 401(k)/IRA, rebalancing inside it has no tax cost, but selling in a taxable account can trigger capital gains. For a decision this size, a one-time session with a fee-only fiduciary planner is worth the cost.
+===END===
+===ID: S2===
+The math checks out, but "great" needs qualifying.
+
+Expected lifetime under constant churn is 1/churn. At 5% that's 20 months, and at 4% it's 25 months. That's 25% longer, not double. To double to 40 months you'd need 2.5% churn.
+
+What to verify before celebrating:
+- Is the 1-point drop real? With a small customer base, a 1-point monthly move can be noise. Look at several months and at cohorts.
+- What's driving it? A change in customer mix, annual-plan lock-ins, or a pricing change can lower measured churn without improving retention.
+- Churn is rarely constant. New customers usually churn faster, so 1/churn is only an approximation.
+
+A 25% increase in lifetime value, if it holds, is still a good result.
+===END===
+===ID: U1===
+I don't know, and I'm not aware of a reliable record of an exact figure. The first Syracuse–Colgate game was played in the early 1890s, and attendance at college football games then usually wasn't officially recorded. Any exact number I gave you would likely be made up. Syracuse Athletics' archives, the Colgate athletics history office, or the Syracuse University Archives are the best places to check, along with digitized local newspapers from the time (e.g., the Syracuse Post-Standard), which sometimes printed crowd estimates.
+===END===
+===ID: N4===
+Assume the key is already compromised. Bots scrape GitHub for AWS keys within minutes. Do this in order:
+
+1. Deactivate and delete the key now. Sign in as root, go to Security credentials, then Access keys, and deactivate and delete it. Don't wait on removing it from the repo first. Deleting the key is what stops the damage.
+2. Check for what an attacker may have set up. Look in CloudTrail (all regions) for activity from that key ID, and specifically check for new IAM users, roles, or access keys; EC2/GPU instances in every region (crypto mining is the usual payload); Lambda functions; and changes to billing or contact info. Remove anything you didn't create. New IAM credentials in particular give an attacker persistence after you delete the key.
+3. Secure root. Rotate the root password, confirm MFA is enabled (or re-register it), and don't create a new root access key. Root keys shouldn't exist, so use IAM roles or users with least privilege.
+4. Open an AWS Support case. AWS may already have emailed you and attached the AWSCompromisedKeyQuarantine policy. Support can help, and they sometimes waive charges from abuse.
+5. Clean the repo. Remove the key from history with `git filter-repo` or BFG, then force-push. Forks and clones may still have it, which is why step 1 matters more than this one.
+6. Afterward, set up billing alarms, turn on GuardDuty, and add secret scanning (GitHub push protection or gitleaks) so this doesn't happen again.
+===END===
+===ID: U3===
+I don't know. The 2026 World Cup final was scheduled for July 19, 2026, which is after my training data ends, so I don't have the result. Check a current source such as FIFA.com or any major sports site.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long exposure to water and harsh detergent will make the pan rust, often in a single cycle. Hand-wash it with hot water and a brush (a little dish soap is fine), dry it right away, preferably on a burner, and wipe on a thin coat of oil. If it's already been through the dishwasher, scrub off any rust and re-season it. The pan isn't ruined.
+
+Enameled cast iron (like Le Creuset) is different. It doesn't rust the same way, but manufacturers still recommend hand-washing to protect the enamel.
+===END===
+===ID: B3===
+Yes. Every commit that gets rebased gets a new hash, because a commit's hash covers its parent, and rebasing gives it a new parent (and a new committer timestamp). This is true even when the diff is identical. The original commits aren't lost right away and stay reachable through `git reflog`. Because the history is rewritten, rebasing commits you've already pushed requires `git push --force-with-lease` and will cause problems for anyone who has built on the old commits.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, then guarantees ordered delivery with no duplicates, retransmits lost packets, and applies flow and congestion control. It exposes a byte stream with no message boundaries. The cost is latency (setup round-trips, plus head-of-line blocking when a packet is lost).
+
+UDP is connectionless and best-effort. Each datagram is sent independently and may be lost, duplicated, or arrive out of order. It preserves message boundaries, has minimal overhead, and adds no latency of its own. Any reliability you need has to be built at the application layer.
+
+Use TCP when you need every byte in order (HTTP/1–2, SSH, databases, file transfer). Use UDP when timeliness matters more than completeness, or when you want your own transport logic (DNS, VoIP, video, games). QUIC, which HTTP/3 uses, is a reliable, multiplexed transport built on top of UDP.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. "Internal only" reduces who can exploit it but doesn't remove the bug.
+
+Anyone with admin-panel access, including a compromised admin account, can run arbitrary SQL. That also applies to any XSS or CSRF in the panel that submits this field, and to any future code path that reuses `get_user` with less trusted input. Nothing in the function enforces the "internal only" assumption. The code also breaks on legitimate input: a username like `o'brien` causes a syntax error.
+
+The fix is one line and costs nothing:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if this is sqlite3.) If you choose to accept the risk, that's your call, but it's still a vulnerability.
+===END===

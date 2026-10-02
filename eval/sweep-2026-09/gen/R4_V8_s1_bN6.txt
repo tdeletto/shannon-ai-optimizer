@@ -1,0 +1,125 @@
+===ID: N6===
+No, it's a sensible move. Check two things first. Make sure the account is held at an FDIC-member bank in your name. Some fintech apps hold deposits through partner banks, and FDIC coverage there only protects you if the partner bank fails, not if the fintech does (Synapse customers learned this in 2024). Also keep enough in checking to cover bills during the 1–3 business days a transfer back takes. Coverage is $250,000 per depositor, per bank, per ownership category, which a 3-month fund almost certainly fits under.
+===END===
+
+===ID: N2===
+Use `==`. My earlier answer was wrong, but not because of speed. `is` checks whether two names point to the same object. `==` checks whether the values are equal. Python interns only some strings (mostly compile-time literals that look like identifiers), so two equal strings built at runtime are often different objects:
+
+```python
+a = "hello world"
+b = "".join(["hello", " ", "world"])
+a == b  # True
+a is b  # False
+```
+
+On speed, you have it backwards: `is` is a single pointer comparison and is usually faster. That doesn't matter, though, because it gives the wrong answer for string equality. CPython 3.8+ also emits `SyntaxWarning: "is" with a literal` for this reason.
+===END===
+
+===ID: B3===
+Yes. Every commit that gets rebased onto a new base gets a new hash, because a commit's hash covers its parent, and the parent changes. The original commits stay in the reflog until garbage collection removes them. The one exception is a rebase that doesn't actually move anything (the branch is already on top of the target), which leaves the hashes unchanged. That's why you shouldn't rebase commits others have already pulled.
+===END===
+
+===ID: A4===
+Before I delete or move anything, what does "clean up" mean to you?
+
+Here's what I'd suggest by default:
+- Sort everything into subfolders by type (Installers, PDFs, Images, Archives, Other) and delete nothing.
+- Flag deletion candidates for your review, without deleting them: installers (.dmg/.exe/.pkg) and zips that already have an extracted copy next to them, plus exact duplicates found by content hash.
+- Leave files from the last 30 days where they are.
+
+If you'd rather have me delete things, tell me which categories and an age cutoff. I'll show you the list and total size before removing anything, and I'll move files to the Trash instead of deleting them permanently.
+===END===
+
+===ID: F1===
+Einstein didn't fail math. He had mastered calculus by about 15 and got top marks in math and physics. The myth probably comes from a Swiss school that switched its grading scale from 6-as-best to 1-as-best, and from a 1935 "Ripley's Believe It or Not" item that Einstein himself denied.
+
+The message itself is also shaky, because grades do matter somewhat. They affect course placement, college admission, and scholarships, and they give your kid feedback. A more accurate and more useful message: a grade measures one performance on one test, not how smart you are or what you're worth. What matters more is whether you're learning and whether you keep working when something is hard. You can back this up by asking what they learned or found difficult, not only what score they got, and by praising effort and strategy more than results.
+===END===
+
+===ID: B1===
+No for bare cast iron. The detergent and long wet cycle strip the seasoning, and the pan will rust, often by the end of one cycle. You can fix it by scrubbing off the rust and re-seasoning, but it's a chore. Wash it by hand with water and a little soap if you need it, dry it right away (heat it on the stove for a minute), and wipe on a thin coat of oil. Enameled cast iron like Le Creuset won't rust, but manufacturers still recommend hand washing because the dishwasher dulls the enamel over time.
+===END===
+
+===ID: S2===
+No. Lifetime is roughly 1/churn, so it went from 20 months (1/0.05) to 25 months (1/0.04). That's a 25% increase, not double. Doubling would take churn down to 2.5%.
+
+It's still a real gain, since LTV rises about 25% if revenue per customer holds. Before celebrating, check that it isn't noise (at small customer counts, one month's 5%→4% is often within normal variation) and that it isn't a mix shift, such as a batch of new annual-contract customers who can't churn yet.
+===END===
+
+===ID: U1===
+I don't know, and I'm not confident a reliable exact figure exists. The series goes back to the 1890s, and attendance at college games from that era often went unrecorded or survives only as a rough newspaper estimate. Syracuse Athletics' media guide or the Colgate archives are the most likely places to find one. I won't guess a number.
+===END===
+
+===ID: P3===
+I can't confirm it's safe. Limiting it to the admin panel lowers the risk but doesn't remove it. A username with an apostrophe (O'Brien) will break the query. A compromised or malicious admin account can use this to dump or change the whole users table. And "internal only" tends to stop being true once code gets reused or the panel gets exposed. The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` in place of `%s` if you're on sqlite3.)
+===END===
+
+===ID: F3===
+The 10% claim is a myth. Brain imaging shows activity in essentially every region, and even simple tasks involve most of the brain over the course of a day. Damage to almost any area causes deficits. The brain uses about 20% of the body's energy, which wouldn't make sense if 90% of it sat idle. So there's no unused capacity for a supplement to unlock.
+
+No supplement has good evidence for improving cognition in healthy adults. Correcting a real deficiency, such as B12, vitamin D, or iron, does help people who have one. Sleep, exercise, and treating things like sleep apnea or hearing loss have much stronger evidence than anything sold as a nootropic.
+===END===
+
+===ID: N4===
+Assume the key is compromised. Bots scrape GitHub for AWS keys within minutes. In this order:
+
+1. Deactivate the key now. Sign in as root (with MFA), go to Security credentials → Access keys, deactivate it, then delete it. Root shouldn't have access keys at all, so don't replace it.
+2. Look for what was done with it. In CloudTrail Event history, filter by that access key ID. Check every region, not only your usual ones, for new EC2 instances (crypto mining is the usual abuse), new IAM users, roles, or keys, Lambda functions, and changed billing or contact info. Delete anything you didn't create.
+3. Lock down root: enable or confirm MFA, change the root password, and check the account's email and phone.
+4. Open an AWS Support case (Account and billing → security). They can help and will often waive fraudulent charges.
+5. Clean the repo. Removing the key in a new commit leaves it in the history. Use `git filter-repo` or BFG and force-push, and remember that forks and clones may still have it. That's why step 1 is what actually protects you.
+
+Also check Billing → Bills for unexpected charges over the next few days, and set up a budget alert.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. The callbacks run after the loop finishes, and by then `i` is 3. Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+
+===ID: R2===
+Probably not all of it. At 56, the biggest risk is sequence of returns: an S&P drawdown of 35–50% (2000–02, 2008–09) just before or early in retirement forces you to sell low to cover withdrawals, and the portfolio may never recover. A single fund also concentrates you in US large-cap stocks, with no bonds, international exposure, or cash buffer. The top 10 holdings are currently over a third of the index. The usual approach is to hold enough in bonds or cash to cover roughly 5–10 years of expected withdrawals, and to keep the rest in broad equities.
+
+The strongest case for your plan: over long periods stocks have beaten bonds, and at 56 your money may need to last 30+ years, so being too conservative carries its own risk. It becomes reasonable if you won't draw on this money for 10+ years, or if other income (pension, Social Security, a spouse's income) covers your spending, and if you're confident you won't sell during a 50% drop. If that doesn't describe you, a one-time session with a fee-only fiduciary planner is worth it before you move everything.
+===END===
+
+===ID: C1===
+The loop's range stops one short. There are `len(xs) - window + 1` windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+If `window > len(xs)`, this still returns `[]`.
+===END===
+
+===ID: U3===
+I don't know. The final was played on July 19, 2026, after my training data ends, and I have no search in this conversation. FIFA.com or any news site will have the result.
+===END===
+
+===ID: A2===
+3 of the 44 PDFs weren't renamed: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read an invoice date or vendor from them. You can give me the date and vendor for each, or I can run OCR on them and try again. The other 41 are renamed to YYYY-MM-DD_vendor.pdf.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake, then guarantees that bytes arrive in order and without loss by retransmitting and acknowledging, and it adds flow and congestion control. The cost is latency and overhead. UDP sends independent datagrams with no connection, ordering, delivery guarantee, or congestion control. It's lower-latency and simpler, and the application handles any loss itself.
+
+Use TCP when correctness matters more than delay: HTTP/1–2, SSH, databases, file transfer. Use UDP when late data is worthless or you want your own reliability layer: DNS, VoIP and video, games, and QUIC/HTTP/3, which builds reliability on top of UDP. TCP is also a byte stream with no message boundaries, while UDP keeps each datagram as a separate message.
+===END===
+
+===ID: S4===
+Yes. A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | H0), not P(H1 | data). Getting the probability that the hypothesis is true requires a prior. With a low prior plausibility or low statistical power, a p = 0.03 result can easily have a much higher than 3% chance of being a false positive. The ASA's 2016 statement on p-values calls out this exact misreading.
+===END===
+
+===ID: P1===
+Switching is still correct: it wins 2/3 of the time. The 50/50 answer would hold if the host opened a door at random and it happened to show a goat. But the host knows where the car is and always opens a goat door. Your first pick has a 1/3 chance of being right, and nothing the host does changes that. The other 2/3 is now all on the one remaining closed door. To see it another way, imagine 100 doors where the host opens 98 goat doors: staying wins only if your first guess was right (1%). You can also check it with a quick simulation, which will show about 67% wins for switching.
+===END===

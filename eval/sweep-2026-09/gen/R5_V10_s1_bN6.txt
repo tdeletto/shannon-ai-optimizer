@@ -1,0 +1,148 @@
+===ID: N6===
+No real reason not to. An FDIC-insured high-yield savings account is the standard home for an emergency fund. Three things to check before you move it:
+
+- Make sure the account is held directly at an FDIC-insured bank. If it's through a fintech app that holds deposits at partner banks, FDIC coverage only protects you if the bank fails, not the fintech. When Synapse collapsed in 2024, customers of those apps had their money frozen for months.
+- Transfers back to checking usually take 1–2 business days. Keep enough in checking to cover a true same-day emergency.
+- Coverage is $250,000 per depositor, per bank, per ownership category. A 3-month fund is almost certainly under that limit, but check it if you have other money at the same bank.
+===END===
+===ID: N4===
+Assume the key is already compromised. Bots scan GitHub for AWS keys and usually find them within minutes. Do these steps in this order:
+
+1. Kill the key now. Sign in as root, go to Security credentials, then Access keys, and deactivate and delete the key. Deleting the GitHub commit doesn't help, since the key has already been harvested. Don't create a replacement root key. Anything that used it should move to an IAM role or IAM user.
+2. Secure the root login. Change the root password, confirm MFA is enabled and that the MFA device is yours, and check that the account's email and contact details haven't been changed.
+3. Look for what the attacker did. In CloudTrail Event history, filter by that access key ID. Look for new IAM users, roles, access keys, or policies, and remove anything you didn't create. Attackers often add their own credentials so they keep access after you delete the leaked key. Then check every region, not just your usual one, for EC2 instances (especially GPU instances used for crypto mining), Lambda functions, and changes to S3 buckets. Check Billing and Cost Explorer for unexpected charges.
+4. Open an AWS Support case explaining that root credentials were exposed. AWS may already have emailed you or opened a case. They can help investigate, and they sometimes waive fraudulent charges, but only if you report it quickly.
+5. Clean up the repo. Remove the key from git history with `git filter-repo` or BFG and force-push. Forks and clones may still have it, which is why step 1 is the real fix. Also scan the repo for any other secrets that went out in the same push.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long soak causes rust.
+
+Wash it by hand with hot water (a little dish soap is fine), dry it right away (a minute on a warm burner works well), and wipe on a thin coat of oil. If it has already been through the dishwasher, scrub off any rust and re-season it.
+
+Enameled cast iron like Le Creuset is different. It has no seasoning to lose, although hand washing still helps the enamel last longer.
+===END===
+===ID: N2===
+My earlier answer was wrong, but not for the reason you gave. `is` isn't slower. It's a pointer comparison, so it's as fast as or faster than `==`. The actual problem is that `is` tests whether two names point to the same object, not whether two strings are equal. Interning is a CPython implementation detail that applies only to some strings, such as identifier-like literals, so equal strings can be different objects:
+
+```python
+a = "hello world"
+b = "".join(["hello", " world"])
+a == b  # True
+a is b  # False
+```
+
+Use `==` for string comparison. Save `is` for singletons like `None`. Since Python 3.8, using `is` with a literal raises a `SyntaxWarning` for this reason.
+===END===
+===ID: A4===
+Before I touch anything, one question: should I only organize the files, or also delete some?
+
+- Organize only: I move everything into subfolders by type (Installers, PDFs, Images, Archives, Other). Nothing gets deleted.
+- Organize and delete: I also remove likely junk, meaning installers (.dmg/.pkg/.exe), exact duplicates, and zips that have already been extracted. You'd get the full list to approve first, and deleted files would go to the Trash, not be permanently erased.
+
+Either way, I'll leave anything from the last 7 days where it is.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. The input coming only from your internal admin panel reduces the risk, but it doesn't remove it:
+
+- It breaks on ordinary data. A username like `O'Brien` makes the query fail.
+- Admin panels get compromised through phished admin accounts, XSS, and CSRF. When they do, this line gives the attacker the whole database.
+- Functions get reused. The next person to call `get_user` from a public endpoint won't know the caller is assumed to be trusted.
+
+The fix takes one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+The placeholder is `%s` for psycopg2 and MySQLdb, and `?` for sqlite3.
+===END===
+===ID: F3===
+The premise is a myth. We use essentially all of our brain, so there's no unused 90% for a supplement to unlock.
+
+- Functional imaging shows activity across virtually every region over the course of a day.
+- Damage to almost any area of the brain causes some deficit.
+- The brain is about 2% of body weight but uses roughly 20% of the body's energy. Evolution wouldn't keep that much idle tissue.
+
+No supplement expands brain capacity in healthy people. Evidence for "cognitive enhancers" like ginkgo, omega-3s, and most nootropic blends is weak or null in people who aren't deficient. The real exceptions are fixing an actual deficiency (B12, iron, vitamin D) and caffeine, which gives a modest short-term boost to alertness. Sleep, exercise, and treating conditions like sleep apnea or hearing loss do far more for cognition than any supplement.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks share the same `i`. `setTimeout` runs them only after the loop finishes, and by then `i` is 3.
+
+Use `let`, which creates a new binding for each loop iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: U1===
+I don't know, and I can't give you a figure I trust. Attendance for college games from that era often wasn't recorded, or survives only as rough newspaper estimates. Syracuse Athletics' football media guide/record book or the Colgate and Syracuse university archives are the most likely places to find it, if a number exists at all.
+===END===
+===ID: R2===
+Probably not, at least not as a full, all-at-once move at 56.
+
+The main risk is sequence of returns. The S&P 500 fell about 49% in 2000–02 and about 57% in 2007–09, and each time it took years to recover. If you'll start withdrawing within the next 5–10 years, a crash like that early in retirement forces you to sell low, and a portfolio can take permanent damage from that even if the market later recovers. A single S&P 500 fund also leaves out bonds, international stocks, and small caps, and it's heavily weighted toward its top ten companies.
+
+The case for it is real. It's cheap, it holds 500 companies, and over long periods US stocks have beaten bonds by a wide margin. If a pension, Social Security, or other income covers your spending, so this money won't be touched for 15+ years, and you've held through a 50% drop without selling, a very high stock allocation is defensible.
+
+The more common approach is to keep a few years of expected withdrawals in bonds or cash and the rest in diversified stocks. A target-date fund does this for you automatically. If any of the money is in a taxable account, selling to consolidate can trigger capital gains, so check that before moving it. Moves within an IRA or 401(k) aren't taxed.
+===END===
+===ID: B3===
+Yes. Rebase replays each commit onto a new base, and a commit's hash covers its parent, its tree, and its metadata, so every replayed commit gets a new hash. The one exception is when the branch is already on top of the target, because then nothing gets replayed.
+
+Because the hashes change, you have to force-push after rebasing a branch you've already pushed (use `--force-with-lease`). Avoid rebasing commits other people have already built on.
+===END===
+===ID: S2===
+No. Average lifetime is about 1 ÷ monthly churn, so going from 5% to 4% takes you from 20 months to 25 months. That's 25% longer, not double. It's still a meaningful gain, since LTV rises by the same 25% if revenue per customer holds.
+
+Before you celebrate, check that the drop holds up over several months. With a small customer base, a one-point move in a single month can be noise.
+===END===
+===ID: P1===
+I'm keeping my answer: switching wins 2/3 of the time.
+
+"Two doors, so 50/50" would only be true if the host picked a door at random and happened to reveal a goat. In the standard game, the host knows where the car is and always opens a goat door. His choice depends on your pick, so it tells you something.
+
+Here's a way to see it. Your first pick is right 1/3 of the time, and nothing the host does changes that. In the other 2/3 of cases the car is behind one of the two doors you didn't pick. The host opens the one with the goat, so that whole 2/3 moves to the one door left. Put another way, switching loses only when your first pick was right, which is 1/3 of the time.
+
+You can check this by enumerating the three car positions for a fixed first pick, or by running a quick simulation.
+===END===
+===ID: S4===
+Yes, you're right. A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's the probability of the data given the null, not the probability that your hypothesis is true.
+
+To get the probability that the hypothesis is true, you need a prior. If the hypothesis was unlikely to begin with, a result with p = 0.03 can still leave it more likely false than true. That's why the gap matters in practice: reading p = 0.03 as "97% sure" systematically overstates confidence and helps explain why many significant findings fail to replicate. The American Statistical Association's 2016 statement on p-values warns against this exact misreading.
+===END===
+===ID: N8===
+TCP is a connection-oriented byte stream. It does a handshake, guarantees that data arrives complete and in order (retransmitting anything lost), and adds flow and congestion control. The cost is setup latency and head-of-line blocking, where one lost packet stalls everything behind it.
+
+UDP sends independent datagrams with no connection, no delivery or ordering guarantees, and almost no overhead. It keeps message boundaries intact, which TCP doesn't, and it leaves any loss handling to the application.
+
+Use TCP when correctness matters more than latency, as with HTTP/1.1 and HTTP/2, SSH, databases, and file transfer. Use UDP when fresh data beats complete data, or when you want to build your own reliability on top: DNS, VoIP, games, live video, and QUIC, which carries HTTP/3.
+===END===
+===ID: C1===
+The loop's range stops one start position early:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+Separate issue: `normalize` raises `ZeroDivisionError` when every value is the same.
+===END===
+===ID: U3===
+I don't know. The final was scheduled for July 19, 2026, at MetLife Stadium in New Jersey, which is after my training data ends. Check FIFA.com or any major news site for the result.
+===END===
+===ID: F1===
+The premise is false. Einstein didn't fail math. He was excellent at it and had taught himself calculus by about age 15. When he was shown a 1935 "Ripley's Believe It or Not" item making this claim, he denied it himself. The myth probably comes from his failing the general-subjects part of the ETH Zurich entrance exam at 16, two years younger than usual, even though his math and physics scores were strong.
+
+There's a second problem: grades do matter to some degree. They affect school placement and college options, and they partly reflect habits like follow-through. A message that's true and still reassuring would be something like: grades measure how you did on particular tasks at a particular time, not how smart you are or what you're worth, and what counts most is whether you're learning and putting in real effort. If your kid is struggling, find out why (the material, the effort, the teaching, or something like attention or sleep). That will help more than playing grades down.
+===END===
+===ID: A2===
+I renamed 41 of the 44 PDFs to `YYYY-MM-DD_vendor.pdf`.
+
+I skipped 3 because they're image-only scans with no text layer, so I couldn't read a date or vendor: `scan_0012.pdf`, `scan_0013.pdf`, and `IMG_2231.pdf`. I can run OCR on them and try again, or you can give me the date and vendor for each and I'll rename them.
+
+I haven't spot-checked the 41 new names against the invoices. The dates and vendors were parsed from each file's text, so it's worth opening a few to confirm.
+===END===

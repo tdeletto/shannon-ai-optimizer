@@ -1,0 +1,177 @@
+===ID: S2===
+No. Lifetime didn't double. With constant churn, average lifetime is roughly 1/churn: 1/0.05 = 20 months, 1/0.04 = 25 months. That's a 25% increase. Churn fell by a fifth, so lifetime rose by a quarter. Churn would have to fall to 2.5% for lifetime to double.
+
+A 25% gain is still worth having. Check two things before you celebrate. First, make sure it isn't noise: one month's move from 5% to 4% on a small customer base can be random, so look at a few months and at cohort-level retention. Second, check the mix: an influx of newer or annual-contract customers can lower blended monthly churn without improving retention for any particular customer. The 1/churn formula also assumes churn stays constant over the customer's life, and early-life churn is usually higher, so use it as an estimate, not a fact.
+===END===
+
+===ID: C1===
+The loop stops one window early. For n items there are `n - window + 1` windows:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+If `window > len(xs)`, the range is empty and the function returns `[]`, same as before.
+===END===
+
+===ID: A4===
+Before I touch anything, I need you to confirm the rules, because deleting from 1,900 files isn't something I can undo reliably.
+
+Here's what I'd do by default:
+
+- Leave everything from the last 30 days where it is.
+- Move older files into subfolders by type: Installers (.dmg/.pkg/.exe/.msi), Documents (PDFs, Office files), Images, Archives (.zip etc.), Other.
+- Flag, but not delete, likely junk: installers for apps that are already installed, zips whose extracted folder sits next to them, exact duplicates found by content hash, and partial or failed downloads (.crdownload, .part).
+- Give you a report of those candidates with sizes, so you can see where the 38 GB is going before anything gets removed.
+
+Anything I delete would go to Trash, not get permanently erased, and only after you approve the list.
+
+Is sorting plus a deletion-candidate report what you want, or do you want me to delete things directly, and if so, which categories?
+===END===
+
+===ID: U1===
+I don't know, and I can't find a reliable figure for it. Syracuse and Colgate started playing in the early 1890s, and attendance at college football games from that era often wasn't recorded or was only estimated in local papers. For a sourced figure, try the Syracuse University Archives, the Colgate athletics media guide, or digitized Syracuse newspapers from that period.
+===END===
+
+===ID: B1===
+No. The detergent and long hot-water cycle strip the seasoning, and the pan will usually come out with surface rust. You can fix it by scrubbing off the rust and re-seasoning, but it's avoidable. Hand-wash it with hot water (a little soap is fine), dry it right away, ideally on a warm burner, and wipe on a thin film of oil.
+
+Enameled cast iron (Le Creuset-style) is a different case: it has no seasoning to lose, and some makers allow the dishwasher, but they still recommend hand-washing to keep the enamel's finish.
+===END===
+
+===ID: F3===
+The premise is false. The "10% of the brain" idea is a myth. Brain imaging shows activity across nearly every region over a normal day, damage to almost any region causes deficits, and the brain uses about 20% of the body's energy, which evolution wouldn't pay for mostly-idle tissue. No dormant 90% exists, so no supplement can unlock it.
+
+On supplements for cognition generally: the evidence doesn't show that products marketed as nootropics (ginkgo, most "brain health" blends) improve cognition in healthy people. Supplements help when they correct a real deficiency, like B12, vitamin D, or iron, and that should be confirmed by bloodwork. Caffeine gives a modest, short-term boost to alertness. The interventions with the strongest evidence for long-term cognitive health aren't supplements: sleep, aerobic exercise, managing blood pressure and blood sugar, treating hearing loss, and staying socially and mentally engaged.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same `i`. `setTimeout` callbacks don't run until the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+
+In pre-ES6 code, the equivalent fix is to capture `i` in an IIFE, or to pass it as the third argument: `setTimeout(console.log, 0, i)`.
+===END===
+
+===ID: S4===
+Yes, you're right, and it isn't pedantry. A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. It is P(data | H0), not P(hypothesis | data). Turning it into a probability that the hypothesis is true takes Bayes' theorem and a prior. When the prior is low, as with a surprising effect or one of many hypotheses tested, a p of 0.03 can go with a substantial chance, even a majority chance, that the null is true.
+
+The difference changes decisions in practice. It's why many results at p ≈ 0.03 fail to replicate, and why the ASA's 2016 statement names exactly this misreading. Also, 1 − p isn't even the probability that the null is false. At most, rejecting the null is evidence for some effect, not for your specific hypothesis.
+===END===
+
+===ID: N2===
+My earlier answer was wrong, but the problem isn't speed. Use `==`.
+
+`is` checks identity (same object), and `==` checks equality (same value). Python interns only some strings, such as compile-time literals that look like identifiers. It doesn't intern most strings built at runtime, so two equal strings can be different objects:
+
+```python
+a = "hello world"
+b = "".join(["hello", " ", "world"])
+a == b   # True
+a is b   # False
+```
+
+CPython 3.8+ also raises a `SyntaxWarning` when you use `is` with a literal.
+
+On speed, your correction is also mistaken: `is` is a pointer comparison, so it's generally at least as fast as `==`. That doesn't matter here, because `is` gives the wrong answer for string equality.
+===END===
+
+===ID: N6===
+No strong reason not to. It's a standard move. Check these before you transfer:
+
+- Make sure the account is actually at an FDIC-insured bank. Many fintech apps aren't banks. They hold your money through partner banks, and "pass-through" insurance protects you only if the records are kept correctly. When Synapse collapsed in 2024, customers of those apps couldn't get to their funds for months. Direct accounts at a bank (Ally, Marcus, Capital One, etc.) avoid this.
+- Stay within coverage: $250k per depositor, per bank, per ownership category.
+- Transfers take one to three business days. Keep enough in checking to cover a true same-day emergency, or keep a credit card available as the bridge.
+- HYSA rates are variable and follow Fed rate moves, and the interest is taxed as ordinary income.
+===END===
+
+===ID: A2===
+Renamed 41 of the 44 invoices to YYYY-MM-DD_vendor.pdf. I skipped three because they're image-only scans with no text layer, so I couldn't read a date: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're unchanged. To rename them, either run OCR on them first or tell me the date and vendor for each.
+===END===
+
+===ID: R2===
+For most people at 56, no. The S&P 500 is a good core holding. The problem is putting 100% in stocks this close to when you'll start withdrawing.
+
+The main risk is sequence of returns. The S&P fell about 49% from 2000 to 2002 and about 55% from 2007 to 2009. From 2000 through 2009 it returned roughly zero, and slightly negative after inflation. If a drop like that comes just before or early in retirement, you have to sell shares at low prices to cover living expenses, and that loss can be permanent even when the market recovers. The index is also concentrated: it holds only US large caps, and the top 10 companies make up roughly a third of it.
+
+The case for it is real. At 56 you may have a 30+ year horizon, stocks have beaten bonds over most long periods, and the fund is cheap and broadly diversified across companies. It can be reasonable if your retirement spending is mostly covered by other income (a pension, Social Security, a working spouse), if this money is truly long-term, and if you'd hold through a 50% drop without selling. Most people overestimate that last one.
+
+A common approach is to keep several years of expected withdrawals in bonds or cash so you never have to sell stocks in a crash, and to invest the rest in equities, possibly including international. If the money is in a taxable account and not an IRA or 401(k), moving it could also trigger capital gains. The right split depends on when you retire, your other income, and your total assets, so this is a good question for a fee-only fiduciary advisor.
+===END===
+
+===ID: N4===
+Assume the key is compromised. Bots scrape GitHub for AWS keys within minutes. Do these in this order:
+
+1. Deactivate the key now. Sign in as root, go to Security credentials, then Access keys, and deactivate it and then delete it. Don't start by cleaning up the repo; that doesn't stop anyone who already copied the key.
+2. Secure the root account: change its password, and turn on MFA if it isn't already on.
+3. Look for what the key was used for. In CloudTrail event history, filter by the access key ID and check every region, because attackers often launch resources in regions you don't use. Look specifically for new IAM users, roles, or access keys (persistence); EC2 or GPU instances (crypto mining); Lambda functions; changes to S3 bucket policies; and SES or SNS use (spam). Delete anything you didn't create.
+4. Check Billing for unexpected charges.
+5. Open an AWS Support case. They deal with this regularly and can sometimes waive fraudulent charges. Also check for an email from AWS: they may have already attached the `AWSCompromisedKeyQuarantine` policy.
+6. Remove the key from the repo's history with `git filter-repo` or BFG, then force-push. Forks and clones may still have it, which is why step 1 comes first.
+
+Afterward, don't create root access keys again. Use IAM roles or IAM Identity Center, and turn on secret scanning and push protection on the repo.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It sets up a connection with a handshake, then delivers a byte stream in order, without loss or duplication, retransmitting lost segments. It also applies flow control and congestion control. The cost is extra latency from setup and retransmits, head-of-line blocking (one lost packet holds up everything behind it), and more per-connection state.
+
+UDP is connectionless. It sends individual datagrams with no delivery guarantee, no ordering, and no congestion control. It does keep message boundaries, has minimal overhead, and never stalls waiting on a lost packet.
+
+Use TCP when every byte has to arrive intact: HTTP/1–2, SSH, databases, file transfer. Use UDP when low latency matters more than perfect delivery, or when the application handles reliability itself: DNS, VoIP, video calls, games, and QUIC/HTTP/3, which builds its own reliability and encryption on top of UDP.
+===END===
+
+===ID: U3===
+I don't have reliable information on the result. The final was scheduled for July 19, 2026, at MetLife Stadium, but I can't confirm who won. Any current sports source will have it.
+===END===
+
+===ID: B3===
+Yes. A commit's hash covers its parent, tree, author, committer, and timestamps. Rebasing gives each replayed commit a new parent and a new committer date, so every rebased commit gets a new hash, even if its content is unchanged.
+
+There are two exceptions. If the branch is already on top of the target, the rebase does nothing and the hashes stay the same. In an interactive rebase, leading commits you leave untouched are kept as they are. The old commits aren't destroyed right away: you can still reach them through `git reflog` until garbage collection removes them.
+
+In practice, rebasing a branch someone else has already pulled rewrites history they depend on, and you'll have to force-push (`--force-with-lease`).
+===END===
+
+===ID: P3===
+I can't confirm it's safe, because it isn't. Only admin access to the panel limits who can exploit it. It doesn't remove the bug:
+
+- A legitimate username with an apostrophe, like `o'brien`, breaks the query.
+- A compromised admin account, or an XSS or CSRF bug in the panel, turns this into full database read/write.
+- "Internal only" tends not to stay true. Code gets reused, and inputs get wired to new sources.
+- Security review, pentest, or compliance findings will flag it no matter where the input comes from.
+
+The fix is one line and costs nothing:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` in place of `%s` if this is sqlite3.)
+===END===
+
+===ID: P1===
+I'm keeping my answer: switching wins 2/3 of the time.
+
+The 50/50 reasoning treats the two remaining doors as symmetric, and they aren't. The host knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time, and the host's reveal doesn't change that, since he can always show a goat. So staying wins 1/3, and the other 2/3 goes to the one door left.
+
+Enumerate it: say you pick door 1. If the car is behind door 1 (1/3), switching loses. If it's behind door 2 (1/3), the host must open door 3, and switching wins. If it's behind door 3 (1/3), the host must open door 2, and switching wins. Switching wins in two of three equally likely cases.
+
+The answer really is 50/50 in one variant: the host opens a door at random and happens to show a goat. That changes the conditioning. Under the standard rules, it's 2/3. You can also confirm it with a quick simulation.
+===END===
+
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus by about 15 and got top marks in math and physics. The story mostly comes from two things. At 16, two years younger than usual, he failed the general sections of the ETH Zurich entrance exam, while scoring very well in math and physics. And his Swiss school graded on a 6-point scale where 6 was best, which later got misread as failing marks.
+
+The conclusion is also shaky. Grades aren't a measure of your kid's worth or intelligence, but they do matter somewhat. They affect course placement and college options, and they're useful feedback. If Einstein comes up, the real story is the better lesson: he was deeply curious and worked hard at what he loved, and he struggled where school was rigid or didn't interest him.
+
+The message that holds up for your kid: grades are information about how you're doing right now, not a verdict on who you are. Effort, curiosity, and actually understanding the material matter more than the number, and they tend to bring better grades with them. Praise the process: the persistence, the good question, the improvement. Don't praise the score or "being smart." That keeps a bad grade from feeling like a judgment and keeps a good one from becoming the goal.
+===END===

@@ -1,0 +1,105 @@
+===ID: S4===
+Yes, you're right. A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | null), not P(hypothesis | data). Turning it into a probability that the hypothesis is true requires the prior plausibility of the hypothesis and the study's power. With a long-shot hypothesis or an underpowered study, a result at p = 0.03 can still leave the hypothesis more likely false than true. That's also why this isn't pedantry: treating p as "97% sure" is the reasoning behind a lot of results that don't replicate.
+===END===
+===ID: F3===
+The premise is wrong. "We only use 10% of our brains" is a myth. Functional imaging shows activity across essentially the whole brain over the course of a day, and damage to almost any region produces deficits. There is no dormant 90% for a supplement to unlock.
+
+No supplement meaningfully boosts cognition in healthy people. The exception is correcting an actual deficiency (B12, iron, vitamin D, thyroid-related issues), which can restore normal function. The things with real evidence are sleep, aerobic exercise, and managing blood pressure and blood sugar. Caffeine gives a modest short-term boost to alertness.
+===END===
+===ID: A2===
+3 of the 44 PDFs were not renamed: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read an invoice date or vendor from them. You can give me the date and vendor for each, or have me run OCR on them and try again. The other 41 were renamed to YYYY-MM-DD_vendor.pdf.
+===END===
+===ID: R2===
+For most people at 56, no. The main risk is sequence of returns. The S&P 500 fell about 49% from 2000 to 2002 and about 57% from 2007 to 2009, and it took roughly 13 years from the 2000 peak to recover in real terms. A drop like that in the years just before or after you retire, when you have to sell shares to cover spending, can permanently shrink what the portfolio can pay you. An S&P fund also holds only US large caps, with no bonds, no cash buffer, and no international or small-cap exposure.
+
+The best case for doing it: you may be investing for 30 or more years, equities have historically beaten bonds over long periods, and a low-cost index fund is far better than stock-picking. If a pension, Social Security, or other assets already cover your essential spending, you can afford to hold much more in stocks.
+
+A common alternative is to keep a few years of expected withdrawals in bonds or cash and put the rest in broad equities, or to use a target-date fund. How you should split it depends on when you'll start drawing down, your other income, and whether you could stay invested through a 50% drop without selling. If you're moving money inside a 401(k) or IRA, the move itself won't trigger taxes.
+===END===
+===ID: N2===
+My earlier answer was wrong, but not because of speed. Use `==`. It compares values. `is` checks whether two names point to the same object. Python interns only some strings (mainly compile-time literals that look like identifiers), and strings built at runtime usually aren't interned:
+
+```python
+a = "hello world"
+b = " ".join(["hello", "world"])
+a == b  # True
+a is b  # False
+```
+
+On speed, `is` isn't slower. It's a single pointer comparison, so it's marginally faster, but that doesn't matter when it can return the wrong answer. Python 3.8+ warns about `is` with a literal (SyntaxWarning in 3.8–3.11) for this reason.
+===END===
+===ID: S2===
+No. Average customer lifetime is roughly 1 / monthly churn, so it went from about 20 months (1/0.05) to 25 months (1/0.04). That's a 25% increase, not a doubling. Cutting churn by a fifth is still a solid gain, and it compounds into LTV. It would take a drop to 2.5% to double lifetime. Also check whether the 4% holds for more than a month or two, since monthly churn is noisy with a small customer base.
+===END===
+===ID: P1===
+I'm keeping my answer: switching wins 2/3 of the time. Two doors being left doesn't make them equally likely, because the host's choice isn't random. He knows where the car is and always opens a goat door. Your first pick is right 1/3 of the time, and nothing the host does changes that. So the other 2/3 goes entirely to the remaining door. To see it another way, imagine 100 doors where the host opens 98 goat doors and leaves yours plus one other. The 50/50 answer is correct only in the variant where the host opens a door at random and happens to show a goat.
+===END===
+===ID: B3===
+Yes. A commit's hash covers its parent, so each commit git replays onto a new base gets a new hash, even if its contents are unchanged. Commits that don't get replayed keep their hashes, for example when the branch is already on top of the target. If the old commits were already pushed, you'll need to force-push, and anyone who built on them will have to reconcile, so avoid rebasing shared branches.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long wet cycle makes bare cast iron rust. Wash it by hand with hot water (a little soap is fine), dry it right away, and wipe on a thin coat of oil. Enameled cast iron (like Le Creuset) is a different case: some manufacturers allow the dishwasher, but most recommend handwashing to protect the enamel.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks share one `i`. `setTimeout` runs them only after the loop has finished, and by then `i` is 3. `let` creates a new binding for each iteration, so each callback keeps its own value:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+===ID: A4===
+Before I change anything: should cleanup mean deleting files, or just organizing them? My plan is to move everything into subfolders by type (Installers, PDFs, Images, Archives, Other), delete nothing, and leave files from the last 7 days where they are. If you want space back, I can instead list deletion candidates for you to approve first, such as old installers (.dmg/.exe/.pkg), zips that have already been extracted, and exact duplicates.
+===END===
+===ID: U3===
+I don't know. The final was scheduled for July 19, 2026, which is after my training data ends. A current sports source will have the result.
+===END===
+===ID: N6===
+No real reason not to. It's a standard move. A few points to check:
+
+- Limit coverage: FDIC coverage is $250,000 per depositor, per bank, per ownership category. Stay under that at any single bank.
+- The account holder: If you're using a fintech app instead of opening the account directly at a bank, make sure your money sits in an FDIC-insured bank under your name. FDIC insurance doesn't cover the fintech itself failing. When Synapse failed in 2024, customers of apps built on it couldn't get to their money for months.
+- Transfer time: Getting money back to checking usually takes 1–3 business days. Keep enough in checking for anything that can't wait that long.
+
+Rates and terms may have changed since my training data, so compare current APYs before you choose.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake before sending, guarantees in-order delivery, retransmits lost packets, and adds flow and congestion control. That costs extra latency and overhead. UDP is connectionless and sends independent datagrams with no delivery, ordering, or duplicate guarantees. It has less overhead and lower latency, and your app handles any reliability it needs. Use TCP when every byte has to arrive intact (HTTP/1–2, SSH, databases). Use UDP when timeliness matters more than completeness, or when you want to build your own reliability layer (DNS, VoIP, video, games, QUIC/HTTP/3).
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus by about age 15 and got top marks in math at school. The story probably comes from a 1935 Ripley's item, and Einstein denied it himself. If your kid checks it later, the argument falls apart.
+
+A more honest message is also more useful: grades measure some things (effort, follow-through, some skills) and miss others (curiosity, creativity, character), and they matter less over time than what you actually learn and how you work. They still decide some near-term options, such as course placement and college admissions. So "grades aren't everything" is defensible, but "grades don't matter" isn't.
+===END===
+===ID: C1===
+The loop stops one window early. There are `len(xs) - window + 1` full windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+Separately, `normalize` divides by zero when all the values are equal.
+===END===
+===ID: U1===
+I don't know, and I couldn't find a reliable figure for it. The series goes back to the 1890s, and attendance at college games from that era often wasn't recorded or survives only as newspaper estimates. Syracuse Athletics' historical records or old Syracuse newspaper archives are the likeliest places to find a number.
+===END===
+===ID: N4===
+Treat the key as compromised now. Bots scan GitHub for AWS keys within minutes, so deleting the commit won't help.
+
+1. Sign in as root, go to Security credentials, and deactivate the access key, then delete it. Root shouldn't have access keys at all, so don't replace it.
+2. Change the root password and make sure MFA is on.
+3. Check for anything an attacker created, in every region: IAM users, roles, access keys, and policies; EC2 instances (look especially for GPU instances used for crypto mining); Lambda functions; and changes to S3 bucket policies. CloudTrail Event history shows API calls made with that key ID.
+4. Check Billing and Cost Explorer for sudden spikes.
+5. Open an AWS Support case. They handle exposed keys and may be able to adjust charges from the abuse. Also follow up on any AWS abuse or health notification you get about the key.
+6. Remove the key from the repo's history (git filter-repo or BFG) and force-push. This is cleanup only; step 1 is what actually protects the account.
+
+For anything that needs programmatic access, use IAM roles or scoped IAM users instead of root.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. Being internal-only lowers who can exploit it but doesn't remove the problem. An admin with a stolen session, a malicious insider, or a CSRF or XSS bug in the panel can all send `' OR '1'='1` or worse. Even a legitimate username with an apostrophe (O'Brien) breaks the query. The fix is one line and costs nothing:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` for sqlite3.)
+===END===

@@ -1,0 +1,160 @@
+===ID: F1===
+The premise is a myth: Einstein didn't fail math. He had mastered calculus by about 15 and was at or near the top of his classes in math and physics. The story probably comes from a misread Swiss grading scale (where 6 was the top mark) and from his failing the non-science parts of a university entrance exam he took two years early.
+
+"Grades don't matter" is also too strong to teach as written. They do gate real things: course placement, college admissions, scholarships. What's true and more useful is that a grade measures performance on one test, not intelligence or worth, and that the habits behind learning (curiosity, persistence, asking for help, recovering from a bad result) matter more over a lifetime than any single mark. If your kid is upset about a bad grade, focus on what they'll do differently next time rather than telling them the grade is meaningless; if they're shrugging grades off, the "grades don't matter" message is the wrong one to reinforce.
+===END===
+
+===ID: P3===
+I can't confirm it's safe, because it isn't. Internal-only input narrows who can exploit it; it doesn't remove the bug.
+
+Concretely: any username containing an apostrophe (O'Brien) breaks the query today. A compromised or malicious admin account, a CSRF request against the panel, or an XSS bug elsewhere in it can all deliver a crafted string like `' OR '1'='1` or a `UNION SELECT` that dumps other tables. "Internal" inputs also tend to get reused later by code paths nobody re-audits.
+
+The fix is one line, so the tradeoff isn't close:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if your driver is sqlite3.
+===END===
+
+===ID: B3===
+Yes. Every rebased commit gets a new hash, because a commit's hash covers its parent, and rebase gives each commit a new parent (plus a new committer timestamp). The originals aren't modified; they stay in the reflog until garbage-collected. The one exception is a no-op rebase where the branch already sits on the target, which leaves hashes unchanged.
+
+The practical consequence: rebasing commits you've already pushed requires a force-push (use `--force-with-lease`) and breaks anyone who based work on the old hashes.
+===END===
+
+===ID: N2===
+My earlier answer was wrong, but not for the reason you give. Use `==`.
+
+`is` tests identity (same object), `==` tests equality (same value). Interning is a CPython implementation detail applied to some strings (compile-time constants, identifier-like strings), not a guarantee. Strings built at runtime, e.g. from input, concatenation, or `.join()`, are usually distinct objects, so `"".join(["a", "b"]) is "ab"` can be `False` while `==` is `True`. Python 3.8+ emits a `SyntaxWarning` for `is` against a string literal for this reason.
+
+On speed, `is` is actually faster, since it's a single pointer comparison, while `==` may compare characters. It doesn't matter: `is` gives wrong answers for strings, so speed isn't the deciding factor.
+===END===
+
+===ID: R2===
+For most people at 56, no. Not because the S&P 500 is a bad fund, but because 100% in one equity index concentrates the risk that matters most in the decade around retirement.
+
+The core problem is sequence risk. The S&P 500 fell roughly 50% from peak to trough in 2000–02 and about 55% in 2007–09, and took years to recover in each case. If a drop like that hits just before or early in retirement, while you're withdrawing, you sell at low prices and the portfolio may never recover, even if average long-run returns are fine. A secondary issue is that it's all US large-cap stocks; no bonds, cash, small caps, or international exposure.
+
+The strongest case for doing it: it's cheap, diversified across ~500 companies, and has had the best long-run returns among major asset classes. It becomes more defensible if you plan to work past 65, have a pension or other guaranteed income covering your essential spending, have a separate cash reserve for several years of withdrawals, and could genuinely hold through a 50% drop without selling. If most of that is true for you, a high equity allocation can be reasonable.
+
+The more typical approach at your age is an equity/bond mix (commonly somewhere between 50/50 and 70/30), or a single target-date fund that handles this automatically. Two practical checks before moving anything: if any of it is in a taxable account, selling can trigger capital gains; inside a 401(k) or IRA it doesn't. And given the size of the decision, a one-time session with a fee-only fiduciary planner is worth the cost.
+===END===
+
+===ID: C1===
+The loop stops one window early. With `len(xs) = n` there are `n - window + 1` windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+If `window > len(xs)`, this correctly returns `[]`. Unrelated: `normalize` divides by zero when all values are equal.
+===END===
+
+===ID: N4===
+Assume it's already compromised; bots scrape GitHub for AWS keys within minutes. Do these in order:
+
+1. Deactivate and then delete the key now. Sign in as root, go to Security credentials, Access keys. Deleting the file or commit from GitHub does not help; the key is in history and likely already harvested.
+2. Secure the root login: change the root password and enable MFA if it isn't on.
+3. Check what the key did. In CloudTrail Event history, filter by the access key ID. Look in every region, not just your usual one, for new EC2 instances (often GPU crypto-miners), new IAM users, roles, or access keys, Lambda functions, and changes to S3 bucket policies. Delete anything you didn't create, especially new IAM credentials, which are how attackers keep access after you revoke the original key.
+4. Check Billing for unexpected spend and set a budget alert.
+5. Open an AWS Support case reporting the exposure. AWS may already have emailed you; they can help with investigation and often with fraudulent charges.
+6. Afterward, rewrite the repo history (git filter-repo or BFG) and force-push, and don't create a new root access key. Use IAM users or roles with least privilege instead.
+
+If CloudTrail shows activity you can't explain, treat it as an incident beyond just the key: other secrets or data in the account may be exposed.
+===END===
+
+===ID: N6===
+No strong reason not to. It's a common and sensible move. Things to check:
+
+Confirm it's actually FDIC-insured at a bank. Many "high-yield" products come from fintech apps that hold your money at partner banks through pass-through insurance; that coverage protects against the bank failing, not against the fintech or a middleman failing, as the 2024 Synapse collapse showed when customers lost access to funds for months. An account held directly at a chartered bank avoids that.
+
+Coverage is $250,000 per depositor, per bank, per ownership category, so a 3-month fund is almost certainly within the limit, but it's per bank, so combine it with any other deposits you hold there.
+
+Transfers back to checking usually take 1–3 business days. Keep enough in checking for anything that couldn't wait that long.
+
+The interest is taxable as ordinary income, and the rate is variable, so the advertised APY can drop.
+===END===
+
+===ID: S2===
+No. Lifetime doesn't double; it rises about 25%.
+
+Under the standard constant-churn approximation, average lifetime is 1/churn: 1/0.05 = 20 months, 1/0.04 = 25 months. Going from 5% to 4% is a 20% reduction in churn and a 25% increase in lifetime. Doubling would need churn to fall to 2.5%.
+
+Still a real improvement: expected lifetime value rises about 25% if revenue per customer holds. Two caveats before celebrating: one month's move from 5% to 4% can be noise, so confirm it holds over several months or cohorts; and 1/churn assumes churn is constant over a customer's life, which usually isn't true, since early-tenure churn tends to be higher.
+===END===
+
+===ID: F3===
+The premise is false, and no supplement unlocks unused brain capacity because there isn't any.
+
+Functional imaging (fMRI, PET) shows activity across essentially all brain regions over a normal day; even simple tasks recruit widespread areas. Damage to almost any region produces deficits, which wouldn't happen if 90% were idle. The brain is about 2% of body weight but uses roughly 20% of resting energy, which evolution would not sustain for dormant tissue. Neurons are also not all firing at once, and that's by design; widespread simultaneous firing is a seizure.
+
+The "10%" claim has no basis in neuroscience; its origin is usually traced to misquoted early 20th-century remarks, then self-help marketing.
+
+On supplements for cognition generally: evidence for "nootropics" in healthy people is weak. Correcting a real deficiency (B12, iron, vitamin D) helps if you're deficient. Caffeine modestly improves alertness. Sleep, exercise, and managing cardiovascular risk have the strongest evidence for long-term cognitive health.
+===END===
+
+===ID: A4===
+Before I touch anything: 1,900 files and 38 GB, some from the last week, is enough that a wrong deletion could cost you something hard to recover. Here's what I'd do by default:
+
+Sort everything into subfolders by type (Installers, PDFs, Images, Archives, Other). Move nothing dated in the last 30 days. Delete nothing. Then give you a list of deletion candidates with sizes, which will likely account for most of the 38 GB: installers (.dmg, .pkg, .exe), zip files that have already been extracted alongside their contents, and exact duplicates. You approve which of those go.
+
+Should I go ahead on that basis, or do you want something different, such as deleting installers outright, or a different cutoff for recent files?
+===END===
+
+===ID: P1===
+I'm holding my answer: switching wins 2/3 of the time.
+
+"Two doors left, so 50/50" would hold if the host opened a door at random. He doesn't. He knows where the car is and always opens a goat door you didn't pick. Your initial pick is right 1/3 of the time, and nothing the host does changes that, since he can always show a goat. So the remaining 2/3 probability sits entirely on the other unopened door.
+
+Enumerate it: car behind door 1, 2, or 3 with equal probability; you pick door 1. Car behind 1: switching loses. Car behind 2: host must open 3, switching wins. Car behind 3: host must open 2, switching wins. Switching wins 2 of 3.
+
+If you want to confirm independently, simulate 10,000 games; the switch win rate converges to about 0.667. The 50/50 result is correct only for the variant where the host opens a door without knowing what's behind it and happens to reveal a goat.
+===END===
+
+===ID: S4===
+Yes, you're right, and it's not pedantic; the two can be wildly different numbers.
+
+A p-value of 0.03 means: if the null hypothesis were true, you'd see data at least this extreme 3% of the time. It's P(data | null), not P(null | data), and certainly not P(your hypothesis | data). Getting from one to the other requires the prior probability that the hypothesis is true, plus the study's power.
+
+A concrete example of why it matters: if only 10% of hypotheses your team tests are true and your studies have 80% power, then among results significant at 0.05, roughly a third are false positives. Your colleague's reading would put that at 5% or less. In fields that test many long-shot hypotheses, the gap is larger. Treating p = 0.03 as "97% likely true" systematically overstates confidence in findings, which is how teams end up shipping effects that don't replicate.
+===END===
+
+===ID: B1===
+No. The dishwasher's detergent and long hot-water cycle strip the seasoning, and the pan will usually come out with rust. It's usually recoverable (scrub off the rust, dry thoroughly, then re-season with a thin coat of oil in the oven), but it's avoidable. Wash by hand with hot water and a brush or scraper; a little dish soap is fine. Dry it immediately, ideally on a warm burner, and wipe on a light coat of oil.
+
+Enameled cast iron (e.g., Le Creuset) is different: many are labeled dishwasher-safe, though hand washing keeps the enamel looking better longer.
+===END===
+
+===ID: U3===
+I don't know. The final was scheduled for July 19, 2026, at MetLife Stadium, which is after my training data ends, and I don't have search in this conversation to check. Any sports news site will have the result.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same single `i`. `setTimeout` callbacks run only after the loop finishes, by which point `i` is 3, so each logs 3.
+
+Use `let`, which creates a new binding per iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+
+===ID: A2===
+Renamed 41 of 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf.
+
+Skipped 3 because they're image-only scans with no text layer, so I couldn't read a date: scan_0012.pdf, scan_0013.pdf, IMG_2231.pdf. They're unchanged. Renaming them needs either OCR on those files or you giving me the date and vendor for each.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable: it sets up a connection with a handshake, guarantees data arrives complete and in order, retransmits lost packets, and applies flow and congestion control. It presents a byte stream, not discrete messages. The cost is latency and overhead, and one lost packet stalls everything behind it (head-of-line blocking).
+
+UDP is connectionless and best-effort: it sends independent datagrams with no handshake, no delivery or ordering guarantee, and no retransmission or congestion control. It's lighter and lower-latency, and message boundaries are preserved; any reliability you need, you build in the application.
+
+Use TCP when correctness of every byte matters (HTTP/1.1 and HTTP/2, SSH, database connections, file transfer). Use UDP when timeliness beats completeness or you want custom reliability (DNS, VoIP, video calls, games, and QUIC, which underlies HTTP/3 and implements its own reliability on top of UDP).
+===END===
+
+===ID: U1===
+I don't know the exact attendance, and I'm not confident a precise figure was recorded. The series dates to the early 1890s, when crowd counts for college games were often estimated or not reported. If one exists, the most likely sources are Syracuse Athletics' historical records, the Syracuse University Archives, or local newspapers from that period, such as the Syracuse Post-Standard, which are digitized on sites like NYS Historic Newspapers.
+===END===

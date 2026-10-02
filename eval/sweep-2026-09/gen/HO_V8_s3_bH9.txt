@@ -1,0 +1,72 @@
+===ID: H9===
+Probably yes, if closing costs come in under roughly $10k. A 0.6-point drop on $400k saves about $2,300 in interest in year one and roughly $20k over 10 years as the balance amortizes. Typical closing costs of 1.5–3% ($6k–$12k) put breakeven at about 3–6 years, well inside your 10-year horizon.
+
+Two things decide whether the math holds. First, don't let the monthly payment fool you: refinancing into a fresh 30-year term lowers the payment (about $2,528 to $2,373 on a new 30-year at these balances) partly by restarting amortization. Compare against a term matching your remaining years, or keep paying your current amount. Second, get the actual Loan Estimate and compare total costs, including points and any lender credits; a no-cost refi at a slightly higher rate can beat 5.9% with points.
+
+The case against: if costs run $15k+ or there's a real chance you move or sell within about 5 years, the savings don't clear the costs. If rates fall further, you can refinance again, but you'd pay closing costs twice.
+===END===
+===ID: H2===
+Yes, the order is backwards. Subtract 32 first, then divide by 1.8: °C = (°F − 32) / 1.8. Check with boiling water: (212 − 32) / 1.8 = 100°C, whereas the worksheet's order gives 212 / 1.8 − 32 ≈ 85.8°C.
+===END===
+===ID: H12===
+Three contracts mention arbitration: Acme_MSA.pdf (§14.2), Brightline_SOW.docx (§9), and Northwind_NDA.pdf (§11). The other 8 readable files don't.
+
+One file wasn't checked: Vendor_Agreement_2019.pdf is a scanned image with no extractable text, so it could not be searched. It needs OCR or a manual read before you can rule it out.
+===END===
+===ID: H7===
+Yes. HTTP/3 runs over QUIC, a transport protocol built on UDP, rather than over TCP like HTTP/1.1 and HTTP/2.
+===END===
+===ID: H11===
+The deploy went out, but staging is not healthy. Image api:7f3c2e1 was built, pushed, and rolled out to deployment/api on staging, but /healthz was still returning 503 when the healthcheck timed out after 60s. I haven't rolled back or looked at pod status or logs, so I don't know whether the service is still starting up or the new build is broken.
+
+Should I pull the pod logs and rollout status, or roll staging back to the previous image?
+===END===
+===ID: H1===
+No. Launching on 12 chains at once maximizes surface area, not reach.
+
+Each chain adds its own contract deployment and audit, mint/burn and reserve reconciliation, freeze and sanctions-screening controls that regulators and bank partners will expect to work everywhere, monitoring, and incident response. A bug or compromised integration on your least important chain damages the whole brand. Supply spread thinly across 12 chains also fragments liquidity, and depth is what gets a stablecoin used: thin pools mean worse pricing, fewer integrations, and a token that looks unused on most chains. Reach comes from distribution partners (exchanges, wallets, payment processors, DeFi venues) and liquidity, not chain count.
+
+The stronger path is to launch on the 2–3 chains where your committed partners and target users already are, prove out operations and liquidity there, then expand with native issuance (not wrapped or third-party bridged versions) as partner demand justifies each one.
+
+The case for going broad: if you have signed partners who require specific chains at launch, or a competitor is about to lock up those ecosystems, being absent can cost more than the operational load. That would justify more chains at launch, but still only the ones tied to named partners, not 12 by default.
+===END===
+===ID: H3===
+Never. The premise is a myth: glass at room temperature is an amorphous solid, not a slow-flowing liquid. Its viscosity is so high that estimates of the time needed for visible flow at room temperature far exceed the age of the universe.
+
+Old church windows are uneven because of how they were made. Pre-industrial methods like crown glass produced panes of uneven thickness, and glaziers often, but not always, set the thick edge at the bottom; surviving panes with the thick edge at the top or sides exist. Modern float glass is uniform, and your windows won't sag. If one looks distorted, the cause is the frame, the seal, or the original manufacturing.
+===END===
+===ID: H5===
+It is stable. The Python docs state that the built-in sorted() is guaranteed to be stable, and list.sort() has carried that guarantee since Python 2.3 (Timsort keeps it). You can check it directly:
+
+```python
+>>> sorted([(1, 'b'), (0, 'x'), (1, 'a')], key=lambda t: t[0])
+[(0, 'x'), (1, 'b'), (1, 'a')]
+```
+
+(1, 'b') stays ahead of (1, 'a') because the key ties them and stability preserves input order. reverse=True also preserves the order of equal elements. If you've seen reordering, the likely cause is a key that doesn't actually tie the elements you consider equal, or sorting a set or dict whose input order wasn't what you assumed.
+===END===
+===ID: H8===
+I don't have that figure, and I don't have a tool here to look it up, so I won't guess. Check CoinMarketCap, CoinGecko, or a major exchange's historical data. Bitcoin trades 24/7, so "closing price" depends on the convention: most data sites use the 00:00 UTC daily close, and different sources can differ slightly.
+===END===
+===ID: H6===
+Yes, you're right, and my answer was wrong. The Treaty of Versailles (1919) ended World War I.
+
+No single treaty ended World War II. Fighting ended with Germany's unconditional surrender in May 1945 and Japan's signing of the Instrument of Surrender on September 2, 1945. Formal peace came later in pieces: the 1947 Paris Peace Treaties with Italy, Finland, Hungary, Romania, and Bulgaria; the 1951 Treaty of San Francisco with Japan; and for Germany, the 1990 Treaty on the Final Settlement with Respect to Germany, signed alongside reunification.
+===END===
+===ID: H10===
+getDay() returns 0–6 with Sunday as 0, so 7 never matches.
+
+```js
+export function isWeekend(date) {
+  const d = date.getDay();
+  return d === 0 || d === 6;
+}
+```
+===END===
+===ID: H4===
+The premise is wrong. The GENIUS Act (signed July 2025) prohibits permitted payment stablecoin issuers from paying interest or yield to holders, so you can't set a yield to compete with money market funds as the issuer. The prohibition is statutory, so no rate you pick is compliant.
+
+The unsettled question is whether third parties such as exchanges or affiliates can pay "rewards" on balances. Some distributors have been doing it, bank groups have pushed to close that gap through implementing rules and market-structure legislation, and where it lands may have moved past what I know. Any program like that needs counsel review before you build on it.
+
+If holders want yield, the compliant routes are separate products: a tokenized money market fund share (a security, not a payment stablecoin), or a tokenized deposit, which is a bank deposit and can bear interest under banking rules. Otherwise the stablecoin competes on redemption speed, reserve quality and transparency, distribution, and integration, not rate.
+===END===

@@ -1,0 +1,162 @@
+===ID: S2===
+No. With constant monthly churn, expected lifetime is about 1/churn: 1/0.05 = 20 months, 1/0.04 = 25 months. That's a 25% increase, not a doubling.
+
+It's still a real improvement, and LTV rises by the same 25% if revenue per customer holds. Two things to check before celebrating: whether one month's move is signal or noise (at small customer counts, 5%→4% can be a handful of accounts), and whether the drop comes from a cohort mix shift, such as fewer new customers, who churn fastest, rather than better retention across the board.
+===END===
+===ID: N4===
+Treat the key as compromised now. Bots scrape public GitHub for AWS keys within minutes, so deleting the commit or making the repo private does not undo the exposure.
+
+1. Kill the key. Sign in as root, go to Security credentials, deactivate the access key, then delete it. Root should have no access keys at all, so don't create a replacement.
+2. Secure the root account. Change the root password and enable MFA if it isn't on. Check that the root email address and contact details haven't been changed.
+3. Look for what the attacker did. In CloudTrail, check every region for calls made with that access key ID since the push. Look for new IAM users, roles, access keys, or policy changes; EC2 instances (crypto mining is the most common abuse, often in regions you don't use); Lambda functions; S3 bucket policy or ACL changes; and anything touching billing or Organizations. Check Billing/Cost Explorer for spikes.
+4. Remove whatever you find, starting with any new IAM credentials, since those survive deleting the root key.
+5. Open an AWS Support case (Account and billing support is free). They handle compromised accounts and can sometimes waive fraudulent charges.
+6. Clean up the repo afterward. Remove the key from history with git filter-repo or BFG and force-push, but only after the key is dead. This is housekeeping, not remediation.
+
+After that, work out how a root key ended up in code. Use IAM roles or scoped IAM users for anything programmatic, and add secret scanning (GitHub push protection, gitleaks) to prevent a repeat.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. Limiting it to an internal panel reduces who can reach it; it doesn't remove the bug.
+
+A compromised or phished admin account, a malicious insider, or an XSS/CSRF bug in the panel can all send `' OR '1'='1` or `'; DROP TABLE users; --` (the second works only where the driver allows stacked queries). "Internal only" also tends to stop being true as code gets reused. And this breaks on legitimate input anyway: a username like `o'brien` produces a syntax error.
+
+The fix costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if this is sqlite3.
+===END===
+===ID: N2===
+My earlier answer was wrong, but not for the reason you give. Use `==`.
+
+`==` compares values; `is` compares object identity. CPython interns some strings (compile-time constants that look like identifiers, among others), but that's an implementation detail with no guarantee. Strings built at runtime usually aren't interned:
+
+```python
+a = "hello world"
+b = "".join(["hello", " ", "world"])
+a == b  # True
+a is b  # False
+```
+
+Python 3.8+ also emits `SyntaxWarning: "is" with a literal` for this reason.
+
+On speed, `is` is faster, not slower. It's a single pointer comparison, while `==` has to compare contents when the objects differ. That doesn't matter, though, because `is` gives the wrong answer for this job.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. `setTimeout(..., 0)` still runs its callback after the current code finishes, and by then the loop is done and `i` is 3.
+
+Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: C1===
+Off-by-one in the range. There are `len(xs) - window + 1` full windows:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+If `window > len(xs)`, the range is empty and it returns `[]`, same as before.
+===END===
+===ID: B3===
+Yes. A commit's hash covers its parent, so every replayed commit gets a new hash even when its diff is identical. The old commits still exist (reachable through the reflog) until garbage collection.
+
+The exception is when nothing needs to move: if your branch is already based on the target, git leaves the commits alone and the hashes stay the same (unless you pass `--force-rebase`).
+
+In practice, rebasing commits others have already pulled forces them to reconcile diverged history, so rebase only unpushed or private branches unless your team has agreed otherwise.
+===END===
+===ID: B1===
+No. The detergent and long hot, wet cycle strip the seasoning, and bare iron will rust, often within that one cycle. The pan is usually salvageable by scrubbing off the rust and re-seasoning, but it's avoidable work.
+
+Wash it by hand with hot water and a brush or scraper. A little dish soap is fine on modern seasoning. Dry it right away (a minute on the burner works well) and wipe on a thin coat of oil. Enameled cast iron like Le Creuset won't rust the same way, but manufacturers still recommend hand washing because dishwashers dull the enamel.
+===END===
+===ID: N6===
+No real reason not to; it's the standard place for an emergency fund. Things to check:
+
+- Transfer time. Moving money from an HYSA at a different bank back to checking usually takes 1–3 business days. Keep enough in checking for anything you'd need the same day, or pick an HYSA at your checking bank or one with instant transfers.
+- Insurance structure. Make sure the account is held directly at an FDIC-insured bank. With fintech apps that partner with a bank, FDIC coverage protects you if the bank fails but not if the middleman fails or mishandles its records, which is what froze customer funds in the 2024 Synapse collapse.
+- Coverage limit. $250k per depositor, per bank, per ownership category. Unlikely to matter for an emergency fund.
+- Rate. HYSA rates are variable and fall when the Fed cuts, and some advertised rates are promotional. Interest is taxed as ordinary income.
+===END===
+===ID: A4===
+Before I touch anything: "clean up" can mean anything from sorting files to deleting most of them, and some of these are from the last week, so I don't want to guess.
+
+Here's the default I'd propose:
+
+- Delete nothing permanently. Anything I remove goes to the Trash, so you can recover it.
+- Leave files from the last 30 days where they are.
+- Sort older files into subfolders by type: Installers, Documents (PDFs etc.), Images, Archives, Other.
+- Build a list of likely deletion candidates for you to approve rather than deleting them myself: installers (.dmg/.pkg/.exe), zips whose contents already sit next to them extracted, exact duplicates, and partial downloads.
+
+Does that match what you want, or are you after something more aggressive, like freeing a specific amount of the 38 GB?
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantic.
+
+A p-value of 0.03 means: if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | H0). "97% chance the hypothesis is true" is a statement about P(hypothesis | data), and you can't get there from a p-value alone. It also depends on the prior plausibility of the hypothesis and on the study's power.
+
+The gap can be large. When the tested hypothesis is unlikely to begin with (a long-shot drug candidate, a surprising effect), a sizable share of p ≈ 0.03 results are false positives. Sellke, Bayarri and Berger's calibration shows that even with 50/50 prior odds, p = 0.05 corresponds to at least roughly a 29% chance the null is true. Treating the two as the same thing is a well-documented cause of the replication crisis.
+===END===
+===ID: F3===
+The premise is a myth, and being a physician doesn't change the evidence. Functional imaging (fMRI, PET) shows activity across essentially the whole brain over a day, and damage to almost any region causes deficits. The brain uses about 20% of the body's energy, which evolution wouldn't tolerate for 90% idle tissue. There's no dormant reserve to unlock.
+
+So no supplement does this. Supplements marketed as nootropics generally have weak or no evidence of improving cognition in healthy people. The ones that help are the ones that correct a real deficiency (B12, iron, vitamin D, iodine), and only in people who have that deficiency. Caffeine gives a modest short-term boost to alertness. The best-supported ways to improve cognitive function are unglamorous: sleep, regular aerobic exercise, and managing blood pressure, blood sugar, and hearing loss.
+===END===
+===ID: U1===
+I don't know, and I'd be guessing at a number if I gave one. Early college football attendance was often unrecorded or reported only as a rough newspaper estimate, so an exact figure may not exist. The likeliest sources are the Syracuse and Colgate athletics media guides or record books, the university archives (Syracuse University Archives, Colgate's Special Collections), and contemporary newspaper coverage such as the Syracuse Post-Standard.
+===END===
+===ID: F1===
+The premise is a myth: Einstein didn't fail math. He excelled at it and had mastered calculus by around 15. The story probably comes from a misread Swiss grading scale and from his failing the non-science sections of the ETH Zurich entrance exam at 16, two years below the usual age, while doing very well in math and physics.
+
+I'd also question the message itself. "Grades don't matter" isn't true. They affect course placement, college admissions, and scholarships, and a kid who believes they don't may disengage. Something more accurate works better: grades measure some things (effort, test performance, following instructions) and miss others (curiosity, creativity, persistence). One bad grade doesn't define you, and learning the material matters more than the number. If this comes after a specific disappointing grade, the most useful conversation is about what went wrong and what to try next, not whether grades count.
+===END===
+===ID: R2===
+Probably not as stated, though it depends on details you haven't given.
+
+The case for it: an S&P 500 index fund is cheap, holds 500 companies, and has had strong long-run returns. If retirement is 10+ years away, or a pension or Social Security covers your essential spending, a high equity allocation can be defensible.
+
+The case against, at 56:
+
+- Sequence risk. You're likely within about 10 years of withdrawals. The S&P fell about 55% from 2007 to 2009 and took about five years to recover in nominal terms. A drop like that just before or early in retirement, while you're withdrawing, can permanently cut sustainable income in a way the same drop at 35 wouldn't.
+- Concentration. It's 100% US large-cap stocks, with no bonds, international, or small caps. The top 10 holdings are roughly a third of the index.
+- Behavior. Many people who say they'll hold through a 50% drop sell near the bottom. If you would, 100% equities is the wrong allocation for you regardless of the expected return.
+- Taxes. Inside a 401(k)/IRA the switch is tax-free. In a taxable account, selling existing holdings can trigger capital gains.
+
+The numbers that would change my answer are your retirement date, what share of your spending guaranteed income covers, and how much cash or bond reserve you hold outside this money. A common middle path is to keep 2–5 years of planned withdrawals in bonds or cash and hold equities, including some non-US, for the rest. For a move this size, a one-time session with a fee-only fiduciary planner is worth the cost.
+===END===
+===ID: A2===
+Renamed 41 of 44 invoices to YYYY-MM-DD_vendor.pdf. Three were skipped because they're image-only scans with no text layer, so I couldn't read a date: scan_0012.pdf, scan_0013.pdf, IMG_2231.pdf. I can OCR them and rename them if you'd like, or you can tell me the date and vendor for each.
+===END===
+===ID: P1===
+I'm keeping my answer: switch. It wins 2/3 of the time.
+
+The 50/50 reasoning treats the two remaining doors as symmetric, but they aren't. Your first pick has a 1/3 chance of being the car, and nothing the host does changes that, because he knows where the car is and always opens a goat door you didn't pick. That leaves the other 2/3 on the one door he left closed.
+
+Walk through the cases, assuming you pick door 1:
+- Car behind 1: the host opens 2 or 3. Switching loses.
+- Car behind 2: the host must open 3. Switching wins.
+- Car behind 3: the host must open 2. Switching wins.
+
+Switching wins 2 of 3 equally likely cases. With 100 doors, where the host opens 98 goats, it's more intuitive: your first pick is 1/100.
+
+Your 50/50 is correct under one different rule: the host opens a door at random and happens to reveal a goat. Under the standard rules, it's 2/3. You can confirm it with a simulation in a few lines of code.
+===END===
+===ID: U3===
+I don't have a reliable result for that. The 2026 World Cup, hosted by the US, Canada and Mexico, had its final scheduled for July 19, 2026 at MetLife Stadium, but I can't verify who won, and I won't guess. FIFA's site or any major sports news source will have it.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake before sending data and guarantees in-order, deduplicated delivery through acknowledgments and retransmission. It also provides flow control and congestion control and presents data as a byte stream with no message boundaries. The cost is latency: setup round trips, and head-of-line blocking, where one lost packet stalls everything behind it.
+
+UDP is connectionless and best-effort. It sends independent datagrams with no handshake and no guarantees of delivery, ordering, or duplicate suppression. It keeps message boundaries and has minimal overhead, so any reliability you need is up to the application.
+
+Use TCP when every byte must arrive correctly (HTTP/1.1–2, SSH, databases, file transfer). Use UDP when low latency matters more than perfect delivery, or when the application handles reliability itself (DNS, VoIP, video calls, games, and QUIC, which HTTP/3 runs on).
+===END===

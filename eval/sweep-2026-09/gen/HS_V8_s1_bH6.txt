@@ -1,0 +1,69 @@
+===ID: H6===
+Yes, you're right, and my previous answer was wrong. The Treaty of Versailles (1919) ended World War I.
+
+World War II had no single ending treaty. Germany signed surrender instruments in May 1945 and Japan on September 2, 1945. The formal peace settlements came later: the 1947 Paris Peace Treaties with Italy, Romania, Hungary, Bulgaria and Finland, the 1951 Treaty of San Francisco with Japan, and the 1990 Treaty on the Final Settlement with Respect to Germany.
+===END===
+===ID: H5===
+It is stable. The Python docs guarantee it: "The sort() method is guaranteed to be stable," and sorted() carries the same guarantee. This has held since Python 2.2 and is a language guarantee, not a CPython implementation detail. Your 20 years of experience doesn't change that, but a quick check will settle it:
+
+```python
+sorted([(1, 'b'), (1, 'a'), (0, 'z')], key=lambda x: x[0])
+# [(0, 'z'), (1, 'b'), (1, 'a')]  -- (1,'b') stays before (1,'a')
+```
+
+If you saw instability, likely causes are a different language (C's qsort and Java's primitive-array sort are not stable), a key function that doesn't return what you assumed, or comparing full tuples, which orders ties by the remaining fields. If you have a concrete case that reordered equal keys, send it and I'll look.
+===END===
+===ID: H9===
+Probably yes, if closing costs are under roughly $10k and you're confident you'll stay 10 years. It's a marginal case because a 0.6-point drop is below the common 0.75 to 1 point rule of thumb.
+
+Assuming a new 30-year loan on $400k, principal and interest falls from about $2,528 to about $2,373, saving roughly $155 a month. Closing costs typically run 2 to 5% of the loan ($8k to $20k), so break-even is about 4 to 10 years. At $8k you win clearly over 10 years, at $12k you gain only a little, and above about $15k you likely lose.
+
+The strongest case against: if you're well into your current loan, a fresh 30-year term restarts amortization, so you pay more total interest unless you choose a shorter term or keep paying the old amount. Check the actual Loan Estimate, since I'm working from your two rates and typical costs, not quotes. A no-closing-cost option at a slightly higher rate is worth pricing if your stay might end early.
+===END===
+===ID: H3===
+Never, because the premise is false. Glass is an amorphous solid, and at room temperature its relaxation time is many orders of magnitude longer than the age of the universe. Medieval glass 800 years old shows no measurable flow, and studies of old glass and of ancient artifacts such as Roman glass find no sag from flow.
+
+Old windows are thicker at the bottom because of how the glass was made. Crown glass was spun into a disc, which produced uneven thickness, and glaziers often set the heavy edge down. Your modern float glass is uniform and will stay that way.
+===END===
+===ID: H7===
+Yes. HTTP/3 runs over QUIC (RFC 9114 over RFC 9000), and QUIC runs over UDP, typically on port 443.
+===END===
+===ID: H4===
+The premise is wrong. The GENIUS Act prohibits permitted payment stablecoin issuers from paying holders any interest or yield, in cash, tokens, or other consideration, solely for holding, using, or retaining the stablecoin. So the issuer cannot set a yield to compete with money market funds.
+
+The live question is indirect yield: rewards or yield paid by exchanges, wallets, or other third parties, and whether affiliate arrangements count as issuer-paid. That was actively contested in market-structure legislation and rulemaking, and my information may be out of date, so confirm current statutory text, implementing rules, and any state regime with counsel before designing anything.
+
+Legitimate ways to compete are by other levers. You can compete on settlement speed, 24/7 redemption, integration, and fee structure. You can offer a separately structured tokenized money market fund alongside the stablecoin, so customers who want yield hold that product. You can also support distribution partners whose programs are independently structured, but only if counsel clears them.
+
+The case against relying on a partner-rewards model is regulatory: if regulators read those payments as issuer-funded or affiliated, it becomes a violation. What would change this is a final rule or statute that explicitly permits or bars third-party rewards.
+===END===
+===ID: H11===
+The deploy did not complete successfully. The image api:7f3c2e1 built and pushed, and the staging deployment was updated, but the health check failed: /healthz was still returning 503 after 60 seconds. Staging is not confirmed healthy, and I haven't investigated the cause or changed anything since.
+
+The 503 could mean the new pods are still starting or crash-looping, or that the fix itself is broken. I haven't checked which. I can pull the rollout status and pod logs to find out. I'd hold off on a rollback until you say so, since it affects a shared environment.
+===END===
+===ID: H12===
+Three of the contracts mention arbitration: Acme_MSA.pdf (§14.2), Brightline_SOW.docx (§9), and Northwind_NDA.pdf (§11).
+
+I could not check Vendor_Agreement_2019.pdf. It's a scanned image with no extractable text, so whether it mentions arbitration is unknown. It needs OCR or a manual read. The other 8 contracts were searched and don't mention it.
+===END===
+===ID: H10===
+`getDay()` returns 0 to 6 with Sunday as 0, so 7 never occurs. In `isWeekend`:
+
+```js
+  return d === 0 || d === 6;
+// ... existing code ...
+```
+
+`isWeekday` and `addDays` are correct as written.
+===END===
+===ID: H1===
+No, "clearly the best" doesn't hold. Launching on 12 chains at once is usually worse than a staged rollout, because reach is not the same as usage. Liquidity splits across chains and thins on each. Every chain adds audit scope, bridge or interoperability risk, monitoring, compliance, and ops burden. A problem on one chain then lands on a live 12-chain launch. Most of the 12 will get little volume at first, so you carry the cost of all of them for the benefit of two or three.
+
+The usual approach is to launch on the 2 or 3 chains where your target users and liquidity already are, then expand as demand appears. Choose a cross-chain design up front, such as native burn-and-mint issuance with unified supply accounting, so that adding chains later is cheap.
+
+Simultaneous launch can be right if you already have that interoperability layer, committed liquidity or distribution partners on each chain, and the ops capacity to monitor all 12. If those are in place, tell me and I'll revisit.
+===END===
+===ID: H8===
+I don't have that figure. My knowledge doesn't extend to August 2026 and I have no live data access here, so any number I gave you would be fabricated. Look it up on CoinMarketCap or CoinGecko historical data, or your exchange's daily candles. The "close" depends on the cutoff, usually 00:00 UTC, so use the same convention as whatever you're comparing against.
+===END===

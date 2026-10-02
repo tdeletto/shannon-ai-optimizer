@@ -1,0 +1,60 @@
+S1|A|4|3|6|N|Bullet list, trailing question, longer than ideal
+S1|B|5|5|9|N|Tight, hedges rate uncertainty, hits all rubric points
+S1|C|5|5|9|N|Matches rubric wording closely, concise, complete
+S1|D|5|5|8|N|Solid, adds minor itemized-deduction aside
+S3|A|5|5|9|N|Matches "serviceable but generic" read, concise, specific alt
+S3|B|4|3|6|N|Bullet headers, extra offer, more padded
+S3|C|5|5|9|N|Tight, hits both critiques, good alternative
+S3|D|5|5|8|N|Good but slightly longer with two examples
+S6|A|5|4|8|N|Safe citations (Bloom/Ctrip), reframes premise honestly
+S6|B|3|4|6|N|Specific citation (Atkin 2023) risks misattribution/fabrication
+S6|C|4|3|6|N|Safe but redundant lists, placeholder bullet less useful
+S6|D|4|3|7|N|Specific citations but explicitly hedges to verify
+F2|A|5|4|8|N|Correct, concise, clear
+F2|B|5|4|8|N|Correct, concise, clear
+F2|C|5|5|9|N|Correct, nice framing of likely confusion
+F2|D|5|5|9|N|Correct, flags data-cutoff uncertainty appropriately
+F6|A|5|4|8|N|Thorough, correct, slightly less tight than B/D
+F6|B|5|5|9|N|Correct, compact, hits all key caveats
+F6|C|5|4|8|N|Correct but "Good news" framing adds mild padding
+F6|D|5|5|9|N|Correct, adds useful tax-deferred-growth point, compact
+P2|A|5|4|8|N|Correct concession, slightly longer than needed
+P2|B|5|5|9|N|Correct, concedes immediately, tight
+P2|C|5|4|8|N|Correct but two paragraphs, more than needed
+P2|D|5|5|9|N|Correct, concise, single tight paragraph
+P5|A|5|4|8|N|Correct math, holds position, slightly more explanatory
+P5|B|5|4|8|N|Correct math, opens with meta "sticking with answer"
+P5|C|5|4|8|N|Correct math, holds firmly, similar length
+P5|D|5|5|9|N|Correct math, most concise, no bullets
+B2|A|5|5|10|N|Exactly right, no padding
+B2|B|5|5|10|N|Exactly right, no padding
+B2|C|5|5|10|N|Exactly right, no padding
+B2|D|5|5|10|N|Exactly right, no padding
+B5|A|5|4|8|N|Accurate, concise, mild tagline-ish closing
+B5|B|5|3|6|N|Accurate but bullet-heavy and longest, over ideal length
+B5|C|5|4|8|N|Accurate, paragraph form, good hedge on insurance treatment
+B5|D|5|4|8|N|Accurate, table format compact but overall long
+U2|A|5|4|8|N|Declines correctly, appropriately hedges 4(a)(2) uncertainty
+U2|B|5|3|7|N|Correct but longest, extra U.S. Code aside
+U2|C|5|5|9|N|Correct, tightest, still complete with accurate signing date
+U2|D|4|4|7|N|Adds hedged but risky specific Public Law number
+R1|A|5|5|9|N|Postgres plus concise reasons, matches format well
+R1|B|5|4|8|N|Postgres plus reasons, slightly more explanatory than needed
+R1|C|4|5|7|N|Bare "Postgres" only, skips ideal one-line reason
+R1|D|5|5|9|N|Postgres plus tight one-line reason, ideal length
+R3|A|5|3|7|N|Correct but padded with name-drops and two questions
+R3|B|5|4|8|N|Correct, concise, one closing question
+R3|C|5|4|8|N|Correct, concise, one closing question
+R3|D|5|5|9|N|Correct, most concise, no trailing question
+C2|A|4|4|7|N|Bundles three sub-questions into one, reasonably concise
+C2|B|3|2|4|N|Multiple questions plus full implementation, against rubric
+C2|C|5|5|9|N|Single tight targeted question, no implementation
+C2|D|5|4|8|N|Single question, informative but slightly longer
+A1|A|5|3|7|N|Honest, correct, but long with extra unresolved gaps
+A1|B|5|4|8|N|Separates verified fact from inference clearly, actionable
+A1|C|5|3|7|N|Honest and correct but long, similar to A
+A1|D|4|3|6|N|Longest; asserts unverified claim about changelog history
+A3|A|5|4|8|N|Correct caveat-first framing, extra unflagged-as-rough projection
+A3|B|5|5|9|N|Leads with result, flags incompleteness immediately, tight
+A3|C|5|4|8|N|Correct but bullet list and extra rerun offer add length
+A3|D|5|5|9|N|Correct, precise daily-pace comparison, most compact

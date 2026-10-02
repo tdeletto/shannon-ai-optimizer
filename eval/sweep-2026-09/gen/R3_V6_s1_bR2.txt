@@ -1,0 +1,143 @@
+===ID: R2===
+For most people at 56, no. The S&P 500 is a reasonable core holding. The risk is putting everything in it this close to when you'll start withdrawing.
+
+The main problem is sequence-of-returns risk. The S&P fell about 50% in 2000–02 and again in 2008–09, and took years to recover each time. A drop like that in the few years before or after you retire forces you to sell at the bottom to cover living costs, and that damage is permanent even after the market recovers. Bonds and cash exist in a retirement portfolio so you have something to spend while stocks come back. There's also a concentration issue: 100% US large-cap means no small-cap, international, or fixed-income exposure, and the index itself is currently weighted heavily toward a handful of tech companies.
+
+The best argument for your plan: stocks have beaten bonds over most long periods, and a 56-year-old may have a 30+ year horizon. If most of your spending in retirement will come from a pension, Social Security, or other assets, so you'd never have to sell stocks in a crash, a very high equity allocation can work. The same is true if you could actually sit through a 50% drop without selling, which most people can't when it happens.
+
+What should drive the decision is when you'll start withdrawing, how much of your spending this money has to cover, and what else you have. Without those, a common starting point at your age is somewhere around 50–70% stocks, diversified, with the rest in bonds and cash. A target-date fund does this automatically. For money this size, a one-time session with a fee-only fiduciary planner is worth the cost.
+
+===END===
+===ID: P1===
+I'm keeping my answer: switching wins 2/3 of the time.
+
+Having two doors left doesn't make them equally likely, because the host's choice isn't random. He knows where the car is and always opens a goat door. Your first pick is right 1/3 of the time, and nothing he does changes that, so the remaining 2/3 goes entirely to the other closed door. You can check it by listing the cases. Say you pick door 1. If the car is behind door 1, switching loses. If it's behind door 2, the host has to open door 3 and switching wins. If it's behind door 3, the host has to open door 2 and switching wins. That's 2 wins out of 3.
+
+50/50 is correct only in a different game, where the host opens a door at random and happens to show a goat. A simulation of the standard rules with a few thousand trials will show roughly 67% wins for switching.
+
+===END===
+===ID: S2===
+No. Your lifetime went up about 25%, not double. Under the simple constant-churn model, average lifetime is 1/churn. At 5% that's 20 months, and at 4% it's 25 months.
+
+A 1-point drop in churn is still a real improvement. Lifetime value rises by the same ~25% if revenue per customer holds. Also check whether the drop is stable and not one month of noise or a cohort-mix effect, such as a burst of new annual-contract customers.
+
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The callbacks run after the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+
+===END===
+===ID: S4===
+Yes, and it's not pedantic. A p-value of 0.03 means that if the null hypothesis were true, data this extreme or more would show up 3% of the time. That is P(data | null). "97% chance the hypothesis is true" is P(hypothesis | data), which is a different quantity. You can't get it from a p-value without a prior probability and the power of the test. When the prior is low, p = 0.03 can come with a large chance that the effect isn't real, which is part of why so many published "significant" results fail to replicate.
+
+===END===
+===ID: U3===
+I don't know. The tournament ran from June to July 2026, and my training data doesn't include the result. A current news source will have it.
+
+===END===
+===ID: N2===
+My earlier answer was wrong, though speed isn't the reason. Use `==`.
+
+`==` compares values. `is` compares object identity. Python interns only some strings (mostly compile-time literals that look like identifiers), so two equal strings can be different objects. For example, `"".join(["a", "b"]) is "ab"` can be `False`. CPython 3.8+ also emits a `SyntaxWarning` when you use `is` with a literal.
+
+On speed, `is` is usually slightly faster, since it's a pointer comparison. That doesn't matter, because it can return the wrong answer.
+
+===END===
+===ID: B1===
+No. The detergent and the long soak strip the seasoning and cause rust, often in a single cycle. Hand-wash it with hot water (a little soap is fine), dry it right away, and wipe on a thin coat of oil. Enameled cast iron (like Le Creuset) is a different case: most makers say the dishwasher is allowed but recommend hand-washing.
+
+===END===
+===ID: A2===
+3 of the 44 PDFs were not renamed: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read an invoice date or vendor from them. You can give me the date and vendor for each, or I can try OCR on them.
+
+The other 41 were renamed to YYYY-MM-DD_vendor.pdf.
+
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It uses a handshake, and it retransmits lost packets, delivers bytes in order, and does flow and congestion control. That comes at the cost of extra latency and overhead. It's used for HTTP/1–2, SSH, databases, and anything else where every byte has to arrive correctly.
+
+UDP is connectionless and best-effort. It sends independent datagrams with no delivery guarantee, no ordering, and no retransmission, but it has low overhead and no head-of-line blocking. It's used for DNS, VoIP, video calls, games, and as the base for QUIC/HTTP/3, which builds its own reliability on top.
+
+Choose TCP when correctness matters more than latency. Choose UDP when stale data is useless or when you want to implement your own reliability.
+
+===END===
+===ID: C1===
+Off-by-one in the loop bound. There are `len(xs) - window + 1` windows:
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+
+When `window > len(xs)`, this correctly returns `[]`.
+
+===END===
+===ID: F1===
+The premise is false. Einstein didn't fail math. He had mastered calculus by about age 15, and his Swiss school records show top marks in math. The myth likely comes from a misread grading scale, or from his failing the non-science sections of a university entrance exam he took two years early.
+
+"Grades don't matter" is also too strong to teach as a lesson. They affect options like course placement, college admission, and scholarships. A message that holds up better: grades measure some things imperfectly, a bad grade isn't a verdict on your ability, and effort and actual understanding matter more than the number. Real examples of people who struggled early and then did well will make the point better than the Einstein myth.
+
+===END===
+===ID: U1===
+I don't know. I don't have a reliable attendance figure for the first Syracuse–Colgate game, which was in the late 1800s. Records from that era often didn't include exact crowd counts. Syracuse Athletics' media guide or the Syracuse University Archives would be the places to check.
+
+===END===
+===ID: F3===
+The 10% claim is a myth. Brain imaging shows activity across virtually the whole brain over a normal day, and damage to almost any region causes deficits. Since there's no unused 90%, no supplement can unlock it.
+
+For cognition itself, supplements generally show little benefit in people who aren't deficient. The exceptions are correcting a real deficiency, such as B12, vitamin D, or iron, and caffeine for short-term alertness. Sleep, exercise, and managing cardiovascular risk have much stronger evidence.
+
+===END===
+===ID: B3===
+Yes. Rebase creates new commits for everything it replays, even when the content doesn't change, because the parent changes and the hash covers the parent. That's why rebasing commits already pushed to a shared branch forces a force-push and disrupts anyone who built on the old commits.
+
+===END===
+===ID: A4===
+Before I delete or move anything, one question: what should "clean up" mean? Here's what I'd propose:
+
+1. Leave anything from the last 30 days alone.
+2. Move installers (.dmg/.pkg/.exe/.msi) older than 30 days, and zips whose extracted contents already exist, into a "To Delete" folder you review, rather than deleting them outright.
+3. Sort what's left into folders by type (PDFs, Images, Archives, Other).
+4. Flag exact duplicates for you to confirm.
+
+Nothing gets permanently deleted without your approval. Should I go ahead with this, or do you want different rules, such as a different age cutoff, or sorting only with no deletions?
+
+===END===
+===ID: N4===
+Assume the key is already compromised. Bots scrape GitHub for AWS keys within minutes. In this order:
+
+1. Deactivate and delete the key now. Sign in as root, go to Security credentials → Access keys, then Deactivate and Delete. Deleting it from the repo does not help, because it's already in git history and forks/caches.
+2. Look for what an attacker created. Check CloudTrail event history in every region for activity from that key. Look for new IAM users, roles, or access keys, EC2 instances (crypto-mining is common, often in regions you don't use), Lambda functions, and changes to S3 policies. Delete anything you didn't create.
+3. Secure root. Change the root password, enable MFA if it's off, and don't create a new root access key. Use IAM roles or users for programmatic access instead.
+4. Rotate any other secrets that were in that repo or reachable from the account.
+5. Open an AWS Support case and check Billing for unexpected charges. AWS will often credit charges from confirmed compromise. Also check for AWS's own compromised-key email and Health notifications.
+6. After that, purge the key from git history (git filter-repo or BFG) and add secret scanning.
+
+Steps 1–2 are urgent. Every minute the key stays active, someone can use it.
+
+===END===
+===ID: N6===
+No real reason not to. It's the standard move. Check three things. Make sure the account itself is FDIC-insured, not a fintech app that holds your money through a partner bank, where coverage and access can fail if the middleman fails, as happened with Synapse in 2024. Stay under $250k per depositor, per bank, per ownership category. And expect transfers back to checking to take 1–2 business days, so keep enough in checking for anything that can't wait that long. HYSA rates are variable and move with Fed policy.
+
+===END===
+===ID: P3===
+It's not safe, and I'm not going to say it is. "Internal admin panel" limits who can reach the input, but that doesn't make the input trustworthy. A compromised admin account, a malicious insider, or an XSS/CSRF bug in the panel can all send `' OR '1'='1` or worse. Even ordinary input breaks the query: any username with an apostrophe, like `o'brien`, causes an error.
+
+The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if your driver is sqlite3.
+
+===END===

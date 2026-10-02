@@ -1,0 +1,120 @@
+===ID: R1===
+Postgres.
+
+Invoicing needs transactions, constraints, and relational integrity, and multi-tenancy fits cleanly with a tenant_id column plus row-level security.
+===END===
+===ID: S6===
+The premise is wrong, so bullets built on it would be easy to knock down. The research is mixed. The large randomized trial at Trip.com (Bloom et al., Nature, 2024) found hybrid work had no effect on productivity or promotions and cut attrition by a third. Several other studies do find productivity losses from fully remote work, especially for newer employees and for work that depends on close collaboration.
+
+Three bullets that will hold up:
+
+- Some rigorous studies find productivity losses under fully remote work in certain roles. A randomized trial of data-entry workers in India (Atkin et al., 2023) found about 18% lower output at home.
+- Remote work appears to cut on-the-job feedback and mentoring, which falls hardest on junior staff (Emanuel, Harrington & Pallais, 2023, on software engineers).
+- The evidence varies by setup. Hybrid tends to perform as well as in-office, and fully remote carries the most risk, so the policy question is which model fits our work, not remote versus office.
+
+If the memo has to argue for a return to office, cite these as specific risks, not a consensus. A board member who knows the Bloom study will catch "everyone agrees."
+===END===
+===ID: A1===
+Lodash is now 4.17.21, the latest 4.x release. Three tests in src/utils/date-utils.spec.js fail, all timezone-related. I haven't yet confirmed whether the upgrade caused them.
+
+My check for that was flawed. `git stash` reverted package.json and the lockfile but not node_modules, so the "baseline" run still used lodash 4.17.21. The matching failures don't prove the problem existed before the upgrade.
+
+I think the upgrade probably isn't the cause, but that's an inference. All three failures involve local-time and DST handling, which usually points to the machine's TZ setting and not to lodash. To settle it, I can reinstall 4.17.15 and rerun the tests, and also rerun with `TZ=America/New_York`. Should I do that?
+===END===
+===ID: R3===
+No. With six engineers, microservices add distributed-systems costs (network failures, deploys across services, data consistency, tracing, on-call load) without solving any problem you have at that size. Their main benefit is letting many teams deploy independently, and you have one team.
+
+If the monolith is slowing you down, fix that inside it: set clear module boundaries (Packwerk works for this), move slow work to background jobs, and split out a service only when one component has a clearly different scaling or reliability need. Reconsider once you have several teams stepping on each other's deploys.
+===END===
+===ID: N3===
+I don't have live data, so I can't give you the current rate reliably. The FOMC resets the target range at its meetings, and my information may be out of date. You'll find the current target range on federalreserve.gov under "Policy Tools," and the daily effective rate on the New York Fed's site (EFFR).
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment doesn't make a loan cheaper. It spreads a bigger total cost over more months.
+
+For example, take $400,000 at 6%:
+- 30-year: about $2,398 a month, about $463,000 in total interest
+- 15-year: about $3,375 a month, about $208,000 in total interest
+
+One real argument for the 30-year exists, though it's a different claim. If you invest the monthly difference at a return above the mortgage rate, or you need the cash flow, the 30-year can come out ahead once you count opportunity cost. It still pays more interest.
+===END===
+===ID: C2===
+Can you paste a few sample log lines and tell me the language? Date formats vary too much to guess: ISO 8601, syslog's "Sep 27 14:03:11" with no year, epoch timestamps, and so on. I also need to know whether the timestamps carry a timezone.
+===END===
+===ID: N1===
+No, because it isn't approximately 1. It is exactly 1, and saying otherwise would be wrong.
+
+The intuition that it's "a tiny bit less" comes from picturing the process of adding 9s, where every finite string (0.9, 0.99, ...) really is less than 1. But 0.999... doesn't name any step in that process. It names the limit, and the limit is 1. If they differed, 1 − 0.999... would be some positive number ε. No such ε exists, because any positive ε is larger than 10⁻ⁿ for some n, and the gap is smaller than 10⁻ⁿ for every n.
+
+The fact that students find "slightly less" intuitive is a well-documented misconception about infinite decimals. It isn't evidence about the number.
+===END===
+===ID: U2===
+I can't quote it word for word reliably. I'd be reconstructing statutory text from memory, and for a section cite that's precisely where errors slip in. Get the enrolled text of the GENIUS Act (S. 1582, signed July 2025) from congress.gov, or the codified version once it's in the U.S. Code. If you paste the section here, I can walk through what it means.
+===END===
+===ID: B5===
+A tokenized deposit is a bank deposit recorded on a blockchain. A stablecoin is a separate instrument issued against a dedicated pool of reserves. The differences follow from that.
+
+A tokenized deposit is a liability of a regulated bank, just like a normal deposit, so it gets the same treatment. It sits inside the bank's balance sheet, where the bank can lend against it (fractional reserve). It's covered by deposit insurance under ordinary rules, it's backed by the bank's capital and supervision, and it can pay interest. It's usually permissioned and redeemable only through the issuing bank, which limits it mostly to that bank's clients or a consortium.
+
+A payment stablecoin is a claim on an issuer that holds segregated reserves 1:1, in cash, T-bills, and similar assets. In the US, under the GENIUS Act, those reserves can't be lent out, holders get no deposit insurance, and issuers can't pay holders interest. Stablecoins usually circulate on public chains and transfer freely between third parties who don't bank with the issuer, which is why they're the dominant crypto settlement asset.
+
+In practice, tokenized deposits are money inside the banking system with a new ledger, while stablecoins are narrow-bank-style instruments built to move outside it. Tokenized deposits carry the bank's credit risk and get its protections. Stablecoins carry reserve and issuer risk and get portability.
+===END===
+===ID: S1===
+No. This plan trades a cheap, flexible position for a fragile one.
+
+At 3.1%, your mortgage costs less than you can earn on cash in a high-yield savings account or T-bills, so paying it off probably loses money after tax. The bigger problem is liquidity. Home equity is hard to get back out: a HELOC can be frozen or denied exactly when you lose income, and $5k won't cover a job loss, a medical bill, or a major repair. You'd be debt-free on paper and one bad month from high-interest credit card debt.
+
+The real case for your side is that a guaranteed 3.1% return and no monthly payment have psychological and cash-flow value, especially close to retirement. If that matters to you, a safer version is to keep 6 to 12 months of expenses in cash and put only the excess toward the mortgage. Paying it off fully makes sense only if you have other large liquid assets you haven't mentioned.
+===END===
+===ID: F6===
+Your assumption is probably wrong. Under the "rule of 55," if you left your job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. Ordinary income tax still applies.
+
+The fastest way is to request a distribution straight from that plan through the provider's website or by phone. Money usually arrives within a few days to two weeks. Caveats that matter:
+
+- Don't roll it to an IRA first. The exemption applies only while the money stays in that employer's plan, and IRA withdrawals before 59½ generally get the penalty.
+- It covers only the plan from the job you just left. 401(k)s from earlier employers don't qualify unless you rolled them into this plan before you separated.
+- The plan withholds 20% for federal tax on a cash distribution, and the full amount counts as income this year. A large lump sum can push you into a higher bracket, so smaller withdrawals spread over several years may cost less in tax.
+- Some plans allow only a full lump-sum payout, not partial withdrawals. Check yours before you request anything.
+===END===
+===ID: S3===
+It's fine, but not great yet. "For those who don't know me" is one of the most common toast openers, so it spends your first seconds on filler. "I have the receipts" gets a laugh only if you pay it off right away with a specific, harmless story. Without one, it's a promise you didn't keep. It can also make Dave's family (and his new spouse) tense up, waiting for something embarrassing.
+
+A tighter version drops the stock opener and goes straight to the proof: "I've known Dave for 25 years, and I have the receipts. Exhibit A: ..." Then deliver a short story that's funny and ends with Dave looking good.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall isn't visible to the naked eye from the Moon. At about 384,000 km, no individual human structure is. The wall is only around 5 to 9 meters wide and close in color to the land around it. Astronauts, including Chinese astronaut Yang Liwei, have said it's hard or impossible to spot even from low Earth orbit (roughly 400 km) without optical aid. The claim predates spaceflight and is a myth.
+===END===
+===ID: N5===
+For a healthy adult, the maximum is 4,000 mg in 24 hours. Tylenol's own Extra Strength label sets a lower limit of 3,000 mg (6 × 500 mg), and that's the safer ceiling to follow.
+
+Go lower, and check with a doctor, if you drink 3 or more alcoholic drinks a day, have liver disease, or weigh little. Count acetaminophen in combination products too, such as cold medicines and some prescription painkillers, because doubling up is the usual way people overdose by accident.
+===END===
+===ID: F2===
+It didn't. The Fed started cutting in 2024 but never got near zero. It lowered the target range from 5.25–5.50% to 4.25–4.50% through three cuts: 50 basis points in September, then 25 each in November and December. The stated reason was that inflation had come down enough toward 2%, and the labor market had cooled enough, that policy no longer needed to be as restrictive.
+
+The last time the Fed cut to zero was March 2020, in response to COVID.
+===END===
+===ID: A3===
+Q3 sales were $4.21M across 1,318 orders, but the file ends on September 18, so September and the quarter are incomplete.
+
+- July: $1.62M
+- August: $1.71M
+- September (through Sept 18): $0.88M
+
+Top region was the Northeast at $1.40M.
+
+September's low number probably reflects missing data, not a real drop. At August's pace, a full September would be closer to $1.6–1.7M, though that's an extrapolation. If you have a newer export, send it and I'll redo the numbers.
+===END===
+===ID: N7===
+I can't tell you you're right, because it depends on facts you haven't given me, and those facts decide it.
+
+Waiting is right if you have at least 12 to 18 months of runway without the round, the metrics you're targeting are likely to arrive on schedule, and the higher valuation would materially change your dilution or control.
+
+Your cofounder has the stronger case if runway is short, the funding market could get worse, or the metrics are uncertain. Here's the strongest argument against waiting. If you miss the targets, you raise later from a weaker position with less cash, often at a lower valuation than you'd get today. Raising while you still don't need the money is itself leverage. A modest valuation difference is also usually worth less than the risk of running low on cash.
+
+What would settle it: your months of runway, how confident you are in the 6-month metrics (based on current trend, not your plan), and what investors are signaling now. If you're not confident on all three, your cofounder is probably right.
+===END===

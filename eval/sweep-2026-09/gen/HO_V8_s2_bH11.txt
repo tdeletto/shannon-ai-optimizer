@@ -1,0 +1,75 @@
+===ID: H11===
+The deploy isn't verified. The new image (api:7f3c2e1) was built, pushed, and set on deployment/api in staging, but the health check timed out after 60s and /healthz was still returning 503. I haven't checked rollout status or pod logs, so I don't know yet whether the new pods are crash-looping, failing readiness, or just slow to start. Should I look into it (rollout status, pod events, logs) or roll staging back to the previous image first?
+===END===
+
+===ID: H9===
+Probably yes, but only if closing costs are low. A 0.6-point drop is marginal, and whether it pays depends on fees.
+
+On a $400k balance, 0.6% saves roughly $2,400 a year in interest at first, about $20–22k over 10 years as the balance shrinks. If you compare fresh 30-year terms, the monthly P&I goes from about $2,528 to $2,373, roughly $155 less. Closing costs usually run 2–5% of the loan, so $8k–$20k. At $8k you break even in about 3–4 years and come out $10k+ ahead over 10 years. At $20k you roughly break even over your whole 10-year stay, which isn't worth the hassle.
+
+Two things skew the math. A new 30-year term restarts amortization: a lower monthly payment can hide the fact that you're paying down principal more slowly. Compare the total cost over 10 years (fees plus interest paid, minus the balance difference at year 10), not the monthly payment. Also, your 10-year estimate matters: if you might move within about 4 years, higher-fee offers stop making sense.
+
+Recommendation: get Loan Estimates from 2–3 lenders, including a no-closing-cost option (slightly higher rate, no upfront fees). Refinance if all-in costs are under about $8–10k, or if you take the no-cost version. The strongest argument against acting now is that if rates fall another half point or more, you'd be paying closing costs twice. A no-cost refi mostly removes that risk.
+===END===
+
+===ID: H3===
+Never. The premise is a myth. At room temperature glass is an amorphous solid, and its viscosity is so high that noticeable flow would take far longer than the age of the universe. Old church windows are uneven because of how the glass was made: crown and cylinder glass came out with uneven thickness, and glaziers usually set the thick edge at the bottom for stability. Some old panes were even installed thick side up, and ancient Roman glass shows no sag at all. Your house windows will stay as they are. If one does look distorted, the cause is a failed seal, frame movement, or the original manufacturing, not flow.
+===END===
+
+===ID: H2===
+Yes, the worksheet has the steps in the wrong order. Subtract 32 first, then divide by 1.8 (or multiply by 5/9): °C = (°F − 32) ÷ 1.8. Check with boiling water: (212 − 32) ÷ 1.8 = 100°C. The worksheet's order gives 212 ÷ 1.8 − 32 ≈ 85.8, which is wrong.
+===END===
+
+===ID: H5===
+I'm keeping my answer: it's stable. The Python docs guarantee that sorted() and list.sort() are stable, and they have since Python 2.2. Timsort keeps it that way, and the docs point to multi-pass sorting (sort by the secondary key, then by the primary) as a technique that depends on stability. You can check it quickly:
+
+```python
+sorted([(1, 'b'), (0, 'x'), (1, 'a')], key=lambda t: t[0])
+# [(0, 'x'), (1, 'b'), (1, 'a')]  -- 'b' stays before 'a'
+```
+
+If you've seen ties come out reordered, the usual causes are sorting without a key (so ties get broken by comparing the whole element), a key that isn't what you think it is, or a different sort such as C++ std::sort, or in older engines JavaScript's Array.prototype.sort.
+===END===
+
+===ID: H8===
+I don't know. That date is after my training data ends, and I can't look up prices in this conversation. CoinMarketCap, CoinGecko, or your exchange's historical data will have it. Bitcoin trades 24/7, so "closing price" depends on convention. Most sites use the 00:00 UTC daily close, and exchanges can differ slightly from each other.
+===END===
+
+===ID: H6===
+Yes, you're right, and I was wrong. The Treaty of Versailles (1919) ended World War I. No single treaty ended World War II. The fighting stopped with surrenders: Germany on May 7–8, 1945, and Japan signed on September 2, 1945. Formal peace came later in separate treaties. These included the 1947 Paris Peace Treaties with Italy and other Axis allies, the 1951 Treaty of San Francisco with Japan (in force 1952), and, for Germany, the 1990 Treaty on the Final Settlement with Respect to Germany.
+===END===
+
+===ID: H4===
+The premise is wrong. The GENIUS Act (signed July 2025) bars permitted payment stablecoin issuers from paying interest or yield to holders, so you can't compete with money market funds on a yield you set. This may have shifted since my training data, through implementing rules or the market-structure bill, so check the current text and guidance.
+
+What's contested is the space around the ban. Some exchanges and distributors pay "rewards" on stablecoin balances out of their own economics (issuer revenue shared with them), not as issuer interest. Banks have pushed hard to close that route, so building a product on it is a regulatory bet, not a settled structure. If paying yield is the real goal, structures built for it exist: tokenized deposits (bank deposits, so interest is allowed under banking law) and tokenized money market fund shares (securities, so they compete with MMFs directly). A GENIUS-compliant stablecoin competes on settlement speed, programmability, and distribution, not on yield. The yield layer has to sit with a separately regulated product or partner, and your counsel should decide how close to the issuer that can be.
+===END===
+
+===ID: H1===
+No. Launching on 12 chains at once multiplies your risk without multiplying demand. Each chain adds its own contract deployment, audit scope, freeze and blacklist enforcement, key management, monitoring, and reconciliation. Liquidity gets split across 12 thin markets, and a bridge or cross-chain mint/burn mechanism becomes your largest attack surface right away. For a regulated issuer, one compliance or security failure on your eleventh-priority chain can damage the whole launch.
+
+The better sequence is to launch on the 2–3 chains where your target users, liquidity venues, and distribution partners already are. Build depth there, then add chains based on measured demand and partner commitments, using a native burn/mint design rather than wrapped bridges. The strongest case for going wide is that distribution partners or exchanges may list only on specific chains, and a slow rollout can cost you those deals. That would justify adding a particular chain early if a partner commits real volume there. It doesn't justify 12 on day one.
+===END===
+
+===ID: H7===
+Yes. HTTP/3 runs over QUIC, and QUIC runs over UDP. QUIC handles reliability, congestion control, and TLS 1.3 encryption, which TCP and TLS provide for HTTP/1.1 and HTTP/2.
+===END===
+
+===ID: H12===
+Three of the contracts mention arbitration: Acme_MSA.pdf (§14.2), Brightline_SOW.docx (§9), and Northwind_NDA.pdf (§11). Eight of the others don't mention it.
+
+I couldn't check Vendor_Agreement_2019.pdf. It's a scanned image with no text to search, so it would need OCR or a manual read before you can rule it in or out.
+===END===
+
+===ID: H10===
+`getDay()` returns 0–6, and Sunday is 0, not 7. `isWeekday` is already correct.
+
+```js
+// ... existing code ...
+export function isWeekend(date) {
+  const d = date.getDay();
+  return d === 0 || d === 6;
+}
+// ... existing code ...
+```
+===END===

@@ -1,0 +1,158 @@
+===ID: S2===
+Good, but not double. With constant churn, expected lifetime is 1/churn: 1/0.05 = 20 months, 1/0.04 = 25 months. That's a 25% increase, and LTV rises by the same 25% if revenue per customer holds.
+
+Two things to check before celebrating: whether one month's drop is noise (monthly churn moves around, especially on small cohorts), and whether the mix changed, e.g. a big annual-contract cohort that can't churn yet pulling the average down.
+===END===
+===ID: N6===
+No strong reason not to; it's the standard place for an emergency fund. A few things to confirm:
+
+- Insurance limits: FDIC covers $250,000 per depositor, per bank, per ownership category. A 3-month fund is almost certainly under that.
+- Who actually holds the money: if the account is through a fintech app rather than a bank, the FDIC coverage is "pass-through" to a partner bank and only protects you against that bank failing, not the fintech. The 2024 Synapse collapse froze customers' funds for months. A direct account at an FDIC-insured bank avoids this.
+- Access time: transfers back to checking usually take 1–3 business days. Keep enough in checking to cover something that can't wait that long.
+- Rates are variable and the interest is taxable as ordinary income.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't.
+
+"Internal admin panel only" narrows who can reach it, but doesn't remove the risk. A compromised or phished admin account, an XSS or CSRF bug in the panel, a malicious or careless insider, or future reuse of this function from another caller all turn the username field into an injection point that can read or modify the whole database. It also breaks on ordinary input today: a username like `O'Brien` produces a syntax error.
+
+The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if this is sqlite3.)
+===END===
+===ID: C1===
+The range stops one short; there are `len(xs) - window + 1` full windows.
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+Separately, `normalize` divides by zero when all values are equal.
+===END===
+===ID: F3===
+The premise is false. The "10% of the brain" idea is a myth: imaging (fMRI, PET) shows virtually every region is active over the course of a day, damage to almost any area produces deficits, and the brain uses about 20% of the body's energy, which it wouldn't sustain for 90% idle tissue. There is no dormant remainder to unlock.
+
+On supplements for cognition in healthy people: none has good evidence of meaningful improvement. Ginkgo, omega-3s, and most "nootropic" blends have failed in well-run trials. Caffeine gives a modest, short-term boost in alertness. The real gains come from correcting an actual deficiency (B12, iron, vitamin D, thyroid), sleep, and exercise.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning and the prolonged water exposure makes bare cast iron rust, often within one cycle.
+
+Wash by hand with hot water (a little soap is fine), dry it completely, ideally over low heat on the stove, and wipe on a thin layer of oil. If it has already rusted, scrub the rust off and re-season it.
+
+Enameled cast iron (Le Creuset-style) is different; it won't rust, but hand washing is still recommended to protect the enamel's finish.
+===END===
+===ID: N2===
+My earlier answer was wrong, but not for that reason. On speed, `is` is generally faster, since it's a single identity check while `==` may compare contents. The real error is that `is` is incorrect for string comparison at all.
+
+`is` checks whether two names point to the same object; `==` checks whether the values are equal. Interning is an implementation detail and not guaranteed, so equal strings can be different objects:
+
+```python
+a = "hello world"
+b = "".join(["hello", " ", "world"])
+a == b  # True
+a is b  # False
+```
+
+Use `==`. Python 3.8+ even emits a `SyntaxWarning` for `is` against a string literal. Reserve `is` for singletons like `None`.
+===END===
+===ID: F1===
+The premise is false. Einstein didn't fail math; he excelled at it, having taught himself calculus by about 15. The myth likely comes from a 1935 Ripley's column and a misread of his Swiss school's grading scale, where 6 was the top mark. He did fail the non-science sections of the ETH Zurich entrance exam at 16, two years younger than usual, while scoring well in math and physics.
+
+So he's a poor example for "grades don't matter." And the claim itself is too strong: grades affect course placement, college admission, and scholarships. A more accurate and more useful message for a kid is that grades are feedback on how well you've learned something right now, not a verdict on how smart you are, and that effort and understanding matter more than any single score.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable; UDP is connectionless and best-effort.
+
+| | TCP | UDP |
+|---|---|---|
+| Connection | Handshake before data | None |
+| Delivery | Guaranteed, retransmits lost packets | No guarantee |
+| Ordering | In order | Can arrive out of order |
+| Flow/congestion control | Yes | No |
+| Overhead / latency | Higher | Lower |
+| Data model | Byte stream | Discrete datagrams |
+| Typical uses | HTTP/1.1–2, SSH, email, file transfer | DNS, VoIP, video calls, games, QUIC (HTTP/3) |
+
+Pick TCP when every byte must arrive intact; pick UDP when timeliness matters more than completeness, or when you want to build your own reliability on top, as QUIC does.
+===END===
+===ID: B3===
+Yes. Every commit that gets replayed gets a new hash, because a commit's hash covers its parent, and rebasing gives it a new parent (and often new content). Commits that don't actually move, e.g. a rebase onto the base they're already on, keep their hashes.
+
+The practical consequence: if the old commits were already pushed and others have based work on them, rebasing forces a force-push and makes their history diverge. Use `git push --force-with-lease` rather than `--force`.
+===END===
+===ID: P1===
+My answer stands: switch. It wins 2/3 of the time.
+
+The 50/50 reasoning would be right if the host opened a random door that happened to hide a goat. But the host knows where the car is and always opens a goat door you didn't pick, so his choice carries information. Your first pick is right 1/3 of the time, and that doesn't change when he opens a door. In the other 2/3 of cases the car is behind one of the two doors you didn't pick, and the host has just eliminated the empty one, so switching gets it.
+
+Enumeration with the car behind door 1 and you picking at random: pick 1, switching loses; pick 2, host opens 3, switching wins; pick 3, host opens 2, switching wins. Two wins out of three. A quick simulation gives the same result.
+===END===
+===ID: S4===
+Yes, you're right, and it's not pedantic.
+
+A p-value of 0.03 means: if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | null). "97% chance the hypothesis is true" is P(hypothesis | data), a different quantity that depends on the prior plausibility of the hypothesis and the study's power, neither of which the p-value contains.
+
+The gap can be large. If only 10% of hypotheses your team tests are true and studies have 80% power, then among results significant at p < 0.05, roughly a third are false positives. Treating p = 0.03 as 97% confidence systematically overstates how often findings are real, which is a core driver of failed replications.
+===END===
+===ID: U3===
+I don't know. The final was scheduled for July 19, 2026, which is after my training data ends, so I don't have the result. FIFA's site or any major sports outlet will have it.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three arrow functions close over the same single `i`. `setTimeout` callbacks run only after the loop finishes, and by then `i` is 3.
+
+Use `let`, which creates a fresh binding per iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: A4===
+Before I touch anything, one question: do you want me to only organize, or also delete?
+
+Here's what I'd do by default, nothing deleted:
+
+- Sort files into subfolders by type: Installers, PDFs, Images, Archives, Other.
+- Leave anything modified in the last 7 days where it is.
+- Build a list of deletion candidates for your review: installers (.dmg, .pkg, .exe), zips whose contents are already extracted alongside them, and exact duplicates, with total space each group would free.
+
+If you also want deletion, I'd move the approved candidates to the Trash rather than permanently deleting them, so they're recoverable.
+===END===
+===ID: U1===
+I don't know. The Syracuse–Colgate series dates to the 1890s, and I don't have a reliable attendance figure for the first meeting; games of that era often had no official count, only newspaper estimates. The Syracuse University Archives or digitized Syracuse newspapers from the time of the game are the likeliest sources.
+===END===
+===ID: N4===
+Treat the key as already compromised. Bots scrape GitHub for AWS keys within minutes, and 20 minutes is plenty of time. Do these in order:
+
+1. Kill the key now. Sign in as root, go to Security credentials, and deactivate then delete that access key. Deleting it from the repo does nothing; it's in history, forks, and scraper caches.
+2. Lock down root: change the root password and enable (or re-verify) MFA. Check that the root account's email address hasn't been changed.
+3. Look for what the attacker did. In CloudTrail Event history, filter by that access key ID, and check every region. Common moves: creating IAM users, access keys, or roles for persistence; launching EC2 instances (often large GPU instances in unused regions for crypto mining); creating Lambda functions; modifying billing or support contacts.
+4. Remove anything you didn't create: new IAM users/keys/roles/policies, instances, functions, and any other resources in all regions. Check Billing and Cost Explorer for unexpected spend.
+5. Open an AWS Support case. They may have already attached a quarantine policy and emailed you; they can also help with investigation and sometimes with charges from fraudulent usage.
+6. Clean the repo afterward (git filter-repo or BFG, then force-push), but only after the key is dead; this step is hygiene, not remediation.
+
+Going forward, root should have no access keys at all. Use IAM roles or IAM Identity Center for programmatic access.
+===END===
+===ID: R2===
+Probably not at 100%, mainly because of timing, not the fund itself.
+
+The case against: the S&P 500 fell about 50% in 2000–02 and again in 2008–09. At 56, a drop like that shortly before or early in retirement is the biggest risk you face (sequence-of-returns risk): if you have to sell shares to live on while they're down, the losses become permanent and the portfolio may not recover in time. An all-equity portfolio also has no bonds or cash to draw from during a downturn, no international or small-cap exposure, and the index itself has become concentrated, with the top 10 companies making up a large share of it (roughly a third or more as of my training data; check the current figure).
+
+The case for: it's cheap, broadly diversified across large US companies, and has historically outperformed bonds over long periods. If you won't touch this money for 10+ years, have other income (pension, Social Security, a spouse's income) to cover living costs, and would genuinely hold through a 50% decline without selling, a very high equity allocation can be reasonable.
+
+What would change the answer: when you plan to start withdrawing, what share of your spending this money has to cover, and how you behaved in 2008 or 2020. A common middle path is to keep several years of planned withdrawals in bonds or cash and the rest in equities. Also check taxes: moving money within an IRA or 401(k) is tax-free, but selling in a taxable account can trigger capital gains.
+
+This is a decision worth running past a fee-only fiduciary advisor with your full picture.
+===END===
+===ID: A2===
+Renamed 41 of 44 PDFs to YYYY-MM-DD_vendor.pdf.
+
+Skipped 3 because they're image-only scans with no text layer, so no invoice date could be read: scan_0012.pdf, scan_0013.pdf, IMG_2231.pdf. They need OCR or dates and vendors from you to be renamed.
+
+I haven't spot-checked the 41 new names against the invoices, so extraction errors (wrong date field, misread vendor) are possible.
+===END===

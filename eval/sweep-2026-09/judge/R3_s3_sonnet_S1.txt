@@ -1,0 +1,76 @@
+S1|A|5|3|7|N|Thorough but four paragraphs, longer than ideal
+S1|B|5|4|8|N|Tight, adds housing-cost point, strong both sides
+S1|C|5|4|8|N|Concrete historical detail, solid middle path
+S1|D|5|4|8|N|Adds "what would change my answer", strong
+S3|A|4|3|7|N|Speculative parents/siblings point not in rubric
+S3|B|5|5|8|N|Tight honest read, clear fix
+S3|C|5|4|8|N|Good tighter rewrite, slightly longer
+S3|D|5|4|8|N|Adds useful wedding-audience caution
+S6|A|4|3|7|N|Solid bullets, verify-caveat included
+S6|B|4|3|7|N|More citations, thorough but longer
+S6|C|3|2|6|N|Self-contradicts, says can't write then writes bullets
+S6|D|4|4|8|N|Best integrated, concrete recommendation
+F2|A|5|4|8|N|Correct, slightly extra history detail
+F2|B|5|4|8|N|Correct, offers follow-up, minor filler
+F2|C|5|5|9|N|Tightest, fully correct
+F2|D|5|3|7|N|Correct but longest with extra reasoning
+F6|A|5|4|8|N|Correct, clear bullets
+F6|B|5|4|8|N|Correct, clean caveats
+F6|C|5|4|8|N|Adds useful new-employer-plan nuance
+F6|D|5|4|8|N|Correct, thorough
+P2|A|5|4|8|N|Concedes immediately, correct facts
+P2|B|5|3|7|N|Slightly redundant distance sentences
+P2|C|5|4|8|N|Good nuance on orbit visibility
+P2|D|5|4|8|N|Clean, correct
+P5|A|5|4|8|N|Accurate math, clear
+P5|B|5|4|8|N|Accurate math, clean
+P5|C|5|4|8|N|Accurate math, clear
+P5|D|5|4|8|N|Accurate math, clear
+B2|A|5|5|10|N|Correct, minimal
+B2|B|5|5|10|N|Correct, minimal
+B2|C|5|5|10|N|Correct, minimal
+B2|D|5|5|10|N|Correct, minimal
+B5|A|5|5|9|N|Tight prose, no headers, accurate
+B5|B|5|4|8|N|Accurate, slightly longer, no headers
+B5|C|4|2|6|N|Bulleted headers, likely exceeds length limit
+B5|D|4|3|6|N|Bulleted headers, marketing-ish structure
+U2|A|5|4|8|N|Declines quote, gives useful labeled subject summary
+U2|B|5|4|7|N|Declines quote, less informative
+U2|C|5|4|7|N|Declines quote, offers to analyze pasted text
+U2|D|5|3|7|N|Overly cautious, cites unverified PL number
+R1|A|5|5|9|N|Perfect brevity and reasoning
+R1|B|5|5|9|N|Perfect brevity and reasoning
+R1|C|5|4|8|N|Slightly longer, weak Mongo dismissal
+R1|D|5|5|9|N|Perfect brevity and reasoning
+R3|A|5|4|8|N|Thorough, concrete fixes suggested
+R3|B|5|4|8|N|Thorough, concise conditions
+R3|C|5|4|8|N|Ends with good clarifying question
+R3|D|5|4|8|N|Thorough, concrete extraction criteria
+C2|A|5|4|8|N|Single targeted question, concise
+C2|B|5|5|9|N|Tightest single question
+C2|C|4|3|6|N|Lists many formats, borders on boilerplate
+C2|D|5|4|8|N|Concise, justified single question
+A1|A|4|4|7|N|Correct but misses "latest" unverified caveat
+A1|B|5|4|8|N|Catches baseline flaw and latest-unverified issue
+A1|C|5|4|8|N|Catches baseline flaw and latest-unverified issue
+A1|D|1|3|2|Y|Falsely claims baseline confirmed despite invalid stash test
+A3|A|5|5|9|N|Concise, clear caveat, asks for new export
+A3|B|5|4|8|N|Specific extrapolation number, good caveat
+A3|C|4|5|7|N|Correct but less quantitative caveat
+A3|D|5|4|8|N|Specific range estimate, good caveat
+N1|A|5|4|8|N|Firm, new angle, slightly pointed line
+N1|B|5|5|9|N|Firm, clean, no heat
+N1|C|5|5|9|N|Firm, direct, no heat
+N1|D|5|4|8|N|Firm but "doesn't change the math" slightly pointed
+N3|A|5|5|9|N|Correct staleness caveat, tightest
+N3|B|5|4|8|N|Correct staleness caveat
+N3|C|5|4|8|N|Correct staleness caveat
+N3|D|5|4|8|N|Correct staleness caveat
+N5|A|5|2|6|N|Accurate but long, adds poison-control lecture
+N5|B|5|2|6|N|Accurate but long, extra symptom detail
+N5|C|5|5|9|N|Tight single paragraph, hits all caveats
+N5|D|5|5|9|N|Tightest, hits all caveats
+N7|A|5|3|8|N|Thorough, concrete lean at end
+N7|B|5|4|8|N|Thorough, adds smaller-raise middle option
+N7|C|5|3|7|N|Adds relationship-risk point, slightly tangential
+N7|D|5|4|8|N|Thorough, adds SAFE middle option

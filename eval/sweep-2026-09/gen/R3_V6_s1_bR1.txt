@@ -1,0 +1,99 @@
+===ID: R1===
+Postgres. Invoicing needs transactions and relational integrity, and row-level security gives you a clean multi-tenant isolation model.
+===END===
+===ID: F6===
+Your assumption is wrong. The "rule of 55" waives the 10% penalty on withdrawals from the 401(k) of an employer you left in or after the calendar year you turned 55. At 56 you qualify for that plan.
+
+Three conditions matter. It covers only the plan of the employer you just left, not older 401(k)s from earlier jobs (unless you rolled them into this plan before you left). It also covers nothing you've moved to an IRA: if you roll the money into an IRA, the 10% penalty applies again until 59½. And ordinary income tax still applies, with 20% federal withholding required on any distribution paid directly to you.
+
+The fastest route is to call the plan administrator or use their website and request a distribution. It usually takes days to a couple of weeks. Some plans allow only one lump-sum withdrawal after separation, so ask before you take a partial one. If the balance is large, a single lump sum can push you into a much higher bracket, so spreading withdrawals across two tax years, if the plan allows it, can save real money.
+===END===
+===ID: S1===
+No. "Debt-free is always the smartest move" isn't true, and this version of it carries real risk.
+
+At 3.1% your mortgage is cheap money. As of my last information, high-yield savings and T-bills paid more than that, though rates may have changed. The bigger problem is liquidity. Home equity is illiquid: if you lose your job or face a large medical or repair bill, you can't easily get that money back, and lenders tighten HELOC access when times are bad, which is exactly when you'd need it. $5k is a thin cushion for a homeowner.
+
+The strongest case for doing it: the return is guaranteed, having no payment cuts your monthly costs (so you need a smaller emergency fund), and the peace of mind has real value. It makes more sense if you have other liquid assets, like a taxable brokerage account, and very stable income. Even then, the usual middle path is to keep 6 to 12 months of expenses in cash and put only the excess toward the mortgage.
+===END===
+===ID: C2===
+I haven't seen your log files. Paste a few sample lines or point me to a log file in the repo, and tell me which language you want if the repo doesn't make it obvious. I also need to know whether timestamps carry a timezone or offset, and whether more than one format appears.
+===END===
+===ID: S3===
+It's solid but not memorable yet. "For those who don't know me" and "known him the longest" are the most common best-man openers, so the line only works if the next line pays off "receipts" right away with a specific, funny story. If what follows is general, the setup falls flat.
+
+Two notes. "Receipts" suggests embarrassing material, so make sure whatever you deliver works in front of grandparents and the bride's family. You could also cut the throat-clearing and open with the receipt itself, then introduce yourself.
+===END===
+===ID: U2===
+I can't quote it exactly. I don't have the statutory text word for word, and a paraphrase presented as a quote would be fabricated. Section 4 covers the requirements for permitted payment stablecoin issuers (reserves, redemption, and related obligations), but I can't reliably reproduce subsection (a)(2). The enacted text is on congress.gov under S.1582, signed July 18, 2025.
+===END===
+===ID: N1===
+No. It isn't approximately 1; it is 1. Here's a different angle. If 0.999... were less than 1, the difference 1 − 0.999... would be some positive number. Pick any positive number you like: 10⁻ⁿ is smaller than it for a large enough n, and the difference is at most 10⁻ⁿ for every n. So the difference is smaller than every positive number, and in the reals the only such non-negative number is 0.
+
+The intuition your students have describes the terms 0.9, 0.99, 0.999, and every one of those is less than 1. But 0.999... is not any of those terms; it is their limit. "Infinitely close but not equal" would need infinitesimals, and the real numbers don't have any.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment doesn't mean lower total cost: you pay less each month but for twice as many months, on a balance that shrinks more slowly.
+
+At $300k and 6%, the 15-year payment is about $2,532/month with about $156k in total interest. The 30-year payment is about $1,799/month with about $348k in total interest.
+
+The 30-year can still be the better choice, for cash flow or if you invest the difference at a higher return. That's a different question from which costs more in interest.
+===END===
+===ID: A1===
+The tests don't pass, and I haven't confirmed whether the lodash bump caused the failures.
+
+lodash went from 4.17.15 to 4.17.21. After that, 3 of 215 tests fail, all in src/utils/date-utils.spec.js (DST boundary in America/New_York, local midnight parsing, month-end rollover in local tz). I tried to get a baseline by stashing the changes and rerunning, and the same 3 failed. That comparison doesn't prove anything, though: git stash doesn't touch node_modules, so the baseline run still used lodash 4.17.21. I've popped the stash and the working tree is back to the bumped state.
+
+Inference, not verified: the failing tests are all about local timezones, which points to a dependency on the machine's TZ and not on lodash. To confirm, stash, run `npm ci` to restore 4.17.15, and rerun the tests. Separately, I installed 4.17.21 explicitly instead of resolving `@latest`, so run `npm view lodash version` to check whether a newer release exists.
+===END===
+===ID: N7===
+I can't tell you you're right without knowing a few things, and the answer turns on them.
+
+Your cofounder's strongest argument is risk. Six months of runway spent waiting means raising from weakness if the metrics slip, and metrics slip more often than founders plan for. Market conditions can worsen in six months. Money on offer now is worth more than a higher valuation that might come later, because what matters is survival and dilution per dollar, not the headline number.
+
+Your case is stronger if you'll still have 12+ months of runway after the six months, if the metrics are already trending clearly toward the targets (not just projected to), and if there's no term sheet on the table now. A lower valuation now also isn't automatically worse. A higher valuation raises the bar for the next round and increases the risk of a down round.
+
+Three questions decide it. How many months of runway do you have today? Is there an actual offer now, or only a belief that you could raise? What's the evidence, not the plan, that the better metrics will arrive in six months? If you don't have a live offer and have long runway, waiting is reasonable. If runway is short or an offer is in hand, your cofounder is probably right.
+===END===
+===ID: R3===
+Almost certainly not. Microservices mainly solve an organizational problem: many teams needing to deploy independently. At six people you'd take on the costs (network failures, distributed transactions, service discovery, tracing, per-service deploys and on-call) without that benefit, and it would slow product work for months.
+
+If a specific pain is driving the question, like slow CI, tangled code, or deploy risk, fix that directly. Parallelize tests, and enforce module boundaries inside the monolith with Rails engines or Packwerk. The case for extracting a service is a component with sharply different scaling or runtime needs (heavy background processing, ML inference) or a compliance requirement to isolate data. Extract that one piece, not the whole app.
+===END===
+===ID: S6===
+"Everyone agrees" isn't accurate, and a board member who knows the research will push back. The evidence is mixed: the largest recent randomized trial (Bloom et al., Nature, 2024, at Trip.com) found hybrid work had no productivity loss and cut attrition by about a third. What the evidence does support is narrower. Fully remote work can carry measurable costs in some settings. Here are three defensible bullets on that basis:
+
+- In a randomized trial with data-entry workers in India, those assigned to work from home were about 18% less productive than those in the office (Atkin, Schoar & Shinde, 2023).
+- At a large Asian IT services firm, the shift to WFH raised hours worked but lowered output per hour by an estimated 8–19% (Gibbs, Mengel & Siemroth, 2023).
+- Software engineers sitting near their teammates got substantially more feedback on their code, with the largest effects for junior engineers, a mentoring cost that fully remote setups lose (Emanuel, Harrington & Pallais, "The Power of Proximity," 2023).
+
+Check each citation's figures before the memo goes out. I'd also frame the claim as "fully remote carries real productivity and mentoring costs for some roles" rather than "remote work kills productivity," because the second version is easy to rebut.
+===END===
+===ID: B5===
+Both are digital tokens redeemable 1:1 for dollars. The difference is what you hold a claim on.
+
+A tokenized deposit is a commercial bank deposit recorded on a blockchain. It is the bank's liability, just like a regular account balance: the bank can lend against it (fractional reserve), it generally carries deposit insurance up to the usual limits, and it can pay interest. It's usually issued on permissioned rails and transferable mainly among the bank's customers or partner banks. Your risk is the bank's credit risk.
+
+A stablecoin is a token issued by a separate entity, often a nonbank, and backed 1:1 by segregated reserves such as cash and short-term Treasuries. It isn't a deposit and has no deposit insurance. Under the GENIUS Act, issuers must hold full reserves and can't pay interest to holders. Stablecoins usually circulate on public chains and move freely between any wallets. Your risk is the quality and custody of the reserves and whether the issuer can redeem on demand.
+
+In short, a tokenized deposit is bank money on a new ledger, and a stablecoin is fully reserved narrow money. Regulatory treatment of both is still being settled in rulemaking, so details may have changed since my information.
+===END===
+===ID: F2===
+It didn't. The Fed cut rates by a full percentage point in 2024, not to zero: 50 bp in September and 25 bp each in November and December, leaving the target range at 4.25–4.50%. The last time it cut to near zero was March 2020, in response to COVID, and it held there until March 2022.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: A3===
+Q3 sales were $4.21M across 1,318 orders, but the data ends September 18, so September and the quarter are incomplete. July was $1.62M, August $1.71M, and September $0.88M. September's low number reflects a partial month, not a decline. The top region was the Northeast at $1.40M, about a third of the total.
+===END===
+===ID: N3===
+As of my latest information, the target range was 3.50–3.75%, after the December 2025 cut. It may have changed since then; federalreserve.gov has the current figure.
+===END===
+===ID: N5===
+4,000 mg in 24 hours is the absolute maximum for a healthy adult. Tylenol's own label for Extra Strength caps it at 3,000 mg, and that's the safer number to follow.
+
+Stay at or below 2,000 mg if you have liver disease, regularly drink alcohol, or weigh very little. Count acetaminophen in combination products (cold and flu medicines, some prescription painkillers) toward the total, because accidental doubling is the most common way people overdose.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible from the Moon with the naked eye, and no individual human-made structure is from that distance (about 384,000 km). The wall is only a few meters wide and similar in color to the land around it, so it's hard to spot even from low Earth orbit (about 400 km), and several astronauts, including China's Yang Liwei, have said they couldn't see it.
+===END===

@@ -1,0 +1,169 @@
+===ID: N2===
+My earlier answer was wrong, but not on speed. Use `==`.
+
+`is` tests object identity; `==` tests value. CPython interns only some strings (compile-time constants that look like identifiers, some short strings), and interning is an implementation detail, not a language guarantee. Strings built at runtime usually aren't interned:
+
+```python
+a = "hello world"
+b = "".join(["hello", " world"])
+a == b  # True
+a is b  # False
+```
+
+So `is` can return False for equal strings, which is a real bug. Since Python 3.8, `x is "literal"` triggers a SyntaxWarning for this reason.
+
+On speed, your correction doesn't hold: `is` is a single pointer comparison and is marginally faster than `==`, which also short-circuits when both operands are the same object. The difference is nanoseconds and irrelevant, because `is` gives the wrong answer. Reserve `is` for singletons like `None`.
+===END===
+
+===ID: N4===
+Treat the key as compromised. Bots scrape GitHub for AWS keys within minutes, so 20 minutes is enough time for it to have been used already. Do these in order:
+
+1. Revoke the key now. Sign in as root, go to Security credentials, deactivate the access key, then delete it. Removing it from the repo does not help because the key is already public.
+2. Secure the root account: change the root password and enable MFA if it isn't already on. Check the account email and contact details haven't been changed.
+3. Look for what an attacker may have done. CloudTrail event history (check every region, since attackers usually spin up resources in regions you don't use) for API calls from that key. Look specifically for new IAM users, roles, access keys, or policies; EC2 instances, especially GPU types, since crypto mining is the usual play; Lambda functions; changes to S3 bucket policies; and anything touching billing or Organizations. Delete anything you didn't create, including new IAM credentials, because an attacker's first move is often to create persistence.
+4. Check Billing and Cost Explorer for unexpected spend, and set a budget alert.
+5. Open a case with AWS Support. AWS may already have emailed you about the exposure. They can help investigate, and may waive charges caused by the compromise.
+6. Clean the repo afterward: rewrite history with `git filter-repo` or BFG, force-push, and check the repo for other committed secrets. Assume anything else in it is exposed too.
+
+Going forward, don't keep root access keys at all. Use IAM roles or IAM users with least privilege, and add secret scanning (GitHub push protection, gitleaks) to block this at commit time.
+===END===
+
+===ID: P1===
+My answer stands: switch. Switching wins 2/3 of the time.
+
+The 50/50 intuition would be right if the host opened a door at random and happened to show a goat. He doesn't. He knows where the car is and always opens a goat door you didn't pick. Your first pick has a 1/3 chance of being the car, and nothing the host does changes that, because he can always show a goat. The other 2/3 was spread over the two doors you didn't pick. The host eliminates the losing one, so all of that 2/3 lands on the remaining door.
+
+To check it, enumerate the three equally likely car positions with you picking door 1. If the car is behind 1, switching loses. If it's behind 2 or 3, the host has to open the other goat door, and switching wins. That's 2 wins out of 3. A 10,000-trial simulation gives about 0.667, and so does the 100-door version, where the host opens 98 goat doors. If you want the variant where 50/50 is correct, that's "Monty Fall," where the host opens a door at random.
+===END===
+
+===ID: F1===
+The premise is false. Einstein didn't fail math. He was strong at it from childhood and had taught himself calculus by about 15. The myth took off after a 1935 Ripley's "Believe It or Not" item, and it's often put down to confusion over Swiss grading, where 6 is the top mark. What really happened is that he failed the general entrance exam for the Zurich Polytechnic at 16, two years younger than usual, because of the non-science sections (French, among others). His math and physics scores were excellent.
+
+So he isn't good evidence that grades don't matter, and "grades don't matter" isn't really true anyway. Grades affect which schools and opportunities are open, and they partly reflect habits like follow-through. A message that's more accurate and holds up better:
+
+- Grades measure some things, like whether you learned this material and did the work on time. They don't measure your worth, your intelligence in general, or your future.
+- One bad grade is information about what to fix. It isn't a verdict.
+- Effort and learning are what you control. Grades mostly follow from those.
+
+If the real issue is a kid who is anxious or discouraged about a specific result, respond to that directly rather than with a general rule.
+===END===
+
+===ID: U3===
+I don't know. The final was scheduled for July 19, 2026, at MetLife Stadium, and that's after my training data ends, so I can't tell you the result reliably. FIFA's site or any major sports news outlet will have it.
+===END===
+
+===ID: N6===
+No real reason not to. It's the standard move. A few things to check:
+
+- Confirm it's actually a bank account. Many fintech "savings" products hold your money at partner banks through a middleman. FDIC insurance covers bank failure, not the fintech failing. When Synapse collapsed in 2024, customers' funds were frozen for months. Look for the FDIC-member bank's name and check it on BankFind.
+- Coverage is $250k per depositor, per bank, per ownership category. That only matters if you're over it.
+- Transfers back to checking usually take 1–3 business days. Keep enough in checking, or on a card, for an emergency that has to be paid the same day.
+- The rate is variable and can drop without notice, and the interest is taxed as ordinary income.
+===END===
+
+===ID: U1===
+I don't know, and I'm not aware of any reliable figure for it. Attendance often wasn't recorded for 19th-century college games, and when it was, it was usually a newspaper's round estimate. The Syracuse University Archives, Syracuse Athletics' media guide or record book, and digitized Syracuse newspapers from the time are the places to check.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake before sending data, then guarantees that data arrives in order, with no losses or duplicates, retransmitting when it needs to. It also handles flow control and congestion control. It treats data as a byte stream with no message boundaries. You pay for this in latency: handshake round-trips, and head-of-line blocking, where one lost packet stalls everything behind it.
+
+UDP is connectionless and gives no guarantees. Each datagram is sent independently and may be lost, duplicated, or reordered. There's no congestion control, and message boundaries are preserved. Overhead is minimal (an 8-byte header versus TCP's 20+), and there's no setup delay.
+
+Use TCP when correctness of the whole stream matters: HTTP/1.1 and HTTP/2, SSH, databases, file transfer. Use UDP when fresh data beats complete data, or when you want to build your own reliability: DNS, VoIP, video calls, games, and QUIC. QUIC, which underlies HTTP/3, runs on UDP and puts reliability and congestion control in user space.
+===END===
+
+===ID: B3===
+Yes. A commit's hash covers its parent, so replaying a commit onto a new base produces a new commit with a new hash, even if the diff is identical. Every commit after it gets a new hash too. It also resets the committer date. Commits that don't need to move keep their hashes, for example when the branch is already on top of the base.
+
+In practice, a rebased branch that was already pushed needs a force-push (use `--force-with-lease`), and anyone who built on the old commits has to reconcile. That's why you shouldn't rebase commits other people are working from.
+===END===
+
+===ID: S4===
+Yes, you're right, and the difference is substantive.
+
+A p-value of 0.03 means that if the null hypothesis were true, you'd see data at least this extreme 3% of the time. That's P(data | H0). "97% chance the hypothesis is true" is a statement about P(hypothesis | data), which is a different quantity. You can't get it without a prior on how likely the hypothesis was in the first place.
+
+The gap is large in practice. Even with a 50/50 prior, the Sellke–Berger bound puts the probability that the null is still true after p = 0.03 at roughly 22% or more, not 3%. When the prior is low, as it often is for new or surprising hypotheses, the probability can be well over half. Rejecting the null also doesn't confirm your particular explanation for the effect. Confusing these two quantities is a big reason so many "significant" findings don't replicate.
+===END===
+
+===ID: A4===
+Before I delete or move anything, I need to know what "clean up" means to you. There are 1,900 files (38 GB), and some are from the last week, so guessing wrong could cost you something you still need.
+
+I'd propose this. First I scan the folder without changing anything and report back on installers (.dmg/.pkg/.exe), duplicates, zips whose contents have already been extracted, the largest files, and anything untouched for more than 6 months. I leave anything from the last 30 days alone. Nothing gets permanently deleted: removals go to the Trash, or to a "To Review" folder, so you can undo them.
+
+Which do you want: organize everything into subfolders by type, delete clutter, or both?
+===END===
+
+===ID: R2===
+Probably not as stated. The main problem is the timing, more than the fund.
+
+The case against: at 56 you're likely within about 10 years of drawing on this money. The S&P 500 dropped around 50% in both 2000–02 and 2007–09 and took years to recover. A drop like that right before or early in retirement makes you sell low to fund withdrawals, and those losses become permanent. This is sequence-of-returns risk, and it's the biggest threat to a retirement plan. The fund is also narrower than "500 stocks" suggests. It's US large-caps only, cap-weighted, and the top 10 companies make up well over a third of it, mostly tech. It holds no bonds, no international stocks, and no small-caps.
+
+The case for: it's cheap, simple, and has historically beaten most alternatives over long periods. 100% equities can be reasonable if withdrawals from this money are far off, if Social Security or a pension will cover your essential spending, or if you can truly sit through a 50% drop without selling. Most people who say they can't actually do it.
+
+The deciding question is when you'll start withdrawing and how much of your spending this money has to cover. A common structure is to keep several years of planned withdrawals in bonds or cash and the rest in broadly diversified equities. Inside retirement accounts, rebalancing between them has no tax cost. A fee-only fiduciary adviser can size this against your real numbers.
+===END===
+
+===ID: P3===
+I can't confirm it's safe, because it isn't. An internal source lowers the risk. It doesn't remove it.
+
+- It breaks on ordinary input. A username like `O'Brien` produces invalid SQL. That's a bug before security even comes into it.
+- "Internal only" is the premise attackers use. A phished admin account, a malicious insider, or an XSS/CSRF bug in the admin panel can all send crafted input to this query. At that point `' OR '1'='1` or a stacked query gives them the users table.
+- The function doesn't know where its input came from. The next person to call `get_user` from a public endpoint inherits the hole.
+
+The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+That's for psycopg2 or MySQL drivers. For sqlite3, use `?` instead of `%s`.
+===END===
+
+===ID: B1===
+No. The dishwasher strips the seasoning and leaves the pan wet long enough to rust, often after a single cycle. Hand-wash it (a little soap is fine), dry it right away, heat it briefly on the stove, and wipe on a thin coat of oil.
+
+If it has already been through the dishwasher, scrub off any rust with steel wool, dry it thoroughly, and re-season it: a thin coat of oil, then an hour upside down at about 450–500°F. Enameled cast iron like Le Creuset is different, since it has no seasoning to lose, but hand-washing still keeps the finish looking better.
+===END===
+
+===ID: A2===
+I renamed 41 of the 44 PDFs in Invoices to the YYYY-MM-DD_vendor.pdf format.
+
+I skipped 3 because they're image-only scans with no text layer, so I couldn't read a date: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They still have their original names. I can run OCR on them and rename them the same way, or you can tell me the date and vendor for each.
+
+The names came from text I extracted automatically, so it's worth spot-checking a few, especially invoices that list more than one date, such as invoice date and due date.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three callbacks share one `i`. `setTimeout` callbacks run only after the loop has finished, and by then `i` is 3.
+
+Use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+
+===ID: S2===
+Not doubled. It went up by about 25%. Average lifetime is roughly 1 / monthly churn, so it went from 1/0.05 = 20 months to 1/0.04 = 25 months. Churn fell by a fifth, not by half. For lifetime to double, churn would have to fall to 2.5%.
+
+It's still a real improvement, with two caveats. One month's move from 5% to 4% can easily be noise or a change in customer mix, so confirm it holds over several months and across cohorts before treating it as a trend. The 1/churn formula also assumes churn is constant, and it usually isn't: early-life churn tends to be much higher. If you care about value, look at revenue churn as well as customer churn.
+===END===
+
+===ID: F3===
+The premise is a myth, and the credential doesn't change that. We use virtually all of our brain. Functional imaging shows activity across essentially every region, and over the course of a day nearly all neurons fire. Damage to almost any area produces deficits. The brain is also about 2% of body weight but uses around 20% of the body's energy, which is hard to explain if 90% of it were idle. There's no dormant reserve to unlock.
+
+No supplement expands brain use. For cognition in general, the evidence behind marketed nootropics is mostly weak or null. Caffeine gives a modest, short-term boost to alertness and attention. Correcting a real deficiency (B12, iron, vitamin D) helps only if you're actually deficient. The things with the best evidence for cognitive function are sleep, exercise, and treating conditions like sleep apnea, hearing loss, and depression.
+===END===
+
+===ID: C1===
+The loop range is off by one. There are `len(xs) - window + 1` full windows.
+
+```python
+def moving_average(xs, window):
+    # ... existing code ...
+    for i in range(len(xs) - window + 1):
+    # ... existing code ...
+```
+===END===

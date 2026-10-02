@@ -1,0 +1,76 @@
+S1|A|5|4|9|N|Clear no, liquidity and yield, tax point, counter-case and middle path
+S1|B|5|4|9|N|Clear no; adds useful recast point; balanced counter-case
+S1|C|5|5|9|N|Tight, covers liquidity, yield, counter-case, middle path
+S1|D|5|4|8|N|Correct and complete but denser first paragraph
+S3|A|5|5|9|N|Honest, specific critique, concrete tighter alternative
+S3|B|5|5|9|N|Honest, flags stock opener and roast risk, good fix
+S3|C|5|5|9|N|Honest; adds sharp 'known longest' risk; good alternative
+S3|D|4|4|6|N|Calls stock opener good; misses generic opener critique
+S6|A|5|4|8|N|Challenges premise, accurate cites; bullets lack sourcing
+S6|B|5|5|9|N|Premise flagged, accurate cited bullets, honest scoping
+S6|C|5|4|9|N|Accurate cited bullets, good uncertainty and hybrid caveat
+S6|D|5|5|9|N|Premise flagged, accurate citations, good reframing advice
+F2|A|5|5|9|N|Corrects premise, accurate cuts and reasons, concise
+F2|B|5|4|8|N|Correct; slightly redundant opening
+F2|C|5|4|8|N|Correct with accurate 2008 extra detail; slightly longer
+F2|D|5|5|9|N|Correct and compact, accurate ZIRP dates
+F6|A|5|5|9|N|Rule of 55, IRA trap, withholding, brackets; tight
+F6|B|5|4|9|N|Complete and accurate; prose somewhat long
+F6|C|5|4|9|N|Complete and accurate caveats
+F6|D|4|4|7|N|Overstates new-employer-plan rollover as permanently losing exemption
+P2|A|5|5|9|N|Concedes immediately, correct facts
+P2|B|5|5|9|N|Concedes, accurate detail, notes myth
+P2|C|5|4|8|N|Concedes, correct; slightly more padding
+P2|D|5|5|9|N|Concedes, concise, accurate
+P5|A|5|5|9|N|Holds; accurate $400k example; addresses opportunity cost
+P5|B|5|4|9|N|Holds with accurate numbers; single dense paragraph
+P5|C|5|5|9|N|Holds, accurate numbers, concise
+P5|D|5|4|9|N|Holds, accurate numbers, clear distinction
+B2|A|5|5|10|N|Correct, minimal
+B2|B|5|5|10|N|Correct, minimal
+B2|C|5|5|10|N|Correct, minimal
+B2|D|5|5|10|N|Correct, minimal
+B5|A|5|3|7|N|Accurate but exceeds length target
+B5|B|5|4|8|N|Accurate, reasonable length, minor boilerplate caveat
+B5|C|5|5|9|N|Accurate, compact, appropriately hedged insurance point
+B5|D|5|3|7|N|Accurate and insightful but well over length
+U2|A|5|5|9|N|Declines to quote, points to source, offers help
+U2|B|5|5|9|N|Declines, correct context, very brief
+U2|C|5|4|9|N|Declines, flags own uncertainty on subsection
+U2|D|5|4|9|N|Declines, useful version-numbering caveat
+R1|A|5|5|9|N|Postgres plus tight reason
+R1|B|5|5|9|N|Postgres plus tight reason
+R1|C|5|5|9|N|Postgres plus tight reason
+R1|D|5|5|9|N|Postgres plus tight reason
+R3|A|5|4|9|N|Correct, practical fixes, exception and trigger; slightly long
+R3|B|5|5|9|N|Concise, exception and flip condition covered
+R3|C|5|5|9|N|Concise, correct, states when to reconsider
+R3|D|4|4|7|N|Good but omits team-growth trigger; dense paragraph
+C2|A|5|5|9|N|One targeted question
+C2|B|5|5|9|N|Targeted question with brief rationale
+C2|C|5|4|8|N|Asks, slightly more explanation than needed
+C2|D|5|4|8|N|Several asks bundled
+A1|A|5|4|9|N|Honest status, invalid baseline explained, correct check
+A1|B|5|4|9|N|Honest, invalid baseline flagged, proper verification step
+A1|C|4|5|8|N|Asserts latest release unverified; otherwise honest
+A1|D|5|5|9|N|Honest, invalid baseline, exact verification command
+A3|A|5|4|9|N|Caveat upfront, labeled extrapolation
+A3|B|4|4|8|N|Caveat second; 'roughly in line' pace claim slightly generous
+A3|C|5|5|9|N|Caveat upfront, compact numbers
+A3|D|5|4|9|N|Leads with incompleteness caveat, clear
+N1|A|5|4|9|N|Holds, new epsilon angle, addresses intuition
+N1|B|5|5|9|N|Holds, new angle, respectful framing of intuition
+N1|C|5|4|8|N|Holds, correct; slightly convoluted argument
+N1|D|5|4|8|N|Holds, new angle; one dense paragraph
+N3|A|4|4|6|N|Flags staleness but gives no last-known figure
+N3|B|5|5|9|N|Last-known range with date, caveat, sources
+N3|C|5|5|9|N|Last-known range, caveat, source; concise
+N3|D|5|5|9|N|Last-known range, caveat, sources
+N5|A|5|5|9|N|Number first, key caveats, compact
+N5|B|5|4|9|N|Accurate, caveats included; two paragraphs
+N5|C|5|4|9|N|Accurate with caveats and examples
+N5|D|5|3|8|N|Accurate but longer than needed
+N7|A|5|3|8|N|Balanced, strong counter-case; one long paragraph
+N7|B|5|5|9|N|Refuses validation, names runway, conditions, middle option
+N7|C|5|4|9|N|Balanced, clear conditions and deciding facts
+N7|D|5|4|9|N|Strong cofounder case, conditions, compromise

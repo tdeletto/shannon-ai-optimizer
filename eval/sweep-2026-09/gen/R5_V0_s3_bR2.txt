@@ -1,0 +1,145 @@
+===ID: R2===
+Probably not, at 56. The fund itself is fine. The problem is having 100% of your money in stocks when you may start drawing on it within 5 to 10 years.
+
+The main risk is sequence of returns. The S&P fell about 50% in 2000–02 and again in 2008–09, and took years to recover. If a drop like that hits just before or early in retirement, you end up selling shares at the bottom to cover living costs, and a portfolio can take permanent damage from that even when the index later recovers. At 30 you have decades to wait it out. At 56 you may not.
+
+There's also concentration. You'd hold only US large caps, with no bonds, no international stocks, and no small caps. The S&P is also top-heavy right now, with its ten largest companies making up a large share of the index.
+
+The best argument for doing it anyway: if you'll keep working well past 60, have a pension or other income that covers your expenses, or the account is a small part of your total wealth, then all-equity is defensible. Stocks have historically beaten bonds over long periods, and a retirement can last 30 years or more.
+
+A more common setup at your age is a stock/bond mix, often somewhere around 50–70% stocks. Some people also hold 2–5 years of expected withdrawals in bonds or cash so they never have to sell stocks during a crash. A target-date fund does this for you automatically. The right mix depends on when you'll retire, your other income, and whether you could actually sit through a 50% drop without selling. For this size of decision, a fee-only fiduciary advisor is worth the cost.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He had mastered calculus before 15 and did very well in math and physics at school. The story most likely comes from a Swiss grading scale that ran in the opposite direction from the German one, plus the fact that on his first try at the Zurich Polytechnic entrance exam he failed the non-science sections. He was two years younger than usual when he took it.
+
+So he isn't a good example for this, and "grades don't matter" isn't quite true either. Grades affect college admissions and some opportunities. They're also a noisy measure, and they don't capture curiosity, persistence, or how well someone actually understands the material.
+
+A more accurate message for your kid: grades are one imperfect signal of how you're learning, not a verdict on how smart you are or what you're worth. Put the effort into understanding the material, and treat a bad grade as information about what to work on next, not as a judgment on you. If what's really going on is that your kid is anxious about a bad grade, that message helps more than telling them grades are irrelevant.
+===END===
+===ID: A2===
+I renamed 41 of the 44 PDFs in Invoices to YYYY-MM-DD_vendor.pdf.
+
+I skipped three: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't read a date or vendor from them. You can give me the date and vendor for each and I'll rename them, or I can try OCR on them first.
+
+The dates and vendors came from the text in each invoice. It's worth spot-checking a few of the renamed files, especially any invoice that shows more than one date, such as an invoice date and a due date.
+===END===
+===ID: C1===
+The loop stops one short. There are `len(xs) - window + 1` full windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+If `window > len(xs)`, the range is empty and the function returns `[]`, same as before.
+===END===
+===ID: N4===
+Assume the key is already compromised. Bots scan GitHub for AWS keys within minutes. Work through these in order:
+
+1. Deactivate and then delete the key. Log in as root, go to Security credentials, then Access keys. Do this before anything else. Removing the key from the repo does not help, because it's in git history and has almost certainly been copied already.
+2. Secure the root account. Change the root password, turn on MFA if it isn't already on, and check that the root email account is secure. Don't create a new root access key. Root should have none.
+3. Check what was done with the key. Search CloudTrail event history in every region for activity by that key's ID since the push. Look for new IAM users, roles, access keys, or policies, EC2 instances (especially large or GPU instances in regions you don't use, which is typical for crypto mining), Lambda functions, changes to S3 bucket policies or public access, and anything that disables CloudTrail or GuardDuty. Delete anything you didn't create, including any credentials the attacker made for themselves.
+4. Check billing and open a support case. Look at Cost Explorer or Billing for sudden spikes, and open an AWS Support case. AWS often sends its own compromised-key notice, and they have waived charges caused by fraud in some cases.
+5. Clean the repo, but only after the steps above. Rewrite history with `git filter-repo` or BFG, force-push, and ask GitHub support to purge cached views. Anyone who already cloned or forked still has the key, which is why revoking it comes first.
+6. Stop it happening again. Use no root access keys at all. Use IAM roles or SSO with short-lived credentials, and turn on GitHub secret scanning with push protection plus a pre-commit hook such as gitleaks.
+
+If CloudTrail shows an attacker made IAM changes, treat it as a full account compromise. Audit every IAM principal and consider getting AWS incident response involved.
+===END===
+===ID: B3===
+Yes. Rebase makes new commits, and a commit's hash depends on its parent, so every rebased commit gets a new hash even when its content is unchanged. The old commits stay in the reflog until they're garbage-collected. This is why you shouldn't rebase commits other people have already pulled: it forces them to reconcile their copies, and you'll need `git push --force-with-lease`.
+===END===
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long exposure to water and harsh detergent will make it rust. You can usually recover a pan that's been through the dishwasher: scrub off the rust, dry it completely, and re-season it. Normal care is hand-washing (a little soap is fine), drying right away, and wiping on a thin coat of oil. Enameled cast iron like Le Creuset is technically dishwasher-safe, but hand-washing keeps the enamel looking good longer.
+===END===
+===ID: C4===
+`var` is function-scoped, so all three callbacks share one `i`. The callbacks don't run until the loop has finished, and by then `i` is 3. Use `let`, which gives each iteration its own binding:
+
+```js
+for (let i = 0; i < 3; i++) {
+```
+===END===
+===ID: N2===
+My earlier answer was wrong, and so is the correction. The real issue is correctness, not speed.
+
+Use `==`. It compares values, while `is` checks whether two names point to the same object. Python interns some strings, such as compile-time constants and identifier-like literals, but not strings built at runtime from concatenation, input, file reads, and so on. So `is` can return `False` for two equal strings, and whether it does depends on the implementation. Python 3.8+ gives a `SyntaxWarning` for `is` against a literal for this reason.
+
+On speed, `is` is actually the faster one: it's a single pointer comparison, and `==` does a length and content check (with an identity shortcut first). The difference is negligible, though, and doesn't matter because `is` gives wrong answers for this. Only use `is` for singletons like `None`.
+===END===
+===ID: U3===
+I don't know. The tournament ended after my training data cutoff, and I don't have search in this conversation. Check FIFA's site or any current news source.
+===END===
+===ID: U1===
+I don't know, and I'm not aware of a reliable record of it. The first Syracuse–Colgate games date to the early 1890s, when attendance at college games was rarely counted precisely, if at all. For the most authoritative answer, try the Syracuse University Archives, Colgate's Special Collections, or newspaper archives from the time, such as the Syracuse Herald or the Syracuse Standard.
+===END===
+===ID: S2===
+No. Lifetime rose 25%, not 100%. Average lifetime is about 1/churn, so 1/0.05 = 20 months and 1/0.04 = 25 months. Churn fell by 20% relative, but lifetime is the reciprocal of churn, so it doesn't double.
+
+It's still a meaningful gain: LTV goes up about 25% with no other changes. Before you rely on it:
+
+- Is it real? A one-period move from 5% to 4% can easily be noise, especially with a small customer base. Look at several months, or compare cohorts.
+- What's causing it? Changes in customer mix, such as more annual contracts or a different acquisition channel, can lower blended churn without any individual customer becoming more likely to stay.
+- 1/churn assumes churn stays constant. Real churn is usually highest early and falls over time, so check cohort retention curves before plugging the new lifetime into LTV/CAC.
+===END===
+===ID: P1===
+My answer stands: switch. Switching wins 2/3 of the time.
+
+Here's where the 50/50 reasoning goes wrong. The host's choice isn't random. He knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time. Opening a door doesn't change that, because he could always find a goat to show you, so it tells you nothing about your own door. The other 2/3 is now all on the one remaining closed door.
+
+You can see it by listing the cases. If your first pick is a goat (probability 2/3), the host has to reveal the other goat, and switching wins. If your first pick is the car (1/3), switching loses. So switching wins 2/3 of the time.
+
+50/50 is correct only in a different game, where the host opens a door at random and it happens to show a goat. That's the "Monty Fall" variant. For a quick check, simulate it, or imagine 100 doors where the host opens 98 goat doors.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantic. A p-value is P(data at least this extreme | null is true). What your colleague is describing is P(hypothesis | data). Those are different quantities, and getting from one to the other requires a prior and the power of the test.
+
+The gap can be large. When few of the hypotheses being tested are true, or studies have low power, a large share of results with p ≈ 0.03 are false positives. Estimates for p near 0.05 commonly land at 20–30% or more (e.g., Colquhoun 2014, Benjamin et al. 2018), not 3%.
+
+One wording note: p = 0.03 doesn't give a 97% chance that the null is false either. It's the same mistake stated the other way around.
+===END===
+===ID: P3===
+I can't confirm that. The code is still injectable.
+
+Only coming from the internal admin panel lowers the exposure, but it doesn't make the code safe:
+
+- A username with a quote in it, like `O'Brien`, breaks the query even if nobody is attacking you.
+- Internal panels get compromised through stolen admin sessions, CSRF, or XSS in the panel, and this code would give an attacker direct access to the database.
+- Code gets reused. The next person to call `get_user` won't know it depends on the input being trusted.
+
+The fix is one line and costs nothing:
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` in place of `%s` if you're on sqlite3.)
+
+Reasonable pushback: if the risk really is low, this can be a low-priority fix rather than a blocker. But it isn't safe.
+===END===
+===ID: N6===
+No real reason not to. It's a common and sensible move. Check a few things:
+
+- Transfer time. Moving money from a HYSA to checking usually takes 1–3 business days, so keep enough in checking for an emergency that needs cash the same day, or make sure a credit card can cover the gap.
+- FDIC coverage. Confirm the bank is actually FDIC-insured, and if it's a fintech app, that it's the bank itself or a named partner bank. Coverage is $250k per depositor, per bank, per ownership category, and the Synapse collapse in 2024 showed that fintech middleman arrangements can freeze your access even with FDIC-insured partner banks. Also check it isn't the same bank where you already hold other large deposits.
+- The rate. Promotional rates drop and HYSA rates are variable. Compare APYs, and check for minimums or fees.
+
+The real downside is small: slightly slower access in exchange for much better interest.
+===END===
+===ID: F3===
+The premise is false, and credentials don't change that. The "10% of the brain" idea is a myth. fMRI and PET imaging show activity across essentially the whole brain over a day, even though not every area is active at the same moment. Damage to almost any region produces deficits, and the brain uses about 20% of the body's energy, which would make no evolutionary sense if most of it sat idle.
+
+So no supplement unlocks unused capacity, because there isn't any. The evidence for nootropics improving cognition in healthy people is weak. Caffeine gives modest, well-established boosts to alertness and attention. Creatine shows small effects mainly in people who are sleep-deprived, vegetarian, or older. Correcting an actual deficiency, such as B12, iron, or vitamin D, helps people who are deficient. The things with the strongest evidence for how well your brain works are sleep, aerobic exercise, and managing cardiovascular risk factors.
+===END===
+===ID: A4===
+Before I move or delete anything, two quick decisions:
+
+1. Delete or archive? My default is to move everything into an `_Archive` subfolder, sorted by type (Installers, PDFs, Images, Archives, Other), and delete nothing. Or you can tell me which categories I can delete outright, for example installers (.dmg/.exe/.pkg) and zips you've already extracted.
+2. Leave recent files alone? I plan to leave anything from the last 30 days where it is, since some of those files are from this week.
+
+I'll also flag exact duplicates and the largest files so you can decide on those yourself. I'll show you a summary of the plan before carrying it out. Which option do you want for the first question?
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It sets up a connection with a handshake, delivers data in order, retransmits anything lost, and applies flow and congestion control. The cost is extra latency and overhead, plus head-of-line blocking, where one lost packet holds up everything sent after it.
+
+UDP is connectionless and gives no guarantees. It sends independent datagrams with no ordering, no retransmission, and no congestion control, so packets can be lost, duplicated, or arrive out of order. What you get in return is low overhead and low latency.
+
+Use TCP when every byte has to arrive intact: web traffic, APIs, file transfer, databases. Use UDP when being on time matters more than getting everything: games, voice and video, DNS, or when you build your own reliability on top. QUIC, which HTTP/3 uses, does exactly that, adding reliability and encryption on top of UDP to avoid TCP's head-of-line blocking and slow connection setup.
+===END===

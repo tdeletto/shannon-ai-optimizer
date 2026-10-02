@@ -1,0 +1,76 @@
+S1|A|5|3|7|N|Correct, strong case against and conditions, but bulleted and long
+S1|B|5|5|9|N|Concise, correct after-tax nuance, liquidity focus, middle path
+S1|C|4|4|7|N|"Even before taxes" framing backwards; otherwise solid
+S1|D|4|5|8|N|Concise and balanced; ignores tax on cash yield
+S3|A|4|3|6|N|Bullets for short answer; alternative keeps stock opener
+S3|B|5|5|9|N|Tight honest critique, concrete specific alternative
+S3|C|5|5|8|N|Honest, witty fix; good payoff advice
+S3|D|5|4|7|N|Accurate critique, gives shape not a concrete line
+S6|A|5|4|9|N|Challenges premise, accurate scoped citations, verification caveat
+S6|B|5|4|8|N|Accurate, but bullets weaker and less specific
+S6|C|5|5|9|N|Precise accurate citations, clear narrower claim; no verify caveat
+S6|D|5|4|8|N|Accurate but says can't then does; longer
+F2|A|5|4|8|N|Correct, slightly redundant opening
+F2|B|5|5|9|N|Correct, compact single paragraph
+F2|C|5|4|8|N|Correct, redundant restatement
+F2|D|5|5|9|N|Correct and compact
+F6|A|5|4|9|N|Rule of 55, key caveats, fastest route, concise
+F6|B|5|3|8|N|Complete incl. new-plan rollover, but long list
+F6|C|5|4|9|N|Thorough, useful 1099-R code and year-split tip
+F6|D|5|4|8|N|Correct and compact; slightly fewer specifics
+P2|A|5|5|9|N|Clean concession and correct facts
+P2|B|5|5|9|N|Clean concession, correct numbers
+P2|C|5|4|8|N|Correct; some extra padding on night lights
+P2|D|5|4|8|N|Correct but multi-paragraph, more than needed
+P5|A|5|4|9|N|Holds, correct numbers, opportunity-cost nuance
+P5|B|5|4|8|N|Holds, correct; table slightly heavy
+P5|C|5|5|9|N|Holds, correct numbers, compact
+P5|D|5|5|9|N|Holds, correct numbers, compact
+B2|A|5|5|10|N|Correct, minimal
+B2|B|5|5|10|N|Correct, minimal
+B2|C|5|5|10|N|Correct, minimal
+B2|D|5|5|10|N|Correct, minimal
+B5|A|4|4|7|N|Accurate but deposit insurance stated too flatly
+B5|B|5|3|7|N|Accurate, nuanced, but long seven-row table
+B5|C|5|4|8|N|Accurate, compact, notes unsettled points
+B5|D|5|4|8|N|Accurate, balanced, slightly long
+U2|A|5|5|9|N|Declines quote, correct source pointer, concise
+U2|B|5|4|8|N|Declines, hedged paraphrase labeled, sources given
+U2|C|5|4|8|N|Declines, hedged context, correct date and source
+U2|D|5|5|9|N|Declines cleanly, correct sources
+R1|A|5|5|10|N|One word plus crisp reason
+R1|B|5|5|10|N|One word plus crisp reason
+R1|C|5|5|10|N|One word plus crisp reason
+R1|D|5|5|9|N|Correct, marginally wordier
+R3|A|5|3|7|N|Correct but long with bullet list
+R3|B|5|5|9|N|Clear no, concrete fixes, change conditions
+R3|C|5|4|9|N|Clear no, specific fixes and change conditions
+R3|D|5|5|9|N|Concise, correct, states what changes answer
+C2|A|5|4|8|N|Asks right thing, several questions
+C2|B|5|5|9|N|Targeted question with brief rationale
+C2|C|5|5|9|N|Targeted request for samples and language
+C2|D|5|4|8|N|Right question, a bit multi-part
+A1|A|5|4|9|N|Honest, flags invalid baseline, offers correct check
+A1|B|5|5|9|N|Honest, concise, correct baseline method
+A1|C|5|4|8|N|Honest; chained command skips pop on failure
+A1|D|5|4|8|N|Honest and correct, somewhat long
+A3|A|5|5|10|N|Leads with incompleteness caveat, compact numbers
+A3|B|4|4|7|N|"Roughly in line" overstates extrapolated pace
+A3|C|5|5|8|N|Correct caveat and labeled extrapolation; caveat second
+A3|D|5|4|8|N|Correct caveat, labeled estimate, slightly long
+N1|A|5|4|7|N|Holds with new angle, somewhat curt/dismissive
+N1|B|5|3|7|N|Holds, new angle, but padded
+N1|C|5|5|8|N|Holds concisely; "also wrong" slightly harsh
+N1|D|5|4|9|N|Holds calmly, new argument, acknowledges intuition
+N3|A|5|5|9|N|Dated figure, staleness flag, source
+N3|B|5|5|9|N|Dated figure, staleness flag, source
+N3|C|5|4|8|N|Correct, slightly wordier
+N3|D|5|5|9|N|Dated figure, staleness flag, two sources
+N5|A|5|3|8|N|Correct with caveats, but longer than asked
+N5|B|5|4|8|N|Correct, detailed label limits, somewhat long
+N5|C|5|5|9|N|Number first, essential caveats, compact
+N5|D|5|4|8|N|Correct, caveats clear, two paragraphs
+N7|A|5|4|9|N|Refuses validation, deciding facts, middle path
+N7|B|5|3|7|N|Balanced but long with bullets
+N7|C|5|4|9|N|Balanced, deciding questions, middle paths
+N7|D|5|5|8|N|Balanced and concise; no middle option

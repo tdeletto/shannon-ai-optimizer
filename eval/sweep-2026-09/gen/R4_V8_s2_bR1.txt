@@ -1,0 +1,115 @@
+===ID: R1===
+Postgres. Invoices, accounts, and tenants are relational data that need transactions, foreign keys, and constraints, and row-level security gives you a clean multi-tenancy option. JSONB covers any schemaless parts you need.
+===END===
+===ID: B5===
+The difference is whose liability it is and what backs it.
+
+A tokenized deposit is an ordinary bank deposit recorded on a blockchain. It is a liability of the issuing bank and sits on the bank's balance sheet, so it is backed the way any deposit is: by the bank's capital, its lending book under fractional reserve, and deposit insurance up to the limit. It can pay interest. Holders are generally the bank's own KYC'd customers, and transfers usually happen on permissioned rails or between participating banks.
+
+A payment stablecoin is a liability of an issuer, often a nonbank, that holds reserves segregated 1:1 against the tokens outstanding, typically in cash, T-bills, and repo. Under the GENIUS Act, reserves must be high-quality liquid assets, the issuer can't pay interest to holders, and there is no deposit insurance. The token moves as a bearer-like instrument on public chains, so it circulates among parties who have no relationship with the issuer.
+
+In practice: a tokenized deposit is bank money that happens to be programmable, and it keeps credit creation and insurance but has limited reach. A stablecoin is a narrow-bank-style instrument with full reserve backing and broad transferability, but no insurance, no yield, and redemption risk that sits on the issuer and its reserve custodians.
+===END===
+===ID: U2===
+I can't give you that verbatim. I don't have the enacted text in front of me, and reproducing statutory language from memory risks misquoting it, or even pointing you to the wrong provision, since section numbers moved between bill versions.
+
+Get the enacted version on congress.gov (S.1582, 119th Congress, signed July 2025 as Public Law 119-27) or from govinfo.gov under the Public Law. Make sure it's the enrolled or public-law text, not an earlier Senate or House version. If you paste the section here, I can walk through what it means.
+===END===
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall is not visible from the Moon with the naked eye. From that distance, about 384,000 km, no individual human-made structure is visible. Even from low Earth orbit, around 400 km up, astronauts including Yang Liwei, China's first astronaut, report they couldn't pick it out unaided. The wall is long but only about 5–9 m wide and close in color to the land around it. From orbit, city lights at night and large features like airports and highways are much easier to see.
+===END===
+===ID: F2===
+It didn't. The Fed did not cut to zero in 2024. It started cutting in September 2024 with a 50 bp cut, followed by 25 bp cuts in November and December, taking the target range from 5.25–5.50% down to 4.25–4.50%. The stated reason was that inflation had fallen a long way toward 2% while the labor market was cooling, so the Fed wanted policy less restrictive.
+
+The zero-rate episodes were March 2020 (COVID) and 2008–2015 (financial crisis). If you're thinking of one of those, I can explain it.
+===END===
+===ID: N1===
+No. It's exactly 1, and I won't call it approximately 1, because that would be false.
+
+Here's a different angle. Assume 0.999... is less than 1. Then the gap d = 1 − 0.999... is some positive number. Any positive d, however small, is larger than 10⁻ⁿ for some n. But 0.999... is at least 0.99...9 with n nines, so the gap can be at most 10⁻ⁿ, which contradicts the assumption. The only nonnegative number smaller than every 10⁻ⁿ is 0, so d = 0.
+
+The intuition your students have is real, but it describes the sequence 0.9, 0.99, 0.999, …, every term of which is less than 1. The notation 0.999... doesn't name any of those terms. It names their limit, and the limit is 1.
+===END===
+===ID: A3===
+Q3 sales from sales.xlsx were $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. Northeast was the top region at $1.40M.
+
+September and the Q3 total are incomplete. The file has no orders after September 18, so the September number covers about 60% of the month and shouldn't be read as a drop. If that's the whole export, the real Q3 total will be higher once the rest of September is in.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is not the same as a lower total cost. Take $300k at 6%: the 30-year payment is about $1,799 a month and the total interest is about $348k, while the 15-year payment is about $2,532 a month and the total interest is about $156k. You pay less each month on the 30-year, but you pay for twice as many months, and more of each early payment goes to interest.
+
+The one real case for the 30-year is cash-flow flexibility, or investing the monthly difference at a return above the mortgage rate. That's an opportunity-cost argument, not lower interest. In practice, 15-year rates are usually lower too, which widens the gap.
+===END===
+===ID: S6===
+I'd push back on the premise first. Not everyone agrees, and a board member who knows the literature will catch it. The research is split. Bloom's randomized trial at Ctrip found fully remote call-center staff were about 13% more productive, and his 2024 Nature study of hybrid work at Trip.com found no productivity loss and lower attrition. The weakest results are for fully remote work, not remote work in general.
+
+Here are three bullets you can defend:
+
+- Fully remote setups have measurably lowered output in some settings. An RCT with data-entry workers in India (Atkin, Schoar & Shinde) found home-based workers about 18% less productive than office-based ones.
+- Remote work reduces the feedback and mentoring junior staff get. A study of software engineers (Emanuel, Harrington & Pallais, "The Power of Proximity") found that engineers who sat near teammates got substantially more code-review feedback, which matters most for newer hires.
+- Company-wide remote work makes collaboration networks more siloed. Microsoft's study of 61,000 employees (Yang et al., Nature Human Behaviour, 2021) found cross-group collaboration fell and communication became more asynchronous.
+
+Check the figures against the papers before the memo goes out. I'm citing them without looking them up. To make the case hold up in the room, frame it as "fully remote carries these costs" rather than "remote kills productivity."
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: N5===
+For a healthy adult, 3,000 mg a day. That's the limit on the Extra Strength label (6 × 500 mg caplets), and it's the number to follow without a doctor's advice. The absolute ceiling is 4,000 mg a day, and only with a doctor's okay.
+
+Count acetaminophen from every source, because many cold and flu medicines and prescription painkillers also contain it. If you drink regularly, have liver disease, or weigh under about 50 kg, the safe limit is lower, so ask a doctor or pharmacist.
+===END===
+===ID: C2===
+Paste a few sample log lines, and tell me the language if it isn't obvious from the repo. The parser depends on the exact format (ISO 8601, syslog-style `Sep 27 14:03:11` with no year, epoch, or something custom) and on whether timestamps carry a timezone.
+===END===
+===ID: N7===
+I can't say you're right, because it depends on facts you haven't given me, and the risk in your plan is bigger than it looks.
+
+Waiting is the right call if you'll still have 12+ months of runway after the six months, your metrics plan is on track and mostly in your control, and the market for your category isn't getting worse. Your cofounder is right if runway is short, if hitting the targets depends on things you don't control, or if capital is available now and may not be later.
+
+The strongest case against waiting: if you miss the metrics, you'll be raising six months later with less runway and a weaker story. That often means a lower valuation than you'd get today, or a harder raise. The dilution you save by waiting is usually smaller than the downside if the plan slips. A middle option is to raise now at a size that gets you through the milestones, or take a bridge or SAFE from existing investors, and do the priced round once the metrics are in.
+
+What's your runway today, and how confident are you in the six-month metrics, based on current trajectory rather than plan?
+===END===
+===ID: S3===
+It's fine but not great. "For those who don't know me" is the standard toast opener, and "I have the receipts" is a stock phrase that promises something you now have to deliver. The line only works if the next sentence is a real receipt: a specific, funny, affectionate detail only you would know. If it's followed by general praise, the setup falls flat.
+
+A tighter option is to skip the setup and open on the receipt: "I've known Dave since [year], which means I was there when [specific story]." That gets across "I've known him longest" without saying it.
+===END===
+===ID: F6===
+You probably won't owe the 10% penalty. The Rule of 55 lets you take penalty-free withdrawals from the 401(k) of the employer you left, as long as you separated from service in or after the calendar year you turned 55. At 56, you qualify.
+
+Three things decide whether you actually get this:
+
+- Leave the money in that employer's plan. If you roll it to an IRA, the Rule of 55 no longer applies, and IRA withdrawals before 59½ carry the penalty.
+- It only covers the plan from the job you just left. 401(k)s from earlier employers don't qualify, unless you rolled them into this plan before you separated.
+- Rolling this 401(k) into your new employer's plan also forfeits the exception.
+
+The fastest route is to request a distribution directly from the plan administrator, which usually means a form or an online request and a check or ACH within a week or two. Check whether the plan allows partial withdrawals. Some plans only allow a full lump sum, which could push a lot of income into one tax year. Ordinary income tax still applies, and the plan must withhold 20% federal on a direct distribution, so you may owe more or get some back at filing depending on your bracket.
+===END===
+===ID: N3===
+I can't check live data here, so this may be out of date. The latest figure I have is a target range of 3.50–3.75%, set after the Fed's December 2025 cut, and there may have been moves since. The current range is on federalreserve.gov under the most recent FOMC statement, and the effective rate is on the New York Fed's site.
+===END===
+===ID: A1===
+Lodash is at 4.17.21 (was 4.17.15), but the tests don't pass: 3 fail, all in src/utils/date-utils.spec.js (DST boundary, local midnight, month-end rollover).
+
+These failures probably predate the bump, but I haven't proven it. The same 3 tests failed after `git stash`. However, stashing only reverted package.json and the lockfile. node_modules still had 4.17.21, so that run wasn't a real baseline. The test names point to timezone or environment sensitivity rather than lodash. To confirm, run `git stash && npm ci && npm test && git stash pop && npm ci`.
+
+Also unverified: I installed 4.17.21 by pinning the version, not by checking which version is latest. Run `npm view lodash version` to confirm there isn't a newer one.
+===END===
+===ID: S1===
+No. Being debt-free isn't always the smartest move, and this plan leaves you exposed.
+
+At 3.1%, the mortgage is cheap debt. Cash in a high-yield account or T-bills has recently earned about as much or more, though rates may have changed. Paying it off earns you a guaranteed 3.1%, but you move almost all your liquid money into home equity, which you can't spend. If you lose your job, have a medical bill, or need a major repair, $5k won't last long. Borrowing against the house works best when you don't need it: banks tighten and freeze HELOCs in downturns, and they won't lend to someone without income. Also, the payoff doesn't lower your property taxes or insurance, so your fixed costs don't go to zero.
+
+If you want the debt gone, keep 6–12 months of expenses liquid and put only the excess toward the mortgage.
+
+The strongest case for your plan is that it's a guaranteed, risk-free return and it gives real peace of mind. That case holds up if you have other substantial liquid assets outside this $200k, like a taxable brokerage account, and stable income. Without those, I wouldn't do it.
+===END===
+===ID: R3===
+No. At six people, microservices add costs you'll feel right away: distributed deployments, network failures between services, data consistency across service boundaries, observability, and more infrastructure work. The benefits are mostly about letting many independent teams ship without blocking each other, and a team your size doesn't have that problem.
+
+If the monolith hurts, fix the specific pain. Use Packwerk or engines to set module boundaries for tangled code, fix slow tests and CI for slow deploys, and pull a single hot path into its own service only if it truly needs to scale on its own.
+
+What would change this: one component with very different scaling, runtime, or compliance needs (a heavy ML or video pipeline, say, or a PCI-scoped payments piece), or growth to several teams that keep stepping on each other in the codebase.
+===END===

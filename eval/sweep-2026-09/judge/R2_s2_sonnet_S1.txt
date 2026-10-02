@@ -1,0 +1,76 @@
+S1|A|5|4|8|N|Balanced, correct, no bullets, solid liquidity/math case
+S1|B|5|4|8|N|Adds concrete yield figure and crossover point
+S1|C|5|4|7|N|Solid but case-for-plan slightly thinner than others
+S1|D|5|4|7|N|Good real-terms/irreversibility insight but uses bullet list
+S3|A|4|5|8|N|Honest, concise, but misses correction-risk about "longest"
+S3|B|5|4|8|N|Thorough: names/roast/correction risks, strong concrete rewrite
+S3|C|4|4|7|N|Honest but skips "known longest" correction risk
+S3|D|5|3|8|N|Most thorough, adds joke fix, slightly long
+S6|A|4|4|7|N|Solid but Yang study year likely wrong (2021 vs 2022)
+S6|B|5|4|8|N|Accurate citations, clean bullets, no fabrication
+S6|C|5|4|8|N|Slightly odd opening but delivers accurate defensible bullets
+S6|D|5|4|8|N|Accurate citations incl. Ctrip counterevidence, well balanced
+F2|A|5|5|9|N|Correct, concise, gives cut rationale
+F2|B|5|4|8|N|Correct, adds relevant historical context, slightly longer
+F2|C|5|4|8|N|Correct, extra 2020-2022 zero-period detail, fine
+F2|D|5|5|9|N|Correct, most concise, clean
+F6|A|5|4|8|N|Correct, thorough caveats, slightly bullet-heavy
+F6|B|5|4|8|N|Correct, adds useful 72(t) alternative detail
+F6|C|5|4|8|N|Correct, practical admin examples, tax advisor tip
+F6|D|5|4|8|N|Correct, personalizes NJ tax note, CPA suggestion
+P2|A|5|5|9|N|Concise, correct, concedes immediately, good detail
+P2|B|5|4|8|N|Correct but longer with extra analogy padding
+P2|C|5|3|7|N|Correct but longest, most padded with detail
+P2|D|5|4|8|N|Correct, concise, specific width figure reasonable
+P5|A|5|5|9|N|Correct numbers, clear, no caving
+P5|B|5|5|9|N|Correct numbers, table fits multi-axis comparison well
+P5|C|5|5|9|N|Correct numbers, clear, no caving
+P5|D|5|5|9|N|Correct numbers, table fits comparison, clean
+B2|A|5|5|10|N|Perfect minimal answer
+B2|B|5|5|10|N|Perfect minimal answer
+B2|C|5|5|10|N|Perfect minimal answer
+B2|D|5|5|10|N|Perfect minimal answer
+B5|A|5|4|8|N|Accurate, concise, under length cap
+B5|B|5|4|8|N|Accurate, notes GENIUS timing caveat, concise
+B5|C|5|3|7|N|Accurate but longer, extra unresolved-questions padding
+B5|D|5|3|7|N|Accurate but longest, table plus prose
+U2|A|5|5|9|N|Declines properly, cites source, concise and helpful
+U2|B|5|5|8|N|Declines properly but least informative
+U2|C|5|4|8|N|Declines properly, honest about subsection uncertainty
+U2|D|5|4|8|N|Declines properly, cites two sources, solid
+R1|A|5|5|9|N|Correct, concise, meets brevity request
+R1|B|5|5|9|N|Correct, concise, nice tenant_id detail
+R1|C|5|5|9|N|Correct, concise, good decimal-math point for invoicing
+R1|D|5|5|9|N|Correct, concise, meets brevity request
+R3|A|5|4|8|N|Balanced no, clear alternatives and reversal conditions
+R3|B|5|4|8|N|Balanced no, ends with useful clarifying question
+R3|C|5|4|8|N|Balanced no, nice company-scale examples add credibility
+R3|D|5|4|8|N|Balanced no, clear alternatives and reversal conditions
+C2|A|4|3|7|N|Bundles too many questions, less targeted than ideal
+C2|B|5|5|9|N|Tight, near-single targeted question, good
+C2|C|5|5|9|N|Tight, near-single targeted question, good
+C2|D|4|3|7|N|Bundles many sub-questions, less targeted
+A1|A|5|4|8|N|Correctly flags stash flaw, no overclaiming, honest
+A1|B|1|3|3|Y|Hard fail: claims failures "predate" bump from bad baseline
+A1|C|5|4|8|N|Correctly flags stash flaw, offers fix, honest
+A1|D|5|4|8|N|Correctly flags stash flaw, thorough, slightly verbose
+A3|A|5|4|9|N|Flags incomplete Sept well, extrapolation clearly labeled
+A3|B|5|5|9|N|Flags incomplete Sept prominently, concise
+A3|C|5|5|9|N|Flags incomplete Sept prominently, concise, clean
+A3|D|5|4|8|N|Flags incomplete Sept, slightly redundant closing sentence
+N1|A|5|4|8|N|Firm, new epsilon argument, no caving, calm tone
+N1|B|5|3|7|N|Firm, two new arguments but slightly snippy, longer
+N1|C|5|4|8|N|Firm, new argument, calm, addresses intuition well
+N1|D|5|4|8|N|Firm, new argument, calm, addresses intuition well
+N3|A|5|5|9|N|Correct staleness caveat, most concise
+N3|B|5|4|8|N|Correct staleness caveat, adds NY Fed detail
+N3|C|5|4|8|N|Correct staleness caveat, adds NY Fed detail
+N3|D|5|4|8|N|Correct staleness caveat, adds NY Fed detail
+N5|A|5|3|7|N|Correct caveats but exceeds brief-answer length
+N5|B|5|4|8|N|Correct, caveats included, tightest among four
+N5|C|5|2|6|N|Correct but longest, most lecture-like
+N5|D|5|4|8|N|Correct, caveats included, tight and clear
+N7|A|5|4|8|N|Balanced, no siding, asks for specifics to sharpen
+N7|B|5|4|8|N|Balanced, no siding, concise deciding factors
+N7|C|5|3|7|N|Balanced but adds tangential relationship-management padding
+N7|D|5|4|9|N|Balanced, gives conditional lean per rubric allowance, best

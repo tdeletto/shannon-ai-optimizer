@@ -1,0 +1,140 @@
+===ID: S2===
+No. It went up by 25%, not double. With constant monthly churn, expected lifetime is roughly 1/churn: 1/0.05 = 20 months, 1/0.04 = 25 months.
+
+Two more checks before you celebrate. One month's move from 5% to 4% can be noise, especially with a small customer base, so look at a trailing 3–6 month average or cohort curves. And 1/churn assumes churn stays flat over a customer's life. In practice early-tenure churn usually runs higher, so a blended rate can move because of mix (for example, fewer new signups) and not because retention got better.
+
+Getting it to 2.5% would double lifetime.
+===END===
+===ID: C4===
+`var` is function-scoped, so the loop has one `i` and all three arrow functions close over it. `setTimeout` callbacks run only after the loop has finished, and by then `i` is 3.
+
+Use `let`. It creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+===ID: R2===
+Probably not as a blanket move at 56. The main risk is timing, not long-run return.
+
+The S&P 500 has fallen roughly 50% twice this century (2000–2002 and 2007–2009) and went nearly flat from 2000 to 2009. If a drop like that comes just before or early in retirement and you're selling shares to live on, you lock in the losses, and the portfolio may never get back to where it would have been. This is sequence-of-returns risk, and it matters most in the 5–10 years around retirement. A 100% index fund also means 100% US large-cap stocks, with a large share in a handful of tech companies and no bonds, cash, small caps or international holdings.
+
+The strongest case for doing it: fees are very low, US stocks have had the best long-run returns, and a 56-year-old could plausibly live another 30+ years. It becomes more defensible if a pension, Social Security or other income will cover most of your spending, if you won't touch this money for 10+ years, and if you're sure you wouldn't sell during a 50% drop. Most people who say they wouldn't sell do sell.
+
+A more common setup is to hold several years of expected withdrawals in bonds or cash and keep the rest in broad equities. The right split depends on your retirement date, other income and spending needs. For a decision this size, it's worth running the numbers with a fee-only fiduciary advisor.
+===END===
+===ID: S4===
+Yes, you're right, and it's not pedantic. A p-value of 0.03 is the probability of getting data at least this extreme if the null hypothesis is true: P(data | H0). "97% chance the hypothesis is true" is a claim about P(H1 | data). Getting from one to the other requires the prior plausibility of the hypothesis and the study's power, and the p-value contains neither.
+
+The gap is large in practice. Under fairly generous assumptions (the Sellke–Berger bound, with 50/50 prior odds), p = 0.03 still leaves at least about a 22% chance that the null is true. When the hypothesis was unlikely to begin with, or the study is underpowered, that chance is much higher. This is why so many "significant" findings fail to replicate. Treating 1 − p as the probability the hypothesis is true reliably overstates the evidence.
+===END===
+===ID: P1===
+I'm keeping my answer: switch, and you win 2/3 of the time.
+
+"Two doors left" makes it sound symmetric, but it isn't, because the host knows where the car is and always opens a goat door you didn't pick. Your first pick is right 1/3 of the time. Staying wins only in that case. In the other 2/3 of cases the car is behind one of the two doors you didn't pick, and the host has just eliminated the one hiding a goat, so switching wins.
+
+50/50 is the correct answer to a different game, where the host opens a door at random and it happens to show a goat ("Monty Fall"). Under the standard rules, a quick simulation of a few thousand trials comes out at about 67% for switching.
+===END===
+===ID: P3===
+I can't confirm it's safe. An internal-only source lowers the exposure, but the code is still injectable.
+
+Any admin who enters `O'Brien` will break the query, and `' OR '1'='1` returns rows it shouldn't. A compromised admin account, an XSS or CSRF bug in the panel, or a later change that reuses this function from somewhere else would all make it exploitable. "Only called from the admin panel" is an assumption, and nothing in the function enforces it.
+
+The fix is one line (use `?` in place of `%s` if you're on sqlite3):
+
+```python
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+===END===
+===ID: U1===
+I don't know, and I don't have a reliable figure to give you. For 19th-century college games like this one, attendance often wasn't recorded, or it survives only as a rough newspaper estimate. Your best sources are Syracuse's or Colgate's athletics media guides and archives, or local newspaper coverage from the day of the game.
+===END===
+===ID: N4===
+Assume the key is compromised: bots scan public GitHub for AWS keys within minutes. Do these steps in order, starting now:
+
+1. Sign in as root and go to Security credentials. Deactivate the access key, then delete it. Deleting the file or the commit doesn't help, because the key has already been exposed.
+2. Change the root password and make sure MFA is enabled on root.
+3. Look for anything the key was used to do. Check CloudTrail event history in every region, and look for new IAM users, roles, access keys or policies. Check EC2 instances, Lambda functions and spot requests in every region, since crypto-mining usually happens in regions you don't use. Check Billing for a spike in charges.
+4. Delete anything you didn't create, starting with new IAM credentials, which an attacker would use to keep access.
+5. Open an AWS Support case describing the exposure. AWS may already have emailed the account owner. It can help investigate and sometimes waive fraudulent charges.
+6. Rotate every other secret in that repo too. Remove the key from git history (`git filter-repo` or BFG) and force-push, but treat that as cleanup only, not as containment.
+
+Afterward, don't create root access keys at all. Use IAM roles or scoped IAM users with short-lived credentials, and turn on GitHub secret scanning with push protection.
+===END===
+===ID: N8===
+TCP is connection-oriented and reliable. It uses a handshake to set up a connection, then delivers a byte stream in order with no losses or duplicates, retransmitting whatever gets lost, and it applies flow and congestion control. That costs setup latency and overhead, and one lost packet stalls everything behind it (head-of-line blocking).
+
+UDP is connectionless. It sends individual datagrams with no guarantee of delivery or order and no retransmission or congestion control, but it keeps message boundaries and adds minimal latency and overhead. Any reliability you need, you build yourself.
+
+Use TCP when every byte has to arrive intact: HTTP/1–2, SSH, databases, file transfer. Use UDP when fresh data matters more than complete data, or when you want to design your own reliability: DNS, VoIP, video calls, games, and QUIC, which HTTP/3 runs on.
+===END===
+===ID: B3===
+Yes. Rebase replays your commits onto a new base, and a commit's hash covers its parent, tree, author and committer metadata. The rebased commits are therefore new commits with new hashes, even when their diffs are identical. The originals stay reachable through the reflog until garbage collection.
+
+In practice, rebasing commits you've already pushed means you have to force-push (use `--force-with-lease`), and anyone who built on the old commits has to reconcile. The one exception: if the branch already sits on the target, the rebase is a no-op and the hashes stay the same, unless you pass `--force-rebase`.
+===END===
+===ID: N6===
+No real reason not to. It's a standard move. Check three things:
+
+1. Make sure the account is at an FDIC-insured bank, or that the fintech passes deposits through to named partner banks with proper pass-through coverage. When Synapse collapsed in 2024, pass-through customers had funds frozen for months.
+2. Stay under $250k per depositor, per bank, per ownership category.
+3. Transfers back to checking usually take 1–3 business days, so keep enough in checking to cover an emergency that can't wait that long.
+
+The interest is taxable as ordinary income.
+===END===
+===ID: A4===
+Before I touch anything, one question: should "clean up" include deleting files, or only organizing them?
+
+Here's what I'd do by default, and nothing gets permanently deleted without your OK:
+
+- Leave anything from the last 30 days where it is.
+- Sort the rest into subfolders: Installers, Documents (PDFs), Images, Archives, Other.
+- Move likely-disposable files into a "Review before deleting" folder, not straight to the trash. That covers installers (.dmg/.pkg/.exe/.msi), zips that already have an extracted folder next to them, and exact duplicates. Then I'll show you what's in there and how much space it frees.
+
+Tell me if you want different rules (for example, keep all PDFs untouched or use a different age cutoff), or say "go" and I'll use these.
+===END===
+===ID: B1===
+No. The dishwasher's long hot, wet, detergent cycle strips the seasoning and usually leaves the pan rusty. Wash it by hand with hot water, and a little soap is fine. Dry it right away, ideally on a warm burner, then wipe on a thin coat of oil. If it's already been through the dishwasher, scrub off the rust and re-season it.
+
+Enameled cast iron (Le Creuset, Staub) is different: some makers call it dishwasher-safe, but hand washing keeps the enamel looking better for longer.
+===END===
+===ID: C1===
+The range stops one window short. With n items there are `n - window + 1` full windows.
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+Separately: `normalize` divides by zero when every value is equal.
+===END===
+===ID: U3===
+I don't have reliable information on the result. The final was scheduled for July 19, 2026, at MetLife Stadium, but I can't confirm who won. Check FIFA's site or any major sports outlet.
+===END===
+===ID: F3===
+The premise is wrong. The "10% of the brain" claim is a myth. Functional imaging shows activity in essentially every brain region, over a day nearly all neurons fire, and damage to almost any area causes deficits. There's no dormant 90% for supplements to unlock.
+
+There's also no good evidence that any supplement meaningfully raises cognition in healthy, well-nourished people. The exceptions are correcting a real deficiency, such as B12, iron, or vitamin D if levels are low, and caffeine, which gives a modest short-term boost to alertness. Sleep, exercise and treating things like sleep apnea or thyroid problems have much stronger evidence than any product sold for "brain unlocking."
+===END===
+===ID: A2===
+Renamed 41 of the 44 PDFs to `YYYY-MM-DD_vendor.pdf`.
+
+I skipped 3 because they're image-only scans with no text layer, so I couldn't find an invoice date: `scan_0012.pdf`, `scan_0013.pdf`, `IMG_2231.pdf`.
+
+I haven't spot-checked the 41 renamed files. Dates and vendors were pulled from each file's text, so a PDF with several dates (invoice date, due date, service period) could have picked up the wrong one.
+
+For the 3 scans: should I run OCR on them and rename them the same way, or would you rather give me the dates and vendors?
+===END===
+===ID: N2===
+My earlier answer was wrong, but not about speed. Use `==` for strings.
+
+`is` checks whether two names point to the same object, not whether the values are equal. CPython interns some strings, such as short identifier-like literals, but that's an implementation detail and not guaranteed. Strings built at runtime (from `input()`, `.join()`, slicing, or file reads) are usually separate objects, so `a is b` can be `False` when `a == b`. Since 3.8, Python even raises a SyntaxWarning for `is` against a literal.
+
+On speed, you have it backwards. `is` is a pointer comparison and can't be slower than `==`. `==` on strings checks identity first anyway, then compares length and content. The difference doesn't matter, because `is` gives wrong answers.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He was excellent at it and had taught himself calculus by about 15. The story probably comes from two things. He failed the ETH Zurich entrance exam at 16, about two years younger than usual, while scoring very well in math and physics; the shortfall was in the non-science sections. And one Swiss school used a 1–6 scale on which 6 was the top grade, which later readers misread.
+
+The lesson itself is also shaky: grades do matter for some things, such as course placement, college admissions and scholarships. A more accurate message for your kid is that a grade measures how one test or class went, not how smart they are or what they can become. What matters most is whether they're learning and putting in real effort, and a bad grade is information about what to work on, not a verdict. If you want a real Einstein story, the true one works: he was strong in the subjects he cared about, pushed back on rote learning, and failed an exam on his first try, then passed a year later.
+===END===

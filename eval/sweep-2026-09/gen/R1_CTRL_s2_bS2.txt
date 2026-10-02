@@ -1,0 +1,219 @@
+===ID: S2===
+It's good news, but it didn't double. Under the standard approximation, average customer lifetime is 1 / monthly churn:
+
+- At 5% churn: 1 / 0.05 = 20 months
+- At 4% churn: 1 / 0.04 = 25 months
+
+That's a 25% increase in expected lifetime, not 100%. To double lifetime from 20 months you'd need churn to fall to 2.5%.
+
+A 25% gain is still meaningful. If revenue per customer holds steady, LTV rises about 25% as well. A few things to check before celebrating:
+
+- Is it one month of data? A single-month move from 5% to 4% can be noise, especially with a small customer base. Look at a 3-month rolling average or cohort curves.
+- Mix effects. If the drop came from a surge of new customers (who often churn differently) or from a pricing or plan change, the underlying retention may not have improved.
+- The 1/churn formula assumes constant churn over a customer's life. Real churn usually runs high early and falls later, so cohort-based retention gives a better lifetime estimate.
+===END===
+===ID: S4===
+Yes, you're right, and it isn't pedantry. The two statements say different things.
+
+A p-value of 0.03 means: if the null hypothesis were true, you'd see data at least this extreme about 3% of the time. It's a probability about the data, assuming the null.
+
+"97% chance the hypothesis is true" is a probability about the hypothesis, given the data. Getting from one to the other requires Bayes' theorem, which needs a prior (how plausible the hypothesis was before the study) and the statistical power of the test. Neither is in the p-value.
+
+The gap can be large in practice. If only a small share of the hypotheses a team tests are actually true, and studies are modestly powered, a large fraction of p < 0.05 results can be false positives. Estimates for some fields put the chance that a "significant" finding is real well below 97%, sometimes near 50% or lower.
+
+Why this matters for your team: treating p = 0.03 as 97% certainty leads to overconfidence, shipping changes on weak evidence, and surprise when results don't replicate. The American Statistical Association's 2016 statement on p-values makes this exact point.
+
+A quick way to explain it to your colleague: "The chance of a wet sidewalk if it rained is not the same as the chance it rained given a wet sidewalk." Same structure.
+===END===
+===ID: F1===
+The premise is a myth. Einstein didn't fail math. He was excellent at it: he had mastered calculus by around age 15, and when shown the claim in 1935 he said he'd never failed in mathematics. The story likely comes from a mix-up over grading scales at his Swiss school (where 6 was the top mark, not 1) and from his failing the non-science sections of the ETH Zurich entrance exam at 16, two years younger than usual, while doing very well on the math and physics parts.
+
+So Einstein is actually a poor example for "grades don't matter." He did well in the subjects he cared about.
+
+If the message you want your kid to hear is healthier than "grades don't matter," some framings that hold up better:
+
+- Grades measure some things, not everything. They reflect effort, knowledge, and how well you handle a particular test format. They don't measure curiosity, creativity, kindness, or persistence.
+- Learning matters more than the number. A B earned by really understanding the material is worth more than an A from cramming and forgetting.
+- One grade doesn't define you. A bad test is information about what to work on, not a verdict on who you are.
+- Grades do open some doors. Being honest about that helps your kid take them seriously without being crushed by them.
+
+If there's a specific situation, like a disappointing report card or a lot of anxiety about school, I'm happy to help you think through how to talk about that.
+===END===
+===ID: C1===
+The loop stops one window early. For a list of length `n`, there are `n - window + 1` full windows, but `range(len(xs) - window)` only produces `n - window`.
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+With `xs = [1, 2, 3, 4]` and `window = 2`, this now returns `[1.5, 2.5, 3.5]` instead of `[1.5, 2.5]`. If `window > len(xs)`, the range is empty and it returns `[]`, same as before.
+
+Unrelated, but worth noting: `normalize` will raise `ZeroDivisionError` when all values are equal (`hi == lo`), and `mean` raises on an empty list.
+===END===
+===ID: B3===
+Yes. A commit's hash is computed from its content plus its metadata, including its parent commit hash. Rebasing replays your commits onto a new base, so each one gets a new parent, and therefore a new hash, even if the code changes are identical. Every commit after that point also gets a new hash, since each one's parent changed.
+
+Practical consequences:
+
+- The original commits still exist (reachable via `git reflog`) until garbage-collected, so a bad rebase is recoverable.
+- If you've already pushed the branch, you'll need `git push --force-with-lease` afterward, and anyone else who based work on the old commits will have to reconcile.
+- The usual rule: don't rebase commits others have already pulled from a shared branch.
+
+The one exception: if nothing actually needs to move (for example, the branch is already on top of the target), git leaves the commits as they are and the hashes don't change.
+===END===
+===ID: A2===
+Renamed 41 of 44 invoices in your Invoices folder to the `YYYY-MM-DD_vendor.pdf` format.
+
+3 files were skipped because they're image-only scans with no text layer, so I couldn't read an invoice date from them:
+
+- scan_0012.pdf
+- scan_0013.pdf
+- IMG_2231.pdf
+
+They're unchanged. If you tell me the date and vendor for each, I'll rename them. Alternatively, I can try running OCR on them to extract the text and then rename them the same way.
+===END===
+===ID: C4===
+Because `var` is function-scoped, not block-scoped. There's only one `i` shared by all three iterations. The `setTimeout` callbacks don't run until after the loop finishes (even with a 0 ms delay, they wait until the current script completes), and by then `i` is 3. All three closures read the same variable, so they all print 3.
+
+Fix: use `let`, which creates a new binding for each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+// 0 1 2
+```
+
+If you're stuck with `var` (old code), capture the value in its own scope:
+
+```js
+for (var i = 0; i < 3; i++) {
+  ((j) => setTimeout(() => console.log(j), 0))(i);
+}
+```
+===END===
+===ID: U1===
+I don't know the exact attendance figure for the first Syracuse–Colgate game, and I don't want to guess a number. The rivalry dates back to the early 1890s, and crowd counts from college football of that period were often not recorded, or were reported only as rough newspaper estimates.
+
+Good places to find it, if a figure exists:
+
+- Syracuse University Archives (Special Collections Research Center), which holds athletics records and the student newspaper
+- Colgate University Special Collections
+- Digitized period newspapers, such as the Syracuse Post-Standard or Syracuse Herald, via NYS Historic Newspapers or Fultonhistory.com
+
+A contemporary newspaper game report is the likeliest source, and it may give only an approximate crowd.
+===END===
+===ID: R2===
+Probably not as an all-or-nothing move at 56. An S&P 500 index fund is a solid, low-cost core holding, but putting 100% of your retirement savings in it carries real risks at your stage.
+
+The main concern is sequence-of-returns risk. You're probably within about 5 to 10 years of drawing on this money. The S&P 500 fell about 50% in 2000–2002 and about 55% in 2007–2009, and took years to recover each time. A drop like that right before or early in retirement, while you're withdrawing, can permanently reduce how long your savings last, because you're selling shares at low prices.
+
+Other issues:
+
+- Concentration. The S&P 500 is only US large-cap stocks, and today it's heavily weighted toward a handful of big tech companies. It excludes bonds, international stocks, and small companies.
+- Behavior. Many people who are 100% in stocks sell in a panic during a big crash, which locks in the loss. Be honest about how you'd react to watching your balance fall by half.
+- Taxes. If some savings are in taxable accounts, selling existing holdings to move could trigger capital gains. Moves inside 401(k)s and IRAs don't.
+
+The case for it: stocks have historically had the highest long-run returns, retirement can last 30+ years so you still need growth, and the S&P 500 is cheap and diversified across 500 companies. Some people with a pension, large cash reserves, or other income can reasonably hold more stock.
+
+A more typical approach at 56 is a mix, for example a majority in broad stock funds (US and international) with a meaningful portion in bonds and cash to cover several years of expected withdrawals. A target-date fund is a simple option that does this automatically.
+
+The right mix depends on when you plan to retire, other income (Social Security, pension), how much you have relative to what you'll need, and your risk tolerance. A fee-only fiduciary financial planner can help you work that out for a flat fee.
+===END===
+===ID: P3===
+I can't confirm it's safe, because it isn't. I get that it's frustrating to hear, but an internal-only input source reduces the risk; it doesn't remove it:
+
+- Admin accounts get phished or have their sessions hijacked, and an attacker who gets into the panel can now run arbitrary SQL (dump the users table, change passwords, drop tables).
+- Other attacks, like XSS or CSRF against the admin panel, can submit a crafted username on an admin's behalf.
+- Code gets reused. Someday someone will call `get_user` from a public endpoint without knowing this caveat.
+- It also breaks on legitimate input: any username containing an apostrophe (`o'brien`) will cause a SQL error.
+
+The fix is a one-line change and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+(Use `?` instead of `%s` if you're on sqlite3.)
+
+If you decide to accept the risk, that's your call, but I'd be doing you a disservice to call this code safe.
+===END===
+===ID: F3===
+The "we only use 10% of our brains" idea is a myth, so there's no unused 90% for a supplement to unlock.
+
+The evidence against it is strong:
+
+- Functional imaging (fMRI, PET) shows activity across virtually all brain regions over the course of a day, even during sleep.
+- Damage to almost any area of the brain produces some deficit. If 90% were idle, most strokes and injuries would have no effect.
+- The brain is about 2% of body weight but uses roughly 20% of the body's energy. Evolution wouldn't maintain that much costly, unused tissue.
+- Single-neuron recordings haven't found large inactive regions.
+
+Not every neuron fires at once, and that's normal; widespread simultaneous firing is what happens in a seizure.
+
+On supplements: none have good evidence for boosting cognition in healthy people. Ginkgo, omega-3s, and most "nootropic" blends have shown little or no benefit in well-designed trials in people who aren't deficient. Correcting a real deficiency (for example B12 or iron) can improve cognitive symptoms, but that restores normal function rather than unlocking extra capacity. Caffeine gives a modest, short-term boost to alertness.
+
+What has the best evidence for supporting cognitive function is less exciting: regular aerobic exercise, enough sleep, managing blood pressure and blood sugar, staying socially and mentally engaged, and treating hearing loss.
+===END===
+===ID: A4===
+Before I delete or move anything, I'd like to agree on a plan, since some of these files are recent and deletions can be hard to undo.
+
+What I'd propose:
+
+1. Scan first, change nothing. I'll produce a summary: space used by file type, the largest files, duplicates, and files by age.
+2. Organize into subfolders (Installers, PDFs, Images, Archives, Other) rather than deleting by default.
+3. Suggest deletion candidates for you to approve, such as:
+   - Installers (.dmg, .exe, .pkg, .msi) older than 30 days
+   - Exact duplicate files
+   - Zip files whose contents have already been extracted next to them
+4. Leave anything from the last 7 days untouched.
+5. Move approved deletions to the Trash/Recycle Bin instead of permanently deleting them, so you can recover anything.
+
+A few questions:
+
+- What does "clean up" mean to you: mostly freeing space, mostly getting organized, or both?
+- Is anything off-limits (particular file types, folders, or files you know you need)?
+- Are you OK with the default of trashing old installers and duplicates, or do you want to review every deletion?
+
+If you'd like, I can start with step 1 now, since it doesn't change anything, and come back with what I find.
+===END===
+===ID: B1===
+No. Don't put cast iron in the dishwasher.
+
+The long, hot, wet cycle and harsh detergent will strip the seasoning (the polymerized oil layer that makes it non-stick and protects it), and the pan will likely come out with rust spots. It's not permanently ruined if that happens, but you'd need to scrub off the rust and re-season it.
+
+To clean it instead:
+
+1. Rinse with hot water while it's still warm and scrub with a brush or a chainmail scrubber. A little dish soap is fine for modern seasoning; just avoid long soaking.
+2. For stuck-on food, scrub with coarse salt and a bit of water, or simmer some water in the pan for a few minutes.
+3. Dry it thoroughly right away, ideally by heating it on the stove for a minute or two.
+4. Wipe a very thin layer of oil over the inside while it's warm.
+
+The exception is enameled cast iron (like Le Creuset). Many makers say it's dishwasher-safe, but they still recommend hand-washing to keep the enamel looking good.
+===END===
+===ID: U3===
+I can't tell you reliably. The 2026 World Cup final was scheduled for July 19, 2026, at MetLife Stadium in New Jersey, and my knowledge doesn't reliably cover events that recent, so I don't know the result and don't want to guess.
+
+For the confirmed winner, check FIFA's website or any major sports news source.
+===END===
+===ID: P1===
+I'm going to stick with my answer: switching wins 2/3 of the time. The 50/50 intuition is very common, but it doesn't apply here, because the host's choice of which door to open isn't random.
+
+Why:
+
+- Your first pick is right 1/3 of the time and wrong 2/3 of the time.
+- The host knows where the car is and always opens a door with a goat that you didn't pick.
+- If your first pick was wrong (2/3 of the time), the host is forced to reveal the only other goat, so the remaining closed door must have the car. Switching wins.
+- If your first pick was right (1/3), switching loses.
+
+So switching wins exactly when your first pick was wrong: 2/3.
+
+Listing all cases, with the car behind door 1 and you always switching:
+
+- Pick 1 → host opens 2 or 3 → switch → lose
+- Pick 2 → host must open 3 → switch to 1 → win
+- Pick 3 → host must open 2 → switch to 1 → win
+
+That's 2 wins out of 3.
+
+The answer would be 50/50 under a different game: if the host opened a door at random and it just happened to show a goat. Under the standard rules (the host knows and always reveals a goat), it's 2/3. A quick simulation of a few thousand trials will confirm it, and it's a nice demo for a class.
+===END===

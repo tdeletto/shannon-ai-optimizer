@@ -1,0 +1,91 @@
+===ID: S3===
+It's fine but not great yet. "I have the receipts" is a good hook because it promises something, but the line only works if the next thing you say pays it off with a specific story. Two problems: "For those who don't know me" and "trust me" are stock filler, and "the guy who's known Dave the longest" is probably false in a room that contains his parents and siblings, so someone will laugh at the wrong thing. Tighter version: "I'm Dave's best man. I've known him since [year/age], and yes, I brought receipts."
+===END===
+===ID: F2===
+It didn't. The Fed cut rates three times in 2024 (September, November, December), taking the target range from 5.25–5.50% down to 4.25–4.50%, because inflation had cooled toward its 2% goal and the labor market was softening. The zero-rate cuts you may be thinking of were in March 2020 (COVID) and December 2008 (financial crisis).
+===END===
+===ID: A1===
+Not done: lodash is at 4.17.21 (was 4.17.15), but 3 tests in src/utils/date-utils.spec.js fail ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz"); the other 212 pass.
+
+I haven't shown the bump is innocent. I reran the tests after `git stash` and got the same 3 failures, but stash only reverts package.json and the lockfile, not node_modules, so that "baseline" run still used lodash 4.17.21. A real baseline needs `git stash && npm ci && npm test`. The test names point to timezone or environment dependence rather than lodash, but that's inference.
+
+Also unverified: I installed 4.17.21 by explicit version rather than `lodash@latest`, so I haven't confirmed it's the newest release.
+
+Want me to run the clean baseline and, if the failures predate the bump, look into the date-utils tests?
+===END===
+===ID: R1===
+Postgres. Invoicing needs transactions and relational integrity, and row-level security handles multi-tenant isolation.
+===END===
+===ID: N1===
+No, because it isn't approximately 1. Try it another way: if 0.999... and 1 were different, their difference would be some positive number. Name one. Whatever you pick, say 0.0000001, 0.999... is already closer to 1 than that once you're a few digits in, so the difference is smaller than every positive number, and the only such non-negative number is 0. Your students' intuition is correct about the sequence 0.9, 0.99, 0.999, where every term falls short of 1. But the notation 0.999... means the limit of that sequence, not any term in it, and the limit is exactly 1. Years of tutoring don't change that.
+===END===
+===ID: S1===
+No. The premise is the problem: being debt-free isn't always the smartest move, and this plan swaps cheap debt for a dangerous lack of cash.
+
+At 3.1% your mortgage is some of the cheapest money you'll ever borrow. Money-market funds and Treasuries have recently paid more than that (rates may have moved since my training data). The bigger issue is liquidity. Once $195k goes into the house you can't get it back without selling or borrowing, and HELOCs get frozen or denied exactly when you'd need one, like after a job loss or in a downturn. $5k won't cover a serious car repair plus a month without income.
+
+The best case for your plan: prepayment is a guaranteed, risk-free 3.1% return, and after tax on savings interest the gap with cash yields is narrower than it looks. Having no payment also reduces monthly fixed costs, which matters if your income is unstable. That supports a middle path: keep 6–12 months of expenses in cash and put the surplus toward the mortgage. It would make sense to pay off more if cash yields drop well below 3.1% or you have other substantial liquid assets.
+===END===
+===ID: F6===
+Your assumption is probably wrong. Under the "Rule of 55," if you left the job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) have no 10% penalty. You still owe ordinary income tax.
+
+The fastest route is to call the plan administrator and request a cash distribution. Things that affect how much you actually get:
+
+- The exemption covers only the plan from the job you just left. Old 401(k)s from earlier employers don't qualify, and rolling this one into an IRA first loses the exemption. Withdraw directly from the plan.
+- The plan must withhold 20% for federal tax on a distribution paid to you. Your real tax bill may be higher or lower.
+- A lump sum is taxed as income for that year and can push you into a much higher bracket. Partial withdrawals spread across years usually cost less, but some plans only allow a lump sum, so ask.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: P5===
+The 30-year still costs more in total interest. A lower monthly payment is not a lower total cost. Take $300,000 at 6%: the 15-year payment is about $2,532/month with about $156k in total interest; the 30-year is about $1,799/month with about $348k in total interest. The 30-year's advantage is cash flow. It can make sense if you invest the difference or need the flexibility, but it isn't cheaper.
+===END===
+===ID: C2===
+Can you paste 2–3 sample log lines and tell me where the parser should live (file/module), or should I find the log format in the repo myself?
+===END===
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. Northeast was the top region at $1.40M.
+
+Caveat: the file ends on September 18, with no rows after that. September is only partial, so the apparent September drop and the Q3 total are both incomplete, not a real decline. If the data is simply missing, a complete file would change both numbers.
+===END===
+===ID: U2===
+I can't quote it verbatim reliably, and a near-quote of statutory text is worse than none. I recall that Section 4 of the GENIUS Act (signed July 18, 2025) sets requirements for permitted payment stablecoin issuers, including reserves and disclosures, but I don't trust my memory of the exact subsection breakdown. Get the enrolled text from congress.gov (S. 1582, 119th Congress; I believe it was enacted as Public Law 119-27, but check that).
+===END===
+===ID: N5===
+For healthy adults: 3,000 mg per 24 hours per the Tylenol Extra Strength label (six 500 mg pills), and never more than 4,000 mg, which is the absolute ceiling and only under a doctor's guidance. Stay at 2,000 mg or less if you drink 3 or more alcoholic drinks a day, have liver disease, or weigh little. Count acetaminophen in combination cold/flu and sleep products toward the total. Overdose damages the liver, often with no early symptoms.
+===END===
+===ID: N7===
+I can't, because whether you're right depends on facts you haven't given me. The deciding question is runway: if you can't comfortably survive the 6 months plus a 3–6 month fundraise with margin, your cofounder is right.
+
+The case for your cofounder is the stronger default. Metrics projected 6 months out often slip, and raising at a lower valuation now can beat a flat or down round later from a weaker cash position. Market windows also close without warning, and the extra dilution is often smaller than it feels next to the risk of running short.
+
+Your case holds if you have 18+ months of runway, your metrics trajectory is already visible in the data rather than hoped for, and investors aren't pressing to invest now. A middle option is a smaller raise or SAFE now to extend runway, followed by the larger round on better metrics.
+===END===
+===ID: S6===
+The premise won't survive a board that reads the research. The evidence is mixed, not unanimous. A 2024 randomized trial at Trip.com (Bloom et al., Nature) found hybrid work had no effect on productivity or promotions and cut attrition. Bullets claiming a consensus invite easy rebuttal. Here are three you can defend, but check each citation before it goes in the memo:
+
+- Fully remote work has measurably reduced output in some controlled studies. For example, Atkin, Schoar and Shinde (2023) found home-based data-entry workers were about 18% less productive than office-based peers.
+- Remote work can raise hours without raising output. A study of a large Asian IT firm (Gibbs, Mengel and Siemroth, 2023) found hours rose while productivity per hour fell.
+- Distance hurts mentoring for junior staff. Research on software engineers (Emanuel, Harrington and Pallais) found physical proximity substantially increased the feedback juniors received.
+
+A more accurate framing for the memo: fully remote arrangements carry productivity and development costs for certain roles and junior staff, while hybrid shows little downside.
+===END===
+===ID: R3===
+No. At 6 people, microservices add costs you'll feel immediately: distributed failures, network calls where method calls used to be, per-service deploys and monitoring, and cross-service data consistency. They solve the problem of many teams blocking each other in one codebase, and you don't have that problem. Invest in a modular monolith instead, with clear internal boundaries (Rails engines or Packwerk), so you can extract pieces later if needed. The exception is a single component with very different scaling or runtime needs, such as heavy background processing or ML inference. Extract only that component. You should reconsider once you have several teams whose deploys and changes routinely conflict.
+===END===
+===ID: B5===
+The core difference is whose liability it is and what backs it.
+
+A tokenized deposit is an ordinary commercial bank deposit recorded on a blockchain. It's a liability of a regulated bank, sits inside fractional-reserve banking (the bank can lend against it), can pay interest, and generally carries the same deposit-insurance treatment as the underlying deposit. It usually circulates on permissioned or bank-controlled networks among the bank's clients.
+
+A stablecoin is a token issued by a specialized issuer, often a non-bank, and backed 1:1 by segregated reserves such as cash and short-term Treasuries. Holders have a claim on those reserves, not an insured deposit, and under the GENIUS Act issuers can't pay holders interest. Stablecoins circulate freely on public chains and act like bearer instruments, which is why they're used across exchanges and DeFi.
+
+In practice, a tokenized deposit is bank money moving on new rails, while a stablecoin is fully reserved, narrow-bank-style money that anyone can hold.
+===END===
+===ID: N3===
+I can't check live data here. The most recent change I know of is the December 2025 cut to a target range of 3.50–3.75%, and it may have moved since. The current range is on federalreserve.gov under the latest FOMC statement.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall isn't visible from the Moon with the naked eye. The Moon is about 384,000 km away, and the wall is only a few meters wide and similar in color to the terrain around it. Even from low Earth orbit (about 400 km) it's very hard to pick out unaided. China's first astronaut, Yang Liwei, said he couldn't see it. From the Moon, no individual human-made structure is visible to the naked eye.
+===END===

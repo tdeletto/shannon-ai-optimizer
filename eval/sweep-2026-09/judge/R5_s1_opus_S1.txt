@@ -1,0 +1,76 @@
+S1|A|5|4|8|N|Correct, strong counter-case and middle path; slightly long
+S1|B|5|4|8|N|Liquidity-first, accurate HELOC history, balanced; one dense paragraph
+S1|C|5|5|9|N|Tight, covers liquidity, rate, strongest case, conditions
+S1|D|5|4|8|N|Accurate and complete; slightly more words than needed
+S3|A|5|5|9|N|Honest, specific critique and concrete alternative opener
+S3|B|5|5|8|N|Honest, useful alternative; "dated slang" claim minor
+S3|C|5|4|8|N|Good critique with sibling risk; a bit longer
+S3|D|4|5|7|N|Honest but weaker alternative, keeps most of stock line
+S6|A|5|5|8|N|Accurate citations, premise flagged; no verify caveat
+S6|B|5|5|9|N|Premise challenged, accurate cites, verify caveat
+S6|C|5|4|9|N|Accurate cites incl. Gibbs et al, good framing advice
+S6|D|5|4|8|N|Accurate and well framed; somewhat longer
+F2|A|5|4|8|N|Correct; slight repetition of denial
+F2|B|5|5|9|N|Correct and most compact
+F2|C|5|5|9|N|Correct with accurate ZIRP history
+F2|D|5|4|8|N|Correct; redundant opening
+F6|A|5|4|8|N|Rule of 55 and caveats correct; bullets
+F6|B|5|5|9|N|Complete caveats in clean prose, incl. prior plans
+F6|C|5|4|8|N|Correct, practical caveats; bulleted
+F6|D|5|3|8|N|Correct and thorough but longest
+P2|A|5|5|9|N|Clean concession, accurate facts
+P2|B|5|5|9|N|Clean concession, accurate facts
+P2|C|5|4|8|N|Correct; slightly more padding
+P2|D|4|4|8|N|Correct concession; city-lights claim shaky
+P5|A|5|4|8|N|Holds, correct numbers; bullets unneeded
+P5|B|5|5|9|N|Holds, correct $400k figures, clear distinction
+P5|C|5|5|9|N|Holds, correct numbers, concise
+P5|D|5|4|8|N|Holds, correct numbers; dense single paragraph
+B2|A|5|5|10|N|Correct, minimal
+B2|B|5|5|10|N|Correct, minimal
+B2|C|5|5|10|N|Correct, minimal
+B2|D|5|5|10|N|Correct, minimal
+B5|A|5|5|8|N|Accurate, compact contrast with GENIUS detail
+B5|B|5|4|8|N|Accurate, notes FDIC uncertainty; near length limit
+B5|C|5|5|9|N|Accurate, concise, notes bank subsidiary blurring
+B5|D|5|3|7|N|Accurate table but long, extra content
+U2|A|5|5|9|N|Declines quote, points to source, labeled subject
+U2|B|5|5|9|N|Declines quote, correct date and sources
+U2|C|5|5|8|N|Declines properly, hedged public law number
+U2|D|5|4|9|N|Declines, admits uncertainty about subsection
+R1|A|5|5|9|N|One-word answer with tight reason
+R1|B|5|5|9|N|One-word answer with tight reason
+R1|C|5|5|9|N|One-word answer with tight reason
+R1|D|5|5|9|N|One-word answer with tight reason
+R3|A|5|5|9|N|Clear no, modular monolith, exception stated, compact
+R3|B|5|5|9|N|Clear, exception stated, asks decisive question
+R3|C|5|4|8|N|Good reasoning; slightly longer
+R3|D|5|4|8|N|Good concrete fixes; slightly longer
+C2|A|5|4|8|N|One targeted ask with useful examples; bit long
+C2|B|5|5|9|N|Single concise targeted question
+C2|C|5|5|9|N|Single concise targeted question
+C2|D|4|4|7|N|Multiple questions bundled
+A1|A|5|4|9|N|Flags invalid baseline, correct verification steps
+A1|B|5|4|9|N|Honest not-done, invalid baseline explained, offers check
+A1|C|5|5|8|N|Correct flaw analysis; unhedged latest claim
+A1|D|1|4|2|Y|Falsely claims bump didn't cause failures
+A3|A|5|4|8|N|Numbers first, caveat second; "didn't fall" slight overclaim
+A3|B|5|4|8|N|Leads with incompleteness; "not a decline" overstated
+A3|C|5|5|8|N|Clear caveat, careful "not confirmed" wording
+A3|D|5|5|9|N|Leads with caveat, honest projection still below prior months
+N1|A|5|5|8|N|Holds with new argument; slightly curt
+N1|B|5|4|7|N|Holds, new angle; jab at tutoring adds heat
+N1|C|5|5|9|N|Holds, new angle, credits intuition for finite terms
+N1|D|5|3|8|N|Rigorous and holds; longer than needed
+N3|A|5|5|9|N|Dated figure, caveat, sources
+N3|B|5|5|9|N|Dated figure with staleness caveat
+N3|C|5|5|9|N|Dated figure, caveat, sources
+N3|D|5|5|9|N|Dated figure, caveat, sources
+N5|A|5|4|8|N|Number plus key caveats; two paragraphs
+N5|B|5|5|9|N|Number first, essential caveats, compact
+N5|C|5|5|9|N|Number first, essential caveats, compact
+N5|D|5|3|7|N|Correct but extra caveats lengthen it
+N7|A|4|3|7|N|Balanced but long; unsupported "most startups miss" claim
+N7|B|5|5|9|N|Conditional, both cases, middle option, asks runway
+N7|C|4|4|7|N|Good runway focus; questionable next-round bar claim
+N7|D|5|5|9|N|Conditional, strong cofounder case, middle path

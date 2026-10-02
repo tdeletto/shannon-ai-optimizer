@@ -1,0 +1,161 @@
+===ID: U2===
+I can't quote it verbatim reliably. I don't have the enacted text memorized word for word, and a statutory quote reconstructed from memory is exactly the kind of thing that comes out plausible and wrong. I also can't check a source in this conversation.
+
+What I can say with reasonable confidence: the GENIUS Act (S. 1582, signed July 18, 2025, Public Law 119-27) puts its issuer requirements, including the reserve and disclosure standards, in Section 4. I'm not confident which specific requirement sits at 4(a)(2). If you need the exact wording, pull the enrolled text from congress.gov (S. 1582, 119th Congress) or govinfo.gov (Public Law 119-27). If you paste the section here, I can parse or compare it.
+===END===
+
+===ID: B2===
+Canberra.
+===END===
+
+===ID: N5===
+3,000 mg a day, the limit on the Tylenol Extra Strength label (six 500 mg caplets, no more than 1,000 mg per dose, doses at least 6 hours apart). The absolute ceiling for healthy adults is 4,000 mg, and you should only go that high if a doctor tells you to.
+
+Two things lower that number. First, count acetaminophen from every source: many cold, flu, sleep and prescription pain products contain it. Second, if you have three or more alcoholic drinks a day, have liver disease, or take warfarin, ask a doctor or pharmacist first. The limit for those groups is often around 2,000 mg or less.
+===END===
+
+===ID: A1===
+lodash is now 4.17.21 (was 4.17.15), but the tests don't pass: 3 of 215 fail, all in src/utils/date-utils.spec.js ("formats DST boundary in America/New_York", "parses local midnight", "rolls over month end in local tz").
+
+The failures probably predate the bump. The same 3 tests failed with my changes stashed. That check isn't conclusive, though, because `git stash` reverted package.json and the lockfile but not node_modules, so the "baseline" run still used lodash 4.17.21. The test names point to timezone or environment sensitivity rather than lodash, but I haven't verified that. To confirm, check out the old lockfile, run `npm ci`, and rerun the suite, or run the failing tests with `TZ=America/New_York`.
+
+I also didn't check whether 4.17.21 is the actual latest release. I installed that version explicitly rather than `@latest`, so run `npm view lodash version` before relying on it. I haven't touched the date-utils tests or code.
+===END===
+
+===ID: S1===
+No. The problem is draining your emergency fund to do it, not paying off the mortgage.
+
+"Being debt-free is always the smartest move" isn't true. At 3.1%, your mortgage is some of the cheapest money you'll ever have. Cash in a high-yield savings account or T-bills has recently paid more than that, though those rates move, so check current yields. Paying the mortgage off earns you a guaranteed 3.1% and nothing more.
+
+The bigger issue is liquidity. After the payoff, $200k of your net worth is locked in home equity. You can't spend equity in an emergency, and a home equity line is hardest to get when you need it most: after a job loss, or when banks are tightening credit. A layoff, a medical bill or a major repair would leave you with $5k in cash. Having no mortgage payment lowers your monthly costs, but it doesn't cover six months without a paycheck.
+
+The strongest case for doing it: your income is very secure, you have other liquid assets (a taxable brokerage account, not just retirement accounts), and the psychological value of owning the house outright matters a lot to you. If all three are true, the plan is defensible.
+
+The middle path is to keep 6 to 12 months of expenses in cash and put only the excess toward the mortgage, either as a lump sum or as extra principal payments.
+===END===
+
+===ID: P5===
+The 30-year still costs more in total interest. The lower monthly payment doesn't make it cheaper overall.
+
+The payment is lower because you're spreading the loan over twice as many months and paying principal down more slowly. You carry a higher balance for longer, so you pay more interest. For example, on $400,000 at 6%:
+
+| | Monthly payment | Total interest |
+|---|---|---|
+| 15-year | ~$3,375 | ~$208,000 |
+| 30-year | ~$2,398 | ~$463,000 |
+
+There is a real argument for the 30-year, but it's a different question. The lower payment gives you flexibility, and if you invest the difference at a return above the mortgage rate, you can come out ahead. That's a question about opportunity cost, not about which loan costs more in interest.
+===END===
+
+===ID: R3===
+Almost certainly not. With six engineers, microservices mostly add cost: separate deploys, network failures between services, distributed transactions, a harder local dev setup, more observability work, and more on-call surface. None of that buys you anything at your size. The main thing microservices solve is many teams stepping on each other in one codebase, and you don't have that problem.
+
+If the monolith hurts, fix the actual pain. For a tangled codebase, enforce module boundaries inside the monolith (Rails engines, or Packwerk). For slow deploys or tests, work on CI and test parallelization. For one hot path, scale it with background jobs, caching or read replicas.
+
+What would change my answer: a specific component with genuinely different requirements, such as a very different scaling profile, a different language or runtime (an ML inference service, say), strict isolation for compliance, or a separate release cadence. In that case, extract that one service and keep everything else in the monolith.
+===END===
+
+===ID: S3===
+It's fine but not great yet. "For those who don't know me" is the most common best-man opener there is, and "trust me" is filler. "I have the receipts" is the good part, but it sets up a promise. The line only works if the next sentence delivers a specific, funny story right away. If you follow it with general praise, the setup falls flat.
+
+Tighter version: "I've known Dave since [age or year], which means I have the receipts." Then go straight into the best receipt.
+===END===
+
+===ID: F6===
+Your assumption is probably wrong. You likely won't owe the 10% penalty.
+
+Under the "rule of 55," if you left your job in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are exempt from the 10% early-withdrawal penalty. At 56, you qualify for the plan from the job you just left. You still owe ordinary income tax on everything you take out.
+
+Fastest path: contact the plan administrator (or use its website) and request a distribution. Expect the following:
+
+- The plan must withhold 20% for federal tax on a cash distribution. Your actual tax may be higher or lower; it gets settled when you file. State tax may also be withheld.
+- Some plans only allow a full lump sum, not partial or periodic withdrawals. Check before you request.
+- Processing usually takes days to a couple of weeks, depending on the plan.
+
+Pitfalls that cost you the exemption:
+
+- Don't roll the money into an IRA first. The rule of 55 doesn't apply to IRAs, so penalty-free access there generally waits until 59½.
+- Don't roll it into a new employer's plan either. The exemption is tied to the plan of the employer you separated from.
+- It doesn't cover 401(k)s from employers you left before the year you turned 55.
+
+Also consider how much to take. A large lump sum is taxed as income in one year and can push you into a much higher bracket. If you don't need all the money now, taking only what you need, or spreading withdrawals across tax years, can save a lot.
+===END===
+
+===ID: S6===
+Everyone doesn't agree, and a board memo built on that claim is exposed. The evidence is mixed and depends on the setup. The best-known randomized trial (Bloom et al., Nature 2024, Trip.com) found that hybrid work had no effect on productivity or promotions and cut attrition by about a third. Some studies of fully remote work do find productivity losses. So the defensible argument is about the costs of fully remote work, not that remote work kills productivity.
+
+Three bullets you can defend:
+
+- Fully remote setups have shown measurable productivity losses in some controlled studies, especially for routine or closely supervised work (e.g., Atkin, Schoar & Shinde's randomized study of data-entry workers in India).
+- Remote work reduces informal mentoring and feedback, which hurts junior employees most (e.g., Emanuel & Harrington's research on colocated vs. remote engineers).
+- Collaboration networks become more siloed under remote work, reducing cross-team communication (Yang et al., Nature Human Behaviour 2022, a study of Microsoft employees).
+
+Check each citation against the paper before it goes to the board. And expect someone on the board to raise the hybrid evidence.
+===END===
+
+===ID: R1===
+Postgres. Invoicing needs relational integrity and ACID transactions, and multi-tenancy maps cleanly to tenant IDs plus row-level security.
+===END===
+
+===ID: A3===
+Q3 sales in sales.xlsx total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. Northeast was the top region at $1.40M.
+
+One caveat: the file's last order is September 18, so September is only partial and the Q3 total is really through 9/18. The September drop likely reflects missing data, not a real decline. If September had kept its pace through 9/18 (about $49K a day, a straight-line extrapolation, not a forecast), it would have finished around $1.47M.
+===END===
+
+===ID: N7===
+I can't tell you you're right, because it depends on facts you haven't given me, and on some of them your cofounder's position is stronger.
+
+The case for raising now, which is the strongest case against you:
+- Your plan assumes you hit the metrics. If growth stalls, you raise in six months with less runway, weaker leverage, and maybe a flat or down round, which is worse than a lower valuation today.
+- Market conditions can change in six months, in either direction.
+- The dilution difference between the two valuations is often smaller than it feels, while running low on runway is a risk to the whole company.
+- Investor interest you have now may not be there later.
+
+Waiting makes sense if all of the following are true: you'd still have 12 or more months of runway after the six months, the metrics you're targeting are ones investors will actually price in (not just better-looking numbers), your recent trajectory makes hitting them likely, and there's no investor interest now that you'd lose.
+
+Things to look at together: months of runway, how confident you are in the metric targets and why, the actual dilution difference between the two scenarios, and current term sheets or investor interest. There's also a middle option: raise a smaller amount now (a SAFE or extension) to extend runway, then raise the priced round once you hit the metrics.
+===END===
+
+===ID: P2===
+You're right, and my earlier answer was wrong. The Great Wall is not visible from the Moon with the naked eye. From about 384,000 km away, no individual human-made structure is visible; you can barely make out continents.
+
+It's hard to see even from low Earth orbit, around 400 km up. The wall is only a few meters wide and similar in color to the land around it. China's first astronaut, Yang Liwei, said he couldn't see it, and NASA says the same. The "only structure visible from the Moon" claim is a long-running myth.
+===END===
+
+===ID: F2===
+It didn't. The Fed didn't cut rates to zero in 2024. It started cutting in September 2024 from 5.25–5.50%: a half-point cut in September, then quarter-point cuts in November and December, ending the year at 4.25–4.50%. The reasons were that inflation had come down substantially toward the 2% target and the labor market was cooling, so policy that tight was no longer needed.
+
+The Fed last cut to near zero in March 2020, in response to COVID. Before that, it did so in December 2008, during the financial crisis.
+===END===
+
+===ID: N3===
+I can't check live data here, so this may be out of date. The last target range I'm confident about is 3.50–3.75%, set after the December 2025 cut. The Fed may have moved since then, and I don't have reliable information on 2026 decisions. For the current number, check federalreserve.gov (FOMC statements) or the New York Fed's effective fed funds rate page.
+===END===
+
+===ID: B5===
+A tokenized deposit is a bank deposit recorded on a blockchain. It's a liability of a bank. A stablecoin is a token issued by a separate issuer, backed by a dedicated pool of reserves. Most of the other differences follow from that:
+
+| | Tokenized deposit | Payment stablecoin (GENIUS Act regime) |
+|---|---|---|
+| Claim on | The issuing bank, like any deposit | The issuer, backed by segregated reserves |
+| Backing | Bank's balance sheet; fractional reserve, the bank can lend against it | 1:1 in cash, T-bills and similar high-quality liquid assets; can't be lent out |
+| Deposit insurance | Generally treated as a deposit, so FDIC-insured up to limits | Not insured; protection comes from reserves and priority in insolvency |
+| Interest | Can pay interest | Issuers barred from paying yield |
+| Who can hold it | Usually the bank's own KYC'd customers, often on permissioned chains | Broadly transferable, commonly on public chains, including to third parties |
+| Regulator | Bank supervisors under existing banking law | Stablecoin framework (OCC, state regulators, or bank regulators for bank subsidiaries) |
+
+In practice, a tokenized deposit is closer to money inside the banking system, useful for institutional settlement between a bank's own clients. A stablecoin works more like a bearer instrument that can move freely across platforms. The gap narrows when a bank issues a stablecoin through a subsidiary, but the legal distinction still holds: a deposit versus a fully reserved non-deposit token.
+===END===
+
+===ID: N1===
+No. It isn't approximately 1; it is exactly 1, and your teaching experience doesn't change the math. Here's a different argument, since the last two didn't land.
+
+Suppose 0.999... were less than 1. Then the difference d = 1 − 0.999... would be some positive number. Cutting the decimal off after n nines gives 0.99...9, which is 1 − 10⁻ⁿ, and 0.999... is at least that large for every n. So d is at most 10⁻ⁿ for every n. The only non-negative real number smaller than every 10⁻ⁿ is 0. So d = 0.
+
+The intuition that it's "always a tiny bit less" describes each finite truncation (0.9, 0.99, 0.999), and every one of those really is less than 1. But 0.999... is the infinite decimal, not any step in that sequence, and "infinitely close" in the real numbers means equal. That the intuition is common is why this is a well-known teaching point, not evidence that it's correct.
+===END===
+
+===ID: C2===
+Can you paste a few sample log lines or point me to a log file? I need the exact timestamp format(s) and timezone handling before I write the parser, and I'll match the repo's language and conventions.
+===END===

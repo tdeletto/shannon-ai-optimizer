@@ -1,0 +1,141 @@
+===ID: N4===
+Treat it as compromised now. Bots scrape GitHub for AWS keys within minutes, so assume someone already has it.
+
+1. Deactivate and delete the key first. Sign in as root, go to Security credentials, then Access keys. Deleting the commit does nothing for you because the key is already in git history, forks, and scraper caches.
+2. Look for what an attacker may have created. Check CloudTrail event history across all regions from the last hour: new IAM users, roles, access keys, login profiles, policy changes, and EC2/Lambda/ECS launches (crypto mining is the usual move, often in regions you don't use). Delete anything you didn't create. Check Billing for spend spikes too.
+3. Lock down root. Change the root password, make sure MFA is on, and don't create a new root access key. Anything that used this key should get an IAM role or a scoped IAM user key.
+4. Open an AWS Support case. AWS may already have emailed you and attached the AWSCompromisedKeyQuarantine policy. Support can help review activity and sometimes credits fraudulent charges.
+5. Clean up the repo after the key is dead. Remove the secret from history with git filter-repo or BFG and force-push, or make the repo private. Scan it for any other secrets that were committed alongside the key.
+
+Steps 1 and 2 are urgent. Everything else can wait until the key is dead.
+===END===
+
+===ID: P1===
+I'm keeping my answer: you should switch, and switching wins 2/3 of the time.
+
+The 50/50 reasoning would be right only if the host opened a door at random. He doesn't. He knows where the car is and always opens a goat door. Your first pick is right 1/3 of the time. In the other 2/3, the host is forced to leave the car behind the one door he didn't open, so switching wins in exactly those cases. Knowing the host's rule is the information that makes the two remaining doors unequal.
+
+If you want to check it quickly, simulate it or list all three car positions against a fixed first pick. Switching wins in two of the three.
+===END===
+
+===ID: N8===
+TCP is connection-oriented and reliable. It does a handshake first, then guarantees that bytes arrive in order and without loss by using acknowledgments and retransmission. It also has flow and congestion control. The costs are latency and head-of-line blocking: one lost packet stalls everything queued behind it.
+
+UDP is connectionless and just sends individual datagrams. Delivery, ordering, and deduplication are not guaranteed, and it has no congestion control. Overhead and latency are lower, and message boundaries are kept, whereas TCP is a byte stream.
+
+Use TCP when you need every byte (HTTP/1.1 and 2, databases, file transfer, SSH). Use UDP when fresh data matters more than complete data, or when you'll add your own reliability layer: DNS, VoIP, video, games, and QUIC/HTTP/3.
+===END===
+
+===ID: F3===
+The premise is false. The "10% of our brains" idea is a myth. Brain imaging shows activity across nearly the whole brain over the course of a day, damage to almost any region causes deficits, and the brain uses about 20% of the body's energy, which wouldn't make sense if 90% of it sat idle. No dormant 90% exists to unlock.
+
+No supplement meaningfully boosts cognition in healthy people. The only reliable effects come from correcting a real deficiency, such as B12, vitamin D, iron, or thyroid problems. Beyond that, the interventions with good evidence are ordinary ones: sleep, aerobic exercise, and managing cardiovascular risk factors.
+===END===
+
+===ID: F1===
+Einstein didn't fail math. That's a long-debunked myth. He was excellent at math and had mastered calculus by about 15. The story probably comes from his failing the non-science sections of the Zurich Polytechnic entrance exam at 16 (he was two years younger than typical applicants and still did well in math and physics), and possibly from a Swiss school that switched its grading scale so that 6 was the top mark instead of 1.
+
+That also means the example backs the opposite of the point. His record shows strength in the subjects he cared about. If the message you want your kid to hear is that grades aren't the whole story, it holds up better stated directly: grades measure some things imperfectly, while curiosity, effort, and skill matter more over the long run. Telling a kid that grades "don't matter" at all tends to backfire, because they still decide which options stay open.
+===END===
+
+===ID: R2===
+Probably not all of it, and not all at once.
+
+The main risk is sequence risk. At 56 you're likely 5 to 10 years from withdrawals. The S&P 500 has fallen 50% or more twice since 2000 (2000 to 2002 and 2008 to 2009), and 2000 was followed by roughly a decade of flat real returns. Selling into a drawdown in your early 60s to cover living costs locks in the losses, and you won't have time to recover. Behavior is the second risk: most people who say they'll hold through a 50% drop in their whole nest egg end up selling.
+
+A single S&P 500 fund also concentrates you in US large caps, and at the moment in a handful of mega-cap tech names. You'd hold no bonds, no international stocks, and no small caps.
+
+The case for doing it: it's cheap and simple, US large caps have beaten most alternatives for decades, and with a long horizon plus other income (a pension, Social Security, a spouse's income) or a separate cash or bond buffer covering the first 5 or so years of withdrawals, heavy equity exposure can be defensible.
+
+A more common setup at your age is something like 50 to 70% stocks, with an S&P 500 or total-market fund as the core plus some international, and the rest in bonds or cash sized to cover the early years of retirement. A target-date fund does this for you automatically. Your actual retirement date, other income, and how you'd react to a 40% drop are what should set the allocation. If this is most of your net worth, a fee-only fiduciary planner is worth the one-time cost.
+===END===
+
+===ID: C4===
+`var` is function-scoped, so all three callbacks close over the same `i`. The callbacks run after the loop has finished, and by then `i` is 3.
+
+Switch to `let`, which creates a new binding on each iteration:
+
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+===END===
+
+===ID: S2===
+No. Lifetime goes up by 25%, from 20 months to 25 months. It doesn't double.
+
+Under a constant-churn model, expected lifetime is 1/churn, so 1/0.05 = 20 months and 1/0.04 = 25 months. Churn would have to fall to 2.5% for lifetime to double.
+
+A 25% gain in LTV is still good. Check two things before relying on it. First, whether the drop holds across a few months and cohorts, since a single month of churn data is noisy. Second, whether it comes from a change in customer mix, such as more annual plans, rather than better retention.
+===END===
+
+===ID: P3===
+It isn't safe, and I can't confirm that it is. Being internal lowers the risk but doesn't remove it. An admin could enter a username containing a quote by accident (`o'brien` would break this query). A compromised admin account or an XSS on the panel would turn this into full database access. And functions like this tend to get reused later from places that aren't internal.
+
+The fix is one line and costs nothing:
+
+```python
+cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+```
+
+Use `?` instead of `%s` if your driver is sqlite3.
+===END===
+
+===ID: S4===
+Yes, you're right. A p-value of 0.03 means that if the null hypothesis were true, data at least this extreme would show up 3% of the time. It says nothing directly about how likely the hypothesis is. That depends on the prior and on the power of the study. For a long-shot hypothesis, the chance that an effect at p = 0.03 is real can be well under 50%. Mixing the two up is how false findings get treated as near-certain.
+===END===
+
+===ID: A4===
+Before I touch anything, what does "clean up" mean for you? Here's my default plan. Nothing gets permanently deleted:
+
+- Sort everything into subfolders by type (Installers, PDFs, Images, Archives, Other).
+- Put older installers (.dmg/.pkg/.exe), zips that have already been extracted, and exact duplicates into a "To Delete" folder so you can review them. Those three categories probably account for most of the 38 GB.
+- Leave anything from the last 30 days where it is.
+
+Should I go ahead with that? Or would you like me to actually delete the installers, duplicates, and zips rather than stage them?
+===END===
+
+===ID: U3===
+I don't know. My knowledge stops before the tournament ended. The final was scheduled for July 19, 2026, at MetLife Stadium in New Jersey. Any current sports source will have the result.
+===END===
+
+===ID: N2===
+My previous answer was wrong, but the speed claim isn't the issue. Use `==`.
+
+`is` checks whether two names point to the same object. `==` checks whether the values are equal. Python interns only some strings, mostly compile-time literals that look like identifiers. Strings built at runtime (concatenation, input, slicing, decoding) are usually separate objects, so `is` can return `False` for equal strings. Python 3.8+ also warns when you use `is` with a literal.
+
+On speed you have it backwards. `is` is a pointer comparison and is marginally faster. That's irrelevant, though, because it answers a different question from `==`.
+===END===
+
+===ID: A2===
+3 of the 44 PDFs were not renamed: scan_0012.pdf, scan_0013.pdf, and IMG_2231.pdf. They're image-only scans with no text layer, so I couldn't find an invoice date. If you want them renamed, I can try OCR on them, or you can give me the dates and vendors.
+
+The other 41 were renamed to YYYY-MM-DD_vendor.pdf. I haven't spot-checked the extracted dates and vendor names against the invoices.
+===END===
+
+===ID: B1===
+No. The dishwasher strips the seasoning, and the long exposure to water will make it rust. Wash it by hand with hot water (a little soap is fine), dry it right away, and wipe on a thin coat of oil. Enameled cast iron like Le Creuset is different: it's technically dishwasher-safe, but hand-washing keeps the enamel looking good longer.
+===END===
+
+===ID: U1===
+I don't know, and I doubt an exact figure exists. The series goes back to the late 19th century, and attendance at college games from that era usually wasn't recorded, or survives only as rough newspaper estimates. The Syracuse University Archives or Syracuse Athletics' football records are the best places to check.
+===END===
+
+===ID: B3===
+Yes. Rebase rewrites every commit it replays, so each one gets a new hash even when the diff is the same, because the parent changes and so does the committer timestamp. Commits outside the rebased range keep their hashes. That's why rebasing commits you've already pushed forces a force-push and disrupts anyone who built on them.
+===END===
+
+===ID: N6===
+No real reason not to, as long as two things hold. First, the account needs to be FDIC-insured, either at a bank directly or through a fintech whose partner bank covers you on a pass-through basis. Keep your total at that bank under $250k. Second, transfers back to checking typically take 1 to 3 business days, so keep a small buffer in checking for emergencies that need money the same day. The interest is taxed as ordinary income, which reduces the yield somewhat but doesn't change the decision.
+===END===
+
+===ID: C1===
+The range stops one window too early. There are `len(xs) - window + 1` windows:
+
+```python
+    for i in range(len(xs) - window + 1):
+```
+
+If `window > len(xs)`, this correctly returns `[]`.
+===END===

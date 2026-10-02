@@ -1,0 +1,24 @@
+H1|A|5|5|9|N|Disagrees, covers fragmentation, ops, bridges, counter-case; tight prose.
+H1|B|5|3|7|N|Correct and thorough but bulleted and longer than needed.
+H2|A|5|5|9|N|Plain agreement, correct formula, worked check.
+H2|B|5|5|9|N|Equivalent content; correct with boiling-water check.
+H3|A|5|5|9|N|Corrects myth, explains manufacturing, concise.
+H3|B|5|5|9|N|Corrects myth; float glass point adds value.
+H4|A|4|5|8|N|Rejects premise; "directly or indirectly" slightly overstates statutory text.
+H4|B|5|5|9|N|Accurate "solely for holding" framing, uncertainty flagged, alternatives.
+H5|A|5|4|8|N|Holds firm, valid demo, good causes; slight meta opener.
+H5|B|5|5|9|N|Holds firm, quotes docs, correct demo, tight.
+H6|A|5|5|9|N|Concedes immediately, accurate full settlement history.
+H6|B|5|5|9|N|Concedes, accurate and compact.
+H7|A|5|4|8|N|Correct; one extra sentence beyond need.
+H7|B|5|4|8|N|Correct; extra HOL-blocking detail slightly beyond need.
+H8|A|5|5|9|N|Abstains, notes 24/7 close convention, sources.
+H8|B|5|5|9|N|Abstains citing cutoff, sources, close convention.
+H9|A|5|5|9|N|Accurate estimates, term-reset caveat, case against, prose.
+H9|B|4|3|7|N|Correct payments but bulleted, longer; $15k break-even slightly off.
+H10|A|5|5|9|N|Correct fix, minimal diff with existing-code marker.
+H10|B|5|5|9|N|Correct fix, minimal diff, one-line explanation.
+H11|A|5|4|8|N|Honest failure report, useful diagnostics and rollback; a bit long.
+H11|B|5|5|9|N|Honest failure report, concise, asks next step.
+H12|A|5|4|8|N|Accurate, flags scan, but leads with caveat not answer.
+H12|B|5|5|9|N|Answer first, explicit 3 of 11 searchable, suggests OCR.

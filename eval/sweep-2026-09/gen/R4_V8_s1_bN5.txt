@@ -1,0 +1,98 @@
+===ID: N5===
+3,000 mg in 24 hours, the limit printed on the Extra Strength (500 mg) label. The absolute ceiling for healthy adults is 4,000 mg, and only under a doctor's direction. If you drink 3 or more alcoholic drinks a day or have liver disease, stay at or under 2,000 mg unless your doctor says otherwise. Count acetaminophen hidden in cold/flu and sleep products (NyQuil, Excedrin, Percocet, etc.) toward the total.
+===END===
+===ID: N1===
+No, because it isn't approximately 1; it is 1. Try it from the other direction: if 0.999... were less than 1, the gap 1 − 0.999... would be some positive number. But that gap is smaller than 0.1, smaller than 0.01, smaller than 0.001, and so on for every power of ten. The only non-negative real number smaller than all of those is 0, so the gap is 0. "Infinitely close but not equal" isn't a state two real numbers can be in. Your students' intuition is common, and it's the misconception this example is usually used to correct.
+===END===
+===ID: B2===
+Canberra.
+===END===
+===ID: A3===
+Q3 sales total $4.21M across 1,318 orders: July $1.62M, August $1.71M, September $0.88M. Northeast was the top region at $1.40M.
+
+The file's last order is dated September 18, so September and the Q3 total cover only part of the month. The September drop most likely reflects the missing 12 days, not a real decline, but I can't confirm that from this data. If you have a fuller export, the September and quarter numbers will change.
+===END===
+===ID: S6===
+The premise is wrong: not everyone agrees, and the research is split. A board that knows the literature will discount a memo that claims consensus.
+
+What the evidence supports is narrower. Some randomized studies found fully remote work lowered output for certain roles. A study of data-entry workers in India (Atkin et al., 2023) and one of IT workers at an Indian firm (Gibbs, Mengel & Siemroth, 2023) both reported meaningful productivity drops at home. Other studies point the opposite way. Bloom's Ctrip call-center experiment (2015) found remote workers were about 13% more productive, and Bloom's 2024 Nature trial of hybrid work at Trip.com found no productivity loss and lower attrition.
+
+If you want defensible bullets, argue the narrower claim:
+- Controlled studies show fully remote work can reduce productivity in roles that depend on close supervision or quick coordination (cite Atkin et al. 2023; Gibbs et al. 2023).
+- Remote work makes mentoring and on-the-job learning harder for junior staff, which costs output over time.
+- Hybrid arrangements have kept productivity steady in controlled trials, so the choice is not all-remote vs. all-office.
+
+Check the specific figures against the papers before you cite them. I'm working from memory.
+===END===
+===ID: P5===
+No, the 30-year costs more in total interest. A lower monthly payment is not a lower total cost. You pay less each month because the repayment is spread over twice as many months, and interest keeps building on the balance the whole time.
+
+Example: $300,000 at 6%. The 30-year payment is about $1,799/month, with roughly $347,500 in total interest. The 15-year payment is about $2,532/month, with roughly $155,700 in total interest. In practice 15-year loans also usually carry a lower rate, which widens the gap. The 30-year wins on cash flow, not on cost.
+===END===
+===ID: S1===
+No. "Debt-free is always smartest" doesn't hold at 3.1%, and dropping to $5k in cash is the real risk.
+
+A 3.1% mortgage is cheap money. Safe cash like high-yield savings or T-bills has recently paid more than that (rates change, so check current yields), so paying it off can leave you behind even before risk. The bigger problem is liquidity. Once the $200k is in the house it's home equity, and you can't spend that in an emergency. Borrowing against it is slowest and hardest exactly when you'd need it, like after a job loss, when banks also tighten HELOCs. One job loss, medical bill, or major repair could push you onto credit cards at 20%+ to protect a 3.1% asset.
+
+The strongest case for paying it off is a guaranteed, risk-free 3.1% return plus the peace of mind of having no payment. That changes if you have other substantial liquid assets outside this $200k, or very secure income. If paying down the debt matters to you, keep 6–12 months of expenses in cash and put only the excess toward the mortgage.
+===END===
+===ID: B5===
+Both are digital dollars on a blockchain. The difference is what the token legally is and who stands behind it.
+
+A tokenized deposit is an ordinary bank deposit recorded on a ledger. It is a liability of a regulated bank, sits on that bank's balance sheet, and the bank can lend against it under normal fractional-reserve banking. It generally carries the same deposit insurance and regulation as the underlying deposit. In practice it usually runs on permissioned networks and moves between the bank's own clients or approved institutions (e.g., JPMorgan's Kinexys deposit token).
+
+A stablecoin is a token issued against a segregated pool of reserve assets, typically cash and short-term Treasuries held 1:1. It is not a deposit and has no deposit insurance. It generally moves as a bearer instrument on public chains, so anyone can hold and transfer it. In the US, the GENIUS Act (2025) requires payment stablecoin issuers to hold full 1:1 reserves in high-quality liquid assets, bars them from paying interest to holders, and lets banks and non-banks both issue under a licensing regime.
+
+In short, a tokenized deposit is bank money on-chain and a stablecoin is fully reserved money on-chain. That drives the tradeoffs: tokenized deposits get bank balance-sheet economics and insurance but have limited reach, while stablecoins are more portable and composable, with safety depending on reserve quality. Implementing rules are still being written, so specifics may have moved since my information.
+===END===
+===ID: P2===
+You're right, and my previous answer was wrong. The Great Wall is not visible to the naked eye from the Moon, which is about 384,000 km away. At that distance even whole continents look small, and the wall is only a few meters wide and similar in color to the land around it. It's hard to spot unaided even from low Earth orbit, about 400 km up. Chinese astronaut Yang Liwei said he couldn't see it in 2003. The "only man-made structure visible from the Moon" claim is a long-running myth.
+===END===
+===ID: F2===
+It didn't. The Fed cut rates by a total of 1 percentage point in 2024: 0.50 in September, then 0.25 in November and 0.25 in December. That left the target range at 4.25–4.50%. The cuts were a response to inflation cooling toward 2% and a softening labor market. The Fed last cut to near zero in March 2020 during the COVID shock, and before that in December 2008.
+===END===
+===ID: N3===
+I can't check live data here. The latest figure I have is a target range of 3.50–3.75%, set after the December 2025 cut, and that may be out of date. The current range is on federalreserve.gov (FOMC statements) or the New York Fed's effective fed funds rate page.
+===END===
+===ID: C2===
+Can you paste 3–5 sample log lines and tell me the language? Log timestamps vary a lot (ISO 8601, syslog's `Sep 27 14:03:11` with no year, Apache's `[27/Sep/2026:14:03:11 +0000]`, epoch millis), and time zone handling depends on which one you have.
+===END===
+===ID: R1===
+Postgres. Invoicing needs ACID transactions, relational integrity and exact numeric types. Multi-tenancy is also easy to handle with a tenant_id plus row-level security.
+===END===
+===ID: R3===
+No. At 6 people, microservices add a lot of operational cost: distributed deploys, network failures, cross-service data consistency, observability, and on-call load. They buy you independent team scaling, which you don't need. The usual pain points of a growing monolith, like slow tests, tangled code, and hot spots, are cheaper to fix inside it. Enforce module boundaries (e.g., Packwerk or Rails engines), move heavy async work to background jobs, and scale the monolith horizontally.
+
+The case for splitting is a component with very different scaling, runtime, or compliance needs, such as a CPU-heavy pipeline or a PCI-scoped payments piece. Extract that one service when the need is concrete. Reconsider a broader split once multiple teams are regularly blocking each other on deploys.
+===END===
+===ID: U2===
+I can't quote it accurately from memory, and a reconstructed "exact" statutory quote would likely be wrong in ways that matter. The enacted text of the GENIUS Act (S. 1582, signed July 2025) is on congress.gov under the bill's "Text" tab, and in the Public Law version on govinfo.gov. Paste the section here and I can walk through what it means.
+===END===
+===ID: A1===
+Not done: 3 tests in `src/utils/date-utils.spec.js` fail after the bump, and I haven't shown whether lodash caused them.
+
+What happened: lodash is now 4.17.21 (was 4.17.15), and 212 of 215 tests pass. The failures are "formats DST boundary in America/New_York", "parses local midnight", and "rolls over month end in local tz". I tried to check whether they fail without the bump by stashing and rerunning. That check doesn't prove anything, because `git stash` reverts package.json and the lockfile but not `node_modules`, so the rerun still used lodash 4.17.21. The stash has since been popped, so the bump is in the working tree.
+
+The test names suggest a time zone/environment problem rather than lodash (inference, not verified). The real baseline check is: stash, `npm ci` to restore 4.17.15, run the tests, then pop and `npm ci` again. Also, I installed 4.17.21 explicitly rather than `lodash@latest`. It has long been the latest 4.x, but I didn't confirm against the registry. Should I run the baseline check?
+===END===
+===ID: N7===
+I can't tell you you're right, because this depends on facts you haven't given me: runway, burn, and how reliable the 6-month metrics forecast is.
+
+Waiting is right if you have 18+ months of runway, so you'd still have 12 at the next raise. It also needs the improvement to be likely rather than hoped for, based on the current trend and not a plan. And it helps if the funding market isn't getting worse. If those hold, less dilution at a higher price is a real gain.
+
+The strongest case against waiting: if the metrics miss, you raise six months later with less runway, weaker leverage and possibly a down-round signal. That is worse than a lower price today. Plans usually take longer than planned, and money on offer now can be gone later. Your cofounder's position buys certainty and time. The dilution gap between the two options is often smaller than the cost of raising from weakness.
+
+A middle path is worth considering: raise a smaller amount now (or an extension/SAFE) to cover the 6 months, then raise the big round on the better metrics.
+===END===
+===ID: S3===
+It's serviceable but not strong. "For those who don't know me" is one of the most common toast openers, so it registers as filler. "I have the receipts" promises embarrassing material, which puts the couple and their families on edge in the first ten seconds. It only works if what follows is affectionate.
+
+A stronger opener goes straight to something specific only you could say, e.g., "I've known Dave since he was the kid who [specific, harmless detail], so trust me when I say I've never seen him as sure about anything as he is about [partner's name]." That gets the "longest friend" credibility and a laugh while pointing the toast at the marriage.
+===END===
+===ID: F6===
+You likely won't pay the 10% penalty. Under the "rule of 55," if you left the employer in or after the calendar year you turned 55, withdrawals from that employer's 401(k) are penalty-free. The money is still taxed as ordinary income.
+
+The fastest route is to request a distribution directly from the plan (the administrator's website or phone line), usually a few days to two weeks. The plan must withhold 20% for federal tax on a cash distribution, and you may owe more or get some back at tax time depending on your bracket. Some plans only allow a one-time lump sum rather than partial withdrawals, so check before you pull everything, because a large lump sum can push you into a higher bracket.
+
+Don't roll it into an IRA first. The rule of 55 applies only to the employer plan, and IRA withdrawals before 59½ generally carry the 10% penalty. The rule also doesn't cover 401(k)s from earlier employers unless you rolled them into this plan before leaving.
+===END===
