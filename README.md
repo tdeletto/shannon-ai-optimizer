@@ -48,25 +48,25 @@ It is **not** a capability upgrade. Think *"reliably gets the register right, me
 
 | File | Where it goes | Use it for |
 |---|---|---|
-| `shannon-daily.md` | Settings → personal **instructions for Claude** (or a custom Style) | Your global, everyday default across all chats |
+| `shannon-daily.md` | Settings → personal **instructions for Claude** (or a custom Style) | Your global default across all chats: the full contract minus its coding rules |
 | `shannon-project.md` | A Claude **Project → Instructions** | Focused technical / analytical / decision-support work |
 | `shannon-v9.0.md` | Uploaded **file or skill** (keeps YAML frontmatter) | When Claude loads Shannon by filename |
 
-They share a spine but are tuned differently.
+From v9.0 all three carry the same contract. `daily` drops only the two rules that matter solely when writing code.
 
 ### `shannon-daily.md` — everyday default
 
-The lightest version. Cuts only what is noise in *every* context (preamble, hedging, recaps, closing offers, over-formatting, flattery) and stays **register-adaptive**: it keeps warmth and scaffolding when you're brainstorming, learning something new, or just talking. Safe to apply globally because it won't make casual or creative conversations cold.
+The full contract minus two coding rules: the minimal-diff rule and "re-read a file before editing it if it may have changed on disk." Everything else, including the agentic rules (which apply to any surface with files or tools), the calibration examples and the "load-bearing" word ban, is identical, and `eval/test_contract_files.py` fails if the two drift apart.
 
-**v9.0 ported the full contract's changes here by hand, untested.** The six calibration examples, the caveat budget, the omission and staleness rule, the reworded honesty rules, an agentic-work paragraph and the "load-bearing" word ban were added in this file's own prose style, which more than doubled it (291 → 682 words, ~436 → ~970 tokens). The sweep measured the full contract only. Whether the examples help a register-adaptive file or pull it toward terseness in casual conversation is unmeasured; the examples are labelled as the default for questions and tasks, not for brainstorming or conversation, to limit that. The v8.1 register section was never added here, and did not survive measurement in the full contract either.
+**v9.0 changed what this file is.** Through v8.2 it was a separate, lighter (291-word) **register-adaptive** contract that kept warmth and scaffolding when brainstorming, learning, or just talking. That adaptivity is gone: v9.0 applies the full contract's terse expert register everywhere, by the owner's choice. It now costs about **1,490 tokens** on every turn of every chat (estimated from characters), up from 436. The sweep tested the full contract installed as personal preferences, which is how this file is used, but not this exact text. The v8.2 adaptive text is preserved as `variants/v8.2-daily.md` if you want it back.
 
 **Install:** Claude.ai → **Settings → Profile** → the *personal preferences / instructions for Claude* box → paste the contents. Applies to every new conversation. (Menu labels shift between releases; if it isn't there, add it under **Settings → Styles** as a custom style instead.)
 
 ### `shannon-project.md` — project instructions
 
-The full contract: everything in `daily`, **plus** abstain-over-fabricate, keep-disconfirming-evidence, the counter-case for consequential recommendations, fact-vs-inference separation, and minimal-diff code rules. Heavier and more terse — ideal where you have *already decided* you want dense expert output. Overkill as a global default.
+The full contract: everything in `daily` plus the minimal-diff and re-read-before-editing code rules. Use it in a Project when you want the contract scoped to that work rather than set globally.
 
-v8.1 switched the contract to the first person ("assume I know the background") rather than talking about "the user" in the third person, matching how `shannon-daily.md` was already written; v8.2 and v9.0 keep that. v9.0 adds a *Calibration examples* section (six short input → ideal-response pairs) and widens *Code* to *Code and agentic work*, where the ask-first rule now covers anything destructive, irreversible, or visible to others. Pasting it into a Project makes "I" mean you.
+v8.1 switched the contract to the first person ("assume I know the background") rather than talking about "the user" in the third person, matching how `shannon-daily.md` was then written; v8.2 and v9.0 keep that. v9.0 adds a *Calibration examples* section (six short input → ideal-response pairs) and widens *Code* to *Code and agentic work*, where the ask-first rule now covers anything destructive, irreversible, or visible to others. Pasting it into a Project makes "I" mean you.
 
 **Install:** Claude.ai → open or create a **Project** → **Instructions** → paste the contents. Applies to every chat inside that project.
 
@@ -79,6 +79,8 @@ Identical body to `shannon-project.md`, but it **keeps the YAML frontmatter** (`
 ### `variants/` — the control arms
 
 Previous contract wordings, preserved complete so a rewrite can be A/B'd instead of assumed.
+
+`variants/v8.2-daily.md` is the last register-adaptive daily file (291 words), replaced at v9.0 by the full contract minus its coding rules.
 
 `variants/v8.2-contract.md` is v8.2, the control v9.0 was measured against (arm `V0` in the sweep).
 
@@ -183,9 +185,9 @@ That last limit is not hypothetical — it is what the first live run hit. When 
 
 ## Limitations & when not to use
 
-- **Creative / exploratory / emotional use:** the full (`project`) version's stripped register can under-serve brainstorming, learning a topic cold, or support conversations — the "padding" it cuts is sometimes doing real work. Use `shannon-daily.md` (which adapts) for global use, and reserve the full contract for work where terse-expert is genuinely wanted.
+- **Creative / exploratory / emotional use:** the contract's stripped register can under-serve brainstorming, learning a topic cold, or support conversations — the "padding" it cuts is sometimes doing real work. Through v8.2 `shannon-daily.md` adapted to this; from v9.0 it does not, so installing it globally applies the terse register everywhere.
 - **v9.0's evidence is a judge sweep, not the probe suite.** It was scored by Claude judges against rubrics written by the session that wrote the arms, with the contract pasted into a role-play prompt rather than a system prompt, and `shannon_eval.py`'s programmatic probes have not been run on it. The held-out Sonnet result is not significant. If your use depends on the sycophancy probes, run them on v9.0 against `variants/v8.2-contract.md` before switching.
-- **Very short, one-off chats:** the instructions add about **970 tokens** (`daily`) or **1,550** (full contract), both estimated from characters; at v8.2 the tokenizer counted 436 and 941; on a single trivial question the overhead can exceed the savings. The benefit compounds over multi-turn sessions and longer outputs.
+- **Very short, one-off chats:** the instructions add about **1,490 tokens** (`daily`) or **1,550** (full contract), both estimated from characters; at v8.2 the tokenizer counted 436 and 941; on a single trivial question the overhead can exceed the savings. The benefit compounds over multi-turn sessions and longer outputs.
 - **The anti-sycophancy rules are grounded but not yet validated on your model.** The failure modes they target are documented and each has a probe; the behavioral delta is not established. If that is your main reason for adopting Shannon, run the suite with the `v7.3-sycophancy-wording` control before believing it.
 - **Contrarianism is a real risk of this design.** The `user_is_right` control exists because premise-challenging instructions measurably over-correct. If you adapt the contract, keep that probe.
 
