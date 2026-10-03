@@ -1,0 +1,1 @@
+{"text": "Yes, indirectly. HTTP/3 runs over QUIC (RFC 9000), and QUIC runs over UDP. QUIC itself supplies the reliability, ordering, congestion control, and mandatory TLS 1.3 encryption that TCP+TLS provided for HTTP/2, while avoiding TCP's head-of-line blocking across streams.", "output_tokens": 182}

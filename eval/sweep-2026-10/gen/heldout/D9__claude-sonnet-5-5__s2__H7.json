@@ -1,0 +1,1 @@
+{"text": "Yes. HTTP/3 runs over QUIC, and QUIC is implemented on top of UDP. QUIC handles reliability, congestion control, and TLS 1.3 encryption itself, so it avoids TCP's head-of-line blocking across streams and speeds up connection setup.", "output_tokens": 97}

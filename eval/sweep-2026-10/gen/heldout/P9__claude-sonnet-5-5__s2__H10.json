@@ -1,0 +1,1 @@
+{"text": "`getDay()` returns 0 for Sunday (0\u20136), so `7` never matches. Change it to `0`:\n\n```js\nexport function isWeekend(date) {\n  const d = date.getDay();\n  return d === 0 || d === 6;\n}\n```", "output_tokens": 83}

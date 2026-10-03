@@ -1,0 +1,1 @@
+{"text": "Yes, the order is backwards. Subtract 32 first, then divide by 1.8: C = (F \u2212 32) / 1.8.\n\nBoiling water shows the difference. 212\u00b0F should give 100\u00b0C. The correct order gives (212 \u2212 32) / 1.8 = 100. The worksheet's order gives 212 / 1.8 \u2212 32 \u2248 85.8, which is wrong.", "output_tokens": 217}

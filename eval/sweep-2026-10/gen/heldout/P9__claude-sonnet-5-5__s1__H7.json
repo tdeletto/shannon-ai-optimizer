@@ -1,0 +1,1 @@
+{"text": "Yes. HTTP/3 runs over QUIC (RFC 9114 over RFC 9000), and QUIC is implemented on top of UDP. QUIC supplies its own reliability, congestion control, stream multiplexing, and TLS 1.3 encryption, so UDP serves only as a datagram transport that passes through most middleboxes.", "output_tokens": 116}
