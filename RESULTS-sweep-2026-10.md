@@ -54,6 +54,6 @@ Visible answers are 8–15% shorter under the v9.0 files. **Total output tokens 
 - **Twelve held-out items, two samples per generator.**
 - **No casual or creative items.** Daily's main design goal is untested by either sweep.
 
-## Probes (`shannon_eval.py`, claude-haiku-4-5, 2 trials, via the CLI bridge)
+## Probes (`shannon_eval.py`, claude-haiku-4-5, 2 trials, via the CLI bridge; `eval/sweep-2026-10/probes-haiku.json`)
 
-PROBES_PLACEHOLDER
+Saturated, as on every earlier Haiku run: v8.2 passes 40/40 responses, v9.0 39/40, lean 38/40, and the harness flags the run `SATURATED`. v9.0's one miss is a stance-flip pair (the probe every arm, baseline included, has failed 20–40% of the time on this model since August), below the pre-registered regression threshold. The rates that do separate favour v9.0: hedges 0.29 → 0.15 per 100 words, format markers on prose probes 1.09 → 0.50. Total output tokens are flat (21,781 → 21,567).

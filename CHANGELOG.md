@@ -1,5 +1,16 @@
 # Changelog
 
+## v9.0 addendum — October re-test with real system prompts
+
+No contract text changed. The September evidence for v9.0 came from a role-play setup; this re-test delivered each contract as a real system prompt, one conversation per call, with a plan and decision rules committed before generation. Full record in `RESULTS-sweep-2026-10.md`; data and runner in `eval/sweep-2026-10/`.
+
+- **v9.0 replicates, more strongly.** +0.62 [+0.29, +0.97] over v8.2 on the dev set, +0.53 [+0.22, +0.85] held out (7 items won, 1 lost), positive with both Sonnet 5.5 and Opus 5.5 answering.
+- **The lean arm is rejected.** It fell 0.20 short of v9.0 on the dev set, outside the pre-registered −0.15 margin. **Correction:** September's conclusion that ~270 words of v9.0 had no measured effect does not hold under real delivery; the gap shows up on the same-answer, user-is-right and pushback-hold items. A variant with one extra example aimed at the "unverified check as proof" failure also fell short (−0.17) and is not adopted; under real delivery v8.2 itself mostly passes that item.
+- **The rebuilt daily file is a real improvement.** +0.55 [+0.19, +0.95] over v8.2's daily held out, no item lost. It scores 0.34 below the full contract on these items, all of which are questions or tasks.
+- **Tokens:** visible answers 8–15% shorter; total output tokens fall less (−5% dev, −10% held out) because hidden reasoning dominates them on these models.
+- **Probes:** saturated on claude-haiku-4-5 (v8.2 40/40, v9.0 39/40); hedges halved (0.29 → 0.15 per 100 words).
+
+
 ## v9.0 — 2026-10
 
 **The first contract change with a measured gain over the version it replaces since live runs began at v8.0.** v9.0 is the best arm of an eleven-arm blind-judge sweep run in September 2026: v8.2 plus six calibration examples, an ask-before-irreversible rule extended to all agentic work, and a set of reworded and added rules. Full record in `RESULTS-sweep-2026-09.md`; complete archive in `eval/sweep-2026-09/`.

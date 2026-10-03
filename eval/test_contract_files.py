@@ -99,9 +99,10 @@ UNPROBED = [
     # -- every v9.0 rule below EXCEPT the examples -- scored +0.03 vs v8.2
     # (95% CI [-0.13, +0.20]); arm V7 -- the examples plus one ask-first line
     # and none of the other rules -- tied v9.0 (+0.04, t = +0.65 by batch).
-    # Every entry after the first is therefore unmeasured-to-null, carried
-    # because it is the text that was held-out tested, not because it earns
-    # its words. See the ceiling note below.
+    # October 2026 correction: re-tested with real system prompts
+    # (RESULTS-sweep-2026-10.md), the lean arm without these rules fell 0.20
+    # short of v9.0, so the "null" notes below describe September's
+    # role-play setup only. Still no programmatic probe for any of them.
     ("calibration examples",
      "Calibration examples",
      "the addition the ablation credits: every arm carrying them beat v8.2 "
@@ -169,8 +170,9 @@ SKILL_FILE = "shannon-v9.0.md"
 # positive). The argument against: a 767-word ablation arm carrying only the
 # examples and the ask-first rule tied it (+0.04, t = +0.65), and an arm with
 # every other v9.0 rule but no examples was null (+0.03), so ~270 words of
-# this ceiling are unearned on the sweep's own evidence. That arm is variants/v9.0-ablation-examples-
-# only.md, and it is the first thing to test when this ceiling comes down.
+# this ceiling looked unearned. The October re-test with real system prompts
+# reversed that (lean arm -0.20 vs v9.0, outside the tie margin). That arm is variants/v9.0-ablation-examples-
+# only.md (re-tested October 2026 and rejected).
 # 1050 -> 1075 for the untested load-bearing word ban (1,058 words).
 #
 # The DAILY ceiling rose 340 -> 500 at v9.0, with no run of its own. Daily
