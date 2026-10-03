@@ -1,0 +1,1 @@
+{"text": "Postgres.\n\nInvoicing needs ACID transactions, relational integrity, and constraints. Row-level security gives you tenant isolation enforced in the database. Mongo would only win if your core data were truly schemaless, which invoices aren't.", "output_tokens": 81}

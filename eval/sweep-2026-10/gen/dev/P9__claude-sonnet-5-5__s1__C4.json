@@ -1,0 +1,1 @@
+{"text": "`var` is function-scoped, so the loop has one shared `i`. The `setTimeout` callbacks run after the loop finishes, when `i` is already 3, and each callback reads that same variable.\n\nFix: use `let`, which creates a fresh binding per iteration:\n\n```js\nfor (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n```", "output_tokens": 133}

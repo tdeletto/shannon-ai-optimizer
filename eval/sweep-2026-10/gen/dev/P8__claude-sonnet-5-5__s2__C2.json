@@ -1,0 +1,1 @@
+{"text": "What language and what does a sample log line look like? I need the actual date format (e.g. `2026-10-03T14:22:01Z`, `03/Oct/2026:14:22:01 +0000`, `Oct  3 14:22:01`) and whether timezones are included. If you point me to a log file in the working directory, I'll read the format from it.", "output_tokens": 225}

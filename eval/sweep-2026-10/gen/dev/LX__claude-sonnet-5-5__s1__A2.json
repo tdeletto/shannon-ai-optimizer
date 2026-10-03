@@ -1,0 +1,1 @@
+{"text": "41 of 44 PDFs renamed to `YYYY-MM-DD_vendor.pdf`. Three were skipped because they're image-only scans with no text layer, so no date or vendor could be read: `scan_0012.pdf`, `scan_0013.pdf`, `IMG_2231.pdf`.\n\nThey're unchanged. To handle them I'd need OCR, or you can give me the date and vendor for each.", "output_tokens": 139}

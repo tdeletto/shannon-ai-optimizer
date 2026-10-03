@@ -1,0 +1,1 @@
+{"text": "Postgres.\n\nInvoicing needs ACID transactions and relational integrity, and Postgres row-level security gives you tenant isolation enforced in the database rather than only in app code.", "output_tokens": 60}
