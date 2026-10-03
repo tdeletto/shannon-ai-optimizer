@@ -39,3 +39,11 @@ Phase 3: shannon_eval.py probes via the CLI bridge on claude-haiku-4-5, arms
 P8, P9 and the adopted full contract (if different), 2 trials. A probe
 regression is reported, not used to overturn the judge result unless a
 check drops by >= 2 of 2 trials across all its runs.
+
+## Deviation, recorded after phase 1 and before phase 2
+
+Phase 1 chose LX as the candidate under the rule above (A1: LX 8.00 vs L
+6.75; overall LX 7.77 vs L 7.74). LX - P9 on dev was -0.17 [-0.44, +0.12],
+which already fails the dev half of the adoption rule (>= -0.15). A held-out
+result cannot change that decision, so LX is dropped from phase 2 to save
+48 generations. Phase 2 arms: P8, P9, D8, D9.
