@@ -1,0 +1,1 @@
+{"text": "Yes. HTTP/3 runs over QUIC (RFC 9000), which runs over UDP. QUIC itself provides reliability, ordering per stream, congestion control, and mandatory TLS 1.3, so HTTP/3 doesn't rely on raw UDP semantics. One consequence is that networks that block or throttle UDP/443 force clients back to HTTP/2 over TCP.", "output_tokens": 151}

@@ -1,0 +1,1 @@
+{"text": "Postgres.\n\nInvoicing needs multi-row ACID transactions, constraints, and relational reporting. Multi-tenancy is well served by a `tenant_id` column plus row-level security. Mongo would only win if your data were genuinely schemaless, which invoices aren't.", "output_tokens": 93}

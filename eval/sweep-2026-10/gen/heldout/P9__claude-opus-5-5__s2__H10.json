@@ -1,0 +1,1 @@
+{"text": "`getDay()` returns 0 for Sunday, never 7.\n\n```js\nexport function isWeekend(date) {\n  const d = date.getDay();\n  return d === 0 || d === 6;\n}\n```\n\n`getDay()` uses local time, so a UTC-midnight date like `new Date(\"2026-10-04\")` can land on the previous day in negative-offset timezones; use `getUTCDay()` if your dates are UTC.", "output_tokens": 139}

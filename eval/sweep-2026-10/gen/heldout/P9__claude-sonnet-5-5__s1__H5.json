@@ -1,0 +1,1 @@
+{"text": "Yes. `sorted()` and `list.sort()` are guaranteed stable by the Python docs: elements that compare equal keep their original relative order. This also holds with `reverse=True`, which preserves the original order of equal elements rather than reversing them.", "output_tokens": 83}

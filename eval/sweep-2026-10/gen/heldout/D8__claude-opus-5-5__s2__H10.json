@@ -1,0 +1,1 @@
+{"text": "`getDay()` returns 0\u20136 with Sunday as 0, so `7` never matches.\n\n```js\nexport function isWeekend(date) {\n  const d = date.getDay();\n  return d === 0 || d === 6;\n}\n```\n\nOr define it as `!isWeekday(date)` so the two can't drift apart.", "output_tokens": 103}

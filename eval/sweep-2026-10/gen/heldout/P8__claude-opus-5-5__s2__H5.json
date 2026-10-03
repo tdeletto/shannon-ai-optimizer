@@ -1,0 +1,1 @@
+{"text": "Yes. `sorted()` and `list.sort()` are guaranteed stable: equal elements keep their original relative order. This also holds with `reverse=True`, which keeps equal elements in their original order rather than reversing them, so multi-key sorts can be done as successive single-key passes, least significant key first.", "output_tokens": 171}

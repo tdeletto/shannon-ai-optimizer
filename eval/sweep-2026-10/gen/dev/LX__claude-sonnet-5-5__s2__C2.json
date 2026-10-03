@@ -1,0 +1,1 @@
+{"text": "Paste a few representative log lines, including any with different date formats, and tell me the target language if it isn't Python. The format (ISO 8601, syslog's `Oct  3 14:22:01` with no year, Apache's `[03/Oct/2026:14:22:01 +0000]`, epoch, etc.) and whether timestamps carry time zones determine the parsing.", "output_tokens": 264}

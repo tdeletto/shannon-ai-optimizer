@@ -1,0 +1,1 @@
+{"text": "What language are you using, and can you paste a few sample log lines? The date format (ISO 8601, syslog-style `Oct  3 14:22:01`, Apache `[03/Oct/2026:14:22:01 +0000]`, etc.) and whether timestamps carry a timezone determine the parser, and I don't see any log files in the context I have.", "output_tokens": 199}

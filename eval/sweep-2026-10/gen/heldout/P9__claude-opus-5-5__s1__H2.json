@@ -1,0 +1,1 @@
+{"text": "Yes, you're right. The order is reversed: subtract 32 first, then divide by 1.8 (or multiply by 5/9). For 212\u00b0F, the correct order gives (212 \u2212 32) \u00f7 1.8 = 100\u00b0C, while the worksheet's order gives 212 \u00f7 1.8 \u2212 32 \u2248 85.8\u00b0C, which is wrong.", "output_tokens": 194}

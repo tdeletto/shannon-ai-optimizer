@@ -1,0 +1,1 @@
+{"text": "`getDay()` returns 0 for Sunday, never 7. Fix:\n\n```js\nexport function isWeekend(date) {\n  const d = date.getDay();\n  return d === 0 || d === 6;\n}\n```\n\n`isWeekday` and `addDays` are fine.", "output_tokens": 89}

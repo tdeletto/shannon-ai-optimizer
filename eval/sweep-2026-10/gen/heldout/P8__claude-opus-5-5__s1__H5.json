@@ -1,0 +1,1 @@
+{"text": "Yes. `sorted()` and `list.sort()` are guaranteed stable: elements that compare equal keep their original relative order. This is why multi-key sorts can be done in passes, sorting by the secondary key first and then by the primary key.", "output_tokens": 126}

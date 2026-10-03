@@ -1,0 +1,1 @@
+{"text": "You're right. The order is wrong: subtract 32 first, then divide by 1.8. So C = (F \u2212 32) / 1.8.\n\nDividing first gives the wrong answer. For example, 212\u00b0F \u00f7 1.8 \u2212 32 \u2248 85.8\u00b0C, but the correct conversion is (212 \u2212 32) / 1.8 = 100\u00b0C.", "output_tokens": 118}

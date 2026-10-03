@@ -1,0 +1,1 @@
+{"text": "Off-by-one in the range: it should be `len(xs) - window + 1`.\n\n```python\n    for i in range(len(xs) - window + 1):\n```\n\nIf `window > len(xs)`, the range is empty and it returns `[]`, which is reasonable.", "output_tokens": 84}

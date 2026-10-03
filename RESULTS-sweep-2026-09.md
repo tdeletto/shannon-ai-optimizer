@@ -32,6 +32,8 @@ Hedge and format-marker rates, scored with `shannon_eval.HEDGES` and `FORMAT_MAR
 
 ## The ablation: what earns the words
 
+> **Correction, October 2026.** The conclusion below, that about 270 words of v9.0 have no measured effect, **did not survive a re-test with real system prompts** (`RESULTS-sweep-2026-10.md`). There the lean arm scored 0.20 below v9.0 on the dev set, outside the pre-registered tie margin, with the gap concentrated on the items the extra rules target. The September design pasted contracts into a role-play prompt and answered several conversations per call, which plausibly washed out rule-level differences. v9.0 stands; the lean arm is rejected.
+
 Four arms isolate the parts of v9.0.
 
 | arm | contents | words | vs v8.2 |

@@ -1,0 +1,1 @@
+{"text": "Postgres.\n\nInvoicing needs multi-row ACID transactions, relational integrity, and exact numeric types, which Postgres handles natively. Row-level security also gives you a solid multi-tenant isolation backstop.", "output_tokens": 75}

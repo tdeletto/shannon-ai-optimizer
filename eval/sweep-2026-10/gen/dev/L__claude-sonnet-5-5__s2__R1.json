@@ -1,0 +1,1 @@
+{"text": "Postgres. Invoicing needs ACID transactions, relational integrity, and reliable reporting; multi-tenancy is straightforward with a `tenant_id` column plus row-level security.", "output_tokens": 64}
